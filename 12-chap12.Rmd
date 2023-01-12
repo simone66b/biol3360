@@ -1,0 +1,15 @@
+
+# Model selection and multi-model inference {#chap12}
+
+
+## What predictor variables should I include in my model?
+
+Get a head start by reading this influential paper by Johnson and Omland:
+\
+```{r out.height = "850px", out.width='750px', echo=F}
+knitr::include_graphics("pics/Johnson&Omland_2004.pdf")
+```
+
+
+
+

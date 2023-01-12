@@ -1,0 +1,277 @@
+# Extending the linear model (part 3) {#chap10}
+
+>O sleep, O gentle sleep,  
+Nature's soft nurse, how have I frighted thee,  
+That thou no more wilt weigh my eyelids down  
+And steep my senses in forgetfulness?  
+`r tufte::quote_footer('--- Shakespeare, Henry IV')`
+
+Whatever was disrupting Henry IV's sleep is clearly not a problem for this jaguar, who seems pretty content with the current state of the kingdom:
+\
+
+<center>![](pics/jaguar_sleep.jpg){width=100%}</center>
+
+\
+
+Sleep is (very nearly) universal among animals. But why we sleep is not well understood. Take this passage from a paper in a [special issue on sleep](https://www.science.org/toc/science/374/6567){target="_blank"} published in Science in 2021: 
+
+> Why do we sleep? The evolutionary advantages of remaining permanently awake and alert seem so obvious that sleep must provide some essential need. Dolphins, fur seals, and whales alternate their sleep in their cortical hemispheres so that they can keep swimming: One half of the brain “sleeps” while the other is awake. This observation alone seems to highlight the importance of sleep, at least for mammals. Despite intense research, why we sleep remains one of the most baffling questions in [biology].
+
+One route to better understanding why animals sleep is to identify biological traits that influence the amount of time an individual sleeps. As with most biological problems, there is unlikely to be just one predictor for the amount of time animals sleep - there will be multiple predictors. In my case it is some combination of how early my son woke me, how much coffee I am drinking, and how much exercise I have done for the day. Moreover, these predictors themselves might 'work together' to determine sleep time, and so it is unlikely that the full story will emerge from analyses of single-predictor statistical models. 
+
+So it is time to learn how to include multiple predictors in our statistical models. Our statistical models can easily incorporate multiple predictors, and there is barely any difference in the form of the model so that everything you have been learning up to now should provide a broad foundation on which to understand this next (small) step. And including multiple predictors can reveal new insights if we make sure to take care of some problems unique to multi-predictor statistical models. 
+
+We will use multiple predictor models to develop an understanding for some characteristics that might be important for sleep time in mammals. In particular, we will use a data set [developed](https://www.pnas.org/doi/10.1073/pnas.0610080104){target="_blank"} by Van Savage (super smart, super interesting and lovely guy, and what a name), and Geoffrey West (also super smart and extremely influential theoretical physicist who decided biology was way way more interesting:
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/AtIPxVHeilE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+\
+
+Associated with these sorts of ideas, we will formally assess how body size and other predictor variables affect sleep time. 
+
+## Multiple predictor variables
+
+First, we will start with what you know - we will build two separate single predictor models, one with a metric predictor and one with a nominal predictor. You can use this opportunity to check your own results from Thursday's practical. Then we will combine them in order to better understand their differences, and how to interpret multi-predictor models. <span style="color: red;">**Exercise**</span> Make sure you follow by implementing the following analyses. You can only learn to be a competent statistician through plenty of practice, and a big part of this course is providing you with an opportunity to practice and play. 
+
+Load the [data](https://drive.google.com/file/d/1wu2NuL5UV4r3dSrY5x9Brmw9ZTYu0e7i/view?usp=sharing){target="_blank"} and make the following changes:
+
+```{r eval=T, results='show',include=T,echo=F,message=F}
+require(ggplot2)
+msleep <- as.data.frame(msleep) # assign the mammal sleep dataframe to msleep
+```
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+# we are going to simplify the dataframe a little for our analyses.
+msleep$vore <- as.factor(msleep$vore) # the variable 'vore' is stored as a character. Convert to a factor for analyses. 
+msleep$carnivorous <- ifelse(msleep$vore == "herbi",0,1) # create a new nominal variable classifying mammals into those that do vs. do not eat meat.
+```
+
+### A single metric predictor variable
+
+Let's plot the data.
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+with(msleep,plot(sleep_total~log10(bodywt),xlab="body weight (log10(kg))",ylab="total sleep per day (hours)"))
+```
+
+Doesn't look like there is a very strong signal. Let us fit a a linear statistical model to the data.
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+m1 <- lm(sleep_total~log10(bodywt),data=msleep)
+summary(m1)
+```
+
+<span style="color: red;">**Exercise**</span> I will leave it to you to check the model assumptions.
+
+The fitted model takes the form:
+
+$\textrm{sleep}_i\sim\mathcal{N}(\mu=11.09-1.79\times\log_{10}(\textrm{body weight}_i),\sigma=3.7)$
+
+You should be familiar with this notation from \@ref(the-modeling-process-and-one-useful-way-of-describing-a-statistical-model), and you should recognize where the parameter estimates in this 'equation' come from in the model summary (above). 
+
+The negative slope coefficient indicates that larger mammals tend to sleep less. Indeed, for one unit increase in body weight (on the $\log_{10}$ scale), mammals tend to sleep 1.79 fewer hours. The standard error of this estimate is relatively small (remembering that 95% of the estimates over the long run will fall within approximately two standard errors of the model estimate), and the $R^2$ value indicates that our predictor variable can account for ~32% of the variation in the data (which is not bad for many biological problems). 
+
+We should plot our results. First, we need to use the `predict()` command to generate predicted values and confidence intervals. I don't necessarily expect all this code to make sense. You are at a point in your modeling and programming careers where you should be running the code yourself and deciphering what is going on, including by using the `?` command in `R`. And you can always ask me for help!
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+# generate new data on which to make predictions, and then use predict() command.
+newdat <- data.frame(seq(min(na.omit(msleep$bodywt)),max(na.omit(msleep$bodywt)),length.out=500)) 
+names(newdat) <- c("bodywt")
+pred <- as.data.frame(predict(m1,newdata = newdat,interval = "c"))
+newdat <- cbind.data.frame(newdat,pred)
+
+# plot the results. First a polygon for the confidence intervals, and then the data points and model fit over the top
+par(mfrow=c(1,1))
+with(msleep,plot(sleep_total~log10(bodywt),pch=1,lwd=2,col=1,type='n',xlab="Body Weight (log10(kg))",ylab="Total Sleep Hours")) # basic plotting frame
+polygon(x=c(log10(newdat$bodywt),rev(log10(newdat$bodywt))),y=c(newdat$lwr,rev(newdat$upr)),col = rgb(red=100/255,green=100/255,blue=100/255,alpha=80/255),border = F) # use polygon to shade an area between the upper and lower 95% confidence intervals. We put this on the 'bottom' of our plot so that points and lines are drawn over the top (otherwise they will be obscured).
+with(msleep,points((sleep_total)~log10(bodywt),pch=1,lwd=1,col=1)) # add the raw data points to the plot
+with(newdat,lines(fit~log10(bodywt),pch=1,lwd=3,col=1)) # add the fitted model to the plot. 
+```
+
+So far so good. 
+
+### A single nominal predictor variable
+
+Let's repeat the process, but this time using a single nominal variable as our predictor. We will model the relationship between mammal diets (meat vs. non-meat eaters) and sleep time. You should immediately recognize that diet as classified in this way is a nominal variable with two levels. 
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+plot(c(-0.25,1.25),c(min((na.omit(msleep$sleep_total))),max((na.omit(msleep$sleep_total)))),type="n",xaxt="n",xlab=expression(paste("'...vore'")),ylab="Total Sleep Hours")
+axis(side=1,at=c(0,1),labels=c("herbivore","carnivore"))
+with(msleep[msleep$carnivorous==0,],points(jitter(carnivorous,factor = 1.2),(sleep_total),col="darkgreen",pch=1))
+with(msleep[msleep$carnivorous==1,],points(jitter(carnivorous,factor = 1.2),(sleep_total),col="darkred",pch=1))
+```
+
+I've gone with red (for carnivore) and green (for herbivore) in the plots, for obvious reasons. But not being colorblind I often forget about red-green color blindness. Let me know if this is an issue for you. And if it isn't, be aware (unlike me in this instance) that when presenting your results it is best to be aware of these things. 
+
+We fit a model to see if there is a signal amidst the noise, and how strong the signal is
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+m2 <- lm((sleep_total)~as.factor(carnivorous),data=msleep)
+summary(m2)
+```
+
+I will leave it to you to check the model assumptions. You really should just do this quickly. Only by becoming a) more familiar with the process; and b) more familiar with the range of possibilities when checking assumptions will you develop the experience to make good decisions as a statistical modeler. 
+
+The fitted model takes the form:
+
+$\textrm{sleep}_i\sim\mathcal{N}(\mu=9.51-1.64\times\textrm{carnivorous}_i,\sigma=4.5)$
+
+where 'carnivorous' is coded using an indicator variable taking the values either 0 (herbivore) or 1 (carnivore). 
+
+The summary output indicates that there is some signal suggesting that carnivores sleep longer than herbivores (about 1.6 hours on average). However, the standard error 'around' this estimate is large relative to the estimate itself, suggesting that the signal is not strong amidst the noise. Moreover, our predictor variable would seem to explain about 3% of the variation in total sleep time (you know where I got this value, right? If not, go over your notes, and if that fails - ask), which is not very much at all. 
+
+We can do a hypothesis test if we choose, with a null hypothesis of no difference in total sleep time. For this purpose, we will use anova (\@ref(partitioning-variation)), but we could also do a likelihood ratio test, or just use the _t_-test from the `summary(model)` output. All will give the same answer here:
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+anova(m2)
+```
+
+This says that the probability of our _observed_ difference in sleep time between herbivores and carnivores, under the assumption that the _true_ difference in sleep time between herbivores and carnivores is zero, is equal to 0.1245. I am not (yet?) against this sort of hypothesis testing, but this sort of twisted (but accurate) language is one reason why some are against hypothesis testing!
+
+We finish by plotting our results. 
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+newdat2 <- data.frame(carnivorous = c(0,1)) # new data for predictions
+pred2 <- predict(m2,newdata=newdat2,interval="c") # fitted values and 95% CIs
+newdat2 <- cbind.data.frame(newdat2,pred2) # new data and predictions together, to help with plotting. 
+
+par(mfrow=c(1,1))
+plot(c(-0.25,1.25),c(min((na.omit(msleep$sleep_total))),max((na.omit(msleep$sleep_total)))),type="n",xaxt="n",xlab=expression(paste("'...vore'")),ylab="Total Sleep Hours")
+axis(side=1,at=c(0,1),labels=c("herbivore","carnivore"))
+with(msleep[msleep$carnivorous==0,],points(jitter(carnivorous,factor = 1.05),(sleep_total),col="darkgreen",pch=1,lwd=0.5)) # raw data
+with(msleep[msleep$carnivorous==1,],points(jitter(carnivorous,factor = 1.05),(sleep_total),col="darkred",pch=1,lwd=0.5)) # raw data
+with(newdat2,points(carnivorous,fit,cex=2,pch=16,col=c("darkgreen","darkred"))) # model estimates
+with(newdat2,arrows(x0=carnivorous,x1=carnivorous,y0=lwr,y1=upr,angle = 90,length = 0.1,code = 3,lwd=2,col=c("darkgreen","darkred"))) # CIs
+```
+
+Note that the 95% confidence intervals clearly overlap, which is consistent with the non-significant result from our hypothesis test (\@ref(standard-errors-and-confidence-intervals)). There is a small signal of higher total sleep hours in carnivores, but the signal in the data appears weak. 
+
+Everything we have done up to now is revision. We know all this! 
+
+## Combining our predictor variables into a single model. 
+
+On the one hand, combining our two predictor variables (body weight and carnivory) into a single model is straightforward - we just assign a coefficient to each predictor, and them together in our linear model:
+
+$\textrm{y}_i\sim\mathcal{N}(\mu=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i},\sigma)$
+
+And in `R`:
+```{r eval=F, results='show',include=T,echo=T,message=F}
+m3 <- lm(sleep_total~as.factor(carnivorous)+log10(bodywt),data=msleep)
+```
+
+On the other hand including multiple predictors: a) reveals and quantifies more complex relationships not detectable from single predictor models, b) generates parameter estimates that are more difficult to interpret and mean something different to parameters in single predictor models, and c) creates issues in estimation and interpretation when the predictor variables are themselves correlated. It is for these reasons that we are building up slowly, with the hope that we can develop some real intuition for what is going on. 
+
+Let's fit our model, including both predictors: 
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+m3 <- lm(sleep_total~as.factor(carnivorous)+log10(bodywt),data=msleep)
+summary(m3)
+```
+
+In notation you are now familiar with, our model takes the form: 
+
+$\textrm{sleep}_i\sim\mathcal{N}(\mu=10.4+1.64\times\textrm{carnivorous}_i-1.93\times\log_{10}(\textrm{body weight}_i),\sigma=3.6)$
+
+Plotting the result allows you to become familiar with what the estimates mean and how the output is interpreted.
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+# create a dataframe of new data for which new predictions will be made
+newdat <- data.frame(bodywt=rep(seq(min(na.omit(msleep$bodywt)),max(na.omit(msleep$bodywt)),length.out=400),2),carnivorous=rep(c(0,1),each=400))
+pred <- predict(m3,newdata=newdat,interval="c")
+newdat <-cbind.data.frame(newdat,pred)
+
+# generate an open plotting frame with appropriate dimensions dictated by the data
+with(msleep,plot(sleep_total~log10(bodywt),type="n",xlab="Body Weight (log10(kg))",ylab="Total Sleep Hours"))
+
+# first plot the polygons showing the confidence intervals. 
+with(newdat[newdat$carnivorous==0,],polygon(x=c(log10(bodywt),rev(log10(bodywt))),y=c(lwr,rev(upr)),col = rgb(0,100/255,0,50/255),border=NA)) 
+with(newdat[newdat$carnivorous==1,],polygon(x=c(log10(bodywt),rev(log10(bodywt))),y=c(lwr,rev(upr)),col = rgb(139/255,0/255,0,50/255),border=NA))
+
+# plot the raw data points
+with(msleep[msleep$carnivorous==0,],points(sleep_total~log10(bodywt),col="darkgreen",pch=16))
+with(msleep[msleep$carnivorous==1,],points(sleep_total~log10(bodywt),col="darkred",pch=16))
+
+# plot the fitted regression lines
+with(newdat[newdat$carnivorous==0,],lines(fit~log10(bodywt),col="darkgreen"))
+with(newdat[newdat$carnivorous==1,],lines(fit~log10(bodywt),col="darkred"))
+```
+\
+This model, where the effects of carnivory are added to the effects of body weight, forces the slope of the model to be the same for each level of carnivory. Interpreting the coefficients of the model we get:
+
+- _the intercept_ The total sleep hours predicted for a herbivore with a body weight of 1kg. If a herbivore (coded as 0 using our indicator variable) has a body weight of 1kg (such that $\textrm{log}_{10}(\textrm{1})=0$) then the model predicts this animal would sleep for a total of 10.4 hours per day. 
+- _the coefficient associated with_ `as.factor(carnivorous)1` Comparing animals with the same body weight, this value estimates the difference in total sleep hours between herbivores and carnivores. Our model predicts that, for a given body weight, carnivores sleep an additional 1.64 hours compared with herbivores. 
+- _the coefficient associated with_ `log10(bodywt)` Comparing animals within the same dietary group (e.g. carnivores), this coefficient describes the difference in total sleep hours for animals differing by one unit of body weight on the $\textrm{log}_{10}$ scale.
+
+Note that for models with multiple predictors, we interpret regression coefficients as comparisons of subjects (in this case, species of mammal) that differ in one predictor while being at the same level of the other predictor. This may be self evident from the plot, and from the explanation of the meaning of the different coefficients. But this also means that the coefficients in models containing multiple predictors do not take the same value when those same predictors are included in single predictor models (compare the coefficients in the single predictor models earlier in this chapter). In models with multiple predictors, the coefficients are estimated taking account of (or controlling for) the other predictors in the model. It is for this this reason that the coefficients in multi-predictor (multiple regression) models are sometimes called 'partial slopes'. It is my understanding that only when different predictors are completely uncorrelated (i.e. orthogonal, such as in an experimental setting), that single and multi-predictor models will provide the same estimates of the coefficients. 
+
+## Interactions in models with multiple predictors
+
+In the previous section adding the effects of metric predictor and nominal predictors forced the slopes coefficients associated with the metric predictor (log10(body weight)) to be the same. But perhaps the slopes of these relationships vary for carnivores and herbivores. To find out we add a multiplicative _interaction_ term to our model. Adding this term allows the slopes of the regression lines associated with the metric predictor (body weight) to vary between different levels of the nominal variable (carnivory).
+
+In `R`, we can add an interaction term explicitly:
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+m4 <- lm(sleep_total~as.factor(carnivorous)+log10(bodywt)+as.factor(carnivorous):log10(bodywt),data=msleep)
+```
+
+Or implicitly (in this case, we use `*` to include all additive and multiplicative effects of the two predictors):
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+m4 <- lm(sleep_total~as.factor(carnivorous)*log10(bodywt),data=msleep)
+```
+
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+summary(m4)
+```
+
+Interpreting the coefficients of the model we get:
+
+- _the intercept_ The total sleep hours predicted for a herbivore with a body weight of 1kg. If a herbivore (coded as 0 using our indicator variable) has a body weight of 1kg (such that $\textrm{log}_{10}(\textrm{1})=0$) then the model predicts this animal would sleep for a total of 10.73 hours per day. 
+- _the coefficient associated with_ `as.factor(carnivorous)1` This coefficient estimates the difference in total sleep hours between herbivores and carnivores whose log10(body weight) = 0. i.e. it compares the difference in sleep time at the intercept. For animals that weigh 1kg, the model estimates that carnivores will sleep approximately 1 extra hour per day. Note that this is different to what we estimated in the model that excluded the interaction between the predictors (the additive model).
+- _the coefficient associated with_ `log10(bodywt)` This coefficient estimates the difference in sleep time for herbivores (coded as 0 using our indicator variable) that differ by one unit of body weight on the transformed ($\textrm{log}_{10}$) scale.
+- _as.factor(carnivorous)1:log10(bodywt)_ This coefficient estimates the difference between carnivores and herbivores in the regression slopes associated with body weight (taking the herbivore regression slope as the reference).
+
+Again, plotting the results will help us to interpret what is going on:
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+newdat <- data.frame(bodywt=rep(seq(min(na.omit(msleep$bodywt)),max(na.omit(msleep$bodywt)),length.out=1000),2),carnivorous=rep(c(0,1),each=1000))
+pred <- predict(m4,newdata=newdat,interval="c")
+newdat <-cbind.data.frame(newdat,pred)
+
+with(msleep,plot(sleep_total~log10(bodywt),type="n",xlab="Body Weight (log10(kg))",ylab="Total Sleep Hours"))
+
+with(newdat[newdat$carnivorous==0,],polygon(x=c(log10(bodywt),rev(log10(bodywt))),y=c(lwr,rev(upr)),col = rgb(0,100/255,0,50/255),border=NA)) 
+with(newdat[newdat$carnivorous==1,],polygon(x=c(log10(bodywt),rev(log10(bodywt))),y=c(lwr,rev(upr)),col = rgb(139/255,0/255,0,50/255),border=NA))
+
+with(msleep[msleep$carnivorous==0,],points(sleep_total~log10(bodywt),col="darkgreen",pch=16))
+with(msleep[msleep$carnivorous==1,],points(sleep_total~log10(bodywt),col="darkred",pch=16))
+
+with(newdat[newdat$carnivorous==0,],lines(fit~log10(bodywt),col="darkgreen",lwd=2))
+with(newdat[newdat$carnivorous==1,],lines(fit~log10(bodywt),col="darkred",lwd=2))
+```
+
+Comparing the results of the single predictor models to the multi-predictor models, can you see how the single predictor models obscure potentially important patterns in the way our biological world works?
+
+The coefficients, their confidence intervals, and information on the quantity and quality of the data, together with information on how well the model fits the data and how much variation the model explains are your most important results. 
+
+We can also use anova (or other methods) to do an hypothesis test for this model. 
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+anova(m4)
+```
+
+As you can see, the anova suggests that it is not particularly likely that we would have observed the differences that we did under the assumption that the true 'effects' of our predictor variables were zero. It is important to note that because the probability of an interaction under the assumption that there is no interaction is low, we should focus on what the interaction is telling us (that the relationship between sleep and body weight is different for animals with different diets), rather than the separate 'main effects' of diet and body weight.
+
+## Omnivory?
+
+A sleeping omnivore.
+
+<center>![](pics/sleeping-bear.jpg){width=100%}</center>
+
+\
+<span style="color: red;">**Exercise**</span> Now that you know how to add and interpret multi-predictor statistical models, _I_ want to know more. I began the analyses in this chapter by collapsing the the dietary categories from four categories ("herbivore", "carnivore","insectivore", and "omnivore") to two categories ("herbivore" and "carnivore"), using the following code `msleep$carnivorous <- ifelse(msleep$vore == "herbi",0,1)`. Based on your results so far in this chapter, what would be your hypothesis for the association between sleep time and body weight and _omnivory_? 
+
+I want you to determine evidence for your hypothesis about omnivory by expanding on the analyses above to include "omnivore" as an additional level of your nominal predictor variable. Your task is to step through the modeling process (exploration, fit, check, re-fit, check, interpret, describe in words and visualise your final results) and come to an answer before the practical on Thursday. I honestly do not know the answer - I have not done the analysis - so I look forward to seeing what you find. 
+
+

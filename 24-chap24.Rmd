@@ -1,0 +1,231 @@
+# Philosophies of Statistcal Inference and Introduction to Bayesian Statistics {#chap24}
+
+## What is Probability?
+
+There are two main views on the nature of probability, the ***frequentist*** philosophy, which is the "classical" way of treating probability, and was the most popular view from the 1920s through to the 1990s. It treats probabilities as long-run frequencies of events. The second main philosophy is the ***Bayesian*** approach, which treats probabilities as measures of  "degrees of belief."
+
+## Frequentist Probability
+
+The notion of frequentist probability is based on the "Law of Large Numbers," in particularly due to &Eacute;mile Borel.
+
+![](./borel.jpg)
+&Eacute;mile Borel  (1871 - 1956)
+
+The definition of probability can be stated thus:
+
+\begin{equation*}
+    \frac{N_n(E)}{n} \rightarrow p\, as\, n \rightarrow \infty
+  \end{equation*}
+  
+which simply means that the proportion of "successes" out of N trials approaches the probability as N approaches infinity.
+
+## Example: Coin Tosses
+
+```{r}
+sample.fun <- function (i) sample(c("H", "T"), size=i, replace=TRUE)
+num.tosses <- 1:10000
+res <- sapply(num.tosses, sample.fun)
+freqH <- unlist(lapply(res, function (x) sum(x == "H")/length(x)))
+plot(num.tosses, freqH, type ="l", ylim=c(0, 1), log="x", ylab="Proportion of Heads",
+     xlab="Number of Coin Tosses")
+abline(h=0.5, col="red")
+```
+
+As you can see above, the more tosses of a fair coin that are performed, the more the proportion of "Heads" tends towards 0.5. Hence, we say that the probability of throwing "Heads" is equal to 0.5.
+
+## Properties of the Frequentist definition
+
+The main advantage of this "Frequentist" definition of probability is that it is ***objective***. It doesn't depend on what we might predict the experimental results to be. The main problem with the frequentist interpretation is that it requires an ___infinite___ number of experimental trials. This is very impractical. Famous frequentists include, Sir Ronald Aylmer Fisher (1890 - 1962) who practically invented classical statistics, including likelihood theory, the design of experiments, the Analysis of Variance and many other contributions. He was also a very important figure in evolutionary biology, as he co-founded the field of population genetics, which integrated Darwin's theory of natural selection with Mendel's discoveries in genetics. The other main statistical theorists to contribute to frequentist theory were Jerzey Neyman (1894 - 1981) and Egon Pearson (1895 - 1980) who first developed the statistical theory of hypothesis testing. This was later extended by Abraham Wald (1902 - 1950).
+
+![](./fisher.jpg){ width=30% }
+Sir Ronald Fisher.
+
+![](./neymanpearson.jpg)
+Jerzey Neyman and Egon Pearson.
+
+![](./170px-Abraham_Wald.jpg)
+Abraham Wald.
+
+## Likelihood
+
+Both Frequentists and Bayesians use the likelihood function in their analyses, although in quite different ways. Frequentists use the method of Maximum Likelihood, which we covered in Section 17.6. You may need to refresh your understanding.
+
+## Bayesian Probability
+
+Bayesian statistics gets its name from the Rev. Thomas Bayes (1701 - 1761). Born in London, he was a Presbyterian minister. During his lifetime, he published one paper on mathematics and one paper on theology. What we now know as Bayes' rule was published posthumously by his friend, Richard Price. Bayes died in Kent.
+
+![](./bayes.jpg)
+Rev. Thomas Bayes.
+
+The full statistical ramifications of Bayes' Rule were subsequently worked out by Laplace. (See Section 22.5.) Although Bayes discovered the rule, he did not work it up into a full theory of statistical inference. Laplace realised the full ramifications of Bayes' rule and hence Bayesian inference should be known as Laplacian inference. (It isn't called this, though. This is an example of [Stigler's Law of Eponymy](https://en.wikipedia.org/wiki/Stigler%27s_law_of_eponymy)
+
+## Derivation of Bayes' Rule
+
+The derivation is simple and relies on the definition of conditional probability. For any two events A and B, we have:
+
+\begin{equation*}
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+\end{equation*}
+
+By symmetry, we also have the relationship:
+\begin{equation*}
+P(B \mid A) = \frac{P(A \cap B)}{P(A)}
+\end{equation*}
+From these, it is easy to see that:
+\begin{align*}
+P(A \mid B)P(B) &= P(B \mid A)P(A) \\
+P(A \mid B) &= \frac{P(B \mid A)P(A)}{P(B)} \\
+P(A_i \mid B) &= \frac{P(B \mid A_i)P(A_i)}{\sum_jP(B \mid A_j)P(A_j)}
+\end{align*}
+
+This second form of Bayes' Rule uses the Law of Total Probability and is useful when there are multiple events $A_j$
+Now let $H$ be a hypothesis of interest and $D$ be the observed data. Note also that the result is only valid if $P(A)$ and $P(B)$ are both $\ne 0$. This is important as division by zero errors will occur if you try to condition on a "null" event. This leads to all sorts of problems such as "Borel's Paradox." See [this Wikipedia page](https://en.wikipedia.org/wiki/Borel%E2%80%93Kolmogorov_paradox).
+
+\begin{equation*}
+   P(H \mid D) = \frac{P(H)P(D \mid H)}{P(D)}
+\end{equation*}
+
+We can say that the probability of our hypothesis $H$ is true, conditional on the observed data $D$ is equal to our ***prior*** probability of hypothesis $H$ being true, multiplied by the ***likelihood*** of observing the data $D$ given that $H$ is true, divided by the probability of observing the data $D$. Note that we have calculated $P(H \mid D)$ from $P(D \mid H)$. The events have been switched around. This is why the Bayesian approach has sometimes been called "inverse probability."
+
+## Bayes' Rule for pdfs and pmfs
+
+We can write Bayes' Rule for probability density (and mass) functions:
+
+\begin{equation*}
+f(a \mid b) = \frac{f(b \mid a)f(a)}{f(b)}
+\end{equation*}
+
+Further, recognise that the denominator is just a normalising constant to ensure that $f(a \mid b)$ is a pdf (pmf). We have:
+   \begin{equation*}
+   f(y \mid x) \propto f(y)f(x \mid y)
+   \end{equation*}
+
+where $y$ is the hypothesis of interest. This can be continuous (pdf) or discrete (pmf). $x$ is the data: $x=\{x_1, x_2, \dots x_n\}$ $f(x \mid y)$ is just the ***likelihood function*** that you have seen previously. We say, "The posterior distribution of $y$, given the data is proportional to the prior distribution of $y$ multiplied by the likelihood." 
+
+It can be argued that the posterior is the quantity of real scientific interest: What scientists want to know is the probability of their hypothesis being true, give the data. An analysis of the likelihood function alone (ie using maximum likelihood estimation) will only tell you the probability of observing the data, given that the hypothesis is true. It is unclear why this quantity would be of scientific interest.
+
+## Implications for an understanding of probability
+
+What does $f(y)$, the prior represent? It represents your "Degree of Belief" about hypothesis $y$.The prior is to be specified in advance, ___before___ seeing the data. Note that you are free to choose whatever prior you want, so long as it represents your degree of belief of the probability of a hypothesis. Since $f(y)$ is a probability density (mass) function, it represents your personal beliefs about the hypothesis before seeing the data. This leads to the notion of ***subjective probability***.
+
+This subjective, or personal, interpretation of probability is fundamentally different from the frequentist approach, but it is aligned with how most people think about probability statements. To see this, think about whether you believe there is alien life elsewhere in the universe. You can assign this a probability of zero if you believe that life doesn't exist anywhere other than Earth. Or you may be very confident that alien life does exist, so you would assign it a probability of unity. Many people will be at least a little unsure either way, and may propose intermediate values for their probability. There are 2 consequences: firstly, everybody's prior belief in the existence of alien life is personal to them. In the absence of data, we cannot say which belief is correct. Secondly, this exercise makes ***no sense*** if we take a frequentist approach to probability. You cannot perform an infinite number of runs of the creation of the universe and record which universes have alien life in them.
+
+This "subjective" view of probability has been adopted by most Bayesian statisticians (there are some objective Bayesian hold-outs, but they are deluded). The ramifications of subjective probability have been studied by Bruno de Finetti (1906 - 1985) in his "Theory of Probability" (1975) and by Leonard "Jimmie" Savage (1917 - 1971) in "The Foundations of Statistics" (1954). De Finetti famously quipped that, ***"PROBABILITY DOES NOT EXIST!"***
+
+## Example: The "bent" coin.
+
+Consider a "bent" coin that is tossed $n$ times. We wish to know, given this data, the probability of tossing a "Heads." We can write down a reasonable Bayesian model:
+
+$Y \mid \theta \sim Binomial(n, \theta)$ - The likelihood
+
+$\theta \sim Beta(\alpha, \beta)$ - The prior for $\theta$ (the probability of tossing "Heads")
+
+$Y =$ the number of "Heads" out of $n$ tosses.
+
+The Binomial distribution is a reasonable choice for modelling coin tosses. Each toss is a trial and it is recorded whether (or not) the result is a heads. $\theta$ is this probability and would be 0.5 for a fair coin.
+
+The Beta distribution is a reasonable prior distribution for $\theta$ as it is a continuous distribution on (0, 1) so it is good for modelling quantities on that scale, such as probabilities.
+
+Beta Distribution: 
+
+$f(\theta | \alpha, \beta) = \frac{1}{B(\alpha, \beta)}\theta^{\alpha - 1}(1-\theta)^{\beta - 1}$
+
+Binomial Distribution: 
+
+$f(y|\theta) = {n \choose y} \theta^y (1-\theta)^{n-y}$
+
+The parameters for the Beta distribution ($\alpha$ and $\beta$) determine the shape of of the distribution: whether it is "humped", "U-shaped", or flat (the Uniform distribution)
+
+## Finding the posterior distribution for $\theta \mid y$
+
+We now have our Beta prior and our Binomial likelihood. To calculate the posterior, simply use Bayes Rule and multiply the prior by the likelihood, and simplify.
+
+\begin{align*}
+f(\theta \mid y) &\propto \theta^{\alpha - 1}(1-\theta)^{\beta - 1} \times \theta^y(1-\theta)^{n-y} \\
+&=\theta^{(\alpha + y) - 1}(1-\theta)^{(\beta + n -y)-1}
+\end{align*}
+
+which is the kernel of a beta density (ie without the normalising constant. Therefore $(\theta \mid y) \sim Beta(\alpha + y, \beta + n -y)$
+
+Notice that we started with a Beta prior for $\theta$ and ended up with a Beta posterior. This is known as ***conjugacy*** and we say, "the Beta distribution is conjugate to the Binomial distribution." Using conjugate priors sometimes helps with the maths but isn't required.
+
+## Which Prior?
+
+In the simplest example where there is ___a priori___ ignorance for a value of $\theta$, three priors have been proposed:
+
+* $\alpha = \beta = 1$ The uniform distribution, suggested by Bayes.
+* $\alpha = \beta = 0$ The improper Haldane prior
+* $\alpha = \beta = \frac{1}{2}$ The Jeffreys prior
+
+Each has its uses. When $n$ is large and $\theta \neq 0, 1$ the differences in the inferences usually becomes negligible.
+
+## The Normal - Normal model
+Consider the following Bayesian Model:
+
+$(Y_1, Y_2, \dots , Y_n \mid \mu) \sim i.i.d. \, N(\mu, \sigma^2)$
+
+$\mu \sim N(\mu_0, \sigma^2_0)$, with $\sigma^2, \, \sigma_0^2, \, \mu_0$ are known constants.
+
+We are now considering the case where there are multiple data points ($Y$), sampled from a Normal distribution.
+
+Note that the Normal distribution is conjugate to itself. (A useful property to know!) We wish to find the posterior distribution of $\mu \mid y$ where $y = \{y_1, y_2, \dots , y_n\}$
+
+As usual, we proceed using Bayes' Rule. The posterior density of $\mu$ is:
+
+\begin{equation*}
+f(\mu \mid y) \propto f(\mu)f(y \mid \mu) \propto \exp \left( - \frac{1}{2} \left( \frac{\mu - \mu_0}{\sigma_0} \right)^2 \right) \times \prod_{i=1}^n \exp \left(- \frac{1}{2} \left(\frac{y_i-\mu}{\sigma} \right)^2 \right)
+\end{equation*}
+
+\begin{equation}
+= \exp \left(- \frac{1}{2}\left[\frac{1}{\sigma_0^2}(\mu^2 - 2 \mu \mu_0 + \mu_0^2)+\frac{1}{\sigma^2}\left(\sum^n_{i=1}y_i^2 - 2 \mu n \bar{y} + n\mu^2 \right) \right] \right)
+\end{equation}
+
+where $\bar{y} = (y_1 + \dots y_n)/n$ is the sample mean.
+
+We see that
+\begin{equation}
+f(\mu \mid y) \propto \exp \left(- \frac{1}{2 \sigma^2_{*}}(\mu^2 - 2 \mu \mu_{*} + \mu_{*}^2) \right)
+\end{equation}
+
+\begin{equation*}
+=\exp\left( - \frac{1}{2 \sigma^2_{*}}(\mu - \mu_{*})^2 \right)
+\end{equation*}
+for some $\mu_{*}$ and $\sigma^2_{*}$ (two functions of the known quantities $n,\, \bar{y},\, \sigma,\,\mu_0$ and $\sigma_0$).
+
+Equating coefficients of powers of $\mu$ in the 2 equations above we find:
+\begin{equation*}
+\frac{1}{\sigma_{*}^2}= \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}
+\end{equation*}
+\begin{equation*}
+\frac{\mu_{*}}{\sigma^2_{*}}=\frac{\mu_0}{\sigma^2_0} + \frac{n\bar{y}}{\sigma^2}
+\end{equation*}
+
+After re-arranging, we have the result:
+
+\begin{equation*}
+(\mu \mid y) \sim N(\mu_*, \sigma^2_*)
+\end{equation*}
+
+Where: $\mu_*=(1-k)\mu_0 + k \bar{y}$, (the posterior mean)
+
+$\sigma_*^2=k\sigma^2/n$ (the posterior variance)
+
+\begin{equation*}
+k=\frac{1}{1+ \left(\frac{\sigma^2}{n\sigma_0^2}\right)}
+\end{equation*}
+$k$ is a "credibility" factor.
+
+## Notes
+
+* $\mu$'s posterior depends on the data (the y's) only by way of the sample mean $\bar{y}$. So we don't need to know all the data, only their mean, to calculate the answer. ie $(\mu \mid \bar{y}) \sim N(\mu_*, \sigma^2_*)$.
+* If $n$ is large then $k \doteq 1$, so that $\mu_* \doteq \bar{y}$ and $\sigma^2_* \doteq \sigma^2/n$. Thus $(\mu \mid y) \dot\sim N(\bar{y}, \sigma^2/n)$. So the prior distribution (specified by $\mu_0$ and $\sigma^2_0$) has little influence on the posterior if there are a lot of data.
+* If the prior variance ($\sigma_0^2$) is small then $k \doteq 0$, so that $\mu_* \doteq \mu_0$ and $\sigma_*^2 \doteq \sigma_0^2$. Thus, $(\mu \mid y) \dot\sim N(\mu_0, \sigma_0^2)$. ie if the prior information is very "precise," the data has little influence on the posterior. So the posterior is approximately equal to the prior. ie $f(\mu \mid y) \doteq f(\mu)$ or equivalently $(\mu \mid y) \dot\sim   \mu$.
+* Suppose that the prior variance ($\sigma^2_0$) is very large. Then as in Note 2, $k \doteq 1$, so that $\mu_* \doteq \bar{y}$, $\sigma_*^2 \doteq \sigma^2/n$ and $(\mu \mid y) \dot\sim N(\bar{y}, \sigma^2/n)$. This makes sense because a large $\sigma_0^2$ implies a very "diffuse" or "flat" prior, reflecting little prior information. This is equivalent to there being a lot of data which effectively "swamps" the prior information.
+* In the case of \textit{a priori} ignorance, it is usual to set $\sigma_0^2 = \infty$, implying that $\mu \sim N(0, \infty)$. This prior is uninformative but is ***improper***. It does not integrate to 1. However, in this case the posterior is: $(\mu | y) \sim N(\bar{y}, \sigma^2/n)$ which is proper. Improper priors may often lead to improper posteriors, which cannot be used for inference. However, in this case, things worked out.
+
+## Take-home messages
+* The analytical treatment of Bayesian models is difficult in all but the simplest cases. (We have not even touched on cases where there are $\geq 2$ unknown parameters.)
+* This difficulty was one of the reasons that Bayesian methods were not used much in the early-mid 20th century.
+* The difficulty was insurmountable before the development of computer algorithms to solve more complex models in the 1980s. We will introduce you to software for analysing more complex models using a computer.
+* Another reason was the problem that statements about "personal" probability are subjective. In practice, this means that the choice of priors can mean that you can get any answer (posterior) that you want. This was a problem for scientists who aim to be as "objective" as possible.
+

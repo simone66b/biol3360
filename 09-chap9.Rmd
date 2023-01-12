@@ -1,0 +1,40 @@
+# Practical Week 3: Sleepy time {#chap9}
+
+<center>![](pics/SleepingWhale.jpg){width=100%}</center>
+
+\
+During today's practical we will explore the association between traits of animals and the amount of time those animals sleep.  Importantly, some animal traits are metric variables and some animal traits are nominal variables. Using single predictor models I would like you to discover as much as you can about the traits of animals and their sleep patterns. The analyses you do today will give you a head start on your introduction to multi-predictor models, which we will cover from Chapter 10.
+
+The data you will need is [here](https://drive.google.com/file/d/1wu2NuL5UV4r3dSrY5x9Brmw9ZTYu0e7i/view?usp=sharing){target="_blank"}. This data set includes information on different aspects of the sleep patterns of different species of mammal, as well as information on the characteristics of the species themselves. For this practical, I would like you to identify potential determinants of the amount of time an animal sleeps ('sleep_total'). At the end of this practical, I would like you to please send me your final results.  
+
+<span style="color: red;">**Exercise**</span> Model the relationship between body weight and sleep time. 
+
+As always, systematically step through the modeling process:   
+1. explore the data using R summaries and graphical techniques. Getting to know your data will help you fit an appropriate model, and will also head off problems early.  
+2. build your model. Take, literally, just a minute to write your model down. This may be easy now, but when models get more complex you'll be glad to have mastered this important skill.     
+3. fit the model.   
+4. check, check, check. Check model summaries. Plot the model over the data. Use diagnostics to identify pathologies.     
+5. re-fit the model to resolve any issues.       
+6. check again.    
+7. once you are satisfied with your model, do a hypothesis test if you wish. Think about what hypothesis you are testing and why.  
+8. carefully visualize the model in the best way possible - as if you are communicating to a client or for a scientific publication. Include as much of the raw data in your plot as possible, include the fitted model, and estimates of uncertainty. Include metrics of model fit.     
+9. write a few sentences that fully describe your analytical methods, the structure of your model, levels of replication, etc. This seems like a tedious task, but it will force you to develop a crystal clear picture of what you have done.    
+10. write a few more sentences explicitly describing what your model is telling you in quantitative terms. 
+
+<span style="color: red;">**Exercise 2**</span> Model the relationship between carnivory and sleep time, repeating all the steps above. Note that the variable 'carnivorous' distinguishes between mammals that eat no meat vs. mammals that include some meat in their diet. 
+
+<span style="color: red;">**Exercise 3**</span> Model the relationship between 'vore' and sleep time. 
+
+<span style="color: red;">**Exercise 4**</span> Send me your results, ideally as a markdown pdf.  
+For each analysis I would like to see:   
+a) the scientific question, stated briefly,    
+b) your final parameterized model in 'equation' form, using the model notation you have been introduced to,      
+c) your results, visualized.   
+d) your conclusion, described using the quantitative information describing the form and fit of your final model.   
+
+And please don't forget - this is your opportunity to ask questions to fill the gaps in your understanding, and to resolve problems.
+
+So don't fall asleep!
+
+
+

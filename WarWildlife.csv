@@ -1,0 +1,254 @@
+country,park,species,lambda,cf,bm,pa.size
+South_Africa,Addo-Elephant NP,Loxodonta_africana,1.0641,0.5,3824.54,1640
+Kenya,Amboseli NP,Giraffa_camelopardalis,0.9506,0,964.65,392
+Kenya,Amboseli NP,Loxodonta_africana,1.0541,0,3824.54,392
+Burkina_Faso,Arly NP,Loxodonta_africana,1.257,0,3824.54,760
+Uganda,Bokora Corridor Wildlife Reserve,Kobus_kob,0.9122,0.4808,80.04,1816
+Uganda,Bokora Corridor Wildlife Reserve,Nanger_granti,0.8195,0.4808,55.46,1816
+Uganda,Bokora Corridor Wildlife Reserve,Sylvicapra_grimmia,0.861,0.4808,15.64,1816
+Kenya,Borana Private Ranch,Loxodonta_africana,0.9887,0,3824.54,141
+Tanzania,Burigi GR and Biharamulo GR,Loxodonta_africana,1.0609,0.04,3824.54,3500
+Namibia,Caprivi Forest Reserve,Loxodonta_africana,1.1168,0.0357,3824.54,1484
+Zimbabwe,Chete Safari Area,Loxodonta_africana,1.0048,0,3824.54,1081
+Zimbabwe,Chewore Safari Area,Loxodonta_africana,1.0574,0.05,3824.54,3390
+Zimbabwe,Chirisa Safari Area,Loxodonta_africana,1.0199,0,3824.54,1713
+Zimbabwe,Chizarira NP,Loxodonta_africana,0.9955,0,3824.54,1910
+Ivory_Coast,Comoe NP,Alcelaphus_buselaphus,0.9552,0,160.94,11492
+Ivory_Coast,Comoe NP,Cephalophus_rufilatus,0.8941,0,12.11,11492
+Ivory_Coast,Comoe NP,Hippotragus_equinus,0.9406,0,264.17,11492
+Ivory_Coast,Comoe NP,Kobus_ellipsiprymnus,0.933,0,204.39,11492
+Ivory_Coast,Comoe NP,Kobus_kob,0.8856,0,80.04,11492
+Ivory_Coast,Comoe NP,Loxodonta_africana,0,0,3824.54,11492
+Ivory_Coast,Comoe NP,Ourebia_ourebi,0.8838,0,17.19,11492
+Ivory_Coast,Comoe NP,Phacochoerus_africanus,0.9073,0,82.5,11492
+Ivory_Coast,Comoe NP,Philantomba_maxwelli,0.8832,0,8.56,11492
+Ivory_Coast,Comoe NP,Sylvicapra_grimmia,0.8832,0,15.64,11492
+Ivory_Coast,Comoe NP,Syncerus_caffer,1.0216,0,592.67,11492
+Ivory_Coast,Comoe NP,Tragelaphus_scriptus,0.8866,0,43.25,11492
+Zimbabwe,Dande Safari Area,Loxodonta_africana,1.0067,0,3824.54,523
+CAR,Dzanga-Ndoki,Loxodonta_africana,1.08,0,3824.54,1143
+Namibia,Etosha NP,Loxodonta_africana,1.036,0,3824.54,22941
+DRC,Garamba NP,Loxodonta_africana,1.165,0.4125,3824.54,14766
+Zimbabwe,Gonarezhou NP,Aepyceros_melampus,1.1024,0,52.59,5053
+Zimbabwe,Gonarezhou NP,Connochaetes_taurinus,0,0.4,198.62,5053
+Zimbabwe,Gonarezhou NP,Equus_burchellii,1.1067,0.4,279.16,5053
+Zimbabwe,Gonarezhou NP,Giraffa_camelopardalis,1.3572,0.3929,964.65,5053
+Zimbabwe,Gonarezhou NP,Hippopotamus_amphibius,0.5503,0.1786,1536.31,5053
+Zimbabwe,Gonarezhou NP,Hippotragus_niger,1.3161,0.4,236.41,5053
+Zimbabwe,Gonarezhou NP,Kobus_ellipsiprymnus,0,0.2857,204.39,5053
+Zimbabwe,Gonarezhou NP,Loxodonta_africana,1.1347,0.4,3824.54,5053
+Zimbabwe,Gonarezhou NP,Phacochoerus_africanus,1.0283,0,82.5,5053
+Zimbabwe,Gonarezhou NP,Syncerus_caffer,1.0533,0.4,592.67,5053
+Zimbabwe,Gonarezhou NP,Taurotragus_oryx,0,0.2857,562.59,5053
+Zimbabwe,Gonarezhou NP,Tragelaphus_angasii,0.8548,0.2857,87.62,5053
+Zimbabwe,Gonarezhou NP,Tragelaphus_strepsiceros,0.8919,0.2857,206.06,5053
+Zimbabwe,Gonarezhou NP; Malipati Safari Area; and Mahenye Wildlife Magament Area,Loxodonta_africana,1.0555,0,3824.54,5208
+Mozambique,Gorongosa NP,Aepyceros_melampus,1.2445,0,52.59,3688
+Mozambique,Gorongosa NP,Alcelaphus_lichtensteinii,0.9347,0.5517,168.7,3688
+Mozambique,Gorongosa NP,Connochaetes_taurinus,0,0.5517,198.62,3688
+Mozambique,Gorongosa NP,Equus_burchellii,0.8568,0.5517,279.16,3688
+Mozambique,Gorongosa NP,Hippopotamus_amphibius,0.9089,0.5517,1536.31,3688
+Mozambique,Gorongosa NP,Hippotragus_niger,0.9613,0.5517,236.41,3688
+Mozambique,Gorongosa NP,Kobus_ellipsiprymnus,0.9732,0.5517,204.39,3688
+Mozambique,Gorongosa NP,Loxodonta_africana,0.9526,0.5517,3824.54,3688
+Mozambique,Gorongosa NP,Ourebia_ourebi,1.2879,0,17.19,3688
+Mozambique,Gorongosa NP,Phacochoerus_africanus,1.2803,0,82.5,3688
+Mozambique,Gorongosa NP,Potamochoerus_larvatus,0.6593,0,69.06,3688
+Mozambique,Gorongosa NP,Redunca_arundinum,1.3008,0,58.06,3688
+Mozambique,Gorongosa NP,Sylvicapra_grimmia,0.809,0,15.64,3688
+Mozambique,Gorongosa NP,Syncerus_caffer,0,0.5517,592.67,3688
+Mozambique,Gorongosa NP,Taurotragus_oryx,0,0.5517,562.59,3688
+Mozambique,Gorongosa NP,Tragelaphus_angasii,1.1372,0,87.62,3688
+Mozambique,Gorongosa NP,Tragelaphus_strepsiceros,1.1989,0,206.06,3688
+Mozambique,Gorongosa NP,Tragelaphus_sylvaticus,1.1163,0,43.25,3688
+South_Africa,Hluhluwe GR and Umfolozi GR,Loxodonta_africana,1.0424,0,3824.54,589
+Zimbabwe,Hwange NP and Deka Safari Area,Loxodonta_africana,1.1349,0,3824.54,15161
+Zimbabwe,Hwange NP,Loxodonta_africana,1.0369,0,3824.54,14651
+South_Africa,Ithala Nature Reserve,Loxodonta_africana,1.1006,0,3824.54,293
+Zambia,Kafue NP,Kobus_leche,1.1229,0,88.65,22400
+Zambia,Kafue NP,Loxodonta_africana,0.9076,0,3824.54,22400
+Uganda,Kaiso Tonya Community Wildlife Management Area,Kobus_kob,0.9123,0.375,80.04,107
+Uganda,Kaiso Tonya Community Wildlife Management Area,Sylvicapra_grimmia,0.9248,0.375,15.64,107
+Malawi,Kasungu NP,Loxodonta_africana,0.8141,0,3824.54,2316
+Tanzania,Katavi NP & Rukwa Game Controlled Area,Loxodonta_africana,1.0122,0,3824.54,6196
+Tanzania,Katavi NP,Loxodonta_africana,1.0036,0,3824.54,4208
+Kenya,Kerio Valley National Reserve,Loxodonta_africana,0.9529,0.3333,3824.54,66
+Namibia,Khaudum NP &  Nyae-Nyae Conservancy,Loxodonta_africana,1.2495,0.0143,3824.54,12834
+Uganda,Kidepo Valley NP,Loxodonta_africana,0.9312,0.5333,3824.54,1430
+South_Africa,Klaserie Private Nature Reserve,Loxodonta_africana,1.091,0,3824.54,594
+South_Africa,Kruger NP,Aepyceros_melampus,0.9991,0.8421,52.59,19175
+South_Africa,Kruger NP,Connochaetes_gnou,0.9464,0.7684,156.55,19175
+South_Africa,Kruger NP,Connochaetes_taurinus,1.0557,0.8421,198.62,19175
+South_Africa,Kruger NP,Damaliscus_lunatus,0.9865,0.8421,136,19175
+South_Africa,Kruger NP,Equus_burchellii,1.0275,0.8421,279.16,19175
+South_Africa,Kruger NP,Giraffa_camelopardalis,1.0021,0.8421,964.65,19175
+South_Africa,Kruger NP,Hippotragus_equinus,0.9057,0.8421,264.17,19175
+South_Africa,Kruger NP,Hippotragus_niger,1.0111,0.8421,236.41,19175
+South_Africa,Kruger NP,Kobus_ellipsiprymnus,1,0.8421,204.39,19175
+South_Africa,Kruger NP,Loxodonta_africana,1,0.8421,3824.54,19175
+South_Africa,Kruger NP,Phacochoerus_africanus,0.9449,0.8421,82.5,19175
+South_Africa,Kruger NP,Syncerus_caffer,1.0145,0.2554,592.67,19175
+South_Africa,Kruger NP,Taurotragus_oryx,1.0324,0.8421,562.59,19175
+South_Africa,Kruger NP,Tragelaphus_strepsiceros,0.9686,0.8421,206.06,19175
+Uganda,Lake Mburo NP,Aepyceros_melampus,0.9549,0.5,52.59,370
+Uganda,Lake Mburo NP,Equus_burchellii,1.0332,0.5,279.16,370
+Uganda,Lake Mburo NP,Hippopotamus_amphibius,0.8751,0.5,1536.31,370
+Uganda,Lake Mburo NP,Taurotragus_oryx,1.1269,0.5,562.59,370
+Tanzania,Lake Rukwa G.R.,Loxodonta_africana,1.62,0,3824.54,1988
+Mozambique,Limpopo NP,Loxodonta_africana,1.1362,0,3824.54,10000
+Malawi,Liwonde NP,Loxodonta_africana,1.0063,0,3824.54,538
+Zambia,Lower Zambezi NP,Loxodonta_africana,1.0377,0,3824.54,4092
+Zambia,Luambe NP and Lumimba Game Management Area,Loxodonta_africana,1.1218,0,3824.54,4754
+Zambia,Lukusuzi NP,Loxodonta_africana,0,0,3824.54,2720
+Zambia,Lumimba Game Management Area,Loxodonta_africana,0.8935,0,3824.54,4500
+Zambia,Lunga-Luswishi Game Management Area,Loxodonta_africana,1,0,3824.54,13340
+Zambia,Lupande Game Management Area,Aepyceros_melampus,1.1898,0,52.59,4840
+Zambia,Lupande Game Management Area,Equus_burchellii,0.8633,0,279.16,4840
+Zambia,Lupande Game Management Area,Giraffa_camelopardalis,1.0448,0,964.65,4840
+Zambia,Lupande Game Management Area,Kobus_ellipsiprymnus,1.0976,0,204.39,4840
+Zambia,Lupande Game Management Area,Kobus_vardonii,1.14,0,71.46,4840
+Zambia,Lupande Game Management Area,Loxodonta_africana,1.0404,0,3824.54,4840
+Zambia,Lupande Game Management Area,Phacochoerus_africanus,1.1892,0,82.5,4840
+South_Africa,Madikwe Nature Reserve,Loxodonta_africana,1.0701,0,3824.54,680
+Ethiopia,Mago NP and Omo NP,Loxodonta_africana,0.6485,0,3824.54,6230
+Zimbabwe,Mana Pools NP,Aepyceros_melampus,1.0561,0,52.59,2196
+Zimbabwe,Mana Pools NP,Equus_burchellii,0.9956,0,279.16,2196
+Zimbabwe,Mana Pools NP,Kobus_ellipsiprymnus,0.962,0,204.39,2196
+Zimbabwe,Mana Pools NP,Loxodonta_africana,0.8816,0,3824.54,2196
+Zimbabwe,Mana Pools NP,Phacochoerus_africanus,0.8463,0,82.5,2196
+Zimbabwe,Mana Pools NP,Syncerus_caffer,0.7452,0,592.67,2196
+Zimbabwe,Mana Pools NP,Taurotragus_oryx,1,0,562.59,2196
+Zimbabwe,Mana Pools NP,Tragelaphus_scriptus,0.8477,0,43.25,2196
+Zimbabwe,Mana Pools NP,Tragelaphus_strepsiceros,0.9381,0,206.06,2196
+South_Africa,Manyeleti GR,Loxodonta_africana,1.4626,0,3824.54,230
+South_Africa,Marakele NP,Loxodonta_africana,1.0651,0,3824.54,590
+Mozambique,Marromeu GR,Alcelaphus_lichtensteinii,0.7262,1,168.7,1500
+Mozambique,Marromeu GR,Equus_burchellii,0.9918,1,279.16,1500
+Mozambique,Marromeu GR,Hippopotamus_amphibius,0.8312,1,1536.31,1500
+Mozambique,Marromeu GR,Hippotragus_niger,0.7049,1,236.41,1500
+Mozambique,Marromeu GR,Kobus_ellipsiprymnus,0.8513,1,204.39,1500
+Mozambique,Marromeu GR,Loxodonta_africana,1,1,3824.54,1500
+Mozambique,Marromeu GR,Phacochoerus_africanus,0.7922,0.6818,82.5,1500
+Mozambique,Marromeu GR,Redunca_arundinum,0.804,1,58.06,1500
+Mozambique,Marromeu GR,Syncerus_caffer,0.825,1,592.67,1500
+Mozambique,Marromeu GR,Taurotragus_oryx,0.8834,0.6818,562.59,1500
+Mozambique,Marromeu GR,Tragelaphus_sylvaticus,0,0.6818,43.25,1500
+Kenya,Masai Mara National Reserve,Loxodonta_africana,0.8739,0.05,3824.54,1510
+Zimbabwe,Matetsi Safari Area,Hippotragus_niger,0.8687,0,236.41,2955
+Zimbabwe,Matetsi Safari Area,Kobus_ellipsiprymnus,0.7852,0,204.39,2955
+Zimbabwe,Matetsi Safari Area,Loxodonta_africana,1.0745,0,3824.54,2955
+Zimbabwe,Matetsi Safari Area,Syncerus_caffer,0.8611,0,592.67,2955
+Uganda,Matheniko Wildlife Reserve,Nanger_granti,0.7783,0.3214,55.46,1757
+Zimbabwe,Matusadona NP,Loxodonta_africana,1.01,0,3824.54,1407
+Kenya,Meru NP and Bisanadi National Reserve,Loxodonta_africana,1,0,3824.54,1476
+Tanzania,Mikumi NP,Loxodonta_africana,1.0563,0,3824.54,3230
+Tanzania,Mkomazi NP,Aepyceros_melampus,1.0211,0,52.59,3245
+Tanzania,Mkomazi NP,Alcelaphus_buselaphus,0.9678,0,160.94,3245
+Tanzania,Mkomazi NP,Giraffa_camelopardalis,1.0401,0,964.65,3245
+Tanzania,Mkomazi NP,Kobus_ellipsiprymnus,1.0242,0,204.39,3245
+Tanzania,Mkomazi NP,Litocranius_walleri,0.9308,0,38.8,3245
+Tanzania,Mkomazi NP,Loxodonta_africana,0.9682,0,3824.54,3245
+Tanzania,Mkomazi NP,Nanger_granti,1.0019,0,55.46,3245
+Tanzania,Mkomazi NP,Oryx_beisa,1.01,0,200.58,3245
+Tanzania,Mkomazi NP,Syncerus_caffer,1.0125,0,592.67,3245
+Tanzania,Mkomazi NP,Taurotragus_oryx,0.9741,0,562.59,3245
+Tanzania,Mkomazi NP,Tragelaphus_imberbis,1.0219,0,94.32,3245
+Tanzania,Moyowosi GR and Kigosi GR,Loxodonta_africana,1.2389,0.042,3824.54,13000
+Kenya,Mpala and Ol Jogi Ranch,Loxodonta_africana,1.0192,0.0357,3824.54,191
+Kenya,Mugie Community Conservancy,Loxodonta_africana,1.0805,0.1429,3824.54,198
+Zambia,Mumbwa Game Management Area,Loxodonta_africana,0.812,0,3824.54,3370
+Uganda,Murchison Falls NP,Loxodonta_africana,1.0375,0.3273,3824.54,3877
+Zambia,Musalangu Game Management Area,Loxodonta_africana,1.0872,0,3824.54,17350
+Kenya,Nairobi NP,Aepyceros_melampus,0.9819,0,52.59,117
+Kenya,Nairobi NP,Alcelaphus_buselaphus,0.9935,0,160.94,117
+Kenya,Nairobi NP,Connochaetes_taurinus,0.6387,0,198.62,117
+Kenya,Nairobi NP,Equus_burchellii,0.801,0,279.16,117
+Kenya,Nairobi NP,Eudorcas_thomsonii,1.0081,0,22.91,117
+Kenya,Nairobi NP,Giraffa_camelopardalis,0.9647,0,964.65,117
+Kenya,Nairobi NP,Hippopotamus_amphibius,0.3974,0,1536.31,117
+Kenya,Nairobi NP,Kobus_ellipsiprymnus,0.9277,0,204.39,117
+Kenya,Nairobi NP,Nanger_granti,1.056,0,55.46,117
+Kenya,Nairobi NP,Phacochoerus_africanus,0.9263,0,82.5,117
+Kenya,Nairobi NP,Taurotragus_oryx,0.6371,0,562.59,117
+Zimbabwe,Ngamo State Forest; Sikumi State Forest,Loxodonta_africana,1.1717,0,3824.54,1573
+Tanzania,Ngorongoro Conservation Area,Alcelaphus_buselaphus,1.0293,0,160.94,8191
+Tanzania,Ngorongoro Conservation Area,Connochaetes_taurinus,0.9822,0,198.62,8191
+Tanzania,Ngorongoro Conservation Area,Equus_burchellii,0.9972,0,279.16,8191
+Tanzania,Ngorongoro Conservation Area,Eudorcas_thomsonii,0.9648,0,22.91,8191
+Tanzania,Ngorongoro Conservation Area,Kobus_ellipsiprymnus,0.9557,0,204.39,8191
+Tanzania,Ngorongoro Conservation Area,Nanger_granti,0.9747,0,55.46,8191
+Tanzania,Ngorongoro Conservation Area,Phacochoerus_africanus,0.6919,0,82.5,8191
+Tanzania,Ngorongoro Conservation Area,Syncerus_caffer,1.1061,0,592.67,8191
+Tanzania,Ngorongoro Conservation Area,Taurotragus_oryx,0.8953,0,562.59,8191
+Mozambique,Niassa GR,Loxodonta_africana,1.078,0,3824.54,42000
+Malawi,Nkhota-Kota Wildlife Reserve,Loxodonta_africana,2.4385,0,3824.54,1802
+Zambia,North Luangwa NP,Loxodonta_africana,0.9539,0,3824.54,4636
+Botswana,Northern Tuli GR,Loxodonta_africana,0.9066,0,3824.54,780
+Zambia,Nsumbu NP,Loxodonta_africana,0.9763,0.0308,3824.54,2063
+Kenya,Ol Pejeta and Solio Ranches,Loxodonta_africana,1.0734,0.0536,3824.54,364
+Burkina_Faso,Pama Partial Forest Reserve,Loxodonta_africana,0.9834,0,3824.54,2230
+Benin,Pendjari Biosphere Reserve,Alcelaphus_buselaphus,0.9563,0,160.94,4505
+Benin,Pendjari Biosphere Reserve,Hippopotamus_amphibius,0.9413,0,1536.31,4505
+Benin,Pendjari Biosphere Reserve,Syncerus_caffer,0.9444,0,592.67,4505
+Uganda,Pian Upe Wildlife Reserve,Alcelaphus_buselaphus,0.9872,0.5385,160.94,2304
+Uganda,Pian Upe Wildlife Reserve,Damaliscus_lunatus,0,0.5385,136,2304
+Uganda,Pian Upe Wildlife Reserve,Giraffa_camelopardalis,0,0.5385,964.65,2304
+Uganda,Pian Upe Wildlife Reserve,Hippotragus_equinus,0,0.5385,264.17,2304
+Uganda,Pian Upe Wildlife Reserve,Kobus_kob,0.9816,0.5385,80.04,2304
+South_Africa,Pilanesberg NP,Loxodonta_africana,1.0717,0.125,3824.54,503
+Uganda,Queen Elizabeth NP,Hippopotamus_amphibius,1.1316,0.1,1536.31,2056
+Uganda,Queen Elizabeth NP,Loxodonta_africana,1.1279,0.5455,3824.54,2056
+Uganda,Queen Elizabeth NP,Syncerus_caffer,1.0053,0.128,592.67,2056
+Tanzania,Ruaha-Rungwa ecosystem,Loxodonta_africana,1.0478,0,3824.54,23506
+Tanzania,Ruaha NP,Aepyceros_melampus,1.0408,0,52.59,14506
+Tanzania,Ruaha NP,Giraffa_camelopardalis,1.0775,0,964.65,14506
+Tanzania,Ruaha NP,Hippotragus_equinus,1,0,264.17,14506
+Tanzania,Ruaha NP,Hippotragus_niger,1.2081,0,236.41,14506
+Tanzania,Ruaha NP,Loxodonta_africana,1.02,0,3824.54,14506
+Tanzania,Ruaha NP,Syncerus_caffer,1.0439,0,592.67,14506
+Tanzania,Ruaha NP,Taurotragus_oryx,1.065,0,562.59,14506
+Tanzania,Ruaha NP,Tragelaphus_strepsiceros,1,0,206.06,14506
+Tanzania,Rungwa GR and Kizigo GR,Loxodonta_africana,1.1799,0,3824.54,13000
+Uganda,Rwenzori Mountain NP,Damaliscus_lunatus,0.8107,0,136,995
+Uganda,Rwenzori Mountain NP,Loxodonta_africana,1.2519,0.25,3824.54,995
+South_Africa,Sabie Sands Private Nature Reserve,Loxodonta_africana,1.2416,0,3824.54,559
+Kenya,Samburu National Reserve,Loxodonta_africana,0.8397,0.0625,3824.54,165
+Kenya,Segera Private Nature Reserve,Loxodonta_africana,1.1225,0,3824.54,200
+Tanzania,Selous GR,Loxodonta_africana,1.0022,0,3824.54,44400
+Tanzania,Serengeti NP,Loxodonta_africana,1.1067,0.0167,3824.54,14763
+Zambia,Sichifula Game Management Area,Loxodonta_africana,0,0,3824.54,3600
+Zimbabwe,Sijarira State Forest,Loxodonta_africana,1.0652,0,3824.54,256
+Burkina_Faso,Singou Faunal Reserve,Loxodonta_africana,1.0129,0,3824.54,1920
+Zambia,Sioma Ngwezi NP,Loxodonta_africana,0.9382,0.0333,3824.54,5726
+Zambia,South Luangwa NP,Loxodonta_africana,0.9385,0,3824.54,9050
+Kenya,Taita Hills Wildlife Sanctuary,Loxodonta_africana,0.997,0,3824.54,113
+Tanzania,Tarangire NP,Aepyceros_melampus,0.9942,0,52.59,2616
+Tanzania,Tarangire NP,Equus_burchellii,1.1456,0,279.16,2616
+Tanzania,Tarangire NP,Giraffa_camelopardalis,1.0828,0,964.65,2616
+Tanzania,Tarangire NP,Kobus_ellipsiprymnus,0.9735,0,204.39,2616
+Tanzania,Tarangire NP,Loxodonta_africana,1.0703,0,3824.54,2616
+Tanzania,Tarangire NP,Madoqua_kirkii,1.0903,0,4.83,2616
+Tanzania,Tarangire NP,Phacochoerus_africanus,1.107,0,82.5,2616
+Tanzania,Tarangire NP,Syncerus_caffer,1.3924,0,592.67,2616
+South_Africa,Tembe Elephant Park,Loxodonta_africana,1.0662,0,3824.54,300
+South_Africa,Timbavati Private Nature Reserve,Loxodonta_africana,1.161,0,3824.54,522
+Kenya,Tsavo East NP,Loxodonta_africana,1.0082,0,3824.54,11747
+Kenya,Tsavo East NP,Syncerus_caffer,1.0405,0,592.67,11747
+Kenya,Tsavo NP,Loxodonta_africana,1.0333,0,3824.54,20812
+Kenya,Tsavo West NP,Loxodonta_africana,1.0093,0,3824.54,9065
+Kenya,Tsavo West NP,Syncerus_caffer,0.9913,0,592.67,9065
+Tanzania,Ugalla River North Forest Reserve; Ugalla River Forest Reserve,Loxodonta_africana,0.98,0,3824.54,6718
+South_Africa,Umbabat Private Nature Reserve,Loxodonta_africana,1.0281,0,3824.54,144
+CAR,Vassako-Bolo Strict Nature Reserve,Loxodonta_africana,0,0,3824.54,843
+DRC,Virunga NP,Loxodonta_africana,0.9591,0.8909,3824.54,7890
+Cameroon,Waza NP,Kobus_kob,1.0506,0,80.04,1700
+Cameroon,Waza NP,Loxodonta_africana,0.8998,0.0196,3824.54,1700
+Zambia,West Petauke Game Management Area,Loxodonta_africana,0,0,3824.54,4140
+Nigeria,Yankari NP,Loxodonta_africana,1,0.1875,3824.54,2254
+Chad,Zakouma NP,Alcelaphus_buselaphus,0.9908,0.0857,160.94,3000
+Chad,Zakouma NP,Damaliscus_korrigum,0.9511,0.0857,127.19,3000
+Chad,Zakouma NP,Giraffa_camelopardalis,1.0554,0.0857,964.65,3000
+Chad,Zakouma NP,Hippotragus_equinus,0.9312,0.0857,264.17,3000
+Chad,Zakouma NP,Kobus_ellipsiprymnus,1.1437,0.0857,204.39,3000
+Chad,Zakouma NP,Loxodonta_africana,0.5628,0.15,3824.54,3000
+Chad,Zakouma NP,Syncerus_caffer,1.1012,0.0857,592.67,3000

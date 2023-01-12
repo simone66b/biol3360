@@ -1,0 +1,62 @@
+# Linear Mixed-Effects Models: Practical Application. {#chap21}
+
+## Introduction
+
+The purpose of this practical is to introduce you to fitting linear mixed-effects models in R, using the packages, `nlme`, `lme4`, `lmerTest` and `DHARMa`. The first two of these package are the “standard” ways to fit linear mixed-effects models in R. The third and fourth packages provides some extra functionality that can be very helpful, such as p-values for significance testing, and model diagnostics.
+
+## Exercises
+
+1. Download and read in the file [roos2.csv](./roos2.csv).
+
+2. Examine the summary of the dataframe. BCI is the Body Condition Index, an index of the health of each kangaroo recorded at each observation. Convert it from a numeric variable to an ordered factor. (Hint: `?ordered`). Ordered factors are like other categorical variables but their
+dummy contrast coding is different to the 0, 1 coding we talked about previously. The new coding
+allows for tests of linear, quadratic, cubic effects etc. The other variables are Female ID (factor), Month (factor), Repro (reproductive condition, factor) NewMeanGroup (average group size, continuous) and Rain (rainfall, continuous).
+
+3. Fit a linear mixed-effects model using the `lme` function in the `nlme` package. The function call has the following structure:
+```{r, eval=FALSE}
+fit <- lme(response ~ fixedfactors * covariates, 
+           random=~randomcoefficients | groupingvariable, 
+           data=dataframe)
+```
+
+4. The random coefficients might be random intercepts, random slopes or both. Use the variable NewMeanGroup as the response, Repro, BCI and Rain as fixed effects. Use a random intercept with Female as the grouping variable (random effect). Use the `anova` function to create an ANOVA table. Remember that for unbalanced datasets, the order of the variables entered into the models can matter. This is in general not desirable. Use `type = "marginal"` in your call to `anova` to get F tests that are not dependent on the order of the variables.
+
+5. Repeat 3 and 4 but use a random slope as well as a random intercept. (Hint: `~ Rain | Female`). Perform a $\chi^2$ Likelihood Ratio test for the significance of the random slope. Do this by constructing two models, one with the random slope and one without the random slope. Then use the `anova` function. ie `anova(model1, model2)` What do you conclude?
+
+6. Detach the `nlme` package from the search path by using the `detach` function. Then load the `lme4` package. (You need to do this because `nlme` and `lme4` clash in some respects). Repeat 3 and 4 above, using the `lmer` function. Note that the syntax is somewhat different for `lmer`: Random effects are included in the model formula with the fixed effects, but are surrounded by parentheses. e.g. `(1|Female)`. Compare the summary output with that from the `lme` fit. Do you notice any differences?
+
+7. Load package `lmerTest` (you may need to install it first). Repeat items 3 and 4 above, again using the `lmer` function. To examine the summary and anova outputs, use the extra argument, `ddf = “Kenward-Rogers”` in each call. ie:
+
+```{r, eval=FALSE}
+anova(model1, ddf="Kenward-Rogers")
+summary(model1, ddf="Kenward-Rogers")
+ranova(model1) ## LRT for random effects.
+```
+
+You will have noticed that `lme` and `lmer` give different outputs. In particular, you will have noticed that no degrees of freedom or p-values for any tests are provided by `lme4`. This is because, except in the simple case of balanced, nested random effects (that is, the examples found in textbooks), nobody knows how to calculate the denominator degrees of freedom for F and t tests. In fact, it is not even clear that the test statistics are actually F- or t-distributed!
+
+`lme` provides F and t tests, as it is optimised for nested designs. (`lme` can cope with some lack of balance, but in that case even the tests calculated by `lme` are not strictly correct.) The authors of `lme4` have thus taken the decision to not provide denominator degrees of freedom or p-values as output for `lmer`. This caused quite a stir in the R community, as R users (and most scientists) often want to perform significance tests of hypotheses about the parameters in their statistical models. There are (at least) three possible solutions. The first is to make sure you have plenty of data. If you have a lot of data, you don’t need to worry too much about the denominator degrees of freedom, as the precise value of the degrees of freedom doesn’t matter, so long as it is large. (Asymptotically, t tests become z tests and F tests become $\chi^2$ tests). An example: compare the differences in p-values for F = 5.8 with 1 numerator degree of freedom and different denominator degrees of freedom. (NB this result is the same for the t-test. Why?)
+
+```{r}
+# 3 denominator degrees of freedom, p > .05
+pf(5.8, 1, 3, lower.tail=FALSE)
+
+# Now add 4 more degrees of freedom (a little more data) now p < 0.05
+pf(5.8, 1, 7, lower.tail=FALSE)
+
+# A lot of degrees of freedom, p < 0.05
+pf(5.8, 1, 60, lower.tail=FALSE)
+
+# add 4 more degrees of freedom p < .05 and nearly the same as above.
+pf(5.8, 1, 64, lower.tail=FALSE)
+```
+This is a problem for many biologists and others who work on systems with inherently small sample sizes. "Just go and collect more data" is not helpful advice for a lot of scientists when data are expensive and slow or difficult to collect. The second alternative is to make some extra assumptions about the distribution of the test statistics and the degrees of freedom. This is what the Kenward-Rogers method (and others) does. K-R assumes the F distribution is correct, and adjusts the F statistic and the degrees of freedom so that the p-value is approximately correct. This is what is implemented in package `lmerTest`. The third alternative is to give up on classical tests and use a completely different approach (e.g. the bootstrap, Bayes).
+
+## Diagnostics
+We can use the usual diagnostics for `lme` models (`plot`, `qqnorm`, etc.). Examine these plots for the `lme` fit. Also, examine the QQ-plot for the random effects. (NB we are assuming normality of the random effects so it is a good idea to see how well that assumption holds.). Since `lmer` has a `simulate` method, we can use the `DHARMa` package as with GLM fits:
+
+```{r, eval=FALSE}
+library(DHARMa)
+res <- simulateResiduals(model1, plot=TRUE)
+```
+What do you conclude? Try transforming the response variable to see if it makes a difference.

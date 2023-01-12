@@ -1,0 +1,87 @@
+
+# Assignment 1: War and wildlife {#chap14}
+
+Events around the world right now are incredibly sad and unsettling. 
+
+<center>![](pics/WarPeace.jpeg){width=85\%}</center>
+\
+Take care of yourself. And we should look out for each other all the time, and especially in times like these.
+
+
+## Effects of war on wildlife
+
+Armed conflicts result in untold human suffering, and their effects also ramify more widely. Here is part of an abstract from a [recent review](https://drive.google.com/file/d/1I5e5d3NWJ20JLQ3axdfN6qaMEPrf2EIl/view?usp=sharing){target="_blank"} on the effects of warfare on species conservation:
+\
+
+> Over 90% of the major armed conflicts between 1950 and 2000 occurred within countries containing biodiversity hotspots, and more than 80% took place directly within hotspot areas. Less than one-third of the 34 recognized biodiversity hotspots escaped significant conflict during this period, and most suffered repeated episodes of violence. The weakening or collapse of sociopolitical frameworks during wartime can lead to habitat destruction and the erosion of conservation policies, but in some cases, may also confer ecological benefits through altered settlement patterns and reduced resource exploitation.  
+
+The contrasting positive and negative effects of war on conservation referred to in this abstract come from separate isolated case studies about the effects of war on wildlife. See also [here](https://drive.google.com/file/d/1NrTcE1R2ZN6ZlFETHgWyDA__0pLkVGz0/view?usp=sharing){target="_blank"}. But can we use the power of statistical modeling to move beyond single case studies to determine if there is a consistent signature of the effect of war - positive or negative - on wildlife population dynamics and persistence?
+
+## The task
+
+I would like you to see if you can use your statistical modeling prowess to detect a signature of the effects of armed conflict on the population dynamics of wildlife. To complete this task you will use a dataset containing information on the population growth rates of 36 species of African mammals occurring in 105 different protected areas, each subject to a different frequency of armed conflict sometime between 1946 and 2010. 
+
+\
+<center>![](pics/WarAndWildlife.jpeg){width=100%}</center>
+\
+
+Let's have a look at the data, which you can download [here](https://drive.google.com/file/d/1wNCP1JFbNB0eA1oPgKHyEc9vddRXwDTf/view?usp=sharing){target="_blank"}.
+
+```{r eval=T, results='show',include=T,echo=T}
+d1 <- read.csv("WarWildlife.csv")
+head(d1[,c(1,3,4,5,6,7)])
+```
+
+
+The key variables in this data set are:
+\
+
++ 'lambda' ($\lambda$) is the average annual population growth rate of a species. An annual population growth rate greater than 1 means that a population is growing, and a value less than 1 means that a population is declining. A value of 1 means the population can replace itself each year, but is neither growing nor declining.
++ conflict frequency ('cf') is the proportion of time over which each species' population growth rate ($\lambda$) was estimated that the species was affected by armed conflict. So, if the population growth rate of a species (lambda) was estimated over six years, and the species was affected by conflict for three of those six years then conflict frequency = 3/6 = 0.5. If no conflict occurred then cf = 0. If conflict occurred in every year over which the population growth rate was estimated, then cf = 1.    
++ body mass ('bm') is the body mass of each species in kg.    
++ protected area size ('pa.size') is the area of the protected area within which the population growth rate of that species was measured.  
+
+At it's heart the problem I have assigned can be 'solved' using multiple regression - that is, using a statistical model with one metric response variable and multiple metric predictor variables. Importantly, you now know how to fit and interpret these models so you should all be in a good place to make progress on solving this problem. 
+
+## What I would like you to submit
+
+This assignment is worth 25% of your final grade. I have outlined the marking scheme below. 
+
+I would like you to submit a document (any format is fine - word, latex, pdf, markdown, etc.) that includes:
+
+1) Statistical methods
+- A one-to-two paragraph description of your statistical methods. Simply describe each of the steps you took to solve this problem. Make sure you include information on the statistical model that you fit, replication (i.e. the number of datapoints), which assumptions you checked and how, any transformations you did, a description of any centering and/or scaling of predictor variables that you did, etc. (3 marks: 1 = low quality, 2 = medium quality, 3 = high quality).
+
+2) Results
+   
+  - A one-to-two paragraph written description of your results. First, I would like you to provide some information on the quality of the model and how much variation in population growth rates your model explains. Second, I would like you to interpret your parameter estimates in biological terms. That is, I would like to see sentences like: "I found that the population growth rates of mammals tended be higher/lower in protected areas subject to greater conflict frequency. Specifically, for a unit change in conflict frequency my results suggest an increase/decrease in average annual population growth rates of XXX $\pm$ 95% CI." Or, as another example: "I found that there was an interaction between the effects of conflict frequency and protected area size on population growth rates. Specifically, conflict frequency tended to increase/decrease population growth rates in smaller protected areas, but had little effect in larger protected areas." These are just examples. You will need to tailor your descriptions according to the results that you find. Also be aware that perhaps you will find no evidence of the effect of your predictor variables on population growth rates, in which case this will be the result you will to describe. (3 marks: 1 = low quality, 2 = medium quality, 3 = high quality) 
+  
+- Visualization of your results: I would like you to use added-variable/partial-regression plots to visualize your results. You can find the description for how to generate and interpret these plots in Section \@ref(partial-regression-plots). If you can, please try to include confidence intervals around the partial regression slopes. Make sure all axes are labelled correctly, and that you include figure caption(s). (3 marks: 1 = low quality, 2 = medium quality, 3 = high quality)
+
+3) Problems you encountered and reasons for caution in the interpretation of your results.
+
+- It is all very well giving you highly sanitized datasets when learning statistical modeling, but the data sets that you will often encounter in your career as Quantitative Biologists will often not be so sanitized and yet you will need to proceed anyway. I really don't expect that you will necessarily be able to solve every issue. But, I would like to you to briefly describe any problems associated with your final statistical model, as well as any procedures you tried to solve these problems, even if you were unable to satisfactorily solve the problems in the end. Importantly - be brief. What I am mostly looking for here is an awareness of the limitations of your final model. (3 marks: 1 = low quality, 2 = medium quality, 3 = high quality)
+
+4) Advanced: multimodel selection
+
+- **Note: you will not be penalized if you do not do this component of the assignment, but you will learn something and I will be impressed!**
+- Use the `MuMIn` package in R command to generate model-averaged estimates of the coefficients associated with each predictor, together with their 95% confidence intervals. I will provide a short worked example of how to do this for the C3 plant data set \@ref(the-data) so you can 'copy' the procedures for this assignment. 
+
+## Due date and submission details
+
+The assignment is due by **Thursday 7th April at 1400**.
+The assignment must be submitted using TurnItIn.
+
+Please let me know if anything about the due date or submission process is unclear. 
+
+
+## Some final remarks
+
+**Please - do not stress about this assignment**. First, while the data might be messy and misbehaving, keep reminding yourself that you know how to build a model with one metric response variable and multiple metric predictors. In fact, I am pretty sure you could fit the basic model to the data in less than a couple of hours. Second, **you don't need to perfectly solve every problem that arises**. I would certainly like you to try, but even if you can't solve a problem, just proceed anyway and then use Section 3 of your document to describe the issues you were unable to solve (and how you perhaps tried to solve them). Third, you should be able to modify much of the code I have already provided in this course to fit the model and visualize the results, and I have provided some clear examples both above and in your online materials about how to describe results.  Fourth, I am not a punitive marker and there will be plenty of reward for effort. Our most important job is not to grade you. As Masters students we are way beyond that. Our main goal is to help you to gain skills, experience, and confidence in statistical modeling. 
+
+Finally, you may notice that there are issues with non-independence in the data. For example, species within the same park may have similar responses to conflict (because they are in the same protected area subject to the same conflict), and the same species in different protected areas may have similar responses to conflict (because they are the same species!). You will learn how to build mixed/multi-level/hierarchical models to deal with this sort of non-independence later in this course. For the purposes of this assignment, proceed as if the data are independent. 
+
+I really look forward to seeing what you find!
+
+
+

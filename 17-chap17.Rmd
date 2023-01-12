@@ -1,0 +1,259 @@
+# Categorical Data and the Generalised Linear Model {#chap17}
+
+## Generalized Linear Models (GLMs)
+
+Data come in many forms. They may be _continuous_, and hence may be potentially modelled using continuous distributions (e.g. the Normal or Gaussian distribution). Or they may be _categorical_ or _nominal_ and they may be modelled using discrete distributions such as the binomial distribution (which you have seen in the context of logistic regression) which can be used for modelling proportions or perhaps the Poisson distribution or the Negative Binomial distribution e.g. for count data. As you have previously seen, the framework of Generalised Linear Models can be used to analyse a wide variety of data that are _not_ Gaussian (Normal). This is just an extension of the Linear Model framework that you have learned in the previous weeks. As a refresher: The linear model can be written as a _matrix_ equation. This simplifies the notation somewhat and means that we can refer to complicated experimental designs without having to write out long equations with lots of subscripts etc. We can write the linear model as:
+
+\begin{equation}
+Y=X\beta + \epsilon, \epsilon \sim N(0, \sigma^2I)
+\end{equation}
+
+Although you may not be familiar with this, it is simply the old linear model that you are used to. It has the following terms:
+
+- $Y$ is the response variable data.
+- $X$ is the Design Matrix. It contains the data for our experimental design, values of covariates etc. (the explanatory variables)
+- $\beta$ is a vector of model parameters. This would represent the quantities that we are trying to estimate. (Intercepts, slopes, differences between treatments etc.)
+- $\epsilon$ is the vector of errors, assumed to be Gaussian with mean zero and variance $\sigma^2$. $I$ is the identity matrix.
+
+With a little rearrangement, we can also write the linear model this way:
+\begin{equation}
+E(Y) = \mu = X\beta, Y \sim N(\mu, \sigma^2I)
+\end{equation}
+
+This still has the same meaning as the first equation, above. More generally, we can write:
+
+\begin{equation}
+g(\mu)= X\beta, \mu \sim f(\mu, \theta)
+\end{equation}
+
+- $g(.)$ is the _link function_. For the ordinary linear model, this is simply the identity function $g(\mu) = \mu$.
+- $X\beta$ is the _linear predictor_ and has the same meaning as for the ordinary linear model.
+- $f(.)$ is a probability distribution from the "exponential family"
+- $\mu$ is the "Expectation" of $Y$ ie the mean values, with $E(Y) = \mu$.
+
+Generalised linear models (GLMs) generalise the ordinary linear model in 2 directions:
+
+- The response variable can have a distribution other thant the Normal distribution.
+- The relationship beween the response and explanatory variables need not be linear (on the scale of the raw response data).
+## Count Data
+
+Frequently we wish to know how a particular treatment affects the numbers of observed units. For example, we may wish to know the effect of land clearing on bird abundance. The data (response) would be the counts of the numbers of birds at replicate study sites. Or we may be interested in the number of cells in a microscope field of view, when testing for the presence of disease in patients. These are just two examples of "count" data. We shouldn't use a Gaussian model for these types of data as the data are discrete and the Gaussian distribution is continuous. The most popular distribution for modelling count data is the _Poisson_ distribution. It has probability mass function (pmf):
+
+\begin{equation}
+P(X=x) = \frac{e^{-\lambda} \lambda^x}{x!}, x=0, 1, 2, \dots
+\end{equation}
+
+One property of the Poisson distribution is that the mean $(\lambda)$ is equal to the variance. This is quite a restrictive assumption and when fitting a Poisson model we often run into trouble due to the variance being _greater_ than the mean. This is known as _overdispersion_. Another problem often encountered is that frequently there are too many zeros (as predicted by a Poisson model) in the data. This can lead to a problem called _zero inflation_. Special methods are necessary for dealing with these problems. We will see some of these below.
+
+## Exponential Families
+An exponential family distribution is one where the probability density function (pdf; continuous random variables) or the probability mass function (pmf; discrete random variables) can be written in the following form:
+
+\begin{equation}
+f(y|\theta) = e^{a(y)b(\theta) + c(\theta) +d(y)}
+\end{equation}
+
+Points to note:
+
+- $b(\theta)$ is known as the "natural parameter" and defines the "canonical" link function.
+- If $a(y)=y$ then the function is said to be in "canonical form."
+- $a(y)$ is a _sufficient statistic_ for y.
+- Although the canonical link function often performs very well, you are free to use other link functions if the data suggest it.
+
+## Exponential Families: Poisson Example
+
+Recall the pmf of the Poisson distribution:
+
+\begin{equation}
+f(x|\lambda) = \frac{e^{-\lambda} \lambda^x}{x!}, x = 0, 1, 2, \dots
+\end{equation}
+
+This function can be re-written as:
+
+\begin{equation}
+f(x|\lambda) = \exp(x\log\lambda - \lambda - \log x!)
+\end{equation}
+Note that $a(x)=x$ so the distribution is in canonical form. Also, the natural parameter $b(\lambda) = \log \lambda$ so $\log()$ is the canonical link function.
+
+Not all distributions are exponential families. The theory of GLMs is only guaranteed to work for exponential families. Fortunately, this includes most of the common distributions that we work with.
+
+## Count Data Example: Slugs and Vegetation Regeneration. 
+Download the dataset:
+
+```{r}
+dat <- read.csv("Revegetation.csv")
+head(dat)
+```
+We will use the $\texttt{glm}$ function to test the hypothesis that there is no difference in the number of slugs (Soleolifera) in the revegetated treatment $\textit{versus}$ the control treatment. First, plot the data:
+
+```{r}
+library(ggplot2)
+plt <- ggplot(dat, aes(x=Soleolifera)) + geom_histogram(fill = "white", colour = "black", bins=30) +
+  facet_grid(Treatment ~ .)
+plt
+```
+Note that there are a _lot_ of zeros. We probably don't think the Poisson model will be a very good fit and we may need to try something else. There looks like there are fewer slugs on the Control sites.
+
+Fit the model:
+```{r}
+fit <- glm(Soleolifera ~ Treatment, family=poisson, data=dat)
+```
+You can use the summary function to look at the diagnostic plots, as with an ordinary linear model fit.
+```{r}
+par(mfrow=c(2,2))
+plot(fit, ask=FALSE)
+```
+
+The plots don't look that great. This is because the $\texttt{plot}$ function that is called is really $\texttt{plot.lm}$ and we are using it to plot the diagnostics as if it were an $\texttt{lm}$ object. Instead, I recommend using the $\texttt{DHARMa}$ package for assessing GLMs in R:
+```{r}
+library(DHARMa)
+res <- simulateResiduals(fit, plot=TRUE)
+```
+The two plots from $\texttt{DHARMa}$ tell us some useful information. $\texttt{DHARMa}$ works by simulating residuals from the model and then scaling them on (0, 1). Under the null hypothesis of "no departure from the fitted model" the simulated residuals should follow a uniform distribution. The QQ plot is a graphical test of this. Departures from the red diagonal line indicate a poor fit of the uniform distribution to these residuals. There are also three hypothesis tests that indicate various problems about the distribution.
+
+The right-hand plot gives information on the homogeneity of variance assumption. It is not significant in this case so heteroskedasticity is not a problem. There is a considerable amount of skew within each treatment group, however.
+
+In addition to the $\texttt{DHARMa}$ plots, we can test whether we have a problem with zero-inflation:
+
+```{r}
+testZeroInflation(res)
+```
+This p-value for this test is very small and the simulated residuals all fall to the left of the result for the fitted model (the red line). This indicates a lot of zero-inflation. All these problems should make us suspect that our model has been specified incorrectly. One way of dealing with the issues is to look for another distribution that can handle large numbers of small values, including zeros. The Negative Binomial distribution is often a useful candidate. It has pmf:
+
+\begin{equation}
+Pr(X=n) = \binom{n -1}{r-1}(1-p)^r p^{n-r}
+\end{equation}
+
+Where n is the sample size and r is the number of "successes." Here are some representative Negative Binomial distributions:
+```{r}
+rvals <- 0:50
+yvals1 <- dnbinom(rvals, size=3, prob=0.8)
+yvals2 <- dnbinom(rvals, size = 3, p =.2)
+yvals3 <- dnbinom(rvals, size = 10, p=.9)
+plot(NULL, xlim=c(0, 50), ylim=c(0, .5), type="n", ylab="P", xlab="Number of Successes")
+lines(stepfun(rvals, c(yvals1, 0)), do.points=FALSE)
+lines(stepfun(rvals, c(yvals2, 0)), do.points=FALSE, col="red")
+lines(stepfun(rvals, c(yvals3, 0)), do.points=FALSE, col="blue")
+legend("topright", col=c("black", "red", "blue"), legend=c("n = 3, p = 0.8",
+                                                  "n = 3, p = 0.2",
+                                                  "n = 10, p = 0.9"), lwd=2)
+```
+We can fit the Negative Binomial model using the $\texttt{glm.nb}$ function from the $\texttt{MASS}$ package:
+```{r}
+library(MASS)
+fit2 <- glm.nb(Soleolifera ~ Treatment, data=dat)
+res <- simulateResiduals(fit2, plot=TRUE)
+```
+The diagnostics look a lot better. None of the statistical tests are significant and there is no problem with heteroskedasticity. This is a good model. We can look for zero-inflation here too.
+```{r}
+testZeroInflation(res)
+```
+There are no issues here, either. If zero-inflation was an issue, we could use a zero-inflated Poisson (ZIP) or a zero-inflated Negative Binomial (ZINB) model. (See package $\texttt{glmmTMB}$)
+
+We can't formally test between the Poisson and Negative Binomial models as they are not nested. We can calculate the AIC for each and we see that the NB model is a lot better.
+```{r}
+AIC(fit) ## Poisson
+AIC(fit2) ## Negative Binomial
+```
+
+## The Gaussian Distribution in Exponential Form:
+
+Recall that exponential families can be written by exponentiating the probability mass (or density) function and immediately taking logarithms. ie
+\begin{equation*}
+  f(y|\theta) = \exp(\log(f(y|\theta)))
+\end{equation*}
+where
+\begin{equation*}
+  \log(f(y|\theta)) = a(y)b(\theta) + c(\theta) + d(y)
+\end{equation*}
+If $a(y) = y$ the distribution is said to be in "canonical" form. $b(\theta)$ is called the "natural parameter" and gives rise to the "canonical" link function. Recall that the probability density function for the Gaussian (Normal) distribution is:
+\begin{equation*}
+  f(y|\mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{1}{2}\frac{(y-\mu^2)}{\sigma^2}}
+\end{equation*}
+$\sigma^2$ is a "nuisance" parameter. We will treat it as a known constant. Writing $f(y|\mu, \sigma^2)$ in exponential form we have:
+
+\begin{equation*}
+\begin{split}
+  f(y|\mu, \sigma^2) &= e^{\log(f(y|\mu, \sigma^2))} \\
+    &= e^A
+  \end{split}
+\end{equation*}
+where:
+\begin{equation*}
+  \begin{split}
+  A &= \log(f(y |\mu, \sigma^2)) \\
+    &= \log\left[ \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{1}{2}\frac{(y-\mu^2)}{\sigma^2}}\right] \\
+    &= \log\left[\frac{1}{\sqrt{2 \pi \sigma^2}}\right] - \frac{1}{2}\frac{(y-\mu)^2}{\sigma^2} \\
+    &= -\frac{1}{2}\log(2 \pi \sigma^2) - \frac{(y^2 -2y\mu + \mu^2)}{2 \sigma^2} \\
+    &=  - \frac{1}{2}\log(2 \pi \sigma^2) +\frac{2 y \mu}{2\sigma^2} - \frac{y^2}{2\sigma^2} - \frac{\mu^2}{2 \sigma^2} \\
+    &= \frac{y\mu}{\sigma^2} - \frac{\mu^2}{2 \sigma^2} - \frac{1}{2}\log(2 \pi \sigma^2) - \frac{y^2}{2\sigma^2}
+  \end{split}
+\end{equation*}
+Hence,
+
+  \begin{align*}
+    a(y) &= y \\
+    b(\mu) &= \frac{\mu}{\sigma^2} \\
+    &\propto \mu \\
+    c(\mu) &= -\frac{\mu^2}{2 \sigma^2}- \frac{1}{2}\log(2 \pi \sigma^2) \\
+    d(y) &= -\frac{y^2}{2 \sigma^2}
+  \end{align*}
+
+  $a(y) = y$ so the distribution is in canonical form. The natural parameter $b(\mu)$ is directly proportional to $\mu$. Hence the canonical link function for the Normal distribution is the identity function $f(x) = x$.
+
+## Maximum Likelihood Estimation and The Normal Distribution:
+
+Idea: We wish to know the values of model parameters that were ``most likely'' to have generated the data. To do this:
+
+1. Form a probability model for one datum
+2. Assuming independence, multiply the probabilities together for all data. Equivalently, take the sum of the logarithms of the probabilities
+3. Convert the resulting probability statement into a (log) likelihood
+4. Find the parameter estimates by maximising the (log) likelihood equation
+
+Here we show how to estimate the value of the location parameter ($\mu$) and scale parameter($\sigma^2$) for the Normal (Gaussian) distribution:
+
+\begin{align}
+f(y|\mu, \sigma^2) &= \frac{1}{\sqrt{2 \pi} \sigma} e^{\frac{-(y - \mu)^2}{2\sigma^2}} \\
+\displaystyle f(y_1, y_2, \dots, y_n | \mu, \sigma^2) &= \prod_{i=1}^n\frac{1}{\sqrt{2 \pi} \sigma} e^{\frac{-(y_i - \mu)^2}{2\sigma^2}} \\
+\displaystyle L(\mu | y_{1, \dots, n}, \sigma) &= - \frac{n}{2} \log(2 \pi)  - n \log(\sigma) -\frac{1}{2 \sigma^2} \sum^n_{i=1} (y_i - \mu)^2 \\
+\displaystyle \frac{dL}{d \mu} &=  \frac{1}{2 \sigma^2} \sum_{i=1}^n2(y_i - \mu) \\
+\displaystyle 0 &= \sum_{i=1}^n y_i - n \mu \\
+\mu &= \frac{\displaystyle \sum_{i=1}^ny_i}{n} = \bar y
+\end{align}
+
+The sample mean!
+
+And for $\sigma^2$:
+
+\begin{align}
+\displaystyle \frac{dL}{d \sigma^2} &=  \frac{-n}{2 \sigma^2} + \frac{1}{2(\sigma^2)^{2}}\sum_{i=1}^n(y_i - \mu)^2 \\
+\displaystyle 0 &= -n + \frac{1}{\sigma^2}\sum_{i=1}^n(y_i - \mu)^2 \\
+\displaystyle \hat{\sigma^2} &= \frac{1}{n}\sum_{i=1}^n(y_i - \mu)^2
+\end{align}
+
+Note that $\hat{\sigma^2}$ is a _biased_ estimate of $\sigma^2$. An unbiased estimator for $\sigma^2$ can be constructed by pretending you have one _less_ data point than you really have, and instead make the denominator $n-1$:
+\begin{equation}
+\hat{\sigma^2} = \frac{1}{n-1}\sum_{i=1}^n(y_i - \mu)^2 
+\end{equation}
+Maximum likelihood estimators have many desirable properties, including:
+
+- Asymptotically (ie for large samples) unbiased
+- Asymptotically Normally distributed
+- Consistent
+- Can be used to construct unbiased estimators with minimum variance (MVUE)
+- Efficient: Make use of all the information in the data
+- Invariant: Functions of MLEs are also MLEs
+
+Deriving maximum likelihood estimators analytically is often painful. There are numerical methods to do this (e.g. in R). For example:
+
+```{r}
+library(stats4)
+y <- c(2.3, 4.5, 3.4, 6.2, 1.9)
+nLL <- function (mu) -sum(dnorm(y, mean = mu, log = TRUE))
+fit <- mle(nLL, start = list(mu = 1), nobs = NROW(y))
+summary(fit)
+# compare with the sample mean:
+mean(y)
+```
+
+Standard errors can often be computed by taking the expectation of the second derivative of the likelihood function with respect to the parameters, resulting in the Fisher information matrix. The negative inverse of the Fisher information is the Cram&eacute;r-Rao lower bound for the variance of the maximum likelihood estimator.
+

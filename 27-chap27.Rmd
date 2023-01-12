@@ -1,0 +1,26 @@
+# Assignment: Satellite of Crabs {#chap27}
+
+## Introduction
+
+Horseshoe crabs (___Limulus polyphemus___) are the extant representatives of an ancient group of marine invertebrates that are not closely related to other "true" crabs. They have an interesting social life: Crabs arrive on the beach to spawn in pairs, but there are also "satellite" males that try to interrupt the pairing male and get extra fertilizations. Some pairs get more "attention" from satellite males than others.
+
+Your task is to reanalyse the data, using Bayesian methods and the brms package, from Brockman (1996) to determine the variable(s) that are associated with pairs having a larger number of satellite males. This dataset was analysed previously by Brockman (of course) and by Alan Agresti (2002, 2013). Feel free to examine their approaches and analyses. The data, CrabSatellites, can be found in the countreg package for R:
+
+```{r eval=FALSE}
+install.packages("countreg", repos="http://R-Forge.R-project.org")
+```
+
+There are hints on the analyses in that package. Feel free to explore the data in any way that you wish, so long as you use Bayesian methods for inference. I recommend the brms package (of course). Also DHARMa. There are many hints in the countreg package. See ?CrabSatellites.
+
+One approach that the countreg authors have used is called a "hurdle" model. This is one solution to the problem of zero-inflation, where we have too many zeros in our dataset than the number expected from the proposed distribution of the data. For example, zero inflation is common in Poisson and Negative Binomial distribution models. In essence the "hurdle" is the case when zero occurs, as opposed to values greater than zero. The values greater than zero are modelled using a zero-truncated Poisson or Negative Binomial model, and the zeros are modelled using a Binomial (Bernoulli) model. The model thus has two parts.
+
+## Assessment
+
+Same as the previous assignment. See Chapter 19 for the marking scheme etc. I (Simone) will happily field any questions or difficulties. This is real-world data and is bound to be messy and need careful attention. Don't expect the analysis to be simple! On the other hand, if you find yourself struggling, make an appointment to see me.
+
+The assignment will be due on the ***17th of June, at 14:00*** via TurnItIn. Have fun!!!
+
+## References
+
+- Agresti A (2013).  ___Categorical Data Analysis___, 3rd ed., John Wiley & Sons, Hoboken.
+- Brockmann HJ (1996).  Satellite Male Groups in Horseshoe Crabs, ___Limulus polyphemus___, ___Ethology___, ***102***(1), 1-21.

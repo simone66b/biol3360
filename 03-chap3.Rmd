@@ -1,0 +1,180 @@
+---
+output:
+  html_document: default
+---
+
+# A simple statistical model {#chap3}
+
+
+## The modeling process and _one_ useful way of describing a statistical model 
+
+We want you to become familiar with the process for building and analyzing statistical models, and for formally describing statistical models. The process should become more and more intuitive over time. The language used to describe statistical models can vary for all sorts of reasons, including personal preference among statisticians, disciplinary conventions, statistical philosophies, model types, and because of the evolution in how statistics is done over time. For this reason it is useful to be exposed to all sorts of ways of 'writing' statistical models so that you can comfortably move between different model formulations, and understand the underlying structure and commonalities even as the specific notation varies. 
+
+As a first step in understanding both the modelling process and model notation we can describe a series of steps required to build just about any statistical model: 
+
+1. Identify a set of measurements that you would like to predict or understand. These are the 'predicted' or 'response' or 'outcome' or 'dependent' variable(s).
+
+2. For the outcome variable(s), define a probability distribution (formally a 'likelihood distribution') that describes the plausibility of individual observations. (Over the next two weeks, we will focus on Gaussian or 'normally' distributed outcome variables, but of course, this is not the only possibility).
+
+3. Identify a set of measurements that you would like to use to predict or understand the response variable(s). These are your 'predictor' or 'independent' or 'input' variables. 
+
+4. Mathematically describe a potential relationship between your predictor variable(s) and your predicted variable. This relationship can be biologically meaningful (i.e. be based on some underlying biological theory or mechanism) or can be 'generic', with no known or clearly understood theoretical or mechanistic basis (as is often the case for most straight-line linear models, for example).
+
+On completing these steps, we can then encode each of our decisions formally using the following notation: 
+
+\[\textrm{outcome}_{i}\sim \textrm{Normal}(\mu_{i},\sigma)\] 
+\[\mu_{i} = \beta_{0} + \beta_{1} \times \textrm{predictor}_{i}\] 
+
+This is one way of describing a statistical model. The first 'equation' tells us that the observations of our outcome variable are normally distributed with some mean $\mu$ and standard deviation $\sigma$. Note that the mean varies according to observation $i$ but the standard deviation does not. We'll come back to this later. The second equation describes a potential mathematical relationship between the mean of our outcome variable and the predictor variable (in this case, in the form of an equation for a straight line with intercept $\beta_{0}$ and slope $\beta_{1}$).
+
+We can collapse the expression/equation above into a single expression, and this simple change can sometimes allow a slightly more intuitive feel for what is going on:
+
+\[\textrm{outcome}_{i}\sim\textrm{Normal}(\beta_{0} + \beta_{1} \times \textrm{predictor}_{i},\sigma)\] 
+
+In this way you can see that a statistical model is a mapping of one set of variables through a probability distribution onto another set of variables. It might also be clear that when appropriate, we can substitute the normal distribution for a different kind of probability distribution, we can substitute the straight-line linear model with a model having a different functional form (and/or more predictors), and we can also make changes to the outcome variable (via a transformation, for example) such that we map a transformed outcome variable to the predictor variable(s). We will cover all these alternatives in this course. 
+
+You will remember from an earlier mini-lecture that an alternative way of describing the same statistical model takes the form: 
+
+\[\textrm{outcome}_{i} = \beta_{0} + \beta_{1} \times \textrm{predictor} + \epsilon_{i}\] 
+\[\epsilon_{i} \sim  \textrm{Normal}(0,\sigma)\] 
+
+This is a legitimate and commonly-used notation. However, while this last way of describing statistical models was how I learnt statistical modeling, I now find the notation described higher above more intuitive and more generalizable. For more details, see the book "Statistical Rethinking" by Richard McElreath (\@ref(textbooks-and-resources)). Regardless, it is a very good idea to get comfortable with different ways of writing and talking about statistical models because just about everyone seems to speak a different language in this regard. 
+
+P.S. if the notation $X\sim \textrm{Normal}(\mu,\sigma)$ is not familiar to you, all it means is that the random variable $X$ is normally distributed with mean $\mu$ and standard deviation $\sigma$. Similarly, if we write $X\sim \textrm{Poisson}(\lambda)$, this means that the random variable $X$ is Poisson distributed with parameter $\lambda$, where for a Poisson distribution the parameter $\lambda$ is equal to both the mean and the variance of the Poisson distribution. We will spend more time on different types of probability distributions and when and how they are used in our statistical modeling later in this course. In the meantime, it is well worthwhile developing a deeper understanding for how to explore features of the normal (and other) distributions within R. Here is a section out of "The R Book" by Michael Crawley that provides some detail about probability distributions in R, and the normal distribution in R in particular:
+[getting to know your/you're normal](https://drive.google.com/file/d/1q3UdQW6yB6qJsoS_FrV9Q6Ij_vniw4Ll/view?usp=sharing){target="_blank"}.
+\
+\
+<span style="color: red;">**Exercise**</span> Using the link/reference just provided - and particularly with reference to the figure on page 219 - use R to become _very_ familiar with the R commands `pnorm()`, `dnorm()`, `qnorm()`, and `rnorm()`. Recreate all of the plots on the top of page 219, and think carefully about how they relate to each other. Becoming familiar with generating and interrogating probability distributions in R using these commands will be invaluable for building, analyzing statistical models, and understanding how things like hypothesis tests can be interpreted. 
+\
+
+
+## A Gaussian model of height
+
+### The problem
+
+We are going to start with a very simple linear model, so simple that it doesn't even have any predictor variables! This approach and this particular example is inspired by, and relies heavily on, the book Statistical Rethinking by Richard McElreath (\@ref(textbooks-and-resources)). This is a wonderful, progressive book on Bayesian statistical modeling. One of the reasons it is wonderful is because much of the general approach that Richard McElreath advocates applies to Bayesian and non-Bayesian modeling alike. I will, at times, rely heavily on McElreath's approach and examples, absent the Bayesian elements, which will become more relevant in the last few weeks of this course. More generally, I will dip into and collate resources from a wide range of statistical texts during this course to give you a broad perspective on statistical modeling, and to make the most of different ways of approaching the process of learning statistical modeling (see Chapter \@ref(chap1) of this bookdown document for a list of useful texts).
+
+We are going to construct a statistical model to describe the heights of [iKung San people](https://en.wikipedia.org/wiki/%C7%83Kung_people){target="_blank"} from southern Africa. We are going to use this dataset and example to: a) begin to develop your intuition for the process of statistical modeling; b) understand two different methods of estimating the parameters of the model; and c) get you actually working with dataframes and doing your own analyses.
+
+<span style="color: red;">**Exercise**</span> Download the [data](https://drive.google.com/file/d/1DlvQGWEsY-Q1ZuOJ7--uTgG0LVS02S0h/view?usp=sharing){target="_blank"} into a convenient working directory, load the data in R and assign to an object. After QBIO7001, you should be familiar with how to do this. If not, get familiar and fast. Then get to know your dataframe by having a look at the 'top' and 'bottom' of the dataframe, and getting to know its structure. The following commands will help, but I will get you to evaluate them yourselves.   
+
+```{r eval=T, results=' hide',include=T,echo=F}
+d <- read.csv("iKung_HeightWeight.csv")
+```
+
+```{r eval=T,results="hide",include=T,echo=T}
+head(d) 
+tail(d)
+str(d)
+```
+
+We will be modeling the adult heights. Therefore, create a new dataframe containing only observations of heights for individuals 18 years old and above. When you do this, how many observations are you left with? Use the `dim()` command in R to find out. 
+
+```{r eval=T, results=' hide',include=T,echo=F}
+d2 <- d[d$age>=18,]
+```
+
+### Getting to know your data
+
+We are going to fit a statistical model to this adult height data. The first step (after data cleaning) in the modeling process is to explore your data graphically. You will develop some experience learning different ways of exploring data graphically. One useful way is to draw a histogram. 
+
+```{r eval=T, results='show',include=T,echo=T}
+hist(d2$height,breaks = 20,freq=F,ylim=c(0,0.1),main="Histogram of Adult Height",xlab="height (cm)")
+```
+
+Now we can go through the 4-step modeling process described above (\@ref(the-modeling-process-and-one-useful-way-of-describing-a-statistical-model)). First, we identify the set of measurements we would like to understand (adult height). Then we define a probability distribution that has a good chance of describing the distribution (or 'the plausibility of individual observations'). For now, it useful to know that adult heights are often approximately normally distributed. Step three is to identify your predictor variables. At this stage, we are not interested in any predictor variables, we are just interested in fitting a probability distribution to the data. This is always the scaffold on to which we build additional complexity, such as the addition of predictor variables. Finally, (step 4) we encode our decisions into a mathematical description of our proposed statistical model: 
+
+\[\textrm{height}_{i}\sim \textrm{Normal}(\mu,\sigma)\] 
+
+That is, we are proposing that these measurements of adult height are normally distributed with some unknown population mean, $\mu$ and standard deviation, $\sigma$. The '~' means that the stochastic (random) variable on the left-side of the expression 'has the distribution' defined by whatever is on the right-side of the expression. 
+
+If we remember back to the goals of statistical modeling (\@ref(goals-of-statistical-modeling)), our goal here is to: a) detect/describe a pattern in the data; and b) estimate values of the parameters. The values of the parameters we wish to estimate here are $\mu$ and $\sigma$.
+
+
+## Estimation methods
+
+<span style="color: red;">**Exercise** </span> Let's first estimate the values of these parameters by guessing. First create a histogram of the adult height data, and then draw a 'normal' curve over the histogram, with your best guesses for the mean and standard deviation, to see if you can roughly describe the distribution of heights. 
+
+To do this you will need to use the `hist()` command, setting `freq = F`(as above). And for overlaying the normal curve you will need three things: 1) the equation for a normal distribution, and 2) the `curve()` command, setting `add=T`, and 3) your best guesses for $\mu$ and $\sigma^2$.
+
+Here is the equation for a normal distribution: 
+
+\[f(x)=\frac {1} {\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}\]
+  
+By coding this expression as the first argument, `expr=`, of the `curve()` command, leaving `x` as `x` in this equation as the variable that will represent individual measurements of adult height, and inserting the values of your best guesses for $\mu$ and $\sigma$, you should be able to do a better job than me at 'fitting' a normal distribution to the data. 
+
+```{r eval=T, results='show',include=T,echo=F}
+hist(d2$height,breaks = 20,freq=F,ylim=c(0,0.1),main="Histogram of Adult Height",xlab="height (cm)")
+mean <- 165
+sd <- 5
+curve(
+  (1 / (sd*sqrt(2*pi))) * exp((-1/2)*((x-mean)/(sd))^2)
+  ,add=T,n=1000,col="red",lwd=3)
+```
+
+Where have I gone wrong? What are your best guesses for $\mu$ and $\sigma$? Try some different guesses until you are happy that you are close to the best possible fit. (I know that you know how to calculate the mean and probably the standard deviation, but humour me here).
+
+The process of 'drawing' a proposed model with different parameter estimates over your data might give you an intuition for the process of fitting and parameter estimation. But we obviously don't fit statistical models and estimate parameters by 'eyeballing' and guessing. And yes - it is easy to calculate the mean and standard deviation of a set of observations such as these adult heights, but once we start fitting more complicated models, doing so becomes more and more difficult. Instead, we need quantitative methods for parameter estimation. 
+
+There are several methods for estimating parameters. Two methods that you will commonly encounter in your statistical modeling career are Least Squares (LS) estimation and Maximum Likelihood (ML) Estimation. 
+
+How does Ordinary Least Squares estimation work?
+\
+\
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/UqszoD8JnVA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+\
+\
+
+How does Maximum Likelihood estimation work?
+\
+\
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/RwxaXcYxgcc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+\
+\
+
+
+## Fitting the model in R
+
+Now you have some idea of how we quantitatively estimate parameters of a statistical model, we can fit this model in R. 
+
+```{r eval=T, results='hide',include=T,echo=T}
+m1 <- lm(height~1,data=d2) # this is the R syntax for fitting a linear model with Gaussian errors. The syntax "height~1", and without the addition of predictor variables, means that we are fitting an 'intercept-only' or constants-only model. 
+summary(m1) # this provides a summary of the model fit, including parameter estimates. 
+```
+
+<span style="color: red;">**Exercise**</span> Can you now repeat the plot (above) showing the histogram of the raw data with the overlay of the normal distribution parameterized using your Ordinary Least Squares estimate of the mean and the standard deviation by fitting a model using `lm()`? To do this you will need to work out which of the numbers in the `summary()` output is the estimate of the mean, and which is the estimate of standard deviation. You can get this from the summary information, but you might also find it useful to use `str(summary)m1` to identify and extract the standard deviation, noting that the greek letter most commonly used to denote the standard deviation is $\sigma$ (sigma).
+
+Your figure should look something like this: \
+
+
+```{r eval=T, results='hide',include=T,echo=F}
+hist(d2$height,breaks = 20,freq=F,ylim=c(0,0.1),main="Histogram of Adult Height",xlab="height (cm)")
+mean <- coefficients(m1)[1]
+sd <- summary(m1)$sigma
+curve(
+  (1 / (sd*sqrt(2*pi))) * exp((-1/2)*((x-mean)/(sd))^2)
+  ,add=T,n=1000,col="red",lwd=3)
+```
+
+<span style="color: red;">**Exercise (advanced)**</span> Can you fit the normal distribution to the height data in R using maximum likelihood estimation? Use this [webpage](https://rpubs.com/Koba/MLE-Normal){target="_blank"} to help, reading the section "A Bit of Theory Behind MLE of a Normal Distribution" before attempting the code. Do you get the same result? If yes, why? If no, why not? 
+
+
+## Summary
+
+You should now have a half-decent understanding of:\
+  1. what a statistical model 'is',\
+  2. the goals of statistical modeling,\
+  3. some of the ethics underpinning, and limitations of, statistical modeling\
+  4. the beginnings of the modeling process (your understanding of this process will grow and grow)\
+  5. different methods of estimation (Least Squares and Maximum Likelihood)\
+  6. how to fit the simplest of linear models in R, and how to identify if not extract estimates of important parameters.\
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,154 @@
+# Installing Stan and brms {-}
+
+In the coming weeks, we'll be using the `brms` package in R to do some Bayesian analysis. `brms` can be tricky to install: this short guide will provide some instructions that might help. `brms` uses the Stan programming language as a backend, and as such, we'll need to install that first. To install Stan, we need access to a C++ compiler. 
+
+There's three steps we need to follow:
+
+- Configure/install C++ compiler tools (needed for Stan)
+- Install Rstan (the R interface for Stan)
+- Install `brms`
+
+For another guide on installing these tools, [this tutorial](https://learnb4ss.github.io/learnB4SS/articles/install-brms.html) is great. In fact, most of this tutorial is based on information found there.
+
+Before you start, make sure that you have installed the latest release of RStudio, and are running R >=4.0. Also, if you have a previous installation of Rstan, or you have tried to install it in the past, run the following to clean your configuration files:
+```{r clean_config, eval=F}
+remove.packages("rstan")
+if ((file.exists(".RData")) 
+    file.remove(".RData")
+```
+
+## Mac OS {-}
+### C++ tools {-}
+
+To get the C++ tools we need, we'll need to install the xcode CLT, the developer command line tools for MacOS, and `gfortran`, a Fortran compiler. In Terminal, run the following command:
+
+```{bash install_xcode, eval = F}
+xcode-select --install
+```
+
+This will take some time, so make sure you have a reliable internet connection.
+
+To install `gfortran`, there are a couple of installers, depending on your CPU:
+
+- [If you have an Apple M1 chip (ARM)](https://github.com/fxcoudert/gfortran-for-macOS/releases/tag/11-arm-alpha2)
+
+- [If you have an Intel chip (x64)](https://github.com/fxcoudert/gfortran-for-macOS/releases/tag/8.2)
+
+Note that the Intel link specifies MacOS Mojave. Regardless of what MacOS version you are running, you need to install the Mojave version of `gfortran` 8.2.
+
+### Installing RStan and brms {-}
+
+To install RStan, you can run: 
+```{r rstan, eval=F}
+install.packages("rstan")
+```
+
+from an R console.
+To verify that your installation is working, you can run an example provided:
+```{r rstan_ver, eval=F}
+example(stan_model, package = "rstan", run.dontrun = T)
+```
+
+If you don't get any errors, and the model compiles and runs, you're all set!
+If you get a warning regarding `mingw_`, it is safe to ignore it.
+
+You can now install brms with 
+```{r brms, eval=F}
+install.packages("brms")
+```
+
+## Windows {-}
+### C++ tools {-}
+First, you'll need to install RTools4, which allows R to build packages from C/C++/Fortran source code. You can download RTools [here]( https://github.com/r-windows/rtools-installer/releases/download/2022-02-06/rtools40-x86_64.exe).
+
+After you have installed RTools, you'll need to put it on the <kbd>PATH</kbd>, an environment variable that tells R where it can find the RTools utilities. This can be done in R:
+```{r rtools_env, eval=F}
+write('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', file = "~/.Renviron", append = TRUE)
+```
+
+This will write to a file `.Renviron`, which stores all the environment variables R can access.
+
+After you have installed RTools and put it on the <kbd>PATH</kbd>, restart R and verify that the RTools utilities can be found:
+```{r rtools_ver, eval=F}
+Sys.which("make")
+## "C:\\rtools40\\usr\\bin\\make.exe" 
+```
+
+Further instructions on installing RTools can be found [here](https://cran.r-project.org/bin/windows/Rtools/rtools40.html). 
+
+### Installing Rstan and brms {-}
+
+After you've installed RTools, restart R and run:
+```{r, eval=F}
+install.packages("rstan", repos = "https://cloud.r-project.org/", dependencies = TRUE)
+```
+
+You can verify the installation by running an RStan example:
+```{r, rstan_ver, eval=F}
+```
+
+Finally, you can install `brms`:
+```{r brms, eval=F}
+```
+
+## Linux {-}
+
+RStan is quite convenient to install on Linux compared to Windows and MacOS.
+You will require either `g++` >= 4.9 or `clang++` >= 3.4. Most Linux distributions will come packaged with these requirements already met, however, if you are running a toaster you might need to update your C++ compiler. To check which version of `g++` or `clang++` you have installed, you can run the following in a terminal:
+```{bash, eval=F}
+g++ --version
+clang++ --version
+```
+
+You will also need to install the `libv8` library. Depending on your distribution, you might be able to install this from a system repository, otherwise there is a static version available to install through R. Installation instructions can be found [here](https://github.com/jeroen/V8#installation).
+
+
+### Installing from binary {-}
+If you are running Ubuntu (LTS versions 16.04, 18.04, 20.04), or Debian (DebianTesting), you can directly install system packages for RStan. Information on which packages you need can be found [here](https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux).  
+
+After installing the necessary system packages, there are a number of C++ compiler flags that we need to set to use Stan. Open R and enter the following:
+```{r, eval=F}
+dotR <- file.path(Sys.getenv("HOME"), ".R")
+if (!file.exists(dotR)) dir.create(dotR)
+M <- file.path(dotR, "Makevars")
+if (!file.exists(M)) file.create(M)
+cat("\nCXX14FLAGS=-O3 -march=native -mtune=native -fPIC",
+    "CXX14=g++", # or clang++ but you may need a version postfix (e.g. clang++-6.0)
+    file = M, sep = "\n", append = TRUE)
+```
+
+You can now restart R and test your rstan installation is working properly by running
+```{r rstan_ver, eval=F}
+```
+
+If you have no errors, all that's left to do is to install `brms`.
+
+```{r brms, eval=F}
+```
+
+### Installing from source {-}
+
+If you aren't running Ubuntu or Debian, you will need to build from source. This is similarly straightforward to installing from binary. Start by running the R code for setting your C++ compiler flags (in [Installing from binary]), and restart R.
+
+Then run the following, changing the number of CPU cores you would like to make available to Stan if necessary:
+```{r build_rstan, eval=F}
+# Remove previous installations
+remove.packages("rstan")
+remove.packages("StanHeaders")
+if (file.exists(".RData")) file.remove(".RData")
+
+# Set number of cores to use - CHANGE THIS DEPENDING ON YOUR SYSTEM
+Sys.setenv(MAKEFLAGS = "-j4") # four cores used
+
+# Install RStan from CRAN
+install.packages("rstan", type = "source")
+
+```
+
+After that, you can verify rstan is working properly by running
+```{r rstan_ver, eval=F}
+```
+
+and install `brms` by running
+```{r brms, eval=F}
+```

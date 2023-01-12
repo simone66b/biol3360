@@ -1,0 +1,247 @@
+# Multiple metric predictors {#chap11}
+
+## Differences between simple and multiple regression
+
+I want to motivate the next feature/issue of multi-predictor models with more than one metric predictor with an example. 
+
+I lived in Switzerland for a number of years. The Swiss have a wonderful tradition in botany, and the Swiss Botanical Society published their own journal called _Botanica Helvetica_ (now Alpine Botany). 
+
+<center>![](pics/BotanicaHelvetica.jpg){width=50%}</center>
+
+\
+
+And a gratuitious picture of one of many Swiss cliches that are not actually cliches:
+
+<center>![](pics/Alps.jpg){width=50%}</center>
+\
+
+That much is true. I think the rest of this story is also true, but either way the example will provide some insight into how models with multiple metric predictors (often called 'multiple regression' models) work, including how they should be interpreted, and also how one additional model assumption should be met.  
+
+Scientific publishing is expensive - particularly for small players - and so authors were charged 200 CHF (= a lot of Australian dollars) per printed page from the 15th page. To tell the authors whether or not they would have to pay a fee, the editor had to predict the number of printed pages (yes - we read actual paper in those days) based on the number of words, tables and figures in the manuscript. To address this problem we can build a statistical model to explain the number of published pages based on characteristics of a sample of manuscripts that have already been published.
+
+The data is [here](https://drive.google.com/file/d/1E4mUElLHVMkcLRO1AkSkvhnPm5VDq_GB/view?usp=sharing){target="_blank"}, and you should have a look:
+
+```{r eval=T, results=' hide',include=T,echo=T}
+d <- read.csv("BotHelv.csv")
+head(d)
+```
+
+One powerful and quick method for graphically exploring data containing several variables is to generate a scatterplot matrix.
+
+```{r eval=T, results=' hide',include=T,echo=T}
+plot(d[,c(2:7)]) # we will exclude manuscript number (= replicate) from our scatterplot matrix
+```
+\
+<span style="color: red;">**Exercise**</span> Stop to think about what the command does, and how to interpret the scatter plot matrix. This won't be the last time you use this command as a statistical modeler. 
+\
+
+We suspect that our predicted variable, pages, is likely to be associated with the number of words, tables, and figures in a manuscript. So we fit a model with these predictor variables. (Note that numbers of tables and figures are count variables, but we can use them as 'metric' predictors).
+
+```{r eval=T, results=' hide',include=T,echo=T}
+m1 <- lm(pages~words+tables+figures,data=d)
+summary(m1)
+```
+\
+Our fitted regression model takes the form:
+
+$\textrm{pages}\sim\mathcal{N}(\mu=0.26+0.0019\times\textrm{words}+0.56\times\textrm{tables}+0.68\times\textrm{figures},\sigma=1)$
+
+### Comparing coefficients
+
+Let's compare our multiple regression with three simple regressions, one for each predictor. I will leave it as an <span style="color: red;">**Exercise**</span> for you to fit the models, but here I will visualise the results. 
+
+```{r eval=T, results=' hide',include=T,echo=F}
+m2 <- lm(pages~words,data=d)
+# summary(m2)
+m3 <- lm(pages~tables,data=d)
+# summary(m3)
+m4 <- lm(pages~figures,data=d)
+# summary(m4)
+
+par(mfrow=c(1,3))
+plot(pages~words,xlab="words",ylab="pages",data=d)
+abline(m2)
+legend("topleft",legend = ("slope=0.0023"),bty="n")
+
+plot(pages~tables,xlab="tables",ylab="pages",data=d)
+abline(m3)
+legend("topleft",legend = ("slope=1.6"),bty="n")
+
+plot(pages~figures,xlab="figures",ylab="pages",data=d)
+abline(m4)
+legend("topright",legend = ("slope=1.955"),bty="n")
+```
+
+Comparing the estimates in the plots above with the estimates in `summary(m1)` output, you will notice that the slope terms in the single-predictor models are higher than in the multiple regression (m1) model. That is, estimates of regression slopes associated with the same predictor variable are different in simple vs. multiple regression. 
+
+These differences arise due to correlations among the predictor variables:
+
+```{r eval=T, results=' hide',include=T,echo=T}
+cor(d[,c(2,4,5)]) # use ?cor to understand what we are looking at here. 
+```
+
+We actually visualized these correlations in the scatter plot matrix above. 
+
+In general, the single predictor regression models quantify the effect of a predictor _ignoring_ the effects of all other predictors. By contrast, the multiple predictor regression model quantifies the effect of each predictor _controlling for_ the effects of all other predictors.  
+
+Because of this:\
+- in simple regression, the relationship between the predictor and the predicted variable includes possible indirect effects due to associated changes in other ignored (and potentially unmeasured) predictors. As such, simple regression models describe the empirical relationship between the predicted and predictor variable.  
+- in multiple regression, slopes represent the additional effect of a unit change in a predictor, for constant values of the other predictors in the model. Stated with reference to our example, multiple regression isolates the influence of words independent of tables and figures by holding tables and figures constant so that they don't 'interfere' when assessing the effect of words. As such, multiple regression can be more effective for quantifying the direct effect of a predictor on a predicted variable, controlling for the influence of other predictors. 
+
+## Visualizing models with multiple metric predictors
+
+### Partial regression plots
+
+Partial regression or 'added-variable' plots illustrate the influence of individual predictors on the response variable after taking away ("partialling out") any possible indirect influence due to correlations with the other predictors. For a model with three predictors ($x_1$,$x_2$,$x_3$), the partial regression plot of $y$ against $x_1$ is:  
+$Y$-axis of the plot: residuals from a regression of $y$ on $x_2$ and $x_3$  
+$X$-axis of the plot: residuals from a regression of $x_1$ on $x_2$ and $x_3$
+
+These are sometimes called "added-variable plots". They are particularly useful when we have more than two metric predictors (because it is hard to visualize relationships in more than two dimensions). And we can generate them in `R`.
+
+```{r eval=T, results=' hide',include=T,echo=T}
+residuals.pages <- residuals(lm(pages~tables+figures,data=d))
+residuals.words <- residuals(lm(words~tables+figures,data=d))
+plot(residuals.pages~residuals.words)
+abline(lm(residuals.pages~residuals.words))
+```
+\
+Notice that the slope of this line is equal to the regression coefficient associated with the predictor 'words' from the original multi-predictor model. Check for yourself:
+
+```{r eval=T, results=' hide',include=T,echo=T}
+summary(lm(residuals.pages~residuals.words))
+```
+
+Magic. And we can interpret the effect of words on page number: every additional word adds 0.0019 additional pages to a published manuscript. 
+
+<span style="color: red;">**Exercise**</span> Generate the other two added variable plots associated with this model, and add confidence intervals.  
+
+### 3D plots
+
+When we are only interested in two metric predictors, we can visualise our results using various forms of 3D plots. To demonstrate we will fit another model with only two predictors: words and illustrations, where illustrations = figures + tables.
+
+```{r eval=T, results=' hide',include=T,echo=T}
+model <- lm (pages~words*illustrations,data=d)
+ab <- coef (model)
+FUN <- function (x1,x2) {ab[1]+ab[2]*x1+ab[3]*x2+ab[4]*x1*x2} # Function to predict Y from the coefficients
+
+Nr.words <- seq (1000,8000,length=20) 
+Nr.illustrations <- seq (0,10,length=20)
+Nr.pages <- outer (Nr.words,Nr.illustrations,FUN)
+
+persp (Nr.words,Nr.illustrations,Nr.pages,theta=-45,phi=15,r=2,ticktype="detail") 
+```
+
+
+```{r eval=T, results=' hide',include=T,echo=T}
+contour (Nr.words,Nr.illustrations,Nr.pages,xlab="words",ylab="illustrations")
+```
+\
+The almost imperceptible curvature in this plot is the effect of the interaction between words and illustrations on page number. Stonger interactions will generate stronger curvature.  
+\
+
+```{r eval=T, results=' hide',include=T,echo=T}
+filled.contour(Nr.words,Nr.illustrations,Nr.pages, color.palette = colorRampPalette (c("lightgreen","white", "darkred")),xlab="words",ylab="illustrations")
+```
+
+## Collinearity
+
+The more correlated the predictors included in a model are, the more uncertain is the estimation of their effects. The standard errors of the estimated coefficients get larger, and any conclusions based on these coefficients get unreliable.
+We can illustrate the issues of collinearity (or multicollinearity) by adding the number of characters in the text as an additional predcitor variation in our model. Obviously, the number of characters strongly correlates with that of words. You can see this in the scatterplot matrix above. What happens if we include it in the model?
+
+
+```{r eval=T, results=' hide',include=T,echo=T}
+m1 <- lm(pages~words+illustrations,data=d)
+summary(m1)
+m2 <- lm(pages~characters+words+illustrations,data=d)
+summary(m2)
+```
+
+The important thing to notice here is that the standard error on the estimate associated with the predictor variable 'words' has increased substantially in the model that included the correlated predictor variable 'characters'. That is, we are much less certain about the influence of correlated predictors on our response variable. 
+
+We can also fit two separate simple regression models, and one full 'multiple' regression model. This way we can visualise the effects of collinearity in the multiple regression model on the uncertainty in our parameter estimates
+
+
+```{r eval=T, results=' hide',include=T,echo=T}
+TwoPredictors <- lm(pages ~ words + characters, data = d) # full multiple regression model containing both (collinear) predictors
+OnePredictor_Words <- lm(pages ~ words, data = d) # simple regression model with the predictor 'words'
+OnePredictor_Characters <- lm(pages ~ characters, data = d) # simple regression model with the predictor characters.
+
+alpha=0.05 # set our alpha (or significannce) level at 0.05, which helps us to calculate 1-alpha = 0.95 confidence intervals on our parameters
+# estimates and 95% confidence intervals on the parameters in the full model. 
+TwoPredictors.CI <- data.frame(TwoPredictors.est = c(TwoPredictors$coef[2],TwoPredictors$coef[3]), 
+                     TwoPredictors.lwr = c(TwoPredictors$coef[2] - (qt(1-alpha/2,TwoPredictors$df.residual)) * summary(TwoPredictors)$coefficients[2,2],TwoPredictors$coef[3] - (qt(1-alpha/2,TwoPredictors$df.residual)) * summary(TwoPredictors)$coefficients[3,2]), 
+                     TwoPredictors.upr = c(TwoPredictors$coef[2] + (qt(1-alpha/2,TwoPredictors$df.residual)) * summary(TwoPredictors)$coefficients[2,2],TwoPredictors$coef[3] + (qt(1-alpha/2,TwoPredictors$df.residual)) * summary(TwoPredictors)$coefficients[3,2])
+                     )
+names(TwoPredictors.CI) <- c("est","lwr","upr")
+
+# estimates and 95% confidence intervals on the parameter in one of the simple models
+OnePredictor_Words.CI <- data.frame(OnePredictor_Words.est = c(OnePredictor_Words$coef[2]), 
+                    OnePredictor_Words.lwr = c(OnePredictor_Words$coef[2] - (qt(1-alpha/2,OnePredictor_Words$df.residual)) * summary(OnePredictor_Words)$coefficients[2,2]), 
+                    OnePredictor_Words.upr = c(OnePredictor_Words$coef[2] + (qt(1-alpha/2,OnePredictor_Words$df.residual)) * summary(OnePredictor_Words)$coefficients[2,2])
+)
+names(OnePredictor_Words.CI) <- c("est","lwr","upr")
+
+# estimates and 95% confidence intervals on the parameter in the second simple regression model
+OnePredictor_Characters.CI <- data.frame(OnePredictor_Characters.est = c(OnePredictor_Characters$coef[2]), 
+                    OnePredictor_Characters.lwr = c(OnePredictor_Characters$coef[2] - (qt(1-alpha/2,OnePredictor_Characters$df.residual)) * summary(OnePredictor_Characters)$coefficients[2,2]), 
+                    OnePredictor_Characters.upr = c(OnePredictor_Characters$coef[2] + (qt(1-alpha/2,OnePredictor_Characters$df.residual)) * summary(OnePredictor_Characters)$coefficients[2,2])
+)
+names(OnePredictor_Characters.CI) <- c("est","lwr","upr")
+
+TwoPredictors.CI
+OnePredictor_Words.CI
+OnePredictor_Characters.CI
+
+# create a new dataframe containing estimates and CIs for all parameters from all models. 
+new <- rbind.data.frame(OnePredictor_Words.CI,OnePredictor_Characters.CI,TwoPredictors.CI)
+
+# plot the result!
+par(mfrow=c(1,1))
+xaxis.loc <- c(1,1.5,2.5,3)
+plot(c(0.5,3.5),c((min(new)+1.4*min(new)),max(new)*1.4),type='n',xaxt="n",ylab="Parameter ('slope') estimates",xlab="")
+axis(1,at = xaxis.loc,labels = c("words","characters","words","characters"))
+points(xaxis.loc,c(new[,1]),cex=2,pch=16,col=c(1,1,2,2))
+arrows(x0 = xaxis.loc,x1 = xaxis.loc,
+       y0=new[,2],y1=new[,3],angle = 90,code = 3,length = 0.1,lwd=3,col=c(1,1,2,2))
+legend("topleft",legend = c("separate single-predictor models","full model including both predictors"),title = "Estimates from:",bty="n",col=c(1,2),pch=c(16))
+```
+\
+From this plot you can see that our estimates of the parameters of the model become a lot less reliable when predictors are collinear. 
+
+A measure for the increase in standard error due to collinearity is the variance-inflation factor (VIF). This indicates how much larger the squared standard errors of the estimated coefficients are, compared to their values without correlated predictors. The VIF for one predictor $X_j$ is given by $1/(1–r_j^2)$, where $r_j^2$ is the $r^2$ when $X_j$ is regressed on all the remaining predictors in the model.
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+model.pages.r.squared <- summary(lm(words~characters+illustrations,data=d))$r.squared # r_j^2 for X_j = words
+1/(1-model.pages.r.squared) # VIF for words
+```
+
+It is my understanding that VIF values greater than 5 indicate pretty strong collinearity and values greater than 10 are really problematic. As with just about all 'metrics' in statistics (e.g. $p$-values), severe cut-offs for what we 'accept' and 'reject' are not always useful for metrics that take continuous values. So along with the VIF diagnostic, it is important to gain an understanding for how collinearity is affecting your ability to draw the conclusions you want to draw from your data. 
+
+```{r eval=T, results='show',include=T,echo=T,message=F}
+library(car)
+vif(m1) # no problem
+vif(m2) # big problem
+```
+
+<span style="color: red;">**Exercise**</span> Fit a model to the mammal sleep data (\@ref(multiple-predictor-variables)) including brain weight and body weight as predictors. Brain weight and body weight are going to be correlated. How severe is the problem for the estimates of the parameters? Answer this question by calculating confidence intervals on the parameter estimates of the correlated variables in two models: a model with just one predictor, and the model with both predictors.  
+
+### What should we do about collinearity?
+
+Biological data often include correlated variables. So some level of collinearity is often difficult to avoid in biological data outside of an experimental setting. Yet as we have seen, collinearity can cause large problems in our ability to estimate model coefficients. Collinearity can cause model coefficients to be 'unstable', such that small changes in the data or the presence/absence of a predictor variable can cause large changes in the parameter estimates. And collinearity causes increases in the value of the standard errors associated with the correlated predictor variables. Because confidence intervals are calculated from standard errors, collinearity increases the range of uncertainty regarding the true value of the coefficient.
+
+**What do we do about this?**
+
+First, if your goal is prediction (within the range of the data - i.e. not extrapolation), and we assume similar patterns of collinearity in the population for which we are making predictions, then things might be ok. Collinearity does not prevent a good fit to the data and does not limit the model's predictive power. It just makes us (a lot) less certain about the effect of particular variables.
+
+However, our goal in statistical modeling is often to make inferences about the effect of particular predictor variables on our response variable. Collinearity definitely impedes this goal. 
+
+To address collinearity, you need to start before you even build your model. Thinking carefully about which predictor variables you care about, and which predictors are likely to contain redundant information (such as the predictors 'words' and 'characters' in our example) is an essential step for avoiding issues associated with collinearity. 
+
+If strong collinearity emerges in your model after the model is fit, you can also choose to omit a correlated predictor. But you need to be aware that if you do so, the parameter estimates that remain in the model will likely change, and you still cannot be sure that this new estimate truly reflects the 'effect' of the predictor variable that remains in the model. This is the same issue as in simple linear regression, where indirect effects of excluded variables are effectively attributed to the predictor that remains in the model, leading to an overestimate of the 'true' effect of the predictor variable. See \@ref(comparing-coefficients).
+
+If you have carefully chosen your predictors and collinearity remains a problem, you can perform what is sometimes known as principal components regression. This involves modeling the response variable as a function of the principal components of the matrix of predictor variables. This begins to solve the problem of collinearity because these principal components are uncorrelated. Because the 'effect' of a principal component can be difficult to interpret, an extra step is required to interpret the effects of the original predictor variables. Further details are beyond the scope of this course, but if you encounter issues with collinearity in your own work, you are now aware of this potential solution and you can explore further if necessary. As with just about everything in statistics, with a bit of practice, it's not that difficult. There are plenty of texts and `R` packages to help. And for those of you doing the Masters in Quantitative Biology, you have a head start because you are covering principal components in [QBIO7002](https://shire.science.uq.edu.au/QBIOL/QBIO7002/docs/){target="_blank"}.
+
+
+
+
+

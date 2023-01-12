@@ -1,0 +1,70 @@
+
+# Extending the linear model (part 4) {#chap15}
+
+<center>![](pics/kale.jpg){width=100%}</center>
+
+## Generalized Linear Models (GLMs)
+
+In all the statistical models we have been working with up to now in this course, we have assumed that the uncertainty in our models can be described using normal distributions. That is, our models have taken the form (\@ref(the-modeling-process-and-one-useful-way-of-describing-a-statistical-model)):
+
+\begin{align} 
+  \textrm{outcome}_{i}&\sim \textrm{Normal}(\mu_{i},\sigma) \\ 
+  \mu_{i} &= \beta_{0} + \beta_{1} \times \textrm{predictor}_{i}
+\end{align}
+
+Moreover, the linear relationship between the mean of the response variable and the predictor variable(s) also means that we have technically been assuming that our response variable can take values between $-\infty$ and $+\infty$. Consistent with both these assumptions our response variables have been metric (continuous).
+
+But this week I got sick. No kidding, I really did. And being sick is not a metric (continuous) variable. Last week I was healthy, this week I am sick. The outcome in this case is binary: healthy vs. sick.^[I guess I could be a little bit or a lot sick, but that's a complication we will put aside for now] In medical research, whether or not someone becomes sick is an important response variable to be able to explain. For example, if a doctor wishes to understand if eating too much kale causes cancer, they would need to sample a population of people who have eaten various amounts of kale (our predictor) and who either have or have not had cancer (our _binary_ response variable). 
+
+More generally, lots of big questions in biology (and outside of biology) require that we explain binary (a specific case of nominal: chapter \@ref(chap8)) response variables. We might, for example, be interested in questions related to presence vs. absence, alive vs. dead, mutant vs. wildtype, infected vs. not infected, _etc_. 
+
+Fortunately we can simply extend the plain old linear model - it really is very adaptable - to accommodate binary response variables. And not only can we accommodated binary response variables, but we can also accommodate response variables that are counts (which are discrete and only take positive values, unlike normally distributed variables), as well as response variables best described by several other distributions that are not normal. This is the world of the '_generalized_ linear model' or GLM. 
+
+But, because I have been sick - not COVID, thankfully - I have not been unable to take a step-by-step approach to developing your understanding of GLMs in these online materials. So, for your self-study this week we're going to go old-skool, but you'll be in the best of hands. I would like you to read (and try to absorb!) two different conceptual and semi-technical explanations of GLMs, particularly as they relate to binary (binomial) response variables. 
+
+## Reading
+
+The first reading is taken from: McElreath, R. 2016. Statistical rethinking: a Bayesian course with examples in R and Stan. CRC Press/Taylor & Francis Group. This book is available online at UQ library. And honestly - the more I read this book, the more I like it as a way for cleaning up a lot of my own confusion around statistical modeling. The book is about Bayesian approaches to statistical modeling, but nothing in the reading I am assigning is particularly Bayesian, so you should have no problem understanding what is being explained. And anything you don't fully understand you might find intriguing and want to find out more. 
+
+```{r out.height = "850px", out.width='750px', echo=F}
+knitr::include_graphics("pics/McElreath_StatisticalRethinking_2016_GLM.pdf")
+```
+
+The second reading is from the text written by my statistical mentor, Mick Keough. Mick was my Honours supervisor two years before his textbook was published: Quinn, G. P., and M. J. Keough. 2002. Experimental Design and Data Analysis for Biologists. Cambridge University Press. This book is also available online at UQ library. I clearly remember poring over dog-eared drafts of his text trying to work out how to analyze the data from my experiments. Here is Chapter 13, which covers GLMs in general, and 'logistic regression' in particular.
+
+```{r out.height = "850px", out.width='750px', echo=F}
+knitr::include_graphics("pics/Quinn_and_Keough_13_LogisticRegression.pdf")
+```
+
+Personally, I find McElreath has an ability to crystallize my understanding on a range of statistical issues, and I would read this first for an excellent conceptual overview. Mick's treatment is more technical and doesn't always have that same crystallizing effect (it is also not Bayesian). But the information is there, and from the readings I am assigning, the chapter from Mick's book goes into more of the necessary detail for how to build and interpret GLMs in this part of the course.
+\
+
+## Problem
+
+As you go through Mick's chapter, I would like you to have a go at analyzing the data he uses in his first example, which looks at the presence/absence of lizards on islands in the Sea of Cortez, each with different perimeter to area ratios. 
+
+<center>![](pics/cortez.jpg){width=100%}</center>
+_The Sea of Cortez. Incidentally, just two years after this work was published, the scientist who collected this data - Professor Gary Polis - died on a field trip in the Sea of Cortez when the boat he was on sank in rough weather. Five scientists died, and I think four others had to swim four hours to other islands before being rescued. Gary was sufficiently famous as an ecologist (how many other famous ecologists do you know?) that obituaries were written in [The New York Times](https://www.nytimes.com/2000/04/01/us/gary-allan-polis-53-an-expert-on-scorpions-and-desert-ecology.html) and in the prestigious scientific journal [Nature](https://www.nature.com/articles/35007221). Gary Polis's work is still highly influential._
+\
+\
+This data from Polis's study is [here](https://drive.google.com/file/d/1fdxzFgdn8ZD206bw5dSyVqlLfQbuTHpD/view?usp=sharing){target="_blank"}, and in box 13.1, Mick goes into quite some detail about how to analyze and interpret this data using a logistic regression model. Can you replicate a good chunk of his analyses? Use the `glm()` command to fit a logistic regression model to this data. The syntax is very similar to `lm()`, but you will need to specify that the distribution is `"binomial"` using the `family` argument. Use `summary(model)` and see if you can interpret what it is showing you, using the chapters above to help. Then see if you can interpret and use the `predict.glm()` command to plot the logistic regression model. To do this, you will need to specify whether to keep your response variable on the 'link scale', or whether to 'back-transform' to the original scale. Use `?predict.glm` to see if you can work out how to do this. Special prizes to those who can generate confidence intervals on their plot. Finally, can you do a likelihood ratio test (you know how to do these using the `anova()` command [\@ref(hypothesis-testing-by-comparing-likelihoods)]) to determine if the predictor variable is a strong predictor of the presence of lizards?^[I hope you can see that although we are now moving into new statistical territory, many of the skills you have learnt up to now will stand you in good stead for understanding, building, and interpreting GLMs in R].
+
+Then, if you are up for it, the data used in Mick's second example in the chapter above is [here](https://drive.google.com/file/d/1QKb4p7ZboT3vBs3-IbqXAH6OJUP9hwWF/view?usp=sharing){target="_blank"}. This problem requires building a generalized linear (logistic regression) model with multiple predictor variables. You don't have to analyze this data if you don't want to, but doing so will only increase your understanding of the issues. 
+
+Good luck, and eat kale. It won't give you cancer and it will help to keep you healthy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

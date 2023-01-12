@@ -1,0 +1,145 @@
+# Linear Mixed-Effects Models {#chap20}
+
+## Motivation
+
+Frequently, we have multiple measurements on experimental units, introducing different sources of variance, among experimental units and within experimental units. Because multiple measurements on each experimental unit are not independent, we should not treat these observations as if they were from different experimental units. To do so would result in "pseudoreplication" (Hurlbert 1984) Read this classic paper [here](./Hurlbert.pdf). 
+
+One simple way of treating the multiple observations is to take the means for each experimental unit and use those as the responses. But we may be interested in knowing the size of the within- versus among-experimental unit variances. For example, an experimenter may want to know how variable their experimental technique is, so the within-experimental unit variance is of interest. If the within-variance is small, it means that the experimental technique is consistent between observations. If it is large, the experimenter may want to change their experimental technique so it is more precise.
+
+A similar issue arises if there are "scale" effects in our experiment (or observational study). An example of this is below in the discussion of the "split-plot" experimental design. Treatments for one experiment may be applied at one large scale (the "plot" scale). But another experiment can be run at the same time if we divide the plots into "subplots" and apply a different sort of experimental treatment to each subplot. Hence we have different "experiments" at different spatial scales on the same experimental units. This is often an efficient use of experimental materials. There will be estimates of variance associated with the "plot" scale and the smaller "subplot" scale.
+
+Another application is where experimental units receive treatments as a group. For example, we may be studying the growth of fish but each fish is not housed individually. They may all be in the same fish tank and there can be multiple tanks with different fish. There will be within-tank and among-tank sources of variance. Or we may be studying the physiology of mice but the large number of mice in the experiment means that mice are housed in multiple rooms. Hence we can expect within-room effects and among-room effects.
+
+These sorts of studies can be analysed in a linear modelling context by introducing the concept of a "random effect." This is in contrast to the normal "fixed" effects (either factors or covariates) that you have seen before. Combining both fixed and random effects into the same model results in a linear "mixed-effects" model. The mixed-effects model is very flexible and can be used in many situations where the ordinary fixed-effect model is inappropriate. Indeed, some experiments _must_ be analysed using mixed-effects models, as the random effects are part of the experimental design.
+
+## Definition
+
+Recall the structure of the general (or ordinary) linear model for simple regression:
+
+ $\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
+ 
+ \tiny
+ \begin{equation}
+     \mathbf{X}= \begin{bmatrix} 
+       1 & X_1 \\
+       1 & X_2 \\
+       1 & X_3 \\
+       \vdots & \vdots \\
+       1 & X_n \end{bmatrix}
+       \end{equation}
+       $\mathbf{X}$ is the _design matrix_
+       
+\begin{equation}
+\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
+\end{equation}
+
+$\beta$ is the vector of parameters.
+       
+\begin{equation}\mathbf{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\end{equation}
+       
+$\epsilon$ is a vector of errors.
+       
+\begin{equation}
+\mathbf{Y} = \begin{bmatrix}
+        Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
+\end{equation}
+$\mathbf{Y}$ is a vector of responses.
+
+### The Mixed-Effects Model
+The linear mixed-effects model is constructed by adding a new term to the matrix equation:
+$\textbf{Y} = \mathbf{X\beta} + \mathbf{Zb} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I}), \mathbf{b} \sim N(0, \delta^2I)$
+Here $\mathbf{Z}$ is a design matrix. $\mathbf{b}$ is a vector of _random effects_ (to be defined below). Note here the new distributional assumption: $\mathbf{b} \sim N(0, \delta^2)$. Our "random effects" follow a normal distribution with zero mean and variance $\delta^2$. Depending on the complexity of $\mathbf{Z}$ we may have other random effect variables with their own variances.
+
+### Random Effects
+Just as covariates are variables that can be measured but often cannot be controlled in an experiment (ie "nuisance" variables), random effects can be thought of as variables that can be controlled (in the sense of the experimenter randomising experimental units to treatments), but cannot be _measured_. Before the experiment, we have no idea what a treatment level for a random effect means. We simply guess that it exists and we estimate this effect with the above distributional assumptions ie that the random effects have a Normal distribution with an unknown variance (to be estimated). This is in contrast to the "fixed effects" where we assume our $\beta$ parameters exist "out there" and can be estimated. They are fixed because they have no other distributional assumptions associated with them. This is a subtle distinction and students often have trouble distinguishing fixed from random effects. One way to think of it is that hypotheses about random effects are to do with _variances_ and hypotheses about fixed effects are to do with (differences among) _means_. The definition of random effects is contested. Here are some definitions from the literature:
+
+- Fixed effects are constant across individuals, and random effects vary. For example, in a growth study, a model with random intercepts $\alpha_i$ and fixed slope $\beta$ corresponds to parallel lines for different individuals i, or the model $y_{it} = \alpha_i + \beta t$ (Kreft and de Leeuw 1998).
+- Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population (Searle et al. 1992).
+- When a sample exhausts the population, the corresponding variable is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random (Green and Tukey 1960).
+- If an effect is assumed to be a realized value of a random variable, it is called a random effect (LaMotte 1983).
+- Fixed effects are estimated using least squares (or, more generally, maximum likelihood) and random effects are estimated with shrinkage [“linear unbiased prediction”] (Robinson 1991).
+
+(Source: Gelman, A. Analysis of variance - Why it is more important than ever. _Annals of Statistics_ **33**(1): 1-31)
+
+As you can see, the definitions differ greatly.
+
+## Example: Observational Study of Kangaroos
+A researcher wishes to study the social behaviour of eastern grey kangaroos (_Macropus giganteus_). They record multiple measurements of the distance to the nearest other kangaroo of known kangaroos (each with their individual ID), along with the height of the pasture grass in which they are standing (3 levels: short, medium, long) and the wind speed (in kmh^-1^). 
+![Social Kangaroos](roos.jpg)
+Questions to think about:
+
+- What is the response variable?
+- Which are the explanatory variables?
+- Which are fixed factors?
+- Which are continuous covariates?
+- Which are random effects?
+
+## Experimental Study: The Split Plot Design
+
+A researcher sows a crop of three cereal grains, each in 6 separate blocks. Within each plot, subplots are created and each subplot is fertilised with one of four different fertiliser concentrations. The crop yield is measured on each subplot.
+
+![Split Plot Example](splitplot.png)
+The different colours represent 3 different varieties of oats. Numbers within subplots represent the 4 Fertilizer treatments.
+
+### Analysis of the Split-Plot Design
+
+```{r}
+library(nlme) # load the nlme package
+data(Oats) # load the pre-installed data
+summary(Oats) # find out about the Oats dataset
+```
+```{r}
+head(Oats) # examine the first 6 lines
+```
+### Data Analysis
+
+Note that below, the fixed effects formula looks very much like the formula for $\texttt{lm}$ or $\texttt{glm}$. The random effects are specified with the $\texttt{random}$ argument. The "1" represents the intercept, followed by the vertical bar (|). The random effects structure $\texttt{Block/Variety}$ means that Variety is nested within Block. 
+
+The Variety variable is in this case in _both_ the fixed effects and random effects formulae. This is unusual but OK since for the random effects, the plot number is "aliased" by the Variety treatment. We could have constructed a new variable called "Plot" with levels 1, 2, and 3 (or a, b, and c) and used this instead of Variety in the random effects formula. But this would just be the equivalent of using the "Variety" variable so we can just stay with that. Usually, variables cannot be in both fixed and random formulae.
+
+```{r}
+Oats$nitro <- factor(Oats$nitro) # make nitro a factor
+fit <- lme(yield ~ Variety * nitro, random = ~1|Block/Variety, data = Oats)
+anova(fit)
+```
+```{r}
+summary(fit)
+plot(fit)
+qqnorm(fit, abline=c(0,1))
+```
+
+As usual in R, there is often more than one way to do things. While the $\texttt{nlme}$ package is excellent and very mature, the $\texttt{lme4}$ package by the same authors has a slightly different functionality and syntax. It doesn't provide p-values but you can use the $\texttt{lmerTest}$ package to get them if you want them:
+
+```{r, message=FALSE}
+detach(package:nlme)
+library(lmerTest)
+## fit the same model, using the lmer function
+Oats$nitro <- factor(Oats$nitro)
+fit.lmer <- lmer(yield ~ Variety * nitro + (1|Block/Variety), data=Oats)
+anova(fit.lmer) ## same as before
+ranova(fit.lmer) ## LRT for random effects.
+summary(fit.lmer) ## parameter estimates etc.
+plot(fit.lmer) ## Diagnostics
+qqnorm(resid(fit.lmer))
+qqline(resid(fit.lmer))
+```
+
+$\texttt{lme4}$ objects have a $\texttt{simulate}$ function so the $\texttt{DHARMa}$ package can be used for them too, as well as glm objects:
+
+```{r, message=FALSE}
+library(DHARMa)
+res <- simulateResiduals(fit.lmer, plot=TRUE)
+```
+
+Finally, we can test the normality assumption for the random effects:
+```{r}
+qqnorm(ranef(fit.lmer)[[1]][,1])
+qqline(ranef(fit.lmer)[[1]][,1])
+```
+The $\texttt{lme4}$ package is in some ways more general than $\texttt{nlme}$ as the latter was designed to only handle _nested_ random effects. In contrast, $\texttt{lme4}$ allows the possibility of nested, or "crossed" random effects. A crossed effect is when you have at least 2 factors and the treatments are all combinations of the levels of both factors. Crossed factors (in "factorial" experimental designs) may be fixed or random. Nested effects are always random. $\texttt{lme4}$ allows for crossed, nested, and _partially_ crossed and nested analyses. Why use $\texttt{nlme}$? That package has some nice features for modelling correlated data, such as data arising from time series, spatial data, or phylogenetic data, which $\texttt{lme4}$ cannot currently do.
+
+## What if the distribution of the random effects is not Normal, and instead it is misspecified?
+
+[This study](Int Statistical Rev - 2020 - Hui - Random Effects Misspecification Can Have Severe Consequences for Random Effects.pdf) shows that misspecification of the distribution of the random effects can have important consequences for hypotheses concerning the random effects (e.g. significance of variance components etc.) There hasn't been a whole lot of research into this problem, and to be honest it is a bit embarassing that most available software only allows Normal random effects. This is probably most easily tackled by using Bayesian methods, which allow for much more general distributional assumptions on all fixed and random effects.

@@ -1,0 +1,232 @@
+# Extending the linear model (part 2) {#chap8}
+
+## Nominal predictor variables 
+
+tl;dr: There is nothing to see here! 
+
+<center>![](pics/tldr_trollcat.jpg){width=70%}</center>
+
+But read on anyway, because it is nice to see that nominal (='categorical') predictor variables are naturally accommodated by linear statistical models. The good news is that after you internalize the details of this chapter you will be able to easily incorporate and move between continuous and categorical predictor variables in your statistical models with next to zero extra pain.
+
+### Variables can be measured on different scales.
+
+As well described by Kruschke (\@ref(textbooks-and-resources)), and based on [Steven's typology](https://en.wikipedia.org/wiki/Level_of_measurement#Stevens's_typology){target="_blank"}:
+
+>"Variables can be measured on different scales. For example, the participants in a foot race can be measured either by the time they took to run the race, or by their placing in the race (first, second, third, etc.), or by the name of the team they represent. These three measurements are examples of metric, ordinal, and nominal scales, respectively."
+
+\
+
+scale of measurement            details
+------------------------        -------------------------------------------  
+Metric                          Generally continuous and real valued. Counts, although not continouus, can often be considered a special case, particularly when a count variable is a predictor variable.
+Ordinal                         Ranks. _e.g._ 1st, 2nd, 3rd. No information about the magnitude of the difference between ranks.
+Nominal                         Categories, with neither distance nor ordering between categories.
+
+\
+And variables taking each of these three types of measurements can be predictor and/or predicted variables in our statistical models. Therefore, our statistical models need to be able to accommodate variables with different scales of measurement. Can they? Of course.
+
+Up to now in this course we have been considering predictor variables in our models that have been metric. For example, in the iKung San data, weight has been our predictor variable, and weight can be measured quantitatively on a continuous scale (i.e. it is metric). Similarly, in the cocoa agroforestry data that you have been analysing, I indicated that the most relevant predictor variable for the 'wicked biological problem' is shade-tree cover, which again can take quantitative values on a continuous scale (albeit capped at 100% shade-tree cover). Examples of metric variables in a biological setting are endless, but include height, weight, time, dosage, etc. Count data, while not continuous, can also often be considered a special case of a metric variable, particularly when counts are used as a predictor varaible.
+
+However, our predictor variables need not be metric. For example, perhaps instead of 'weight' we are interested in the effect of the predictor variable 'sex' on adult height. Considering just males and females, it is clear that sex cannot be measured quantitatively on a continuous scale, and so in this case sex is not metric but is rather a nominal (or 'categorical') variable. In medical research we often have two treatment groups, one group of patients who receive a drug vs. another group of patients who receive a placebo. In this case, our predictor variable - whether or not a patient receives the drug - is nominal.
+
+Being able to quickly classify the scales of the variables you are working with is an easy but important skill for a statistical modeler. <span style="color: red;">**Easy Exercise**</span> Take a moment to classify the following variables as metric or nominal: 1. alive vs. dead; 2. rainfall; 3. drought vs. flood; 4. drug type; 5. drug dosage; 6. species; 7. breed; 8. diet; 9. calorific intake; 10. eukaryote vs. prokaryote; 11. offspring number; 12. offspring sex; 13. offspring sex ratio; 14. antibody titre; 15. morning, noon, night; 16. time; 17. eye colour.
+
+It is easy to envisage a 'linear model', where the deterministic component of the model takes the equation of a straight line ($y_1=\beta_0+\beta_1x_1$) when our predictor (and response) variables are continuous and we see a straight line:
+
+```{r eval=T, results='hide',include=T,echo=F}
+d <- read.csv("iKung_HeightWeight.csv")
+d2 <- d[d$age>=18,c(5,6)] # subset the dataframe to only include the height and weight variables of adults over the age of 18
+d2 <- na.omit(d2) # remove the rows of the new dataframe that contain NAs.
+```
+
+```{r eval=T, results='hide',include=T,echo=T}
+m1 <- lm(height~weight,data=d2)
+plot(height~weight,data=d2)
+abline(m1)
+```
+
+But what about if our predictor variable is nominal? For example, 'sex' is a nominal variable which takes two 'levels' in the iKung San dataset. Let's have a look. (Some of you have been struggling a little with the modeling process as implemented in R. Where this is the case for you I would encourage you to reproduce and run all the code outlined in each chapter in your own R session so you can be very clear what is going on, and so that you can repeat the steps on new biological datasets on demand):
+
+```{r eval=T, results='show',include=T,echo=T}
+d <- read.csv("iKung_HeightWeight.csv")
+d1 <- d[d$age>=18,c(4,5,6)] # subset the dataframe to only include sex, height, and weight variables of adults over the age of 18
+d1 <- droplevels(na.omit(d1)) # remove rows containing NAs
+head(d1)
+```
+
+'male' in the dataframe takes the values 0 and 1 corresponding to female and male respectively. 'male' should be a nominal variable but because the variable is coded as a number, R might think this is a numeric or integer variable, which for our purposes, it is not. Let's check: 
+
+```{r eval=T, results='show',include=T,echo=T}
+str(d1) 
+```
+
+R is incorrectly classifying the variable 'male' as an integer variable. We can tell R to classify this variable as nominal using the `as.factor()` command:
+```{r eval=T, results='show',include=T,echo=T}
+d1$male_factor <- as.factor(d1$male)
+str(d1)
+```
+
+### The linear model for nominal predictors
+
+Now we can plot the 'relationship' between height and sex:
+
+```{r eval=T, results='hide',include=T,echo=T}
+plot(c(min(d1$height),max(d1$height))~c(-0.1,1.1),type="n",xaxt="n",xlab="male",ylab="height")
+axis(1,at = c(0,1),labels = c("0","1"),)
+points(d1$male,d1$height)
+```
+
+We would like to understand the relationship between our nominal predictor variable and height. That is, we wish to understand the effect of our nominal predictor variable on our response variable, or, more correctly, how the difference in adult height varies with the nominal predictor variable 'sex'. 
+
+How do we understand the relationship between a nominal predictor variable through the lens of a linear model? This could not be more straightforward, and you should immediately be able to recognize and interpret nearly all of the output of the `summary(model)` command:
+
+```{r eval=T, results='show',include=T,echo=T}
+m1 <- lm(height~male_factor,data=d1)
+summary(m1)
+```
+
+We just need to think a little more carefully about what the 'intercept' and 'slope' parameters are telling us. In the summary output, the Intercept term is the mean of the response variable in the first-named level of our nominal variable. So, in the table above, the Estimate of the Intercept is simply the mean of the 'male = 0' (i.e. female) heights. The estimate associated with 'male_factor1' in the summary table above is the difference of male = 1 (i.e. male) mean height from male = 0 (i.e. female) mean height. That is, the estimate of the slope is equal to the difference in heights between males and females. 
+
+We can visualize the linear model this way: 
+
+```{r eval=T, results='show',include=T,echo=T}
+plot(c(min(d1$height),max(d1$height))~c(-0.1,1.1),type="n",xaxt="n",xlab="male",ylab="height")
+axis(1,at = c(0,1),labels = c("0","1"),)
+points(d1$male,d1$height)
+points(0,coef(m1)[1],col="red",pch=16,cex=1.5)
+points(1,coef(m1)[1]+coef(m1)[2],col="red",pch=16,cex=1.5)
+curve(coef(m1)[1]+coef(m1)[2]*x,add=T,from=0,to=1)
+text(0.5,160,labels=paste("y=",round(coef(m1)[1],2),"+",round(coef(m1)[2],2),"x"))
+```
+
+That is the deterministic component of our fitted model, $y=149.5 + 10.85x$ describes the difference in the means between the two levels of our nominal variable (when our nominal variable is coded as either 0 or 1 - we'll get this in the section below). Because there is only one 'unit of distance' between the two levels of our predictor variable (again- you will see how this emerges below), the slope is equal to the difference between the two means. 
+
+It is worthwhile taking a moment to recognize that fitting a regression model with a metric (i.e. continuous) predictor can (and should) be interpreted _exactly_ the same way. When our predictor is metric, if we take two different values of our predictor variable $x$ then our fitted regression model simply describes the difference in the mean value of $y$ at those two different values of $x$. So, in the most important respects a linear statistical model takes exactly the same form and can be interpreted exactly the same way regardless of whether our predictor variables are metric or nominal. 
+
+We should complete our analysis above by checking that model assumptions are met (<span style="color: red;">**Exercise**</span>: do this!) and then by plotting the results, including estimates of uncertainty. I would encourage you to step through the following code, and implement the code in your own R session, so that you understand exactly how to finalize the visualisation of your results. 
+
+First, calculate confidence intervals. 
+```{r eval=T, results='show',include=T,echo=T}
+newdat <- as.data.frame(d1[unique(d1$male_factor),"male_factor"])
+names(newdat)<-"male_factor"
+predPI <- cbind.data.frame(newdat,predict(m1,newdata=newdat,interval = "p")) # prediction intervals
+(predCI <- cbind.data.frame(newdat,predict(m1,newdata=newdat,interval = "c"))) # confidence intervals
+```
+
+
+```{r eval=T, results='show',include=T,echo=T}
+# set up the plot
+plot(c(min(d1$height),max(d1$height))~c(-0.5,1.5),type="n",xaxt="n",xlab="sex",ylab="height (cm)")
+axis(1,at = c(0,1),labels = c("female","male"),)
+
+# add raw data points to the plot, adding a small amount of jitter to give a better visualization of data density
+points(jitter(d1$male,factor=0.3),d1$height,cex=0.5,pch=1,col="darkgray")
+
+# add estimates of the means of each group
+points(0,predCI$fit[1],col=1,pch=16)
+points(1,predCI$fit[2],col=1,pch=16)
+
+# add confidence intervals
+arrows(x0=0,x1=0,y0=predCI$lwr[1],predCI$upr[1],angle = 90,code = 3,length = 0.1,col=1,lwd=1.5)
+arrows(x0=1,x1=1,y0=predCI$lwr[2],predCI$upr[2],angle = 90,code = 3,length = 0.1,col=1,lwd=1.5)
+
+# add prediction intervals
+arrows(x0=0,x1=0,y0=predPI$lwr[1],predPI$upr[1],angle = 90,code = 3,length = 0.05,col="blue",lwd=1,lty=1)
+arrows(x0=1,x1=1,y0=predPI$lwr[2],predPI$upr[2],angle = 90,code = 3,length = 0.05,col="blue",lwd=1,lty=1)
+
+# add a goodness of fit measure - how much variation in the data is explained by the predictor variable?
+r.squared <- round(summary(m1)$r.squared,3)
+text(x = 1.4,y=140,bquote(~italic(r)^2==.(r.squared)))
+
+legend("topleft",legend = c("data","model prediction","95% CI","95% PI"),lwd = c(1,1,1.5,1),lty=c(0,0,1,1),pch=c(1,16,NA,NA),col=c("darkgray","black","black","blue"),bty="n")
+```
+
+Note that this plot conforms to increasingly (and appropriately) stringent requirements for presenting data and associated analyses in many scientific publications. In particular, it shows as much of the raw data as possible, along with the estimate (the mean) and estimates of uncertainty - in this case both 95% confidence intervals and prediction intervals - as well as a measure of goodness of fit ($r^2$).
+
+Finally, we would write something like: 
+
+_"We fit a linear model to the data with adult height (cm) as the predicted variable and sex (with two levels: male and female) as the predictor variable. We assumed a Gaussian error distribution. There were n = 165 and n = 187 observations in the male and female levels of our predictor variable, respectively._
+
+_"We found evidence that adult males were, on average, 10.84 cm ($\pm$ a standard error of 0.59 cm) taller than adult females, with predicted female heights of 149.5 cm ($\pm$ 0.8 cm 95% CI) and predicted male heights of 160.4 cm ($\pm$ 0.85 cm 95% CI)."_
+
+If you wanted to do a statistical hypothesis test you could, but you certainly don't have to. The 'standard' hypothesis test in this instance would be that there is no difference in height between males and females. You could test this hypothesis using `anova(model)`, and all the calculations and details about ANOVA that you learnt last week apply in exactly the same way for nominal predictors. You could also use likelihood ratio tests (`anova(reduced_model,full_model,test="LRT")`) or use the _t_-statistic associated with the difference in means in the `summary(model)` output to test the null hypothesis. For data that conforms reasonably well to the model assumptions, all these approaches will give you the same answer. <span style="color: red;">**Exercise**</span>: try it for yourself!
+
+It is worth emphasizing here that we probably don't really expect there to be 'no difference' in male vs. female heights. Moreover, the unlikeliness of 'no difference' is likely to be true for many scientific problems. This has lead many to ask how useful or warranted is a statistical hypothesis test in such a circumstance? In this context it is probably more useful to report the magnitude of the differences that you did find, along with information on how well your model fit the data and how uncertain your estimates are, as well as details on the amount and quality of the data that you are throwing at the problem. 
+
+## Accomodating nominal predictors in our linear statistical model
+
+Despite the fact that there are more similarities than differences between metric and nominal predictor variables in our statistical model, we need to introduce the concept of an 'indicator' variable to accommodate nominal predictors in our statistical model. 
+
+An indicator variable takes the value of 0 or 1 to indicate whether a data point (from our response variable) falls into a specified category. So, in the example where we are modeling height as a function of sex, a value of 0 indicated that height was measured on a female and a value of 1 indicated that height was measured on a male. 
+
+Recall that the deterministic component of the fitted model for this example was: 
+<center>$\textrm{height} = 149.51 + 10.84x$</center>
+
+Remember that in this model sex is the predictor variable $x$, and 'female' was coded as 0. If we substitute 0 for $x$ in our fitted model we are left with only the intercept, which (as described in the previous section) is equal to the mean height of the adult females ($149.51 + 10.84\times0$). If, by contrast we consider that male was coded as 1, and substitute 1 for $x$ in this equation, we have a value that is equal to the mean height of adult males ($149.51 + 10.84\times1$). The difference between these two subpopulations (males and females) is equal to the coefficient $\beta_1$ on the predictor ($x$) variable in the model.
+
+Indicator variables can be used for predictors with two categories (or levels) or for predictors with more than two categories. For example, if we are interested in comparing clinical outcomes for patients taking one of three different types of drugs (e.g. drug 1, drug 2 or drug 3), then patients are coded 1 if they are in the specified category or zero otherwise. Visualizing this may help:
+
+```{r eval=T, results='show',include=T,echo=F}
+zed <- cbind.data.frame(c(1,2,3,4,5,6,7),c(1,1,0,0,0,0,0),c(0,0,1,1,1,0,0),c(0,0,0,0,0,1,1))
+names(zed) <- c("patient","drug_1","drug_2","drug_3")
+zed
+```
+
+We will learn how to model situations such as this below.
+
+Linear models with nominal predictors are just regressions on an indicator variable, where indicator variables assign data points to groups. This is initially easiest to understand when there are only two groups, but this formulation can be used to accommodate additional groups, and all manner of additional complexities. Moreover, this should emphasize that a linear model is a linear model is a linear model. Finally, while it is important to understand how nominal predictors are accommodated by linear statistical models, if you make sure that R recognizes your variables correctly, then R will 'assign' the appropriate indicator variables in the background. 
+
+
+## What predictor variables are associated with differences in offspring size?
+
+<span style="color: red;">**Exercise**</span> Offspring mass is an important predictor of future performance in humans, and in many (if not all) other species. 
+
+```{r out.height = "850px", out.width='750px', echo=F}
+knitr::include_graphics("pics/OffspringSize.pdf")
+```
+\
+Therefore, understanding the determinants of offspring mass is important for identifying how to improve human health, but also to improve agricultural production (e.g. seed mass, mass of offspring of domestic animals), and for understanding the determinants of organism fitness for questions in evolutionary biology. As is typical of most biological response variables, we are often interested in the effects of both metric and nominal predictor variables on offspring mass. 
+
+I would like you to develop an understanding of the association between the birth weight (in grams) of human babies and various metric and nominal predictor variables. For this exercise I would like you to use the `birthwt` dataframe, which is in the `MASS` package in `R`. After you access this data, you can use `?birthwt` to understand what each of the variables are. 
+
+The metric predicted/response variable should be clear from the description of the problem I provided above. I would like you to model the relationship between this response variable and each of the metric and nominal response variables in the dataframe - using separate models for each predictor variable. For the nominal predictors, use only those that contain two categories. For each analysis, step through the following modeling process:
+
+1. plot the relationship between the predicted and predictor variable.
+2. fit a linear model to the data
+3. check the assumptions of the model (linearity, homogeneity of variance, influential points, distributional assumptions [normally distributed errors]), and refit the model as required if important assumptions are violated.
+4. plot the model together with the data. Include the data, predicted/fitted values, and confidence intervals. 
+5. write a couple of sentences describing your analysis and results, as if you were doing so for a scientific report or paper.  
+
+Given the code I have provided in this online document, you should be able to now confidently complete this Exercise. If you come across specific issues, be sure to ask how to solve them!
+
+
+## Categorical predictor variables with more than two levels
+
+Nominal variables with more than two levels can also be accommodated. For example, in the `birthwt` dataframe, the variable race' has three levels: "white", "black", and "other". ^[I am aware that race is a construct, but the consequences of our constructs have biological consequences in general, and for maternal and infant health in particular]
+
+We can compare the effects of race on birth weight using the following model:
+
+```{r eval=T, results='hide',include=F,echo=F}
+require(MASS)
+```
+
+```{r eval=T, results='show',include=T,echo=T}
+m2 <- lm(bwt~as.factor(race),data=birthwt)
+summary(m2)
+```
+
+It is important to notice that our model now estimates three coefficients - one for each race included in the model - as well as our estimate of the population standard deviation (i.e. a total of four parameters are estimated from the data). Notice again that the estimates provided for (race)2 and race(3) are given as differences from the estimate of the intercept. By default, the `lm()` command in `R` sets the first named treatment level (either alphabetically or numerically) as the _baseline_ against which all other treatments are compared - this is the estimate of the intercept. This is not fixed, however. When there are good reasons for doing so we can certainly specify the baseline explicitly:
+
+```{r eval=T, results='show',include=T,echo=T}
+birthwt$race_diff_baseline <- factor(birthwt$race,levels=c("3","2","1")) # create a new variable and specify the order of the factors
+m3 <- lm(bwt~race_diff_baseline,data=birthwt) # fit a model with our new predictor variable
+summary(m3)
+```
+\
+Because we have changed the baseline, the estimates of the differences have now changed, although using the `predict()` command will show you that the estimates themselves have not changed. It is also worth noting that there are different types of contrasts. Here we have been comparing all but one of the treatments to a baseline treatment. But this is not the only option. There might be good reason to compare the mean of the observations across two treatments to a control treatment, for example. It is worth noting then that specific contrasts most relevant to the biological problem and hypotheses at hand can be specified using the `contrasts` argument to the `lm()` command. 
+
+<span style="color: red;">**Exercise**</span> Plot the results of this final model, including the raw data points, estimates, and confidence intervals (similar to the plot of height~sex, above). From the model output and your visualization, write down a few sentences about what you would conclude about the differences in birth weights between races.
+
+
+
+

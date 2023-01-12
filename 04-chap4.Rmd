@@ -1,0 +1,221 @@
+---
+output:
+  html_document: default
+---
+
+
+```{r eval=T, results=' hide',include=T,echo=F}
+d <- read.csv("iKung_HeightWeight.csv")
+d2 <- d[d$age>=18,]
+```
+
+# Extending the linear model (part 1) {#chap4}
+
+You now know how to fit a very basic linear model in R to estimate the parameters of a normal distribution. Kind of useful, but not really. Typically, we are more interested in modeling how some measured outcome or response variable is related to some measured predictor variable. And remember, in our Gaussian model of height ($\textrm{height}_{i}\sim \textrm{Normal}(\mu_{i},\sigma)$), there was no predictor variable - we were instead fitting a normal distribution to the data using OLS to estimate the parameters ($\mu$ and $\sigma$) to find the normal distribution that best fit the data. 
+
+## Adding a continuous predictor variable 
+
+### Exploring the data
+We will now add a _continuous_ predictor variable. Specifically, we will look at how the height of iKung San adults covaries with weight. As noted by McElreath in Statistical Rethinking (page 92): "This isn’t the most thrilling scientific question... But it is an easy relationship to start with, and it only seems dull because you don’t have a theory about growth and life history in mind. If you did, it would be thrilling" (!) And also remember, that our philosophy is that it is better to learn statistical tools progressively and well in a simple if biologically-boring setting to then be able to confidently unleash your statistical skills in the service of real discovery.
+
+So - the relationship between height and weight. One of the early stages of any statistical modeling process is to _explore your data_, including graphically. We did this for the height data but in the absence of any other variables that might be related to height. Now we need to extend our exploration to get a feel for how height might be related to weight. 
+
+<span style="color: red;">**Exercise**</span> As a first step, you should plot the relationship. You should be able to _quickly_ replicate the following plot in R. We don't want to waste a lot of time in this course working out how to do simple things in R, so it is important that you can quickly implement these sorts of plots and procedures.
+
+```{r eval=T, results='show',include=T,echo=F}
+plot(d2$height~d2$weight,ylab="Adult height (cm)",xlab="Adult weight (kg)",pch=1)
+```
+
+A potential relationship looks pretty clear: if you know an adult's weight (the predictor variable), you can probably predict something about their height (the predicted variable). Statistical modeling is about formally quantifying relationships such as this. 
+
+### Constructing the model
+
+So, let's formally describe and quantify the pattern in the figure by fitting a statistical model to the data (remember: we fit a model to the data, we don't fit data to a model. The model should accommodate the data, not the other way around). To do this, we make the parameter $\mu$ in our previous model into a _linear function_ of the predictor variable (weight) and a set of parameters (=coefficients) that we sort of 'make up'. This is step number 4 of the modeling process introduced in \@ref(the-modeling-process-and-one-useful-way-of-describing-a-statistical-model), although we are now building a (slightly) more complicated model. The mathematical description of our proposed statistical model becomes: 
+
+\begin{align} 
+  \textrm{height}_{i}&\sim \textrm{Normal}(\mu_{i},\sigma) \\
+  \mu_i&=\beta_0+\beta_1\textrm{weight}_i
+  (\#eq:m1)
+\end{align}
+
+The first line of the model indicates that we will model height as a normally distributed random variable with mean $\mu$ and standard deviation $\sigma$ (i.e. remember/note that the standard deviation is equal to the square root of the variance $\sigma^2$). In contrast to the model we fit in the previous chapter (\@ref(a-gaussian-model-of-height)), note the subscript _i_ on height _and_ $\mu$. This subscript or index indicates that the mean $\mu$ height now depends on each unique value of the predictor (i.e. each unique observation of adult weight). You will note that this model specifies that the standard deviation (and therefore variance) does _not_ depend on each unique observation, which formalizes an assumption of the model - that the variance of adult height is equal across all values of the predictor variable. We will come back to this and other assumptions of the linear model in a later section. Formally, the first line of the model specifies the likelihood (although this is not usually the language we would use when estimating using ordinary least squares). More generally, this line of the model describes the probabilistic or 'stochastic' part of the model.  
+
+The second line of the model is the 'deterministic core' of the model. It describes the proposed deterministic relationship between mean adult height (our *y* variable, or dependent or predicted variable) and adult weight (our *x* variable, or independent or predictor variable). In contrast to our simple Gaussian model of height (\@ref(a-gaussian-model-of-height)), $\mu$ is no longer a parameter that we estimate. Instead, $\mu$ is itself constructed from other parameters $\beta_0$ and $\beta_1$, as well as our predictor variable, weight. In this model, $\mu$ is now a linear function of weight, taking the familiar form of the equation for a straight line (i.e. $y = mx + c$, where $y=\textrm{height}$, $x=\textrm{weight}$, $c=\beta_0$,and $m=\beta_1$). We are now modeling $\mu$ in terms of an intercept ($\beta_0$) and slope ($\beta_1$), so instead of directly estimating $\mu$, we estimate the values of the intercept and slope, which allows us to understand and quantify how _mean_ height varies as a function of weight. 
+
+There are other ways of writing out this model. We covered this earlier, but for example and for your reference, you will often see models of this type written as: 
+
+\begin{align*} 
+  \textrm{height}_i&=\beta_0+\beta_1\textrm{weight}_i+\epsilon_i \\
+  \epsilon_i&\sim \mathcal{N}(0,\sigma)
+\end{align*}
+
+where $\mathcal{N}$ is shorthand notation for 'normal'.
+
+Note that R (or any other statistical program) will fit this model. It really will. In fact, you can get statistical programs to fit just about any model. But you always need to remember that R cannot tell you whether it is a good idea to fit this (or any other) model. Not only will you need to determine if the fitted model provides a good description of the data (something we will cover in this course), but only you can decide if the scientific question that has led you to _choose_ this statistical model is a well-justified question, and that the link between your scientific question and the model you choose to fit makes sense. 
+
+Finally, also note that we are pretty closely following the four steps of the modeling process from section \@ref(the-modeling-process-and-one-useful-way-of-describing-a-statistical-model), although we are progressively adding additional steps (e.g. data exploration). We will slowly add in new steps to this process, and review the whole process in a later chapter. Becoming really familiar with the modeling process is a key goal of this course. 
+
+### Fitting the model in R 
+
+```{r eval=T, results='hide',include=T,echo=F}
+d <- read.csv("iKung_HeightWeight.csv")
+d2 <- d[d$age>=18,]
+```
+
+Fitting the model in R is easy! For models such as this one where a normal likelihood seems reasonable and without complications such as random effects (introduced in Week 5), we use the `lm()` command again, where 'lm' stands for 'linear model'. The `lm()` command uses OLS estimation and so is most appropriate when a normal distribution is a good descriptor of the stochastic variation in the data (i.e. the variation in the data that is independent of the variation that is 'deterministically explained' by the predictor variable). Using the `lm()` command automatically encodes the information contained in the first line of the model \@ref(eq:m1) - this is not something we need to specify as an argument to `lm()`. 
+
+We do, however, need to specify the predicted (height) and predictor (weight) variables in the `formula` argument to `lm()`. By specifying `formula = height ~ weight` R 'understands' we are fitting a straight-line linear model and so knows to include a parameter for the intercept ($\beta_0$), and a parameter for the slope coefficient ($\beta_1$) associated with each predictor variable (there is only one predictor variable in this model). Finally, we need to point R to the dataframe containing the predictor and predicted variables we have chosen to include in our model. 
+
+<span style="color: red;">**Exercise**</span> Fit the model in R using the following code:
+```{r eval=T, results='show',include=T,echo=T}
+m1 <- lm(formula = height ~ weight, data=d2) # assign a linear model (lm) fit to the object 'm1'. We are modeling height as a function of weight. The `lm` command assumes a normally distributed data (i.e. that a normal likelihood is justified)
+m1.sum <- summary(m1)
+```
+
+We will get into the nitty gritty of the model output shortly. And we will look at a number of different diagnostics to determine how well the model fits and describes the data. But, one of the most important diagnostics is to plot the model fit over the raw data and see how good or bad it looks! 
+
+<span style="color: red;">**Exercise**</span> With the information from the summary of the model fit (above), please recreate the following plot in R:
+\
+```{r eval=T, results='show',include=T,echo=F}
+plot(d2$height~d2$weight,ylab="Adult height (cm)",xlab="Adult weight (kg)",pch=1)
+abline(a = coef(m1)[1],b=coef(m1)[2],lwd=2,col="red")
+```
+
+At first glance, not too bad! But there is a long way to go in understanding our model, and using it for inference. 
+
+## Key components of the model output
+
+For as long as I have been doing statistics, understanding the output of a statistical model fit in any number of computer programs has been...evil - but a necessary evil.
+\
+\
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/CuxwqQtoHIw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+
+## Is your model appropriate? Is your model good?
+
+As mentioned above, statistical programs such as R will fit just about any model to just about any data and spit out a range of convincing-seeming numbers. But a big part of statistical modeling is determining whether the model is appropriate, and does a good job of detecting and quantifying the signal and the noise. Working out whether your model is appropriate is an interative process, involving both checking a number of assumptions that come with the model you are fitting, determining how well the model explains the data, and determining if a different model might better explain the data. To do this, you will fit a model, check a few things, fit another model, check a few things again, fit another model, etc., until you 'decide' you have done the best job you can at fitting a model that is both appropriate and does the best possible job of describing the deterministic and stochastic variation in the data. 
+
+One step in this process is making sure that the assumptions associated with the fitted model are met. 
+
+### Assumptions
+
+All statistical models have assumptions on which the output and interpretation of the model rest. When these assumptions are violated, the answer that the model gives you is less likely to be reliable. So checking the assumptions of a model is another way of saying "does my model actually describe the real world?" If the assumptions are not met, then your model is less likely to be a useful description of the real world. That is, your chosen model doesn't fit the data well.
+
+All that said, depending on your goals for a particular model (e.g. estimation, prediction, hypothesis testing), and depending on the method you use to fit the model (e.g. OLS, ML, Bayesian estimation) some assumptions will be more important than others. For example, OLS does a great job of estimating model coefficients even if the residuals are not normally distributed, but estimates of uncertainty will be unreliable. ML, on the other hand, does a bad job of estimating model parameters if you specify a normal likelihood in your model, but your residuals are not, in fact, normally distributed. Anyway - enough of these details for now. Let's learn about some of the things we need to check to work out if our model does a good job of describing the real world. 
+\
+\
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/-OeFEQv_MvI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+
+<span style="color: red;">**Exercise**</span> Create the residual plot shown in the video, by following the instructions (also given in the video).
+
+Let's now look at few more assumptions of the model, how we can recognize violations, the consequences of violatiions, and some options for resolving violations of model assumptions.
+\
+\
+
+<center><iframe width="560" height="315" src="https://www.youtube.com/embed/kCKw37L20Ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+
+
+### Summaries of fit
+
+Even when all the assumptions of a model are met, we would like to know how 'important' the predictor variables in our model are. That is, how much variation in the data can be explained by the predictor variables in our model?  
+
+There are various ways to determine how well the 'deterministic core' of our model explains the observed variation in our data. For linear models fit using least squares estimation we can use $R^2$ (everyone just calls this "R-squared"). To understand how $R^2$ works, we need to decompose the _total variation_ in our data into different categories - variation that is explained by our model and variation that remains unexplained by our model. 
+
+
+```{r eval=T, results='hide',include=F}
+d1 <- read.table("TemperatureGrowth.txt",header=T)
+str(d1)
+summary(d1)
+```
+
+```{r eval=T, results='hide',include=F}
+model <- lm(growthrate~temperature, data=d1)
+```
+
+```{r eval=T,echo=F}
+library(latex2exp)
+par(mfrow=c(1,3))
+plot(growthrate~temperature, data=d1,xlab="X",ylab="Y",main="Total variation")
+abline(h=mean(d1$growthrate),lwd=2)
+arrows(x0=d1$temperature,x1=d1$temperature,y0=rep(mean(d1$growthrate),length(d1$temperature)),y1=d1$growthrate,code = 0)
+# legend("topleft",legend = "Total variation",bty='n')
+
+plot(growthrate~temperature, data=d1,xlab="X",ylab="Y",main="Explained variation")
+abline(h=mean(d1$growthrate),lwd=2)
+abline(model,lwd=1,lty=3)
+points(x = d1$temperature,y=fitted(model),pch=16)
+arrows(x0=d1$temperature,x1=d1$temperature,y0=rep(mean(d1$growthrate),length(d1$temperature)),y1=fitted(model),code = 0)
+# legend("topleft",legend = "Explained variation",bty='n')
+
+plot(growthrate~temperature, data=d1,xlab="X",ylab="Y",main="Unexplained variation")
+abline(model)
+arrows(x0=d1$temperature,x1=d1$temperature,y0=d1$growthrate,y1=fitted(model),code = 0)
+# legend("topleft",legend = "Unexplained variation",bty='n')
+```
+\
+The total variation can be quantified as the sum of squared deviations (SS) of the observed values from the **mean of all observed values**: SS total $=\sum_{i=1}^N(y_{i}-\bar{y})^2$\. The mean of all observed values is shown as the bold horizontal line in the first and second plots in the figure above. 
+
+The variation explained by the model (in this case, the variation explained by $X$) can be quantified as the sum of squared deviations of the fitted values from the mean of all observed values: SS effect of ${X} = \sum_{i=1}^N(\hat{y}_{i}-\bar{y})^2$\, where $\hat{y}$ are the values of y predicted by the model (i.e. the fitted line).
+
+The unexplained variation is the 'residual' variation after fitting the model, and can be quantified as the sum of squared deviations of the observed values from the fitted values (i.e. the residuals): SS residual $= \sum_{i=1}^N(y_{i}-\hat{y}_{i})^2$\
+
+Why might this be useful? Because, intuitively, we would like the deterministic core of our model to explain as much of the variation as possible. That is, we would like a high proportion of the total variation to be explained by the model. We can calculate this proportion as: 
+
+\[\frac{\textrm{SS effect of X}}{\textrm{SS total}}=\frac{\textrm{SS effect of X}}{\textrm{SS effect of X + SS residual}}=R^2\]
+
+That is, $R^2$ is the fraction of the total variation in $Y$ explained by $X$. Because $R^2$ is a fraction it takes values between 0 and 1, with higher values meaning more variation is explained. 
+
+<span style="color: red;">**Exercise**</span> What is the $R^2$ value for the effect of weight on height? That is, how much variation in our data does the explanatory variable explain?
+
+
+## Using the model to 'achieve' some of the goals of statistical modeling
+
+By now, you may be wondering if we are getting anywhere in this course! Let's take a moment to see where we are in terms of the "goals of statistical modeling" introduced in section \@ref(goals-of-statistical-modeling).
+
+
+
+### Detect and describe deterministic patterns in the data
+
+Looks like we've done this:
+```{r eval=T, results='show',include=T,echo=F}
+plot(d2$height~d2$weight,ylab="Adult height (cm)",xlab="Adult weight (kg)",pch=1)
+abline(a = coef(m1)[1],b=coef(m1)[2],lwd=2,col="red")
+```
+
+And as you now know, you can also use $R^2$ to determine how strong this deterministic signal is, relative to the noise.
+
+### Estimate some quantitative characteristics of a population (i.e. estimate coefficients)
+
+And looks like we've done this too. You can use the `coef()` command to extract the coefficients from the model
+```{r eval=T, results='show',include=T,echo=T}
+coef(m1)
+```
+
+You can see that this goal is related to the first goal. We need parameter estimates to describe the patterns in the data.  
+
+### Predict 
+
+Every point on the fitted line for which we do not have an associated X value (i.e. a measurement of weight) is a prediction. We can use the `predict()` command in `R` to help us find exact predictions, on the assumption that our deterministic model accurately describes any deterministic signal in the data. For this we need to provide R with values of the predictor variable for which we would like predictions.
+
+```{r eval=T, results='show',include=T,echo=T}
+newdat <- as.data.frame(59) # i.e. I would like to know the predicted height for an individual who weighs 59kg.
+names(newdat) <- "weight"
+predict(m1,newdata=newdat)
+```
+
+This means that for a person with a measured weight of 59 kg we would predict their height to be 167.2761 on average, not accounting for uncertainty in this estimate. If I wanted predictions for a range of weights I could specify a range of weights in my `newdat` dataframe. Try it!
+
+<span style="color: red;">**Exercise**</span> We can also make predictions for new _observations_ that account for _both_ the deterministic signal and the stochastic noise. Try, for example `predict(m1,newdata=newdat,interval="p")` and see if you can interpret the output, maybe using `?predict` to get help.
+
+### Test hypotheses. 
+
+This needs a whole section. So:
+
+## Testing hypotheses
+
+Nah - this topic needs a whole chapter! So see you in Chapter 5 (coming soon).
+
+

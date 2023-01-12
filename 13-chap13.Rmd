@@ -1,0 +1,106 @@
+
+
+# Practical Week 4: Climate and plant distributions {#chap13}
+
+Climate change is, and is going to be, one of the most disruptive forces on the biosphere in the coming decades (let alone centuries, and millennia).
+
+Carbon dioxide levels are the highest they have been in at least 800,000 years. Take a moment to try to comprehend that amount of time. 
+\
+
+<center>![](pics/HockeyStick.jpg){width=100%}</center>
+\
+
+And this is causing temperatures to rise and precipitation patterns to change. 
+
+<center>![](pics/NasaTempGraph.jpg){width=100%}</center>
+
+\
+And these changes are having, and will continue to have, knock on effects for ... pretty much everything.
+
+<center>![](pics/climate_change_header.jpg){width=100%}</center>
+\
+
+Perhaps that sounds polemical. But if one actually reads the primary scientific literature describing: a) the evidence for climate change (as summarized [here](https://www.ipcc.ch/report/sixth-assessment-report-working-group-i/){target="_blank"}); and b) the current and predicted impacts of climate change (as summarized [here](https://www.ipcc.ch/report/sixth-assessment-report-working-group-ii/){target="_blank"}), there is only some, but not much, nuance to this story. 
+
+So, one (and I know there are many others) of the most important tasks for you as Quantitative Biologists during your lifetimes will be to understand and mitigate against the effects of climate change on biology, whether that be effects on ['the environment'](https://royalsocietypublishing.org/doi/10.1098/rstb.2019.0104){target="_blank"}, [agricultural production](https://www.science.org.au/curious/policy-features/australian-agriculture-and-climate-change-two-way-street){target="_blank"}, or [human health](https://www.who.int/news-room/fact-sheets/detail/climate-change-and-health){target="_blank"}. 
+
+
+## Plant distributions and climate
+
+Plants occurring in both natural and agricultural settings differ fundamentally in many ways, but perhaps none more so than in the way they photosynthesize. As you may know, there are three different photosynthetic pathways: C3, C4, and crassulacean acid metabolism (CAM). 
+\
+
+<center>![](pics/c3-c4-and-cam-plants.png){width=85%}</center>
+\
+
+Most plants use the C3 photosynthetic pathway. Familiar examples of crops utilizing the C3 pathway include cowpea, cassava, soybean, and rice. C4 photosynthesis occurs in ~3% of vascular plant species, but accounts for ~25% of terrestrial photosynthesis. Familiar examples of crops utlizing the C4 pathway include maize, sugarcane, and sorghum.  
+
+Because of the biochemical and morphological differences among the three photosynthetic pathways, each has its own unique set of advantages and disadvantages. This means that different groups of plants come to thrive (and not thrive) under different sets of environmental conditions. And in particular, the different pathways are more or less vulnerable to changes in temperature, water availability and $\textrm{CO}_2$ concentration - **variables that are changing as a consequence of climate change.** 
+
+\
+
+<center>![](pics/tempC3C4.jpg){width=80%}</center>
+As you can see from the figure above, the relationship between temperature and the rate of photosynthesis differs strongly between plants with different photosynthetic pathways (source: Hannah, Lee., (2022) _Climate Change Biology_ $3^{\textrm{rd}}$ Edition. Academic Press). (This is not exactly what we will be looking at today, but these relationships, presumably derived from experimental data, would be ideal for generating hypotheses for how plants with different photosynthetic pathways might respond to climate change).
+
+One way of understanding how plants with different photosynthetic pathways will respond to shifts in climate around the globe is to understand the current (or at least pre-2000) distributions of these plants with reference to geography (e.g. latitude and longitude) and environmental variables (e.g. temperature, precipitation, seasonality, etc.). That is what we will be doing today. You will be building, checking, re-building, interpreting, and visualizing statistical models with multiple metric predictor variables to identify the strongest _potential_ (because correlation does not equal causation) determinants of the distribution of plants with different photosynthetic pathways. 
+
+## Goals for Today
+
+After today's PBL (and some additional self study) you should know how to: 
+
+1. generate scatterplot matrices to explore multivariate data (easy I know, but important).  
+2. identify, understand and resolve issues associated with 'structural' collinearity in multi-predictor models.  
+3. visualize the results of multiple regression analyses using 'partial regression' (='added variable') plots, and 3D visualizations.   
+4. compare models using information criteria.
+5. evaluate multiple models (specifically, all combinations of all possible predictors) for the purposes of model selection and multi-model inference. 
+
+
+## The data
+
+The data is from a study by [Paruelo and Lauenroth (1996)](https://esajournals.onlinelibrary.wiley.com/doi/abs/10.2307/2269602){target="_blank"}. These researchers collected data on the abundance of C3 and C4 plants at 73 sites across North America. At each site, the researchers recorded latitude and longitude (in centesimal degrees), as well as measurements of a range of environmental variables, including mean annual precipitation (map), mean annual temperature (mat), the proportion of precipitation that fell in June, July and August (the Northern Hemisphere summer; jjamap), and in December, January and February (the Northern Hemisphere winter; djfmap). The data are [here](https://drive.google.com/file/d/1BsZQj40zoLI3p3hEoYtAcE0oUb-gJbn1/view?usp=sharing){target="_blank"}.  
+
+
+## Problem 1: What is the association between the abundance of C3 plants, and latitude and longitude?
+
+You know how to answer this question - simply step through the modeling process that should be becoming more and more familiar to you (explore data, build model [write it out in words], fit, check, re-fit, check, visualize and interpret).
+
+Some specific tasks:   
+1. Make sure you check all the assumptions of multiple regression models. If they arise, we can work together to resolve violations of the assumptions.   
+2. Visualize your results in two ways: 1) partial regression plots; and 2) 3d visualization using `persp()` (or `contour()` or `filled.contour` if you would prefer). Does your visualization help you to interpret an interaction?  
+3. Take a moment to write (YES - actually write) a few sentences describing your results in biological terms. It is all very well to generate lots of model output and fancy visualizations, but you will always need to describe your results to clients, stakeholders, and/or in scientific publications, and you will need to do this in a way that your (possible naive and time-poor) audience understands.
+
+## Problem 2: Finding the 'best' model(s) to describe variation in plant relative abundance
+
+We have six potential predictors in our data. With $p$ predictors (and excluding interactions between those predictors) there are $2^p$ possible combinations of these predictors that we could include in separate statistical models. So for our 6 predictors, there are 64 possible models. Having a several predictors is a common feature of biological data - particularly observational (_cf._ experimental) data.
+
+> In many uses of multiple regression, biologists want to find the smallest subset of predictors that provides the “best fit” to the observed data. There are two apparent reasons for this (Mac Nally 2000), related to the two main purposes of regression analysis – explanation and prediction. First, the “best” subset of predictors should include those that are most important in explaining the varia- tion in the response variable. Second, other things being equal, the precision of predictions from our fitted model will be greater with fewer predictor variables in the model. 
+`r tufte::quote_footer('--- Quinn and Keough (2002)')`
+
+> It is important to remember that there will rarely be, for any real data set, a single “best” subset of predictors, particularly if there are many predictors and they are in any way correlated with each other. There will usually be a few models, with different numbers of predictors, which provide similar fits to the observed data. The choice between these competing models will still need to be based on how well the models meet the assumptions, diagnostic considerations of outli- ers and other influential observations and biological knowledge of the variables retained.
+`r tufte::quote_footer('--- Quinn and Keough (2002)')`
+
+And one final quote from an R package developed to help with model selection (`MuMIn`) before we proceed:
+
+>Users should keep in mind the hazards that a “thoughtless approach” of evaluating all possible models poses. Although this procedure is in certain cases useful and justified, it may result in selecting a spurious “best” model, due to the model selection bias.
+“Let the computer find out” is a poor strategy and usually reflects the fact that the researcher did not bother to think clearly about the problem of interest and its scientific setting (Burnham and Anderson, 2002).
+
+With that in mind, we are going to use a model-selection procedure to help us determine the model(s) that best describe variation in C3 relative abundance. 
+
+Specifically, I would like you to use the `bestglm` package to address this problem. Please make liberal use of R's help command (`?bestglm`) to work your way through this problem. I am not being lazy here - using the help command to understand how to use new and unfamiliar R packages is a necessary skill for the contemporary Quantitative Biologist. As your confidence and understanding continue to develop, you will find yourself exploring all sorts of useful packages, that are initially very unfamiliar. 
+
+A tip to begin though: The input ot the command `bestglm()` must be a dataframe that contains only the predictors and the response. The response must be in the last column, and any transformation must be done in the data frame.
+
+
+## Problem 3 (Advanced): Explore multi-model inference
+
+Multimodel inference uses the information of all plausible models for the estimation and evaluation of model parameters. We can use the information criterion 'AICc', which is the AIC corrected for small sample sizes. Based on the AICc values of all models in the candidate set, AICc weights are computed. These are interpreted as 'model probabilities': the weight of evidence in favor of a given model being the best one given the candidate model set considered and the data at hand'. 
+
+These weights are used to calculate:  
+- Importance values for each predictor.    
+The sum of AICc weights of models that include the predictor. This can range from 0 (irrelevant) to 1 (very important). This is only valid if the predictor is included and excluded in the same number of models within the candidate se.    
+- Model-averaged estimates of the coefficients (together with unconditional standard errors and unconditional confidence intervals).  
+Model-averaged coefficients are weighted averages of the coefficients calculated from all models, weighted by their model probabilities. Unconditional standard errors take into account the variability of coefficients among the different plausible models.  
+
+If you make it this far, explore and use the R package `MuMIn` to determine the model-averaged estimates of the coefficients. Again, make liberal use of R's help command.
+
+
