@@ -3,84 +3,22 @@ output:
   pdf_document: default
   html_document: default
 ---
-# What is statistical modeling? And why do we need it?{#chap2}
+# Week 1: R Programming I{#chap2}
 
-## Why do we need statistical modeling?
+## Why Programming? Why Statistics? Why R?
 
-You've all done some statistics. Have you ever thought deeply about why we actually _need_ statistics? Many textbooks gloss over the reasons why we actually need statistics, and just plunge in to the details of probability theory (coin tossing, anyone? set theory, anyone?), etc. Don't get me wrong, you need to understand some probability to understand statistics, but why do we actually need statistical modeling in the first place? 
+Computer programming has become an increasingly valued skill for biologists. Computer programming allows us to express complicated ideas in a formal way such that they can be analysed and evaluated using a computer. Thus, the computer "keeps us honest" with regard to our ideas. If we can't explain our scientific problem to a computer, we haven't thought it through well enough. Indeed, since [Alan Turing](https://en.wikipedia.org/wiki/Alan_Turing) discovered that a computer can emulate any process that can be described by an algorithm, we might ask, "What are computers for?" Many of you will be used to thinking that computers are used for word processing, spreadsheets, email, Instagram etc. and that is true. But I think the answer to the question goes much deeper than this. The best answer that I can think of is, "__Computers are machines for thinking with.__" We use computers as an aid to thinking about the world. Computers can take the drudgery out of many scientific processes and leave us with room to think about the "big" questions. Computers are used in many situations in biology. In this course, we will be concerned with using computers to statistically and dynamically __model__ aspects of data and biological processes. 
 
-<span style="color: red;">**Exercise**</span> Before watching the first 'mini-lecture' (below), take a moment to write two or three short statements describing exactly why you think we need statistical modeling? Try not to be too vague. Why exactly do we need statistical modeling to understand how our biological world works? We will go over your thoughts in the face-to-face session on Thursday\
-\
+## Why Statistics?
 
-<center>QBIO7005 MiniLecture_01 Why do we need statistical modeling?</center>\
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/LVSQuoqqcG8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+The biological world is messy. There is no way we can treat organisms the way atoms and molecules are treated in physics and chemistry. Even if we knew all the physical and chemical properties of all the molecules in an organism, we still could not predict accurately what that organism looks like or how it will behave so we need to use models that incorporate uncertainty and randomness in a principled way. This is why we do statistics. Statistical models have probability "built in." Statistical models allow us to draw conclusions from data and form a way of thinking about organisms that takes randomness and uncertainty into account. 
 
+Statistics is at the very heart of biology: the mechanism of natural selection requires that organisms differ, and differences among organisms are ultimately due to the random process of mutation. Mutation is necessary for selection to work. Thus, statistical models help us to understand how and why organisms have evolved.
 
+We will be modelling the properties of __data__. Data are crucial to the scientific process and it is important to treat them fairly and gently. We will be using a variety of statistical methods to study data. From previous courses, you may be under the impression that statistics is about performing various tests on your data to draw conclusions. It is true that this is one aspect of statistics. But at a more fundamental level, we seek a good model for our data. After obtaining a good model, we find that the statistical tests are easy. They pretty much look after themselves.
 
-## Learning statistical modeling
+## Why R?
 
-<center>![](pics/onion.jpg){width=50%}</center>
-\
+R is a computer language, similar in many respects to other computer languages that you may have heard of, such as Python, C, and C++. There are many reasons why R is the language of choice for doing statistical modelling. It is free (both free as in "free beer" and free as in "free speech"). It was originally written by statisticians for statisticians so there are many aspects of the language that are ideally suited for doing statistical modelling. The language is relatively easy to read, write, and understand. There are thousands of add-on packages available for R that can be used to do many diverse forms of analysis. R has become the "lingua franca" of statistics. R is used by research statisticians to develop new methods, so chances are that you will have access to the latest methods for doing data analysis. Other packages can take many years to become up to date with well-known methods.
 
-Truly understanding the art and science of statistical modeling is really a career-long endeavor, one that can be surprisingly satisfying and rewarding. In many respects, learning statistics is like peeling back the layers of an onion. But that only partially captures the process. One of the enduring challenges of learning statistical modeling is that the learning becomes a chicken-and-egg problem. To quote Bolker (2008) (\@ref(textbooks-and-resources)): "to know why certain technical details are important, you need to know the big picture, but the big picture itself involves knowing some of those technical details." 
-\
-\
-<center>![](pics/chicken-egg-istock-113580444.jpg){width=50%}</center>
-
-We will try to introduce material progressively, and by first providing high-level context for the lower-level technical details. But in this course this chicken-and-egg problem starts now. As you move through this course (and to quote Bolker again): "Iterating, or cycling [back through earlier material], is the best way to handle this problem." And, even if you don't understand the context of what you are learning right now, have faith that those details are likely to make sense at some point in the future. 
-\
-
-## What is a statistical model (part 1)? 
-
-Your understanding of what a statistical model is, and what features of both data and biology can be accommodated and included, will develop over time. But let us start with some basics:
-\
-\
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/LbRh__ZtB6k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-\
-
-
-## "Lies, damned lies, and statistics". A note on motivation and ethics. 
-
-Statistical modeling can be a powerful way to understand how our (biological) world works. But done badly - whether through  benign or malignant neglect - statistical modeling can be powerfully misleading, leading to the famous statement sometimes attributed to Mark Twain: "There are three kinds of lies: lies, damned lies, and statistics."
-
-There is no doubt that the process of statistical modeling can be consciously manipulated to give the impression of a result that may not be true. To avoid this problem in your own work you need to draw on your own moral principles.
-
-I hope that for most people the more problematic issue is that statistical modeling will nearly always give you an 'answer', but this answer might not be a true reflection of reality because of, among other things, inexperience, or decisions and/or mistakes made during the modeling (and pre-modeling) process. Therefore, doing statistical modeling well will always require a good dose of humility. 
-
-<center>![](pics/artifacts_2x.png){width=40%}</center>
-
-
-Here is a high-profile, non-biological example of the consequences of making a presumably innocent mistake in statistical modeling: [preventable disaster!](https://tinyurl.com/bdh4xxhz){target="_blank"} (We will cover techniques to analyze similar data in a few weeks, but for now, reading down to the paragraph beginning "Instead of trying to predict the number of incidents...", will give you a good enough understanding of the seemingly benign mistake leading to such a dramatic outcome). The modern biological sciences are almost undoubtedly riddled with similar statistical mistakes with who knows what consequences for our understanding of the world. 
-
-Ultimately, all these issues can be overcome, I think, by having the right motivation. To be a great statistician **you need to want to know the real answer. You need to want to give yourself the best chance of knowing how the real world actually works**. Understanding the mechanics of statistical modeling is worth almost nothing unless it is backed up with the right motivation. With the right motivation, you can more effectively avoid the pitfalls of statistical modeling, while leveraging all its power.  
-
-
-## (Very) basic structure of a statistical model
-
-Before we can understand some of the goals of statistical modeling, it will be useful to understand a little more about the structure of a 'standard' statistical model. We will also progressively introduce more and more terminology, remembering that a big part of learning a new discipline is to become more and more familiar with the language of the discipline. 
-\
-\
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/_ZQUFodLQMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-
-\
-
-## Goals of statistical modeling 
-
-So, we know why we need to statistical modeling, and we have some idea of the structure of a statistical model. It is also important to understand the goals of statistical modeling. This wouldn't be so important if there was just one goal, but statistical modeling can be motivated by different goals. To give you an overview of the some of the more common goals of statistical modeling:
-\
-\
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/TC-J58ngc0w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-\
-
-## A note on the challenge and limits of statistical modeling
-
-We just spent a little time on the goals of statistical modeling. Remember that 'achieving' these goals by doing a good job constructing a statistical model does not necessarily mean your conclusions will translate to the world beyond the model. (The following is an excerpt from McElreath's book on Bayesian data analysis (\@ref(textbooks-and-resources)), but the same sentiment applies regardless of the statistical/philosophical framework you are using)
-
-```{r out.height = "850px", out.width='750px', echo=F}
-knitr::include_graphics("pics/SmallWorldsLargeWorlds.pdf")
-```
-
-
-
+Having a good knowledge of programming in R is a skill that employers will find valuable. Even if you don't end up using R, and instead use some other software, you will find that learning a new system is made much easier because you already have experience with R. Like spoken languages, knowing one language can help you learn another. You can compare and contrast. Often you will find that other systems for statistical analysis are very inferior to R!

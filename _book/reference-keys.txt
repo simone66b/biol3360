@@ -1,0 +1,15 @@
+chap1
+course-description
+course-delivery
+textbooks-and-resources
+assessment
+goals-and-expectations
+course-communication
+and-finally
+chap2
+why-programming-why-statistics-why-r
+why-statistics
+why-r
+chap3
+the-workspace-setup
+first-steps
