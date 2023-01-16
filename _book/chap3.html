@@ -190,7 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Go to the top-left pane and type.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chap3.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
 <p>Press the <code>run</code> button at the top right of the pane. You should see the output come out in the Console pane. Congratulations! This is your first R program. A “Hello World” program is traditionally the first program a new programmer writes on a new system that they are learning. You have joined the ranks of computer programmers!</p>
-<p>Go to <code>The Art of R Programming</code> and read through the text up to page</p>
+<p>Some comments about your program: The program calls a function called “cat,” which is a function that prints its arguments in the Console. “cat” stands for “concatenate.” You can use cat() to construct sentences from separate words, as the name suggests. In our case there was only one argument: “Hello World!” so that got printed. “Hello World!” is called a string (short for “character string”). So cat() concatenates strings together. Try:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chap3.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;I said,&quot;</span>, <span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
+<p>You can see that the strings are concatenated and are printed out at the Console. I mentioned that cat() is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put “arguments.” which is what the function works on. These are the inputs to the function. The function can have outputs, called “return values” and functions can also have side-effects. For cat(), the side-effect is to print out something at the Console prompt. The cat() function does not return a value.
+Go to <code>The Art of R Programming</code> and read through the text up to page</p>
 
 </div>
 </div>

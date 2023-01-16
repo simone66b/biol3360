@@ -21,5 +21,22 @@ cat("Hello World!")
 
 Press the ``run`` button at the top right of the pane. You should see the output come out in the Console pane. Congratulations! This is your first R program. A "Hello World" program is traditionally the first program a new programmer writes on a new system that they are learning. You have joined the ranks of computer programmers!
 
+Some comments about your program: The program calls a function called "cat," which is a function that prints its arguments in the Console. "cat" stands for "concatenate." You can use ``cat()`` to construct sentences from separate words, as the name suggests. In our case there was only one argument: "Hello World!" so that got printed. "Hello World!" is called a string (short for "character string"). So cat() concatenates strings together. Try:
 
-Go to ``The Art of R Programming`` and read through the text up to page 
+```{r, eval=FALSE}
+cat("I said,", "Hello World!")
+```
+You can see that the strings are concatenated and are printed out at the Console. I mentioned that ``cat()`` is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put "arguments." which is what the function works on. These are the inputs to the function. The function can have outputs, called "return values" and functions can also have side-effects. For ``cat()``, the side-effect is to print out something at the Console prompt. The ``cat()`` function does not return a value.
+
+## The Art of R Programming
+
+I have learned many languages such as: BASIC, Pascal, Lisp, R, MATLAB, and Julia. I also have some knowledge of FORTRAN and C. Mostly, I am self taught. I have found that the best way to learn a new computer language is to do two things.
+
+- Get a good tutorial book. A good book is your friend. Working through the book will usually teach you everything you need to know, at least at a basic level. You can use the book for reference if you have forgotten how to do things. You can also look up new techniques as you become a better programmer. We use the Art of R Programming because it is a great technical introduction that will give you a good foundation to work from.
+
+- Have a programming project in mind. This can be as simple or as complex as you want. Although as a raw beginner, you should probably restrict yourself to very simple problems which demonstrate the various aspects and capabilities of the language. I encourage you to think up a project for yourself. You could work on interesting problems that have been raised in other previous courses, or something completely new and different. For example, a game or some piece of usable code that you will use in the future. It's up to you!
+
+Go to "The Art of R Programming" and work through the text up to page 83. This will give you a good grounding in the basics of data types in R: Vectors, matrices, arrays, lists. Work through all the example code: Type it into the top left-hand pane and use the Run button to run your code. While you are reading, consider this problem, which will give you some practice with R as you read through the chapters:
+
+A letter of the alphabet can be considered "odd" if its position in the alphabet is described by an odd number. If it is described by an even number, the letter is "even." Write an R function that returns the number of odd letters and the number of even letters in a string of arbitrary length. Hint: There is a function called ``strsplit`` that you can use to split up a string into its constituent characters. See ``?strsplit``.
+
