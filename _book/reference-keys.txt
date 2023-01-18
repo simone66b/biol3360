@@ -13,3 +13,7 @@ why-r
 chap3
 the-workspace-setup
 first-steps
+the-art-of-r-programming
+chap4
+more-on-data-structures
+lists

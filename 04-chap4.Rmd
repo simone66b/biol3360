@@ -1,0 +1,70 @@
+---
+output:
+  html_document: default
+---
+
+# More R Programming {#chap4}
+
+## More on Data Structures
+
+Data structures are fundamental to any computer language. You have already seen some: vectors, matrices, and arrays. In fact, matrices and arrays are really special types of vectors. Matrices and arrays have a special property: they possess dimensions. Try this:
+```{r, eval=FALSE}
+v <- 1:9
+v
+vmat <- v; dim(vmat) <- c(3, 3)
+vmat
+dim(vmat) <- NULL
+vmat
+```
+
+See that you can turn a vector into a matrix, and you can turn a matrix into a vector. The key is the ``dim()`` function which allows you to set and get the dimensions of a matrix or vector. The same applies to higher dimensional objects (arrays):
+
+```{r, eval=FALSE}
+avec <- 1:16
+arr <- array(avec, c(4, 2, 2))
+arr
+dim(arr)
+```
+
+## Lists
+
+Vectors, matrices and arrays are of limited usefulness: they only allow the elements of these data structures to be of the same __type__. That is, vectors (and matrices and arrays) can only have one type of data in them. For example, you can have a vector of numbers:
+```{r}
+1:10
+```
+or a vector of characters:
+```{r}
+LETTERS[1:10]
+```
+but you can't have a vector that mixes characters and numbers:
+```{r}
+vec <- c(1, "A")
+vec
+```
+See that R turns the number (1) into a character ("1"). These are not the same thing! This behaviour may or may not be important to your program but it is crucial that you know about it. So how do you combine, say, characters and numbers? You use another data structure: the list.
+```{r}
+mylist <- list(1, "A")
+mylist
+```
+Here we have a list with two __elements__. The first element is a numeric vector of length 1. It's just the number 1. The second element is a character vector of length 1. It is just the character "A." The way R prints out lists gives us a way to access elements, using the square bracket notation (``[[``, ``[``, etc). So say we want the first element of ``mylist``. We can do:
+
+```{r}
+mylist[[1]]
+```
+Similarly for the second element. (Try it!) Another useful aspect of lists is that the elements can have names:
+```{r}
+names(mylist) <- c("Number", "Letter")
+mylist
+mylist$Letter
+```
+See that if the list has named elements, we can use the ``$`` notation. This notation is less general: lists will always have an ordered set of elements but lists don't always have names attached to the elements. The ``$`` notation is more readable, however.
+
+Note also that unlike vectors and matrices, you can have "nested" lists: lists within lists. This is a very useful property in many circumstances:
+```{r}
+mylist <- list(list("A", 1), list("B", 2))
+mylist
+names(mylist) <- c("Element1", "Element2")
+mylist
+mylist[[1]][[2]] ## accesses the second element of Element1.
+mylist$Element1[[1]] ## mix and match!
+```

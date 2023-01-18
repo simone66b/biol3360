@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chap2.html"/>
-
+<link rel="next" href="chap4.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -157,6 +157,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="chap3.html"><a href="chap3.html#the-workspace-setup"><i class="fa fa-check"></i><b>3.1</b> The Workspace Setup</a></li>
 <li class="chapter" data-level="3.2" data-path="chap3.html"><a href="chap3.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a></li>
+<li class="chapter" data-level="3.3" data-path="chap3.html"><a href="chap3.html#the-art-of-r-programming"><i class="fa fa-check"></i><b>3.3</b> The Art of R Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
+<li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -190,10 +196,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Go to the top-left pane and type.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chap3.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
 <p>Press the <code>run</code> button at the top right of the pane. You should see the output come out in the Console pane. Congratulations! This is your first R program. A “Hello World” program is traditionally the first program a new programmer writes on a new system that they are learning. You have joined the ranks of computer programmers!</p>
-<p>Some comments about your program: The program calls a function called “cat,” which is a function that prints its arguments in the Console. “cat” stands for “concatenate.” You can use cat() to construct sentences from separate words, as the name suggests. In our case there was only one argument: “Hello World!” so that got printed. “Hello World!” is called a string (short for “character string”). So cat() concatenates strings together. Try:</p>
+<p>Some comments about your program: The program calls a function called “cat,” which is a function that prints its arguments in the Console. “cat” stands for “concatenate.” You can use <code>cat()</code> to construct sentences from separate words, as the name suggests. In our case there was only one argument: “Hello World!” so that got printed. “Hello World!” is called a string (short for “character string”). So cat() concatenates strings together. Try:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chap3.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;I said,&quot;</span>, <span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
-<p>You can see that the strings are concatenated and are printed out at the Console. I mentioned that cat() is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put “arguments.” which is what the function works on. These are the inputs to the function. The function can have outputs, called “return values” and functions can also have side-effects. For cat(), the side-effect is to print out something at the Console prompt. The cat() function does not return a value.
-Go to <code>The Art of R Programming</code> and read through the text up to page</p>
+<p>You can see that the strings are concatenated and are printed out at the Console. I mentioned that <code>cat()</code> is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put “arguments.” which is what the function works on. These are the inputs to the function. The function can have outputs, called “return values” and functions can also have side-effects. For <code>cat()</code>, the side-effect is to print out something at the Console prompt. The <code>cat()</code> function does not return a value.</p>
+</div>
+<div id="the-art-of-r-programming" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> The Art of R Programming<a href="chap3.html#the-art-of-r-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I have learned many languages such as: BASIC, Pascal, Lisp, R, MATLAB, and Julia. I also have some knowledge of FORTRAN and C. Mostly, I am self taught. I have found that the best way to learn a new computer language is to do two things.</p>
+<ul>
+<li><p>Get a good tutorial book. A good book is your friend. Working through the book will usually teach you everything you need to know, at least at a basic level. You can use the book for reference if you have forgotten how to do things. You can also look up new techniques as you become a better programmer. We use the Art of R Programming because it is a great technical introduction that will give you a good foundation to work from.</p></li>
+<li><p>Have a programming project in mind. This can be as simple or as complex as you want. Although as a raw beginner, you should probably restrict yourself to very simple problems which demonstrate the various aspects and capabilities of the language. I encourage you to think up a project for yourself. You could work on interesting problems that have been raised in other previous courses, or something completely new and different. For example, a game or some piece of usable code that you will use in the future. It’s up to you! We will brainstorm ideas for projects in the workshops. Essentially, we will be having our own mini <a href="https://en.wikipedia.org/wiki/Hackathon">hackathon</a>. Go to <a href="https://padletuq.padlet.org/sblomberg11/g20f0qpnnpcuqmou">this padlet</a> and post your ideas.</p></li>
+</ul>
+<p>Go to “The Art of R Programming” and work through the text up to page 83. This will give you a good grounding in the basics of data types in R: Vectors, matrices, arrays, lists. Work through all the example code: Type it into the top left-hand pane and use the Run button to run your code. While you are reading, consider your own toy problem and how to apply R to it. Alternatively, you could work on this problem, which will give you some practice with R as you read through the chapters:</p>
+<ul>
+<li>A letter of the alphabet can be considered “odd” if its position in the alphabet is described by an odd number. If it is described by an even number, the letter is “even.” Write an R function that returns the number of odd letters and the number of even letters in a string of arbitrary length. Hint: There is a function called <code>strsplit</code> that you can use to split up a string into its constituent characters. See <code>?strsplit</code>.</li>
+</ul>
 
 </div>
 </div>
@@ -202,8 +219,8 @@ Go to <code>The Art of R Programming</code> and read through the text up to page
           </div>
         </div>
       </div>
-<a href="chap2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chap2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
