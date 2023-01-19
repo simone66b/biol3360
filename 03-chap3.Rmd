@@ -28,6 +28,23 @@ cat("I said,", "Hello World!")
 ```
 You can see that the strings are concatenated and are printed out at the Console. I mentioned that ``cat()`` is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put "arguments." which is what the function works on. These are the inputs to the function. The function can have outputs, called "return values" and functions can also have side-effects. For ``cat()``, the side-effect is to print out something at the Console prompt. The ``cat()`` function does not return a value.
 
+Functions have __definitions__. They are what you spend most of the time coding. A typical function definition is:
+
+```{r}
+mycat <- function (str) {
+  cat("This is a", str)
+}
+```
+
+Notice that we are using the __assignment character__ ``<-`` to give a name to the function ``mycat()``. Then follows the keyword ``function``. The __body__ of the function is enclosed within the curly braces. The function calls the ``cat()`` function and its argument is ``str``. In this case, as ``cat()`` doesn't return a value, neither will our function. Here is a test:
+
+```{r} 
+result <- mycat("dog")
+result
+```
+
+Note that the function has a side-effect because ``cat()`` has a side-effect. (Printing the sentence). Note also that ``mycat()`` doesn't return a value (actually the value ``NULL`` which is "nothing" in R.)
+
 ## The Art of R Programming
 
 I have learned many languages such as: BASIC, Pascal, Lisp, R, MATLAB, and Julia. I also have some knowledge of FORTRAN and C. Mostly, I am self taught. I have found that the best way to learn a new computer language is to do two things.

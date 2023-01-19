@@ -189,55 +189,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="more-on-data-structures" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> More on Data Structures<a href="chap4.html#more-on-data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Data structures are fundamental to any computer language. You have already seen some: vectors, matrices, and arrays. In fact, matrices and arrays are really special types of vectors. Matrices and arrays have a special property: they possess dimensions. Try this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chap4.html#cb3-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span></span>
-<span id="cb3-2"><a href="chap4.html#cb3-2" aria-hidden="true" tabindex="-1"></a>v</span>
-<span id="cb3-3"><a href="chap4.html#cb3-3" aria-hidden="true" tabindex="-1"></a>vmat <span class="ot">&lt;-</span> v; <span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb3-4"><a href="chap4.html#cb3-4" aria-hidden="true" tabindex="-1"></a>vmat</span>
-<span id="cb3-5"><a href="chap4.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb3-6"><a href="chap4.html#cb3-6" aria-hidden="true" tabindex="-1"></a>vmat</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chap4.html#cb8-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb8-2"><a href="chap4.html#cb8-2" aria-hidden="true" tabindex="-1"></a>v</span>
+<span id="cb8-3"><a href="chap4.html#cb8-3" aria-hidden="true" tabindex="-1"></a>vmat <span class="ot">&lt;-</span> v; <span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="chap4.html#cb8-4" aria-hidden="true" tabindex="-1"></a>vmat</span>
+<span id="cb8-5"><a href="chap4.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-6"><a href="chap4.html#cb8-6" aria-hidden="true" tabindex="-1"></a>vmat</span></code></pre></div>
 <p>See that you can turn a vector into a matrix, and you can turn a matrix into a vector. The key is the <code>dim()</code> function which allows you to set and get the dimensions of a matrix or vector. The same applies to higher dimensional objects (arrays):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chap4.html#cb4-1" aria-hidden="true" tabindex="-1"></a>avec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span></span>
-<span id="cb4-2"><a href="chap4.html#cb4-2" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(avec, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb4-3"><a href="chap4.html#cb4-3" aria-hidden="true" tabindex="-1"></a>arr</span>
-<span id="cb4-4"><a href="chap4.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(arr)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chap4.html#cb9-1" aria-hidden="true" tabindex="-1"></a>avec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span></span>
+<span id="cb9-2"><a href="chap4.html#cb9-2" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(avec, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb9-3"><a href="chap4.html#cb9-3" aria-hidden="true" tabindex="-1"></a>arr</span>
+<span id="cb9-4"><a href="chap4.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(arr)</span></code></pre></div>
 </div>
 <div id="lists" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Lists<a href="chap4.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Vectors, matrices and arrays are of limited usefulness: they only allow the elements of these data structures to be of the same <strong>type</strong>. That is, vectors (and matrices and arrays) can only have one type of data in them. For example, you can have a vector of numbers:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chap4.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chap4.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>or a vector of characters:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chap4.html#cb7-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chap4.html#cb12-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
 <p>but you can’t have a vector that mixes characters and numbers:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chap4.html#cb9-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
-<span id="cb9-2"><a href="chap4.html#cb9-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chap4.html#cb14-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
+<span id="cb14-2"><a href="chap4.html#cb14-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
 <pre><code>## [1] &quot;1&quot; &quot;A&quot;</code></pre>
 <p>See that R turns the number (1) into a character (“1”). These are not the same thing! This behaviour may or may not be important to your program but it is crucial that you know about it. So how do you combine, say, characters and numbers? You use another data structure: the list.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chap4.html#cb11-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
-<span id="cb11-2"><a href="chap4.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chap4.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
+<span id="cb16-2"><a href="chap4.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
 ## [[2]]
 ## [1] &quot;A&quot;</code></pre>
 <p>Here we have a list with two <strong>elements</strong>. The first element is a numeric vector of length 1. It’s just the number 1. The second element is a character vector of length 1. It is just the character “A.” The way R prints out lists gives us a way to access elements, using the square bracket notation (<code>[[</code>, <code>[</code>, etc). So say we want the first element of <code>mylist</code>. We can do:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chap4.html#cb13-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chap4.html#cb18-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Similarly for the second element. (Try it!) Another useful aspect of lists is that the elements can have names:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chap4.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Number&quot;</span>, <span class="st">&quot;Letter&quot;</span>)</span>
-<span id="cb15-2"><a href="chap4.html#cb15-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chap4.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Number&quot;</span>, <span class="st">&quot;Letter&quot;</span>)</span>
+<span id="cb20-2"><a href="chap4.html#cb20-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
 <pre><code>## $Number
 ## [1] 1
 ## 
 ## $Letter
 ## [1] &quot;A&quot;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chap4.html#cb17-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Letter</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chap4.html#cb22-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Letter</span></code></pre></div>
 <pre><code>## [1] &quot;A&quot;</code></pre>
 <p>See that if the list has named elements, we can use the <code>$</code> notation. This notation is less general: lists will always have an ordered set of elements but lists don’t always have names attached to the elements. The <code>$</code> notation is more readable, however.</p>
 <p>Note also that unlike vectors and matrices, you can have “nested” lists: lists within lists. This is a very useful property in many circumstances:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chap4.html#cb19-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span>), <span class="fu">list</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">2</span>))</span>
-<span id="cb19-2"><a href="chap4.html#cb19-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chap4.html#cb24-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span>), <span class="fu">list</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">2</span>))</span>
+<span id="cb24-2"><a href="chap4.html#cb24-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]][[1]]
 ## [1] &quot;A&quot;
@@ -252,8 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## [[2]][[2]]
 ## [1] 2</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chap4.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Element1&quot;</span>, <span class="st">&quot;Element2&quot;</span>)</span>
-<span id="cb21-2"><a href="chap4.html#cb21-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chap4.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Element1&quot;</span>, <span class="st">&quot;Element2&quot;</span>)</span>
+<span id="cb26-2"><a href="chap4.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
 <pre><code>## $Element1
 ## $Element1[[1]]
 ## [1] &quot;A&quot;
@@ -268,9 +268,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## $Element2[[2]]
 ## [1] 2</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chap4.html#cb23-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]][[<span class="dv">2</span>]] <span class="do">## accesses the second element of Element1.</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chap4.html#cb28-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]][[<span class="dv">2</span>]] <span class="do">## accesses the second element of Element1.</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chap4.html#cb25-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Element1[[<span class="dv">1</span>]] <span class="do">## mix and match!</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="chap4.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Element1[[<span class="dv">1</span>]] <span class="do">## mix and match!</span></span></code></pre></div>
 <pre><code>## [1] &quot;A&quot;</code></pre>
 
 </div>
