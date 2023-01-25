@@ -68,3 +68,36 @@ mylist
 mylist[[1]][[2]] ## accesses the second element of Element1.
 mylist$Element1[[1]] ## mix and match!
 ```
+
+## Data Frames
+
+A data frame is a special type of list. Its main difference is that a data frame is a list with all its elements having the same length. This is the way that statistical data are usually represented: The columns of the data frame represent variables. The rows of the data frame represent observations. Thus, a data frame is "rectangular." Here's a simple example:
+
+```{r}
+library(ade4)
+data(lizards)
+dat <- lizards$traits
+head(dat)
+```
+
+Here we have used the ``lizards`` data set from the ``ade4`` package. This data set is actually a list: It has elements ``traits`` and two phylogenies: ``hprA`` and ``hprB`` I extracted the data frame from this list and looked at the first 6 lines. It is a ``data.frame`` with 8 variables (columns) and 18 observations, one for each species of lizard in the data set. Since ``dat`` is also a list, we can refer to the columns using the square-bracket notation or the ``$`` notation. Also, data frames have another property: they have dimensions:
+
+```{r}
+dim(dat)
+```
+And you can refer to the elements of the data frame as if they were a matrix:
+
+```{r}
+dat[3, 4]
+```
+This gives the value at the 3rd row and 4th column.
+
+Although each column (variable) has to be of the same length, if you have missing data, you can just put ``NA`` which is the missing data character in R:
+
+```{r}
+dat[3, 4] <- NA
+dat[1:4, 1:5]
+```
+
+Usually you will import data from a file into a data.frame. You can have your NA values in the data file and R will understand them and import them with the rest of the data.
+

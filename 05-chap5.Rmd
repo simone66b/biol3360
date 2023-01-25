@@ -1,0 +1,44 @@
+# Flow of Control {#chap5}
+
+Some programs move in a "linear" fashion, from the first statement, to the second, then third etc. until the end of the program is reached. However, most programs (ie functions) that are longer than 3 or 4 lines tend to allow R to jump around the program from one statement to another, but not in a linear order. For example, we may want to repeat a block of statements a large number of times. Or we may want the program to do different things, depending on the state of some variable in the program.
+
+## Loops
+
+Loops are the most common way of iterating over a block of statements is to use a __loop__. In R, there are three commands that provide loops, each with its different use.
+
+## For loops
+
+The most commonly used loop is the _for_ loop. It is used when you want to iterate several statements over the elements of a vector. A simple example:
+
+```{r}
+x <- 1:10
+for (i in x) {
+  print(i^2)
+}
+```
+
+You can see that the function just prints out the square of the numbers from one to ten, one per line. Although it is most common to iterate over integers (``x <- 1:10``), we can iterate over the contents of any vector:
+
+```{r}
+for (bed in c("mat", "sofa", "table")) {
+  cat("The cat sat on the", bed, "\n")
+}
+```
+
+## while and repeat
+
+The next most commonly used loop is a ``while`` loop. You go around the loop until some condition is not met. Then you exit the loop and go onto the next statement. Here's an example:
+
+```{r}
+cat("Values from a Normal distribution\n")
+x <- rnorm(1)
+while (abs(x) < 1.96) {
+  print(x)
+  x <- rnorm(1)
+}
+cat("Outlier detected.\n")
+```
+
+  
+  print(x)
+

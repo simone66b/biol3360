@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chap3.html"/>
-
+<link rel="next" href="chap5.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,6 +163,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
+<li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap5.html"><a href="chap5.html"><i class="fa fa-check"></i><b>5</b> Flow of Control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap5.html"><a href="chap5.html#loops"><i class="fa fa-check"></i><b>5.1</b> Loops</a></li>
+<li class="chapter" data-level="5.2" data-path="chap5.html"><a href="chap5.html#for-loops"><i class="fa fa-check"></i><b>5.2</b> For loops</a></li>
+<li class="chapter" data-level="5.3" data-path="chap5.html"><a href="chap5.html#while-and-repeat"><i class="fa fa-check"></i><b>5.3</b> while and repeat</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -272,6 +279,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="chap4.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Element1[[<span class="dv">1</span>]] <span class="do">## mix and match!</span></span></code></pre></div>
 <pre><code>## [1] &quot;A&quot;</code></pre>
+</div>
+<div id="data-frames" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Data Frames<a href="chap4.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A data frame is a special type of list. Its main difference is that a data frame is a list with all its elements having the same length. This is the way that statistical data are usually represented: The columns of the data frame represent variables. The rows of the data frame represent observations. Thus, a data frame is “rectangular.” Here’s a simple example:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="chap4.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
+<span id="cb32-2"><a href="chap4.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lizards)</span>
+<span id="cb32-3"><a href="chap4.html#cb32-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> lizards<span class="sc">$</span>traits</span>
+<span id="cb32-4"><a href="chap4.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
+<pre><code>##    mean.L matur.L max.L hatch.L hatch.m clutch.S age.mat clutch.F
+## Sa   69.2      58    82    27.8   0.572      6.0      13      1.5
+## Sh   48.4      42    56    22.9   0.310      3.2       5      2.0
+## Tl  168.4     132   190    42.8   2.235     16.9      19      1.0
+## Mc   66.1      56    72    25.0   0.441      7.2      11      1.5
+## My   70.1      60    81    26.6   0.550      5.4      10      1.0
+## Pb   55.2      44    64    24.0   0.304      4.2       8      2.0</code></pre>
+<p>Here we have used the <code>lizards</code> data set from the <code>ade4</code> package. This data set is actually a list: It has elements <code>traits</code> and two phylogenies: <code>hprA</code> and <code>hprB</code> I extracted the data frame from this list and looked at the first 6 lines. It is a <code>data.frame</code> with 8 variables (columns) and 18 observations, one for each species of lizard in the data set. Since <code>dat</code> is also a list, we can refer to the columns using the square-bracket notation or the <code>$</code> notation. Also, data frames have another property: they have dimensions:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chap4.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dat)</span></code></pre></div>
+<pre><code>## [1] 18  8</code></pre>
+<p>And you can refer to the elements of the data frame as if they were a matrix:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chap4.html#cb36-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] 42.8</code></pre>
+<p>This gives the value at the 3rd row and 4th column.</p>
+<p>Although each column (variable) has to be of the same length, if you have missing data, you can just put <code>NA</code> which is the missing data character in R:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="chap4.html#cb38-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">3</span>, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb38-2"><a href="chap4.html#cb38-2" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##    mean.L matur.L max.L hatch.L hatch.m
+## Sa   69.2      58    82    27.8   0.572
+## Sh   48.4      42    56    22.9   0.310
+## Tl  168.4     132   190      NA   2.235
+## Mc   66.1      56    72    25.0   0.441</code></pre>
+<p>Usually you will import data from a file into a data.frame. You can have your NA values in the data file and R will understand them and import them with the rest of the data.</p>
 
 </div>
 </div>
@@ -280,8 +318,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="chap3.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chap3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
