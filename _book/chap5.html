@@ -170,6 +170,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="chap5.html"><a href="chap5.html#loops"><i class="fa fa-check"></i><b>5.1</b> Loops</a></li>
 <li class="chapter" data-level="5.2" data-path="chap5.html"><a href="chap5.html#for-loops"><i class="fa fa-check"></i><b>5.2</b> For loops</a></li>
 <li class="chapter" data-level="5.3" data-path="chap5.html"><a href="chap5.html#while-and-repeat"><i class="fa fa-check"></i><b>5.3</b> while and repeat</a></li>
+<li class="chapter" data-level="5.4" data-path="chap5.html"><a href="chap5.html#branching-code-the-if-then-else-construct."><i class="fa fa-check"></i><b>5.4</b> Branching code: The if-then-else construct.</a></li>
+<li class="chapter" data-level="5.5" data-path="chap5.html"><a href="chap5.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -196,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some programs move in a “linear” fashion, from the first statement, to the second, then third etc. until the end of the program is reached. However, most programs (ie functions) that are longer than 3 or 4 lines tend to allow R to jump around the program from one statement to another, but not in a linear order. For example, we may want to repeat a block of statements a large number of times. Or we may want the program to do different things, depending on the state of some variable in the program.</p>
 <div id="loops" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Loops<a href="chap5.html#loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Loops are the most common way of iterating over a block of statements is to use a <strong>loop</strong>. In R, there are three commands that provide loops, each with its different use.</p>
+<p>The most common way of iterating over a block of statements is to use a <strong>loop</strong>. In R, there are three commands that provide loops, each with its different use.</p>
 </div>
 <div id="for-loops" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> For loops<a href="chap5.html#for-loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -226,26 +228,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="while-and-repeat" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> while and repeat<a href="chap5.html#while-and-repeat" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The next most commonly used loop is a <code>while</code> loop. You go around the loop until some condition is not met. Then you exit the loop and go onto the next statement. Here’s an example:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="chap5.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Values from a Normal distribution</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## Values from a Normal distribution</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chap5.html#cb46-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
-<span id="cb46-2"><a href="chap5.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">abs</span>(x) <span class="sc">&lt;</span> <span class="fl">1.96</span>) {</span>
-<span id="cb46-3"><a href="chap5.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x)</span>
-<span id="cb46-4"><a href="chap5.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)</span>
-<span id="cb46-5"><a href="chap5.html#cb46-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] 0.2850963
-## [1] -0.4197174
-## [1] -0.650094
-## [1] -0.783348
-## [1] 0.2379868
-## [1] -0.07117911
-## [1] 1.325497
-## [1] -0.9586323
-## [1] -0.3560658
-## [1] -0.6098612</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chap5.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Outlier detected.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<pre><code>## Outlier detected.</code></pre>
-<p>print(x)</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="chap5.html#cb44-1" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span> () { <span class="do">## No arguments!</span></span>
+<span id="cb44-2"><a href="chap5.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Values from a Normal distribution</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb44-3"><a href="chap5.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>) <span class="do">## generate a value</span></span>
+<span id="cb44-4"><a href="chap5.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="fu">abs</span>(x) <span class="sc">&lt;</span> <span class="fl">1.96</span>) {</span>
+<span id="cb44-5"><a href="chap5.html#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(x, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="do">## print x as a side-effect</span></span>
+<span id="cb44-6"><a href="chap5.html#cb44-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>) <span class="do">## generate a new value</span></span>
+<span id="cb44-7"><a href="chap5.html#cb44-7" aria-hidden="true" tabindex="-1"></a>  } <span class="do">## go around the loop from here.</span></span>
+<span id="cb44-8"><a href="chap5.html#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Outlier detected:&quot;</span>, x, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="do">## another side-effect</span></span>
+<span id="cb44-9"><a href="chap5.html#cb44-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-10"><a href="chap5.html#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="chap5.html#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>() <span class="do">## call the function.</span></span></code></pre></div>
+<pre><code>## Values from a Normal distribution
+## 0.6079029 
+## 0.502839 
+## -0.6474733 
+## -0.0791774 
+## -1.362441 
+## -0.2578404 
+## 0.05043192 
+## -0.243644 
+## -0.07539122 
+## 0.245947 
+## 1.450312 
+## 1.37561 
+## 1.155797 
+## 0.8322021 
+## -0.4456885 
+## -0.5102118 
+## 1.313308 
+## Outlier detected: -2.618897</code></pre>
+<p>Note that the loop occurs while the test condition is TRUE. The flow of control breaks out of the while loop as soon as the test condition is FALSE. You can also break out of loops using the <code>break</code> command. You can also skip an iteration of the loop (usually a for loop) using the <code>next</code> command.</p>
+<p>The <code>repeat</code> loop is not often used. It simply iterates over a block of code, without the possibility of the loop ending. You can escape from a <code>repeat</code> loop using the <code>break</code> or <code>next</code> commands.</p>
+</div>
+<div id="branching-code-the-if-then-else-construct." class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Branching code: The if-then-else construct.<a href="chap5.html#branching-code-the-if-then-else-construct." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Frequently we want R to make decisions in our code that depend on some criterion. We want our program to change its behaviour depending on this. This is where the if-then-else construct comes in. Here is a simple example:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chap5.html#cb46-1" aria-hidden="true" tabindex="-1"></a>testcat <span class="ot">&lt;-</span> <span class="cf">function</span> (animal) {</span>
+<span id="cb46-2"><a href="chap5.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (animal <span class="sc">==</span> <span class="st">&quot;cat&quot;</span>) {</span>
+<span id="cb46-3"><a href="chap5.html#cb46-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">cat</span>(<span class="st">&quot;Good kitty.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb46-4"><a href="chap5.html#cb46-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb46-5"><a href="chap5.html#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;What sort of animal are you?</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb46-6"><a href="chap5.html#cb46-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-7"><a href="chap5.html#cb46-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-8"><a href="chap5.html#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="chap5.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="fu">testcat</span>(<span class="st">&quot;cat&quot;</span>)</span></code></pre></div>
+<pre><code>## Good kitty.</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chap5.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">testcat</span>(<span class="st">&quot;dog&quot;</span>)</span></code></pre></div>
+<pre><code>## What sort of animal are you?</code></pre>
+<p>Here we can see the if-then-else at work. The test criterion is <code>if (animal == "cat")</code> <strong>then</strong> do <code>cat("Good kitty.\n")</code> <strong>else</strong> do <code>cat("What sort of animal are you?\n")</code>. You can see that you don’t actually need to write the <code>then</code>. The if-then-else construct allows us to make programs that branch at one or several places in the code, and execute different blocks of code depending on the test criterion. You can also “chain” if-then-else statements together to test for multiple conditions in the code.</p>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Conclusion<a href="chap5.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now we have the building blocks of an R function: We can assign the function a name, and we tell R it is a function using the <code>function</code> key word, followed by the arguments to the function. The <strong>main body</strong> of the function determines how the arguments are to be treated, which may involve loops or if-else constructs. Finally a <strong>value</strong> is returned by the function. Along the way, the function might have <strong>side-effects</strong> such as printing to the screen.</p>
 
 </div>
 </div>
