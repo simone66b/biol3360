@@ -24,3 +24,8 @@ for-loops
 while-and-repeat
 branching-code-the-if-then-else-construct.
 conclusion
+chap6
+effect-sizes
+uncertainty
+standard-errors-and-confidence-intervals
+a-practical-example
