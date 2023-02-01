@@ -17,3 +17,15 @@ the-art-of-r-programming
 chap4
 more-on-data-structures
 lists
+data-frames
+chap5
+loops
+for-loops
+while-and-repeat
+branching-code-the-if-then-else-construct.
+conclusion
+chap6
+effect-sizes
+uncertainty
+standard-errors-and-confidence-intervals
+a-practical-example

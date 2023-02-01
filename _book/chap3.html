@@ -163,6 +163,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
+<li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap5.html"><a href="chap5.html"><i class="fa fa-check"></i><b>5</b> Flow of Control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap5.html"><a href="chap5.html#loops"><i class="fa fa-check"></i><b>5.1</b> Loops</a></li>
+<li class="chapter" data-level="5.2" data-path="chap5.html"><a href="chap5.html#for-loops"><i class="fa fa-check"></i><b>5.2</b> For loops</a></li>
+<li class="chapter" data-level="5.3" data-path="chap5.html"><a href="chap5.html#while-and-repeat"><i class="fa fa-check"></i><b>5.3</b> while and repeat</a></li>
+<li class="chapter" data-level="5.4" data-path="chap5.html"><a href="chap5.html#branching-code-the-if-then-else-construct."><i class="fa fa-check"></i><b>5.4</b> Branching code: The if-then-else construct.</a></li>
+<li class="chapter" data-level="5.5" data-path="chap5.html"><a href="chap5.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> Effect sizes and uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#effect-sizes"><i class="fa fa-check"></i><b>6.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#uncertainty"><i class="fa fa-check"></i><b>6.2</b> Uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="chap6.html"><a href="chap6.html#standard-errors-and-confidence-intervals"><i class="fa fa-check"></i><b>6.2.1</b> Standard errors and confidence intervals</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chap6.html"><a href="chap6.html#a-practical-example"><i class="fa fa-check"></i><b>6.2.2</b> A practical example</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -199,6 +217,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some comments about your program: The program calls a function called “cat,” which is a function that prints its arguments in the Console. “cat” stands for “concatenate.” You can use <code>cat()</code> to construct sentences from separate words, as the name suggests. In our case there was only one argument: “Hello World!” so that got printed. “Hello World!” is called a string (short for “character string”). So cat() concatenates strings together. Try:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chap3.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;I said,&quot;</span>, <span class="st">&quot;Hello World!&quot;</span>)</span></code></pre></div>
 <p>You can see that the strings are concatenated and are printed out at the Console. I mentioned that <code>cat()</code> is a function. Functions are the building blocks of computer programs. You will be writing your own functions to do a variety of things. Inside the parentheses, you can put “arguments.” which is what the function works on. These are the inputs to the function. The function can have outputs, called “return values” and functions can also have side-effects. For <code>cat()</code>, the side-effect is to print out something at the Console prompt. The <code>cat()</code> function does not return a value.</p>
+<p>Functions have <strong>definitions</strong>. They are what you spend most of the time coding. A typical function definition is:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chap3.html#cb3-1" aria-hidden="true" tabindex="-1"></a>mycat <span class="ot">&lt;-</span> <span class="cf">function</span> (str) {</span>
+<span id="cb3-2"><a href="chap3.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is a&quot;</span>, str)</span>
+<span id="cb3-3"><a href="chap3.html#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Notice that we are using the <strong>assignment character</strong> <code>&lt;-</code> to give a name to the function <code>mycat()</code>. Then follows the keyword <code>function</code>. The <strong>body</strong> of the function is enclosed within the curly braces. The function calls the <code>cat()</code> function and its argument is <code>str</code>. In this case, as <code>cat()</code> doesn’t return a value, neither will our function. Here is a test:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chap3.html#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">mycat</span>(<span class="st">&quot;dog&quot;</span>)</span></code></pre></div>
+<pre><code>## This is a dog</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chap3.html#cb6-1" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>Note that the function has a side-effect because <code>cat()</code> has a side-effect. (Printing the sentence). Note also that <code>mycat()</code> doesn’t return a value (actually the value <code>NULL</code> which is “nothing” in R.)</p>
 </div>
 <div id="the-art-of-r-programming" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> The Art of R Programming<a href="chap3.html#the-art-of-r-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -274,6 +302,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

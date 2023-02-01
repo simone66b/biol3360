@@ -9,3 +9,7 @@ link-citations: yes
 ---
 
 # Welcome to BIOL3360! {-}
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("sigma.png","Lotka_Volterra_field_plot.png", "coms.jpg"))
+```

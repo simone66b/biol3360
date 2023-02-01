@@ -163,6 +163,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
+<li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap5.html"><a href="chap5.html"><i class="fa fa-check"></i><b>5</b> Flow of Control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap5.html"><a href="chap5.html#loops"><i class="fa fa-check"></i><b>5.1</b> Loops</a></li>
+<li class="chapter" data-level="5.2" data-path="chap5.html"><a href="chap5.html#for-loops"><i class="fa fa-check"></i><b>5.2</b> For loops</a></li>
+<li class="chapter" data-level="5.3" data-path="chap5.html"><a href="chap5.html#while-and-repeat"><i class="fa fa-check"></i><b>5.3</b> while and repeat</a></li>
+<li class="chapter" data-level="5.4" data-path="chap5.html"><a href="chap5.html#branching-code-the-if-then-else-construct."><i class="fa fa-check"></i><b>5.4</b> Branching code: The if-then-else construct.</a></li>
+<li class="chapter" data-level="5.5" data-path="chap5.html"><a href="chap5.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> Effect sizes and uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#effect-sizes"><i class="fa fa-check"></i><b>6.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#uncertainty"><i class="fa fa-check"></i><b>6.2</b> Uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="chap6.html"><a href="chap6.html#standard-errors-and-confidence-intervals"><i class="fa fa-check"></i><b>6.2.1</b> Standard errors and confidence intervals</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chap6.html"><a href="chap6.html#a-practical-example"><i class="fa fa-check"></i><b>6.2.2</b> A practical example</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -188,12 +206,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> Week 1: R Programming I<a href="chap2.html#chap2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="why-programming-why-statistics-why-r" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Why Programming? Why Statistics? Why R?<a href="chap2.html#why-programming-why-statistics-why-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Computer programming has become an increasingly valued skill for biologists. Computer programming allows us to express complicated ideas in a formal way such that they can be analysed and evaluated using a computer. Thus, the computer “keeps us honest” with regard to our ideas. If we can’t explain our scientific problem to a computer, we haven’t thought it through well enough. Indeed, since <a href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> discovered that a computer can emulate any process that can be described by an algorithm, we might ask, “What are computers for?” Many of you will be used to thinking that computers are used for word processing, spreadsheets, email, Instagram etc. and that is true. But I think the answer to the question goes much deeper than this. The best answer that I can think of is, “<strong>Computers are machines for thinking with.</strong>” We use computers as an aid to thinking about the world. Computers can take the drudgery out of many scientific processes and leave us with room to think about the “big” questions. Computers are used in many situations in biology. In this course, we will be concerned with using computers to statistically and dynamically <strong>model</strong> aspects of data and biological processes.</p>
+<p>Computer programming has become an increasingly valued skill for biologists. Computer programming allows us to express complicated ideas in a formal way such that they can be analysed and evaluated using a computer. Thus, the computer “keeps us honest” with regard to our ideas. If we can’t explain our scientific problem to a computer, we haven’t thought it through well enough. Indeed, since <a href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> showed that a computer can emulate any process that can be described by an algorithm, we might ask, “What are computers for?” Many of you will be used to thinking that computers are used for word processing, spreadsheets, email, Instagram etc. and that is true. But I think the answer to the question goes much deeper than this. The best answer that I can think of is, “<strong>Computers are machines for thinking with.</strong>” We use computers as an aid to thinking about the world. Computers can take the drudgery out of many scientific processes and leave us with room to think about the “big” questions. Computers are used in many situations in biology. In this course, we will be concerned with using computers to statistically and dynamically <strong>model</strong> aspects of data and biological processes.</p>
 </div>
 <div id="why-statistics" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Why Statistics?<a href="chap2.html#why-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The biological world is messy. There is no way we can treat organisms the way atoms and molecules are treated in physics and chemistry. Even if we knew all the physical and chemical properties of all the molecules in an organism, we still could not predict accurately what that organism looks like or how it will behave so we need to use models that incorporate uncertainty and randomness in a principled way. This is why we do statistics. Statistical models have probability “built in.” Statistical models allow us to draw conclusions from data and form a way of thinking about organisms that takes randomness and uncertainty into account.</p>
-<p>Statistics is at the very heart of biology: the mechanism of natural selection requires that organisms differ, and differences among organisms are ultimately due to the random process of mutation. Mutation is necessary for selection to work. Thus, statistical models help us to understand how and why organisms have evolved.</p>
+<p>Statistics is at the very heart of biology: the mechanism of natural selection requires that organisms differ, and differences among organisms are ultimately due to the random process of mutation. Mutation is necessary for selection to work. In eukaryotic cells, assortment of chromosomes occur at random, and there can be random “crossing over” events along a chromosome. Thus, statistical models help us to understand how and why organisms have evolved.</p>
 <p>We will be modelling the properties of <strong>data</strong>. Data are crucial to the scientific process and it is important to treat them fairly and gently. We will be using a variety of statistical methods to study data. From previous courses, you may be under the impression that statistics is about performing various tests on your data to draw conclusions. It is true that this is one aspect of statistics. But at a more fundamental level, we seek a good model for our data. After obtaining a good model, we find that the statistical tests are easy. They pretty much look after themselves.</p>
 </div>
 <div id="why-r" class="section level2 hasAnchor" number="2.3">
@@ -263,6 +281,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
