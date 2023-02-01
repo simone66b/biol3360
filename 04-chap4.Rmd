@@ -68,3 +68,7 @@ mylist
 mylist[[1]][[2]] ## accesses the second element of Element1.
 mylist$Element1[[1]] ## mix and match!
 ```
+
+## Data Frames
+
+Data frames are lists. But they have a special property: All elements of the data frame (the list) are equal in length. Data frames are the usual way of presenting data for statistical analysis. They make sense: You measure some variables (which become the columns of the data frame) and you measure each variable a number of times (the observations of each variable). Hence, data frames are rectangular. Although the length of each element (variable) in a 
