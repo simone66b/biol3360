@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Effect sizes and uncertainty | BIOL3360</title>
-  <meta name="description" content="6 Effect sizes and uncertainty | BIOL3360" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <title>6 LinearModels | BIOL3360</title>
+  <meta name="description" content="6 LinearModels | BIOL3360" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Effect sizes and uncertainty | BIOL3360" />
+  <meta property="og:title" content="6 LinearModels | BIOL3360" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Effect sizes and uncertainty | BIOL3360" />
+  <meta name="twitter:title" content="6 LinearModels | BIOL3360" />
   
   
   
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chap5.html"/>
-
+<link rel="next" href="chap7.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -173,14 +173,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="chap5.html"><a href="chap5.html#branching-code-the-if-then-else-construct."><i class="fa fa-check"></i><b>5.4</b> Branching code: The if-then-else construct.</a></li>
 <li class="chapter" data-level="5.5" data-path="chap5.html"><a href="chap5.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> Effect sizes and uncertainty</a>
+<li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> LinearModels</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#effect-sizes"><i class="fa fa-check"></i><b>6.1</b> Effect sizes</a></li>
-<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#uncertainty"><i class="fa fa-check"></i><b>6.2</b> Uncertainty</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="chap6.html"><a href="chap6.html#standard-errors-and-confidence-intervals"><i class="fa fa-check"></i><b>6.2.1</b> Standard errors and confidence intervals</a></li>
-<li class="chapter" data-level="6.2.2" data-path="chap6.html"><a href="chap6.html#a-practical-example"><i class="fa fa-check"></i><b>6.2.2</b> A practical example</a></li>
+<li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>6.1</b> Graphing the Iris data</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.2</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.3</b> Analysis using t test</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.4</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.5</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.6</b> Points to Note</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.8</b> Linear Models</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.9</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.10</b> Matrix Representation</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.11</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.12</b> Estimation: Ordinary Least Squares</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#estimation-gls"><i class="fa fa-check"></i><b>7.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>7.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>7.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#gls-example-time-series"><i class="fa fa-check"></i><b>7.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#lynx-data"><i class="fa fa-check"></i><b>7.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#acf-and-pacf"><i class="fa fa-check"></i><b>7.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>7.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>7.8</b> GLS Autoregression model of Lynx data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -203,133 +220,300 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="chap6" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">6</span> Effect sizes and uncertainty<a href="chap6.html#chap6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="effect-sizes" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Effect sizes<a href="chap6.html#effect-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Null hypothesis significance testing (NHST), as covered in the previous chapter, emphasizes conclusions based on the presence vs. absence of an effect, according to a more-or-less arbitrary ‘significance-level’ defined by the <em>p</em>-value.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>But it is just as - if not more important - to remember that the parameters you have estimated, and the relationship they describe, actually mean something. So rather than (or in addition to) hypothesis testing, you can use your parameter estimates, and estimates of uncertainty in your parameter estimates, to draw conclusions about how the world works.</p>
-<p>Let’s model the association between height and weight using for the iKung San people again, and look at the estimates of the coefficients:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chap6.html#cb50-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> height <span class="sc">~</span> weight, <span class="at">data=</span>d2)</span>
-<span id="cb50-2"><a href="chap6.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(m1)</span></code></pre></div>
-<pre><code>## (Intercept)      weight 
-## 113.8793936   0.9050291</code></pre>
-<p>The coefficient ‘weight’ describes the strength of the relationship between ‘weight’ (our predictor variable) and height (our response variable). Because weight is measured in kg and height is measured in cm, we can say that height increases with weight at a rate of 0.905 cm of additional height for every 1kg of additional weight. So, you don’t need to focus on <em>p</em>-values and tests of statistical significance. You can focus on <em>effect sizes</em>. Some argue that estimation of biologically-relevant parameters and (relatedly) effect sizes, and their biological (rather than statistical) significance are more important than hypothesis testing. Either way, estimation of effect sizes and hypothesis testing are not mutually exclusive and regardless of whether you ‘do’ hypothesis testing, you should always (also) focus on effect sizes.</p>
-</div>
-<div id="uncertainty" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Uncertainty<a href="chap6.html#uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In many ways our ‘point’ estimates of the model coefficients (extracted using <code>coefficients(model)</code>) are our ‘statistical best guesses’. But they are far from certain. In fact unless you are sampling the entire population (in which case you are not ‘sampling’) and measuring things perfectly then your point estimates ARE CERTAINLY WRONG. So we should not place too much weight on our parameter estimates without also quantifying our uncertainty in those estimates.</p>
-<div id="standard-errors-and-confidence-intervals" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Standard errors and confidence intervals<a href="chap6.html#standard-errors-and-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Formal expressions of uncertainty in our estimates are often expressed as confidence intervals around our estimates (at least for Frequentist [cf. Bayesian] methods). Confidence intervals are derived from the standard error of the estimate. What is a standard error, how does the standard error relate to a confidence interval, and how should a confidence interval be interpreted?</p>
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LAujBMcUvZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-</center>
-<p><br />
-</p>
-<center>
-<img src="pics/normal_distribution.png" style="width:85.0%" />
-</center>
-<p><br />
+<h1><span class="header-section-number">6</span> LinearModels<a href="chap6.html#chap6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Consider R. A. Fisher’s classic Iris data set:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chap6.html#cb50-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;sepalsPetals.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<img src="sepalsPetals.jpg" alt="An Iris" width="108" />
+<p class="caption">
+Figure 6.1: An Iris
 </p>
 </div>
-<div id="a-practical-example" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> A practical example<a href="chap6.html#a-practical-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will (maybe) use some different examples in coming chapters! But for now, we are sticking with our exploration of the association between weight and height. Using this example, how do we calculate confidence (and prediction) intervals on parameters and on the fitted regression line in R? Once you know how to do this, you should be able to apply these methods more generally.</p>
-<p>The formula for a confidence interval for an estimate, where the sampling distribution of the estimate is described by a <em>t</em>-distribution is:</p>
-<p><span class="math inline">\(\hat\beta\pm t_{1-\textrm{alpha}/2,\textrm{df}}\times\sigma_{\hat\beta}\)</span></p>
-<p>where alpha is equal to the ‘significance’ level, and df is equal to the residual degrees of freedome (<span class="math inline">\(n-k\)</span>). To generate a 95% CI, alpha = 0.05. To generate a 71% CI, alpha = 0.29. But why don’t we let R do the work:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="chap6.html#cb52-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> height <span class="sc">~</span> weight, <span class="at">data=</span>d2)</span>
-<span id="cb52-2"><a href="chap6.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="chap6.html#cb52-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb52-4"><a href="chap6.html#cb52-4" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">-</span> (<span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,m1<span class="sc">$</span>df.residual)) <span class="sc">*</span> <span class="fu">summary</span>(m1)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">2</span>] <span class="co"># lower</span></span></code></pre></div>
-<pre><code>##    weight 
-## 0.8223315</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="chap6.html#cb54-1" aria-hidden="true" tabindex="-1"></a>m1<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">+</span> (<span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,m1<span class="sc">$</span>df.residual)) <span class="sc">*</span> <span class="fu">summary</span>(m1)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">2</span>] <span class="co"># upper</span></span></code></pre></div>
-<pre><code>##    weight 
-## 0.9877267</code></pre>
-<p><span style="color: red;"><strong>Exercise</strong></span> Work through the syntax to calculate the upper and lower bounds of the CI above to ‘decipher’ each term. What is <code>qt()</code> and what are its arguments? Why do we use <code>qt()</code> (the mini-lecture should help here). How did I extract the standard error of the coefficient?</p>
-<p>Of course we can also use a convenient shortcut in R:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chap6.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m1)</span></code></pre></div>
-<pre><code>##                   2.5 %      97.5 %
-## (Intercept) 110.1207774 117.6380098
-## weight        0.8223315   0.9877267</code></pre>
-<p>You can see that our ‘long-cut’ and R’s shortcut both give the same upper and lower bounds of the 95% CI.</p>
-<p>As shown in the mini-lecture, we can also generate confidence intervals around the regression line (rather than just on individual coefficients such as the intercept and slope). Confidence intervals around the regression line account for uncertainty in <span class="math inline">\(\hat{y}\)</span> for each <span class="math inline">\(x_i\)</span></p>
-<p>To do this in R is straightforward. First create a dataframe of new ‘weight’ values for which we would like to predict height values based on the fitted model, and for which we would like to generate CIs:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="chap6.html#cb58-1" aria-hidden="true" tabindex="-1"></a>newdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight=</span><span class="fu">seq</span>(<span class="fu">min</span>(d2<span class="sc">$</span>weight),<span class="fu">max</span>(d2<span class="sc">$</span>weight),<span class="at">length.out=</span><span class="dv">400</span>))</span>
-<span id="cb58-2"><a href="chap6.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(newdat)</span></code></pre></div>
-<pre><code>##     weight
-## 1 31.07105
-## 2 31.15106
-## 3 31.23106
-## 4 31.31106
-## 5 31.39107
-## 6 31.47107</code></pre>
-<p><br />
-Now use the <code>predict()</code> command to predict new values of height (according to the fitted model), and to generate confidence intervals, using the argument <code>interval ="c"</code></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="chap6.html#cb60-1" aria-hidden="true" tabindex="-1"></a>predCI <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(m1,<span class="at">newdata =</span> newdat,<span class="at">interval =</span> <span class="st">&quot;c&quot;</span>))</span>
-<span id="cb60-2"><a href="chap6.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predCI)</span></code></pre></div>
-<pre><code>##        fit      lwr      upr
-## 1 141.9996 140.7310 143.2682
-## 2 142.0720 140.8094 143.3346
-## 3 142.1444 140.8878 143.4010
-## 4 142.2168 140.9662 143.4674
-## 5 142.2892 141.0446 143.5339
-## 6 142.3616 141.1230 143.6003</code></pre>
-<p><br />
-And finally, plot the results:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chap6.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(height<span class="sc">~</span>weight,<span class="at">data =</span> d2)</span>
-<span id="cb62-2"><a href="chap6.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>fit<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add fitted/predicted line</span></span>
-<span id="cb62-3"><a href="chap6.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>lwr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for lower bound on CI</span></span>
-<span id="cb62-4"><a href="chap6.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>upr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for upper bound on CI</span></span></code></pre></div>
-<p><img src="QBIO7005_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
-<p>Note that the confidence interval provides information on the precision of our estimate of the fitted line. Being able to predict brand new <em>observations</em> of height in a new sample from the population is something different - a prediction interval, which gives the interval for which we have a certain level of confidence that, say, 95% of new observations from the population will fall within:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="chap6.html#cb63-1" aria-hidden="true" tabindex="-1"></a>predPI <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(m1,<span class="at">newdata =</span> newdat,<span class="at">interval =</span> <span class="st">&quot;p&quot;</span>))</span>
-<span id="cb63-2"><a href="chap6.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(predPI)</span></code></pre></div>
-<pre><code>##        fit      lwr      upr
-## 1 141.9996 131.9159 152.0833
-## 2 142.0720 131.9890 152.1550
-## 3 142.1444 132.0622 152.2267
-## 4 142.2168 132.1353 152.2983
-## 5 142.2892 132.2085 152.3700
-## 6 142.3616 132.2816 152.4417</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="chap6.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(height<span class="sc">~</span>weight,<span class="at">data =</span> d2)</span>
-<span id="cb65-2"><a href="chap6.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>fit<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add fitted/predicted line</span></span>
-<span id="cb65-3"><a href="chap6.html#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="chap6.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co"># confidence intervals</span></span>
-<span id="cb65-5"><a href="chap6.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>lwr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for lower bound on CI</span></span>
-<span id="cb65-6"><a href="chap6.html#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predCI<span class="sc">$</span>upr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for upper bound on CI</span></span>
-<span id="cb65-7"><a href="chap6.html#cb65-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-8"><a href="chap6.html#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="co"># prediction intervals</span></span>
-<span id="cb65-9"><a href="chap6.html#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predPI<span class="sc">$</span>lwr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for lower bound on CI</span></span>
-<span id="cb65-10"><a href="chap6.html#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(predPI<span class="sc">$</span>upr<span class="sc">~</span>newdat<span class="sc">$</span>weight,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>) <span class="co"># add line for upper bound on CI</span></span></code></pre></div>
-<p><img src="QBIO7005_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
-<p><br />
-How <em>confident</em> are you now in your growing statistical skills?</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="chap6.html#cb51-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fisher-smiling-50.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<img src="fisher-smiling-50.jpg" alt="R. A. Fisher" width="100" />
+<p class="caption">
+Figure 6.2: R. A. Fisher
+</p>
+</div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="chap6.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb52-2"><a href="chap6.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="chap6.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(iris)</span></code></pre></div>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 145          6.7         3.3          5.7         2.5 virginica
+## 146          6.7         3.0          5.2         2.3 virginica
+## 147          6.3         2.5          5.0         1.9 virginica
+## 148          6.5         3.0          5.2         2.0 virginica
+## 149          6.2         3.4          5.4         2.3 virginica
+## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chap6.html#cb56-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Kosaciec_szczecinkowaty_Iris_setosa.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<img src="Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris setosa" width="110" />
+<p class="caption">
+Figure 6.3: Iris setosa
+</p>
+</div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="chap6.html#cb57-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;220px-Iris_virginica.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="220px-Iris_virginica.jpg" alt="Iris virginica" width="110" />
+<p class="caption">
+Figure 6.4: Iris virginica
+</p>
+</div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="chap6.html#cb58-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;220px-Iris_versicolor_3.jpg&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="220px-Iris_versicolor_3.jpg" alt="Iris versicolor" width="110" />
+<p class="caption">
+Figure 6.5: Iris versicolor
+</p>
+</div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="chap6.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code></pre></div>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500</code></pre>
+<div id="graphing-the-iris-data" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Graphing the Iris data<a href="chap6.html#graphing-the-iris-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="chap6.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-2"><a href="chap6.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="chap6.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-30-1.png" width="360" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chap6.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="chap6.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-31-1.png" width="360" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="chap6.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="chap6.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-32-1.png" width="360" />
+## Good Resources for Graphing
+You can get these books online through the library.</p>
+<ul>
+<li><em>R Graphics Cookbook</em> by Chang</li>
+<li><em>ggplot2 Elegant Graphics for Data Analysis</em> by Wickham</li>
+</ul>
+</div>
+<div id="analysing-the-iris-data" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Analysing the iris data<a href="chap6.html#analysing-the-iris-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How would you analyse these data? Analysis of Variance (ANOVA)?</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="chap6.html#cb64-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
+<span id="cb64-2"><a href="chap6.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Species       2  437.1  218.55    1180 &lt;2e-16 ***
+## Residuals   147   27.2    0.19                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Model Diagnostics</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="chap6.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb66-2"><a href="chap6.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
+<p>Subset and Recode the Data}</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="chap6.html#cb67-1" aria-hidden="true" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(iris, Species <span class="sc">!=</span> <span class="st">&quot;setosa&quot;</span>)</span></code></pre></div>
+<p>Hypothesis: There exists a difference between the species’ means. How would you analyse these data?
+- t-test?
+- ANOVA?
+- Regression?
+- All three!!!</p>
+</div>
+<div id="analysis-using-t-test" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Analysis using t test<a href="chap6.html#analysis-using-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chap6.html#cb68-1" aria-hidden="true" tabindex="-1"></a>fit.ttest <span class="ot">&lt;-</span> <span class="fu">t.test</span>(Petal.Length <span class="sc">~</span> Species, </span>
+<span id="cb68-2"><a href="chap6.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-3"><a href="chap6.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit.ttest)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  Petal.Length by Species
+## t = -12.604, df = 98, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means between group versicolor and group virginica is not equal to 0
+## 95 percent confidence interval:
+##  -1.495426 -1.088574
+## sample estimates:
+## mean in group versicolor  mean in group virginica 
+##                    4.260                    5.552</code></pre>
+</div>
+<div id="analysis-using-anova" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Analysis using ANOVA<a href="chap6.html#analysis-using-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chap6.html#cb70-1" aria-hidden="true" tabindex="-1"></a>fit.anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris2)</span>
+<span id="cb70-2"><a href="chap6.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.anova)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Species      1  41.73   41.73   158.9 &lt;2e-16 ***
+## Residuals   98  25.74    0.26                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="analysis-using-regression" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Analysis using Regression<a href="chap6.html#analysis-using-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="chap6.html#cb72-1" aria-hidden="true" tabindex="-1"></a>fit.regression <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data=</span>iris2)</span>
+<span id="cb72-2"><a href="chap6.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.regression)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Species, data = iris2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -1.260 -0.360  0.044  0.340  1.348 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       4.26000    0.07248   58.77   &lt;2e-16 ***
+## Speciesvirginica  1.29200    0.10251   12.60   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5125 on 98 degrees of freedom
+## Multiple R-squared:  0.6185, Adjusted R-squared:  0.6146 
+## F-statistic: 158.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="points-to-note" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Points to Note<a href="chap6.html#points-to-note" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>For an F test with <strong>one</strong> degree of freedom in the numerator, <span class="math inline">\(F = t^2\)</span> with the denominator degrees of freedom for the F statistic equal to the degrees of freedom for the t statistic.
+We can get the regression output from the ANOVA fit using <code>summary.lm</code></li>
+</ul>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="chap6.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary.lm</span>(fit.anova)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Petal.Length ~ Species, data = iris2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -1.260 -0.360  0.044  0.340  1.348 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       4.26000    0.07248   58.77   &lt;2e-16 ***
+## Speciesvirginica  1.29200    0.10251   12.60   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5125 on 98 degrees of freedom
+## Multiple R-squared:  0.6185, Adjusted R-squared:  0.6146 
+## F-statistic: 158.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Regression Plot</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="chap6.html#cb76-1" aria-hidden="true" tabindex="-1"></a>iris2<span class="sc">$</span>coded <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris2<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">&quot;versicolor&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb76-2"><a href="chap6.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb76-3"><a href="chap6.html#cb76-3" aria-hidden="true" tabindex="-1"></a>mns <span class="ot">&lt;-</span> <span class="fu">tapply</span>(iris2<span class="sc">$</span>Petal.Length, iris2<span class="sc">$</span>coded, mean)</span>
+<span id="cb76-4"><a href="chap6.html#cb76-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Petal.Length =</span> mns, <span class="at">coded =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">lower=</span><span class="fu">c</span>(<span class="cn">NA</span>, mns[<span class="dv">1</span>]), <span class="at">upper =</span> <span class="fu">c</span>(<span class="cn">NA</span>, mns[<span class="dv">2</span>]))</span>
+<span id="cb76-5"><a href="chap6.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris2, <span class="fu">aes</span>(coded, Petal.Length)) <span class="sc">+</span> </span>
+<span id="cb76-6"><a href="chap6.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb76-7"><a href="chap6.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> lm , <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula=</span>y<span class="sc">~</span>x) <span class="sc">+</span></span>
+<span id="cb76-8"><a href="chap6.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="at">data =</span> df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> coded, <span class="at">ymin =</span> lower, </span>
+<span id="cb76-9"><a href="chap6.html#cb76-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ymax =</span> upper), <span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fl">2.5</span>, <span class="fl">7.5</span>) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb76-10"><a href="chap6.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">expression</span>(beta[<span class="dv">1</span>])), <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">4.5</span>, <span class="at">parse =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb76-11"><a href="chap6.html#cb76-11" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">expression</span>(beta[<span class="dv">1</span>])), <span class="at">x =</span> <span class="fl">0.95</span>, <span class="at">y =</span> <span class="dv">5</span>, <span class="at">parse =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb76-12"><a href="chap6.html#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">expression</span>(beta[<span class="dv">0</span>])), <span class="at">x =</span> <span class="fl">0.05</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">parse =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb76-13"><a href="chap6.html#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">expression</span>(height <span class="sc">==</span> beta[<span class="dv">0</span>] <span class="sc">+</span> beta[<span class="dv">1</span>] <span class="sc">%*%</span> Species)), </span>
+<span id="cb76-14"><a href="chap6.html#cb76-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="dv">7</span>, <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-40-1.png" width="480" /></p>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Summary<a href="chap6.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>If we code our categorical variables as 0, 1, then the slope <span class="math inline">\(\beta_1\)</span> is the same as the difference between the means for each category.</li>
+<li>The intercept <span class="math inline">\(\beta_0\)</span> is the value for the baseline category.</li>
+<li>With 3 or more categories, we construct the 0, 1 <code>dummy variables</code>:</li>
+</ul>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="chap6.html#cb77-1" aria-hidden="true" tabindex="-1"></a>cat.var <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb77-2"><a href="chap6.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(<span class="sc">~</span>cat.var)</span></code></pre></div>
+<pre><code>##   (Intercept) cat.varB cat.varC
+## 1           1        0        0
+## 2           1        1        0
+## 3           1        0        1
+## attr(,&quot;assign&quot;)
+## [1] 0 1 1
+## attr(,&quot;contrasts&quot;)
+## attr(,&quot;contrasts&quot;)$cat.var
+## [1] &quot;contr.treatment&quot;</code></pre>
+</div>
+<div id="linear-models" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Linear Models<a href="chap6.html#linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Comparing groups or doing regression are examples of the General Linear Model.</li>
+<li>Regression: <span class="math inline">\(y_i = \beta_0 + \beta_1x_i + \epsilon_i, \epsilon \sim NID(0, \sigma^2)\)</span></li>
+<li>ANOVA: <span class="math inline">\(y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon \sim NID(0, \sigma^2)\)</span></li>
+<li>Why ``Linear?’’ Definition: A linear transformation (equation) is defined by these 2 properties:</li>
+</ul>
+<p>– <span class="math inline">\(f(x + y) = f(x) + f(y)\)</span>: Additivity
+– <span class="math inline">\(f(Ax) = Af(x)\)</span> : Homogeneity
+– Idea: The whole is equal to the sum of its parts.</p>
+</div>
+<div id="matrix-notation-for-linear-models" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Matrix Notation for Linear Models<a href="chap6.html#matrix-notation-for-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)\)</span></li>
+</ul>
+<p><span class="math display">\[
+Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
+Y_2 = \beta_0 + \beta_1 X_2 + \epsilon_2 \\
+Y_3 = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
+\vdots \qquad \vdots \qquad \vdots \\
+Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
+\]</span></p>
+<p><span class="math display">\[
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} =
+\begin{bmatrix} \beta_0 + \beta_1X_1 \\
+                \beta_0 + \beta_1X_2 \\
+                \beta_0 + \beta_1X_3 \\
+                \vdots \\
+                \beta_0 + \beta_1X_n
+\end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\]</span></p>
+</div>
+<div id="matrix-representation" class="section level2 hasAnchor" number="6.10">
+<h2><span class="header-section-number">6.10</span> Matrix Representation<a href="chap6.html#matrix-representation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} =
+\begin{bmatrix} 1 &amp; X_1 \\ 1 &amp; X_2 \\ 1 &amp; X_3 \\ \vdots &amp; \vdots \\ 1 &amp; X_n \end{bmatrix} \times
+\begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\]</span></p>
+<span class="math display">\[
+\mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
+\]</span>
+</div>
+<div id="distributional-assumptions" class="section level2 hasAnchor" number="6.11">
+<h2><span class="header-section-number">6.11</span> Distributional Assumptions<a href="chap6.html#distributional-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[
+\sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
+\sigma^2 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \sigma^2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; \sigma^2
+\end{bmatrix}
+\]</span>
+<span class="math display">\[
+\epsilon \sim N(0, \sigma^2\mathbf{I})
+\]</span>
+Full model:
+<span class="math inline">\(\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})\)</span></p>
+</div>
+<div id="estimation-ordinary-least-squares" class="section level2 hasAnchor" number="6.12">
+<h2><span class="header-section-number">6.12</span> Estimation: Ordinary Least Squares<a href="chap6.html#estimation-ordinary-least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[
+\hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
+\hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
+\]</span>
+where <span class="math inline">\(\hat{\sigma}^2\)</span> is the unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(p=2\)</span> since we are estimating the slope and the intercept. <span class="math inline">\(n\)</span> is the sample size.</p>
 
 </div>
-</div>
-</div>
-
-
-
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>As a brief aside, when thinking about the value of NHST, you should be aware that we are not limited to testing a null hypothesis of no effect, which is almost never likely to be true anyway. In fact, using classical (Frequentist), likelihood and Bayesian methods for example, we can compare the fit of models representing different competing hypotheses. You may wonder why we didn’t just teach you this in the first place and it’s a good question. First, as pointed out in the previous chapter ANOVA is a general statistical method whose use is not limited to NHST. Second, everything you are learning should provide you with a foundation on which to build. Third, you already know about maximum likelihood estimation methods, and you know how to compare models in R using likelihood ratio tests, for example. So it might not seem like it but you are well on your way.<a href="chap6.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="chap5.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chap5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

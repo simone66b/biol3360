@@ -1,0 +1,473 @@
+\documentclass[11pt]{beamer}
+\usetheme{Copenhagen}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\author{Simone Blomberg}
+\title{Linear Models}
+%\setbeamercovered{transparent} 
+%\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+\date{\today} 
+%\subject{} 
+\begin{document}
+
+<<setup, include=FALSE>>=
+library(knitr)
+opts_chunk$set(concordance=TRUE, size="small", prompt=TRUE)
+@
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Linear Models}
+Consider R. A. Fisher's classic Iris data set:
+\includegraphics[scale=.25]{sepalsPetals.jpeg}
+\includegraphics[scale=.03]{fisher-smiling-50.jpg}
+<<size='tiny'>>=
+data(iris)
+head(iris)
+tail(iris)
+@
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\begin{subfigure}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{Kosaciec_szczecinkowaty_Iris_setosa.jpg}
+\caption*{\textit{Iris setosa}}
+\end{subfigure}%
+\begin{subfigure}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{220px-Iris_virginica.jpg}
+\caption*{\textit{Iris virginica}}
+\end{subfigure}%
+\begin{subfigure}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{220px-Iris_versicolor_3.jpg}
+\caption*{\textit{Iris versicolor}}
+\end{subfigure}
+\caption*{Fisher's Irises}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Iris Data}
+<<size='scriptsize'>>=
+summary(iris)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Graph of Iris data}
+<<fig.height=2.5, fig.width=3.75>>=
+library(ggplot2)
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_point() + ylim(0, 8)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Graph of Iris data}
+<<fig.height=2.5, fig.width=3.75>>=
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_jitter(width = 0.4, height = 0) + ylim(0, 8)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Boxplot of Iris data}
+<<fig.height=2.5, fig.width=3.75>>=
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_boxplot() + ylim(0, 8)
+@
+\end{frame}
+
+\begin{frame}
+  \frametitle{Useful books for plotting}
+  \begin{itemize}
+  \item ``R Graphics Cookbook'' by Chang (2013) QA276.45.R3 C46 2013 (NOT online)  \url{http://www.cookbook-r.com/Graphs/}
+  \item ``ggplot2 Elegant Graphics for Data Analysis'' by Wickham (2009) (QA90 .W53 2009 and online)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Iris data}
+\begin{itemize}[<+->]
+\item How would you analyse these data?
+\item Analysis of Variance (ANOVA)
+\item
+<<>>=
+fit <- aov(Petal.Length ~ Species, data = iris)
+summary(fit)
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Model Diagnostics}
+<<fig.height=4, fig.width=8>>=
+par(mfrow=c(1,2))
+plot(fit, which = 1:2)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Subset and Recode the Data}
+<<size='footnotesize'>>=
+iris2 <- subset(iris, Species != "setosa")
+@
+Hypothesis: There exists a difference between the species' means.
+\begin{itemize}[<+->]
+\item How would you analyse these data?
+\item t-test?
+\item ANOVA?
+\item Regression?
+\item All three!!!
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Analysis using t test}
+<<size='footnotesize'>>=
+fit.ttest <- t.test(Petal.Length ~ Species, 
+  data = iris2, var.equal = TRUE)
+print(fit.ttest)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Analysis using ANOVA}
+<<>>=
+fit.anova <- aov(Petal.Length ~ Species, data = iris2)
+summary(fit.anova)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Analysis using Regression}
+<<size='scriptsize'>>=
+fit.regression <- lm(Petal.Length ~ Species, data=iris2)
+summary(fit.regression)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Points to Note}
+\begin{itemize}[<+->]
+\item For an F test with \emph{one} degree of freedom in the numerator, $F = t^2$ with the denominator degrees of freedom for the F statistic equal to the degrees of freedom for the t statistic.
+\item We can get the regression output from the ANOVA fit using \texttt{summary.lm}
+<<size='tiny'>>=
+summary.lm(fit.anova)
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Regression Plot}
+<<>>=
+iris2$coded <- ifelse(iris2$Species == "versicolor", 0, 1)
+@
+
+<<fig.height=3.2, fig.width=5, echo=FALSE>>=
+options(warn = -1)
+mns <- tapply(iris2$Petal.Length, iris2$coded, mean)
+df <- data.frame(Petal.Length = mns, coded = 0:1, 
+  lower=c(NA, mns[1]), upper = c(NA, mns[2]))
+ggplot(data=iris2, aes(coded, Petal.Length)) + 
+geom_point() + 
+geom_smooth(method = lm , color = "red", se = FALSE, formula=y~x) +
+geom_errorbar(data = df, mapping = aes(x = coded, ymin = lower, 
+  ymax = upper), width = 0.05, col = "blue") + ylim(2.5, 7.5) + xlim(0, 1) +
+geom_text(label = paste(expression(beta[1])), x = 0.5, y = 4.5, parse = TRUE) +
+geom_text(label = paste(expression(beta[1])), x = 0.95, y = 5, parse = TRUE) +
+geom_text(label = paste(expression(beta[0])), x = 0.05, y = 4, parse = TRUE) +
+geom_text(label = paste(expression(height == beta[0] + beta[1] %*% Species)), 
+  x = 0.5, y = 7, parse = TRUE)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}[<+->]
+\item If we code our categorical variables as 0, 1, then the slope $\beta_1$ is the same as the difference between the means for each category.
+\item The intercept $\beta_0$ is the value for the baseline category.
+\item With 3 or more categories, we construct the 0, 1 \textit{dummy variables}:
+<<>>=
+cat.var <- LETTERS[1:3]
+model.matrix(~cat.var)
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Linear Models}
+\begin{itemize}[<+->]
+\item Comparing groups or doing regression are \textbf{both} examples of the General Linear Model.
+\item Regression: $y_i = \beta_0 + \beta_1x_i + \epsilon_i, \epsilon \sim NID(0, \sigma^2)$
+\item ANOVA: $y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon \sim NID(0, \sigma^2)$ 
+\item Why ``Linear?'' Definition: A linear transformation (equation) is defined by these 2 properties:
+\begin{itemize}
+\item $f(x + y) = f(x) + f(y)$: Additivity
+\item $f(Ax) = Af(x)$ : Homogeneity
+\item Idea: The whole is equal to the sum of its parts.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matrix Notation for Linear Models}
+\begin{itemize}[<+->]
+\item[] $Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)$
+
+\item[] \begin{align*}
+Y_1 & = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
+Y_2 & = \beta_0 + \beta_1 X_2 + \epsilon_2 \\
+Y_3 & = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
+& \vdots \qquad \vdots \qquad \vdots \\
+Y_n & = \beta_0 + \beta_1 X_n + \epsilon_n 
+\end{align*}
+
+\item[]  \begin{equation*}
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
+\begin{bmatrix} \beta_0 + \beta_1X_1 \\
+                \beta_0 + \beta_1X_2 \\
+               	\beta_0 + \beta_1X_3 \\
+               	\vdots \\
+               	\beta_0 + \beta_1X_n
+\end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matrix Representation}
+\begin{equation*}
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
+\begin{bmatrix} 1 & X_1 \\ 1 & X_2 \\ 1 & X_3 \\ \vdots & \vdots \\ 1 & X_n \end{bmatrix} \times
+\begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
+\end{equation*}
+\begin{minipage}{.22\linewidth}
+\centering
+\begin{equation*}
+\mathbf{X}= \begin{bmatrix} 
+	1 & X_1 \\
+	1 & X_2 \\
+	1 & X_3 \\
+	\vdots & \vdots \\
+	1 & X_n \end{bmatrix}
+\end{equation*}
+Design Matrix	
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+\begin{equation*}
+\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
+\end{equation*}
+Vector of Parameters
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+\begin{equation*}
+\mathbf{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+\end{equation*}
+Vector of Error Terms
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+\begin{equation*}
+\mathbf{Y} = \begin{bmatrix}
+Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
+\end{equation*}
+Vector of Responses
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distributional Assumptions}
+\begin{equation*}
+\sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
+\sigma^2 & 0 & \cdots & 0 \\
+0 & \sigma^2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \sigma^2
+\end{bmatrix}
+\end{equation*}
+\begin{equation*}
+\epsilon \sim N(0, \sigma^2\mathbf{I})
+\end{equation*}
+\centering
+Full model:
+\huge $\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
+\end{frame}
+
+\begin{frame}
+\frametitle{Estimation: Ordinary Least Squares}
+\begin{gather*}
+\hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
+\hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
+\end{gather*}
+where $\hat{\sigma}^2$ is the unbiased estimator of $\sigma^2$, and $p=2$ since we are estimating the slope and the intercept. $n$ is the sample size.
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalised Least Squares}
+In OLS, the assumption about the errors is that they are \emph{independent and identically distributed}. What if they are not independent? One common example is that the errors are correlated with each other. Then we have:
+\begin{equation*}
+  \epsilon \sim N(0, \sigma^2 \mathbf{\Sigma})
+  \end{equation*}
+  where $\Sigma$ is a variance-covariance matrix for the residuals. ie
+  \begin{equation*}
+    \mathbf{\Sigma} = \begin{bmatrix}
+      \sigma^2_1 & Cov(\epsilon_1, \epsilon_2) & \cdots & Cov(\epsilon_1, \epsilon_n) \\
+      Cov(\epsilon_2, \epsilon_1) & \sigma^2_2 & \cdots & Cov(\epsilon_2, \epsilon_n) \\
+      \vdots & \vdots &  \ddots  & \vdots \\
+      Cov(\epsilon_n, \epsilon_1) & \cdots & \cdots & \sigma^2_n \end{bmatrix}
+    \end{equation*}
+    \end{frame}
+      
+\begin{frame}
+  \frametitle{Estimation: GLS}
+  Then we have the GLS Estimator:
+  \begin{equation*}
+    \hat{\beta_{GLS}} = (\mathbf{X^T \Sigma^{-1} X})^{-1}\mathbf{X^T\Sigma^{-1}Y}
+  \end{equation*}
+  \begin{itemize}
+  \item If the covariances (off-diagonals) are zero, then we have ``weighted least squares''
+  \item We can transform the GLS problem into OLS by multiplying $\mathbf{X}$ and $\mathbf{Y}$ by $\mathbf{\Sigma}^{-1/2}$ Then we can use the OLS equation on these new, transformed data. ie, $\mathbf{X^*} = \mathbf{\Sigma^{-1/2}X}$, $\mathbf{Y^*} = \mathbf{\Sigma^{-1/2}Y}$. $\hat{\beta_{GLS}} = \mathbf{(X^{*T}X^*)^{-1}X^*Y^*}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{GLS example: Phylogenetic autocorrelation}
+<<size='tiny', out.height='4cm', out.width='5cm', fig.show='hold', message=FALSE, warning=FALSE>>=
+library(ape)
+library(ade4)
+library(ggtree)
+data(carni70)
+tr <- read.tree(text=carni70$tre)
+LogRange <- log(carni70$tab$range)
+LogSize <- log(carni70$tab$size)
+dat <- data.frame(LogRange=LogRange, LogSize=LogSize)
+ggplot(aes(x=LogSize, y=LogRange), data=dat)+geom_point()
+ggtree(tr) + geom_tiplab()
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{GLS example: Phylogenetic autocorrelation}
+<<size='tiny'>>=
+library(nlme)
+fit.lm <- lm(LogRange ~ LogSize)
+fit.gls <- gls(LogRange ~ LogSize, correlation=corBrownian(phy=tr))
+summary(fit.gls)
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+<<out.width='0.3\\linewidth',out.height='0.3\\linewidth', size='tiny', fig.show='hold', echo=-1>>=
+predictvals <- function(model, xvar, yvar, xrange=NULL, samples=100,...){
+  if(is.null(xrange)){
+    if(class(model) %in% c('lm','glm')){
+      xrange= range(model$model[[xvar]])
+    }
+    else if(class(model) %in% c('loess')){
+      xrange = range(model$x)
+    }
+  }
+  newdata = data.frame(x = seq(xrange[1], xrange[2], length.out = samples))
+  names(newdata) = xvar
+  newdata[[yvar]] = predict(model, newdata=newdata, ...)
+  newdata
+}
+dat <- data.frame(LogRange = LogRange, LogSize = LogSize)
+## Use the predictvals function from "R Graphics Cookbook"
+ols_predicted <- predictvals(fit.lm, "LogSize", "LogRange")
+ols_predicted$fit <- "OLS"
+gls_predicted <- predictvals(fit.gls, "LogSize", "LogRange", 
+                             xrange = range(dat$LogSize))
+gls_predicted$fit <- "GLS"
+ggplot(aes(x = LogSize, y = LogRange), data = dat)+ geom_point() + 
+    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = ols_predicted, size = 2) + 
+    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = gls_predicted, size = 2)
+plot(fit.gls)
+qqnorm(fit.gls, form = ~resid(., type = "n"), abline = c(0, 1))
+@ 
+\end{frame}
+
+\begin{frame}
+  \frametitle{GLS example: Time Series}
+  \begin{itemize}
+  \item we expect that adjacent values may be more similar than values further away in time. That is, the effect of the ``disturbance'' on the time series decays with time. 
+  \item in general we do not know the covariances of each value with all other values.
+  \item Instead,  we can \emph{model} the time series effects using a smaller number of parameters. 
+  \item A simple example is the ``autoregression'' model:
+  \item $x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Lynx Data}
+<< out.height='4cm', out.width='5cm',  message=FALSE, warning=FALSE, size='tiny'>>=
+data(lynx)
+str(lynx)
+lynxdat <- data.frame(Year=1821:1934, Lynx=lynx)
+ggplot(lynxdat, aes(x=Year, y=Lynx)) + geom_line()+geom_point() +
+    ggtitle("Hudson Bay Lynx Returns")+theme(plot.title = element_text(hjust = 0.5))
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ACF and PACF}
+<<out.width='0.45\\linewidth',out.height='0.45\\linewidth', fig.show='hold', message=FALSE, warning=FALSE>>=
+library(forecast)
+ggAcf(lynx)
+ggPacf(lynx)
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Autoregression of Lynx Data}
+<<size='tiny'>>=
+# find optimal autoregression size
+ar(lynx, method="mle")
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{GLS Autoregression model of Lynx data}
+<<size='tiny'>>=
+fit <- gls(Lynx~Year, correlation=corARMA(p=8), data=lynxdat, method="ML")
+fit
+@ 
+\end{frame}
+
+\begin{frame}[fragile]
+<<out.width='0.45\\linewidth', fig.show='hold'>>=
+vals <- resid(fit, type="n")
+ggAcf(vals)
+ggPacf(vals)
+@ 
+\end{frame}
+\end{document}

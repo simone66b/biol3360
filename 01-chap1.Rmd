@@ -12,9 +12,9 @@ As scientists, we need to be able to collect, analyse and interpret data in term
 
 ## Course Delivery
 
-The course is designed with three ``modules:'' Statistical Modelling, Dynamic Modelling and Communication. Statistical Modelling is taught by Simone Blomberg before the mid-semester break. The first three weeks are devoted to gaining R programming skills (no statistics taught in these weeks). Dynamic Modelling is taught by Jan Engelstaedter after the mid-semester break, and the Communication module is run for the entire semester by Louise Kuchel.
+The course is designed with three ``modules:`` Statistical Modelling, Dynamic Modelling and Communication. Statistical Modelling is taught by Simone Blomberg before the mid-semester break. The first three weeks are devoted to gaining R programming skills (no statistics taught in these weeks). Dynamic Modelling is taught by Jan Engelstaedter after the mid-semester break, and the Communication module is run for the entire semester by Louise Kuchel.
 
-The course is structured into two ``workshops,'' one two-hour and one three hour, for a total of 5 contact hours during the week. We expect you to spend another 5 hours on the content outside of contact hours.
+The course is structured into two ``workshops,`` one two-hour and one three hour, for a total of 5 contact hours during the week. We expect you to spend another 5 hours on the content outside of contact hours.
 
 ## Textbooks and Resources
 
@@ -29,7 +29,7 @@ These books will cover the theory. We will discuss the theory and work through e
 
 ## Assessment
 
-There will be fortnightly quizzes throughout the course, and one ``practical'' exam for the communication module. There are no mid-semester or final exams.
+There will be fortnightly quizzes throughout the course, and one ``practical`` exam for the communication module. There are no mid-semester or final exams.
 
 
 ## Goals and expectations
