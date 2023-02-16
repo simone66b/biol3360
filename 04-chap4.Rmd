@@ -5,7 +5,7 @@ output:
 
 # More R Programming {#chap4}
 
-## More on Data Structures
+## Data Structures
 
 Data structures are fundamental to any computer language. You have already seen some: vectors, matrices, and arrays. In fact, matrices and arrays are really special types of vectors. Matrices and arrays have a special property: they possess dimensions. Try this:
 ```{r, eval=FALSE}

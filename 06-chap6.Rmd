@@ -1,120 +1,264 @@
-# Effect sizes and uncertainty {#chap6}
+# LinearModels {#chap6}
 
-
-## Effect sizes
-Null hypothesis significance testing (NHST), as covered in the previous chapter, emphasizes conclusions based on the presence vs. absence of an effect, according to a more-or-less arbitrary 'significance-level' defined by the _p_-value.^[As a brief aside, when thinking about the value of NHST, you should be aware that we are not limited to testing a null hypothesis of no effect, which is almost never likely to be true anyway. In fact, using classical (Frequentist), likelihood and Bayesian methods for example, we can compare the fit of models representing different competing hypotheses. You may wonder why we didn't just teach you this in the first place and it's a good question. First, as pointed out in the previous chapter ANOVA is a general statistical method whose use is not limited to NHST. Second, everything you are learning should provide you with a foundation on which to build. Third, you already know about maximum likelihood estimation methods, and you know how to compare models in R using likelihood ratio tests, for example. So it might not seem like it but you are well on your way.]
-
-But it is just as - if not more important - to remember that the parameters you have estimated, and the relationship they describe, actually mean something. So rather than (or in addition to) hypothesis testing, you can use your parameter estimates, and estimates of uncertainty in your parameter estimates, to draw conclusions about how the world works. 
-
-Let's model the association between height and weight using for the iKung San people again, and look at the estimates of the coefficients:
-
-```{r eval=T, results='hide',include=T,echo=F}
-d <- read.csv("iKung_HeightWeight.csv")
-d2 <- d[d$age>=18,c(5,6)] # subset the dataframe to only include the height and weight variables of adults over the age of 18
-d2 <- na.omit(d2) # remove the rows of the new dataframe that contain NAs.
+Consider R. A. Fisher's classic Iris data set, consisting of several morphological measurements on the flowers of three species of _Iris_. This data set is famous in statistics and is often used as test data for a wide variety of statistical methods. Fisher was probably the most important statistician __and__ evolutionary biologist of the 20th century. He layed the foundations for our modern practice of statistics and he was a great evolutionary geneticist, partly responsible for inventing population genetics and establishing that natural selection could indeed be a powerful force in evolution. He was also a terrible grump and had lots of fights with other scientists. Although I like to find out about my idols, Fisher is someone that I am glad not to have met! Back to the data:
+```{r, fig.cap="An Iris"}
+knitr::include_graphics("sepalsPetals.jpg")
+```
+```{r, fig.cap="R. A. Fisher"}
+knitr::include_graphics("fisher-smiling-50.jpg")
+```
+```{r}
+data(iris)
+head(iris)
+tail(iris)
+```
+Here we have loaded the data frame called ``iris`` It is built into R, which is convenient for us. The ``head()`` and ``tail()`` functions examine the first 6 and the last 6 lines of the data frame, allowing us to see the variable names and check that the data frame is usable. Although 
+```{r, fig.cap="Iris setosa"}
+knitr::include_graphics("Kosaciec_szczecinkowaty_Iris_setosa.jpg")
 ```
 
-```{r eval=T, results='show',include=T,echo=T}
-m1 <- lm(formula = height ~ weight, data=d2)
-coefficients(m1)
+```{r, fig.cap="Iris virginica"}
+knitr::include_graphics("220px-Iris_virginica.jpg")
 ```
 
-The coefficient 'weight' describes the strength of the relationship between 'weight' (our predictor variable) and height (our response variable). Because weight is measured in kg and height is measured in cm, we can say that height increases with weight at a rate of 0.905 cm of additional height for every 1kg of additional weight. So, you don't need to focus on _p_-values and tests of statistical significance. You can focus on _effect sizes_. Some argue that estimation of biologically-relevant parameters and (relatedly) effect sizes, and their biological (rather than statistical) significance are more important than hypothesis testing. Either way, estimation of effect sizes and hypothesis testing are not mutually exclusive and regardless of whether you 'do' hypothesis testing, you should always (also) focus on effect sizes. 
+```{r, fig.cap="Iris versicolor"}
+knitr::include_graphics("220px-Iris_versicolor_3.jpg")
+```
+```{r}
+summary(iris)
+```
+Here we have a six-figure summary of each of the variables: the mean, minimum and maximum values, plus the median, and first and 3rd quartiles. Together these numbers tell us a little about the distribution of the data (but not much).
 
+## Graphing the Iris data
 
-## Uncertainty
-
-In many ways our 'point' estimates of the model coefficients (extracted using `coefficients(model)`) are our 'statistical best guesses'. But they are far from certain. In fact unless you are sampling the entire population (in which case you are not  'sampling') and measuring things perfectly then your point estimates ARE CERTAINLY WRONG. So we should not place too much weight on our parameter estimates without also quantifying our uncertainty in those estimates.
-
-### Standard errors and confidence intervals
-
-Formal expressions of uncertainty in our estimates are often expressed as confidence intervals around our estimates (at least for Frequentist [cf. Bayesian] methods). Confidence intervals are derived from the standard error of the estimate. What is a standard error, how does the standard error relate to a confidence interval, and how should a confidence interval be interpreted?
-
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/LAujBMcUvZU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
-\
-
-<center>![](pics/normal_distribution.png){width="85%"}</center>\
-
-
-### A practical example 
-
-We will (maybe) use some different examples in coming chapters! But for now, we are sticking with our exploration of the association between weight and height. Using this example, how do we calculate confidence (and prediction) intervals on parameters and on the fitted regression line in R? Once you know how to do this, you should be able to apply these methods more generally. 
-
-The formula for a confidence interval for an estimate, where the sampling distribution of the estimate is described by a _t_-distribution is:
-
-$\hat\beta\pm t_{1-\textrm{alpha}/2,\textrm{df}}\times\sigma_{\hat\beta}$
-
-where alpha is equal to the 'significance' level, and df is equal to the residual degrees of freedome ($n-k$). To generate a 95% CI, alpha = 0.05. To generate a 71% CI, alpha = 0.29. But why don't we let R do the work: 
-
-```{r eval=T, results='hide',include=T,echo=F}
-d <- read.csv("iKung_HeightWeight.csv")
-d2 <- d[d$age>=18,c(5,6)] # subset the dataframe to only include the height and weight variables of adults over the age of 18
-d2 <- na.omit(d2) # remove the rows of the new dataframe that contain NAs.
+```{r, fig.height=2.5, fig.width=3.75}
+library(ggplot2)
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_point() + ylim(0, 8)
+```
+Here we have a plot of the Petal Length for each species. The dots overlap a lot and it is hard to see what is going on, although you can see the maxima and minima quite clearly for each species.
+```{r, fig.height=2.5, fig.width=3.75}
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_jitter(width = 0.4, height = 0) + ylim(0, 8)
+```
+Here are the same data but we have "jittered" the data along the x-axis, allowing us to see each data point separately from the others. This is a good way to display small amounts of data. Note that you should only jitter the data in the x direction in this case. Jittering the y data is wrong! (why?)
+```{r, fig.height=2.5, fig.width=3.75}
+ggplot(aes(x = Species, y = Petal.Length), data = iris) +
+geom_boxplot() + ylim(0, 8)
 ```
 
-```{r eval=T, results='show',include=T,echo=T}
-m1 <- lm(formula = height ~ weight, data=d2)
+If we have a larger amount of data, a box and whisker plot can be useful. It plots the median and interquartile range, and the outer ``whiskers`` extend to 1.5 x the size of the interquartile range. Extreme outliers are also indicated.
 
-alpha <- 0.05
-m1$coef[2] - (qt(1-alpha/2,m1$df.residual)) * summary(m1)$coefficients[2,2] # lower
-m1$coef[2] + (qt(1-alpha/2,m1$df.residual)) * summary(m1)$coefficients[2,2] # upper
+## Good Resources for Graphing
+
+We won't have much time to go into advanced graphing techniques in this course, although I will try to highlight graphing methods as we go along. Fortunately, there are some good books to consult. They are online through the library:
+ 
+- _R Graphics Cookbook_ by Chang
+- _ggplot2 Elegant Graphics for Data Analysis_ by Wickham
+
+## Analysing the iris data
+
+How would you analyse these data? Since we have 3 distinct groups (species) to compare and the data are continuous and (probably) normally-distributed, the Analysis of Variance (ANOVA) might be your first choice. Here is an analysis for petal length in R:
+
+```{r}
+fit <- aov(Petal.Length ~ Species, data = iris)
+summary(fit)
 ```
 
-<span style="color: red;">**Exercise**</span> Work through the syntax to calculate the upper and lower bounds of the CI above to 'decipher' each term. What is `qt()` and what are its arguments? Why do we use `qt()` (the mini-lecture should help here). How did I extract the standard error of the coefficient? 
+We see that there is evidence for significant variation in petal length among species. We reject the null hypothesis that there are no differences in petal length among the three species. Note that this is a very vague conclusion. We don't know which species differ in their petal length from the others, and we don't know how big the differences really are. A thorough analysis would establish this information.
 
-Of course we can also use a convenient shortcut in R:
+## Model Diagnostics
 
-```{r eval=T, results='show',include=T,echo=T}
-confint(m1)
+When building a statistical model, checking the model using diagnostic plots is a crucial step. All models have assumptions and if these assumptions are violated then the model will potentially give wrong results. For the ANOVA model, there are several important assumptions:
+
+- The data are independent
+- The residuals follow a Normal distribution
+- The variance of the residuals is constant over the range of the data (homoscedastic errors).
+
+While all three assumptions are important, the first and third are crucial. It turns out that the Normality of residuals is not an overly strong assumption for the ANOVA model, but you should still check it, as large departures from Normality can cause problems. I usually rely on graphical approaches to testing assumptions:
+
+```{r, fig.height=4, fig.width=8}
+par(mfrow=c(1,2))
+plot(fit, which = 1:2)
 ```
 
-You can see that our 'long-cut' and R's shortcut both give the same upper and lower bounds of the 95% CI. 
+The first diagnostic plot above, plots the residuals versus their fitted values. If the assumption of homoscedasticity holds (try saying that 5 times fast!), there will be no pattern to the residuals. If you see a curve, either upwards or downwards, that is suggestive of curvature in your data. If there is a "trumpet" like effect either increasing to the right or left, or you have a "bow tie" shape to the residual plot ie narrower in the middle, then the data are not homoscedastic.
 
-As shown in the mini-lecture, we can also generate confidence intervals around the regression line (rather than just on individual coefficients such as the intercept and slope). Confidence intervals around the regression line account for uncertainty in $\hat{y}$ for each $x_i$
 
-To do this in R is straightforward. First create a dataframe of new 'weight' values for which we would like to predict height values based on the fitted model, and for which we would like to generate CIs:
-
-```{r eval=T, results='show',include=T,echo=T}
-newdat <- data.frame(weight=seq(min(d2$weight),max(d2$weight),length.out=400))
-head(newdat)
-```
-\
-Now use the `predict()` command to predict new values of height (according to the fitted model), and to generate confidence intervals, using the argument `interval ="c"`
-```{r eval=T, results='show',include=T,echo=T}
-predCI <- as.data.frame(predict(m1,newdata = newdat,interval = "c"))
-head(predCI)
-```
-\
-And finally, plot the results:
-```{r eval=T, results='show',include=T,echo=T}
-plot(height~weight,data = d2)
-lines(predCI$fit~newdat$weight,lwd=2) # add fitted/predicted line
-lines(predCI$lwr~newdat$weight,lty=3,col="red",lwd=2) # add line for lower bound on CI
-lines(predCI$upr~newdat$weight,lty=3,col="red",lwd=2) # add line for upper bound on CI
+Subset and Recode the Data}
+```{r}
+iris2 <- subset(iris, Species != "setosa")
 ```
 
-Note that the confidence interval provides information on the precision of our estimate of the fitted line. Being able to predict brand new _observations_ of height in a new sample from the population is something different - a prediction interval, which gives the interval for which we have a certain level of confidence that, say, 95% of new observations from the population will fall within:
+Hypothesis: There exists a difference between the species' means. How would you analyse these data?
+- t-test?
+- ANOVA?
+- Regression?
+- All three!!!
 
-```{r eval=T, results='show',include=T,echo=T}
-predPI <- as.data.frame(predict(m1,newdata = newdat,interval = "p"))
-head(predPI)
-
-plot(height~weight,data = d2)
-lines(predCI$fit~newdat$weight,lwd=2) # add fitted/predicted line
-
-# confidence intervals
-lines(predCI$lwr~newdat$weight,lty=3,col="red",lwd=2) # add line for lower bound on CI
-lines(predCI$upr~newdat$weight,lty=3,col="red",lwd=2) # add line for upper bound on CI
-
-# prediction intervals
-lines(predPI$lwr~newdat$weight,lty=3,col="blue",lwd=2) # add line for lower bound on CI
-lines(predPI$upr~newdat$weight,lty=3,col="blue",lwd=2) # add line for upper bound on CI
+## Analysis using t test 
+```{r}
+fit.ttest <- t.test(Petal.Length ~ Species, 
+  data = iris2, var.equal = TRUE)
+print(fit.ttest)
 ```
 
-\
-How _confident_ are you now in your growing statistical skills?
+## Analysis using ANOVA
+```{r}
+fit.anova <- aov(Petal.Length ~ Species, data = iris2)
+summary(fit.anova)
+```
+
+## Analysis using Regression
+```{r}
+fit.regression <- lm(Petal.Length ~ Species, data=iris2)
+summary(fit.regression)
+```
+
+## Points to Note
+- For an F test with __one__ degree of freedom in the numerator, $F = t^2$ with the denominator degrees of freedom for the F statistic equal to the degrees of freedom for the t statistic.
+\item We can get the regression output from the ANOVA fit using ``summary.lm``
+
+```{r}
+summary.lm(fit.anova)
+```
+
+Regression Plot
+
+```{r, fig.height=3.2, fig.width=5}
+iris2$coded <- ifelse(iris2$Species == "versicolor", 0, 1)
+options(warn = -1)
+mns <- tapply(iris2$Petal.Length, iris2$coded, mean)
+df <- data.frame(Petal.Length = mns, coded = 0:1, lower=c(NA, mns[1]), upper = c(NA, mns[2]))
+ggplot(data=iris2, aes(coded, Petal.Length)) + 
+geom_point() + 
+geom_smooth(method = lm , color = "red", se = FALSE, formula=y~x) +
+geom_errorbar(data = df, mapping = aes(x = coded, ymin = lower, 
+  ymax = upper), width = 0.05, col = "blue") + ylim(2.5, 7.5) + xlim(0, 1) +
+geom_text(label = paste(expression(beta[1])), x = 0.5, y = 4.5, parse = TRUE) +
+geom_text(label = paste(expression(beta[1])), x = 0.95, y = 5, parse = TRUE) +
+geom_text(label = paste(expression(beta[0])), x = 0.05, y = 4, parse = TRUE) +
+geom_text(label = paste(expression(height == beta[0] + beta[1] %*% Species)), 
+  x = 0.5, y = 7, parse = TRUE)
+```
+
+## Summary
+- If we code our categorical variables as 0, 1, then the slope $\beta_1$ is the same as the difference between the means for each category.
+- The intercept $\beta_0$ is the value for the baseline category.
+- With 3 or more categories, we construct the 0, 1 ``dummy variables``:
+
+```{r}
+cat.var <- LETTERS[1:3]
+model.matrix(~cat.var)
+```
+
+## Linear Models
+- Comparing groups or doing regression are \textbf{both} examples of the General Linear Model.
+- Regression: $y_i = \beta_0 + \beta_1x_i + \epsilon_i, \epsilon \sim NID(0, \sigma^2)$
+- ANOVA: $y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon \sim NID(0, \sigma^2)$ 
+- Why ``Linear?'' Definition: A linear transformation (equation) is defined by these 2 properties:
+
+-- $f(x + y) = f(x) + f(y)$: Additivity
+-- $f(Ax) = Af(x)$ : Homogeneity
+-- Idea: The whole is equal to the sum of its parts.
+
+## Matrix Notation for Linear Models
+
+- $Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)$
+
+$$
+Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
+Y_2 = \beta_0 + \beta_1 X_2 + \epsilon_2 \\
+Y_3 = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
+\vdots \qquad \vdots \qquad \vdots \\
+Y_n = \beta_0 + \beta_1 X_n + \epsilon_n 
+$$
 
 
+$$
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
+\begin{bmatrix} \beta_0 + \beta_1X_1 \\
+                \beta_0 + \beta_1X_2 \\
+               	\beta_0 + \beta_1X_3 \\
+               	\vdots \\
+               	\beta_0 + \beta_1X_n
+\end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+$$
+
+## Matrix Representation
+
+$$
+\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
+\begin{bmatrix} 1 & X_1 \\ 1 & X_2 \\ 1 & X_3 \\ \vdots & \vdots \\ 1 & X_n \end{bmatrix} \times
+\begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
+\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+$$
+
+$$
+\mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
+$$
+\begin{minipage}{.22\linewidth}
+\centering
+$$
+\mathbf{X}= \begin{bmatrix} 
+	1 & X_1 \\
+	1 & X_2 \\
+	1 & X_3 \\
+	\vdots & \vdots \\
+	1 & X_n \end{bmatrix}
+$$
 
 
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+$$
+\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
+$$
+Vector of Parameters
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+$$
+\mathbf{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
+$$
+
+Vector of Error Terms
+\end{minipage}
+\begin{minipage}{0.22\linewidth}
+\centering
+$$
+\mathbf{Y} = \begin{bmatrix}
+Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
+$$
+Vector of Responses
+\end{minipage}
+
+## Distributional Assumptions
+
+$$
+\sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
+\sigma^2 & 0 & \cdots & 0 \\
+0 & \sigma^2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \sigma^2
+\end{bmatrix}
+$$
+$$
+\epsilon \sim N(0, \sigma^2\mathbf{I})
+$$
+\centering
+Full model:
+$\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
+
+
+## Estimation: Ordinary Least Squares
+
+$$
+\hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
+\hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
+$$
+where $\hat{\sigma}^2$ is the unbiased estimator of $\sigma^2$, and $p=2$ since we are estimating the slope and the intercept. $n$ is the sample size.
 
