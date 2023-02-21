@@ -1,121 +1,51 @@
-# Generalised Least Squares {#chap7}
+# Experimental Design {#chap7}
 
-In OLS, the assumption about the errors is that they are __independent and identically distributed.__ What if they are not independent? One common example is that the errors are correlated with each other. Then we have:
-$$
-  \epsilon \sim N(0, \sigma^2 \mathbf{\Sigma})
-$$
-  where $\Sigma$ is a variance-covariance matrix for the residuals. ie
-  
-$$
-    \mathbf{\Sigma} = \begin{bmatrix}
-      \sigma^2_1 & Cov(\epsilon_1, \epsilon_2) & \cdots & Cov(\epsilon_1, \epsilon_n) \\
-      Cov(\epsilon_2, \epsilon_1) & \sigma^2_2 & \cdots & Cov(\epsilon_2, \epsilon_n) \\
-      \vdots & \vdots &  \ddots  & \vdots \\
-      Cov(\epsilon_n, \epsilon_1) & \cdots & \cdots & \sigma^2_n \end{bmatrix}
-$$
+## Some History
+Sir Ronald Fisher developed the foundations for the rigourous experimental design when he was a researcher at Rothamsted Experimental Station 1919 -1933. Rothamsted was an agricultural field station and there were a lot of studies conducted there on the effectiveness of different fertiliser treatments, for example. On arriving at Rothamsted, Fisher was struck by how badly the analyses of these field trials were conducted. He set about developing the theory of the Design of Experiments and he also developed statistical methods to correctly analyse the results of experiments. We use the principles laid down by Fisher to this day.
 
-      
-## Estimation: GLS
-  Then we have the GLS Estimator:
-$$
-    \hat{\beta_{GLS}} = (\mathbf{X^T \Sigma^{-1} X})^{-1}\mathbf{X^T\Sigma^{-1}Y}
-$$
+Although Fisher had some wrong ideas about eugenics, the genetics of intelligence and racial differences, he was remarkable in that he almost single-handedly invented what we now know as ``classical`` statistics. and __also__ developed the theory of population genetics (along with J. B. S. Haldane and Sewell Wright). He was a giant of 20th century science and an evolutionary biologist at heart. Unfortunately he was rather grumpy and prone to having disagreements and fights with most of his contemporaries. They say you should never meet your heroes and I am glad I never met Fisher. He died in 1962 in Adelaide. His ashes are interred in St. Peters Anglican cathedral in Adelaide. If you go to Adelaide you can visit Fisher's ashes. Put your hand on the plaque and absorb some of Fisher's ``force!``
 
-- If the covariances (off-diagonals) are zero, then we have _weighted least squares_
-- We can transform the GLS problem into OLS by multiplying $\mathbf{X}$ and $\mathbf{Y}$ by $\mathbf{\Sigma}^{-1/2}$ Then we can use the OLS equation on these new, transformed data. ie, $\mathbf{X^*} = \mathbf{\Sigma^{-1/2}X}$, $\mathbf{Y^*} = \mathbf{\Sigma^{-1/2}Y}$. $\hat{\beta_{GLS}} = \mathbf{(X^{*T}X^*)^{-1}X^*Y^*}$
+## Experiments
 
-## GLS example: Phylogenetic autocorrelation
-```{r}
-library(ape)
-library(ade4)
-library(ggtree)
-data(carni70)
-tr <- read.tree(text=carni70$tre)
-LogRange <- log(carni70$tab$range)
-LogSize <- log(carni70$tab$size)
-dat <- data.frame(LogRange=LogRange, LogSize=LogSize, Species=gsub("_", ".", rownames(carni70$tab)))
-ggplot(aes(x=LogSize, y=LogRange), data=dat)+geom_point()
-ggtree(tr) + geom_tiplab()
-```
+We first consider the simplest experiment: the comparison of two experimental ``treatments.`` What is a treatment? A treatment is some sort of manipulation carried out by a researcher on a group of experimental units. An example might be if we are trying to find out the effect of a drug, we may give the drug to some subjects. To contrast this treatment, we will give a ``placebo`` to another group of people. The delivery of the drug or placebo are both treatments. The experimental units are the subjects in the experiment. 
 
-## GLS example: Phylogenetic autocorrelation
-```{r}
-library(nlme)
-fit.lm <- lm(LogRange ~ LogSize, data=dat)
-fit.gls <- gls(LogRange ~ LogSize, correlation=corBrownian(phy=tr, form=~Species), data=dat)
-summary(fit.lm)
-summary(fit.gls)
-predictvals <- function(model, xvar, yvar, xrange=NULL, samples=100,...){
-  if(is.null(xrange)){
-    if(class(model) %in% c('lm','glm')){
-      xrange= range(model$model[[xvar]])
-    }
-    else if(class(model) %in% c('loess')){
-      xrange = range(model$x)
-    }
-  }
-  newdata = data.frame(x = seq(xrange[1], xrange[2], length.out = samples))
-  names(newdata) = xvar
-  newdata[[yvar]] = predict(model, newdata=newdata, ...)
-  newdata
-}
-dat <- data.frame(LogRange = LogRange, LogSize = LogSize)
-## Use the predictvals function from "R Graphics Cookbook"
-ols_predicted <- predictvals(fit.lm, "LogSize", "LogRange")
-ols_predicted$fit <- "OLS"
-gls_predicted <- predictvals(fit.gls, "LogSize", "LogRange", 
-                             xrange = range(dat$LogSize))
-gls_predicted$fit <- "GLS"
-ggplot(aes(x = LogSize, y = LogRange), data = dat)+ geom_point() + 
-    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = ols_predicted, linewidth = 2) + 
-    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = gls_predicted, linewidth = 2)
-plot(fit.gls)
-qqnorm(fit.gls, form = ~resid(., type = "n"), abline = c(0, 1))
-``` 
+This simple study has all the properties of an experiment: There is greater than one treatment. (We have 2 treatments, drug and placebo). We are interested in whether the drug works in that the drug treatment is more effective than the placebo, so we can ``contrast`` the treatments. We have performed the experiment a number of times, giving either the drug or the placebo to several subjects. Finally, we do this __at random__, that is, each subject has a probability of 0.5 of receiving either the drug or the placebo. More on the subject of randomness below.
 
+You may have noticed that what we have described is a __randomised, controlled trial__ This is the common term for experiments in the medical field and in the media. Calling a study an RCT is much easier to sell to the general public than an ``experiment``. Subjects generally don't want to be experimented on or treated as guinea pigs so the RCT terminology is used. Statisticians know that we are all talking about ``experiments.'' 
 
-## GLS example: Time Series
+## More terminology
 
-- We expect that adjacent values may be more similar than values further away in time. That is, the effect of the ``disturbance`` on the time series decays with time. 
-- In general we do not know the covariances of each value with all other values.
-- Instead,  we can ``model`` the time series effects using a smaller number of parameters. 
-- A simple example is the ``autoregression`` model:
-- $x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon$
+In our example, we can consider the two treatments (Drug and Placebo) to be properties of a unified object, the __factor__. We thus have a factor Drug with two __levels__: drug and placebo. In more complicated experiments, there may be more than one factor in an experiment, and the treatments are combinations of the levels of the different factors. Aside: When Fisher defined a factor, he was thinking about genetics, where different alleles were considered to be different genetic factors. We now use the term ``factor`` in a more general sense, beyond just allelic differences in phenotypes.
 
-## Lynx Data
+The data we take from our subjects during the experiment are called the ``response`` or ``outcome`` variables of the experiment. For our drug example, if we were interested in the effect of the drug on blood pressure, then we would measure the blood pressure of each experimental unit (subject) after applying the drug or placebo. The blood pressure would be the response variable. The factor Drug (with levels drug and placebo) is called the ``explanatory variable`` and is defined by our experimental design. The difference between the effect of the drug treatment the placebo is called the ``effect size.`` 
 
-```{r}
-data(lynx)
-str(lynx)
-lynxdat <- data.frame(Year=1821:1934, Lynx=lynx)
-ggplot(lynxdat, aes(x=Year, y=Lynx)) + geom_line()+geom_point() + scale_x_continuous() + scale_y_continuous() + 
-    ggtitle("Hudson Bay Lynx Returns")+theme(plot.title = element_text(hjust = 0.5))
-```
+The placebo treatment is called a ``control`` treatment. Controls represent a treatment that contains everything about the drug treatment, except the drug itself. A placebo pill contains no active ingredients but application of a placebo can still affect the results (compared to not taking a pill at all) due to the ``placebo effect.`` The effect of taking the drug is thus __isolated__ from all the other factors that might influence the results that occur both in the drug treatment and the placebo control. Any ``effect,`` the difference between the two treatments, must be due to the application of the drug alone.
 
+## Randomness
 
-## ACF and PACF
+The role of randomness crops up in two places in experiments. The first is that the experimental units differ in small ways from each other. On one hand we should try to use experimental units (subjects, in our case), that are as uniform as possible to reduce the effects of this randomness. This is the reason for using in-bred lines of rats, mice or rabbits in experiments as they are effectively clones with no genetic differences. They are more uniform, at least in their genetics.
 
-```{r}
-library(forecast)
-print(ggAcf(lynx))
-print(ggPacf(lynx))
-```
+On the other hand, if our experiment is expected to be more ``natural`` we may be interested in running it on a more representative group of experimental units. For example, we may recruit subjects with different backgrounds, body size, gender, age, etc. So that any effects of the drug will be more like the representative effect seen in a clinical setting where lots of different people seek to take the same drug, but respond differently. Such considerations should lead you to think carefully about the hypothesis you are trying to test (more on hypothesis testing below).
 
+The other source of randomness is that deliberately induced by the experimenter: The treatments are assigned to the subjects at random, using a random number generator. The reasoning here is that such random allocation to treatments serves to break up any systematic differences that could possibly occur among subjects. In contrast, any other mechanism for allocating treatments to experimental units has the potential for systematic bias, which will render the experiment useless. An example might be if we ask subjects to arrive at the clinic at various times during the day, and we gave the drug to all the subjects that arrived early in the morning, and the placebo to the subjects who arrived at the clinic late in the day. If, for example, the effectiveness of the drug depended on the time it was taken (e.g. due to circadian rhythm effects), then our experiment would be destroyed because a systematic bias was introduced during treatment allocation. Only random application of treatments to experimental units can avoid these undesirable effects.
 
-## Autoregression of Lynx Data
-```{r}
-# find optimal autoregression size
-ar(lynx, method="mle")
-```
+## Positive and Negative Controls
 
-## GLS Autoregression model of Lynx data
-```{r}
-fit <- gls(Lynx~Year, correlation=corARMA(p=8), data=lynxdat, method="ML")
-fit
-```
+Most control treatments in experiments are usually ``negative`` in the sense that they include all the effects on a treatment, __except__ the one of interest to the researcher. However, there are many situations where we need a ``positive`` control: A treatment where an effect is guaranteed to be detected. A common example is when biologists are seeking to sequence an unknown gene. In order to make sure the sequencing experiment is working, they include a gene of known sequence. If the experiment can't get the correct result for the known sequence, then it is clear that there is something wrong with the experimental technique.
 
-```{r}
-vals <- resid(fit, type="n")
-print(ggAcf(vals))
-print(ggPacf(vals))
-```
+## Blinding of experiments
+
+Blinding in experiments is a very useful technique for avoiding all sorts of systematic biases. The method is to apply the experimental treatment __without__ the subject knowing what treatment they are being given. So in our example, the researcher gives a pill to the subjects without telling them whether the treatment is the drug or the placebo. Of course, the researcher knows this information so it can be used later in the statistical analysis. An even more sneaky method is the so-called ``double blind`` trial. Here, both the researcher and the subject do not know which treatment is being applied. The information is kept by a third party and only revealed to the experimenter at the time of the analysis when collecting of data is over. Doubly-blind trials are a powerful technique for controlling many sorts of systematic bias that may be inadvertently introduced by the experimenter and the subject. Sometimes it is not possible to perform such trials, however.
+
+## Covariates
+
+Another useful part of an experiment is to collect other data along with the response variable of interest. For example, in our drug experiment, we could collect information on the sex and body size of the subjects, their level of obesity, family history of heart disease etc. These are all of interest and may be important in contributing to the response of the subjects to the drug treatment. Yet, they are not being experimentally manipulated by the researcher. They are simply extra information that can be used in the interpretation of the experiment. They are called ``covariates.`` 
+
+It is important to remember that perhaps the defining feature of an experiment is to __manipulate__ the experimental units in some way. In this way we can distinguish cause and effect. However, it is possible to collect data on a lot of covariates and relate them to some other variable (the presumed ``outcome`` or ``response``) without manipulating the study system and then derive conclusions about cause and effect. Such ``observational`` studies are fraught because they are heavily dependent on the underlying causal model being correct. However, there could easily be other __unmeasured__ variables that are contributing to the outcome, or the measured covariates could be related to each other in complicated ways. Without experimentation, we cannot usually establish cause and effect. (There are some exceptions to this rule but they rely on extra assumptions and are beyond the scope of this course. If you want information about this, ask me in class.) 
+
+## "Natural" Experiments or Natural "Experiments"
+
+Some people talk about "natural" experiments, such as those provided by natural disasters or weather events, when it is assumed that treatments have been applied to the experimental units at random by the mechanism of the extreme conditions. However, the quotes should be around "experiment" not natural, as nobody doubts the naturalness of the event but it is somewhat dubious to consider it as an experiment akin to researcher manipulated studies where treatments have been allocated to experimental units at random.
+
+## Random effects and Blocking
+

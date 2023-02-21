@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#data-structures"><i class="fa fa-check"></i><b>4.1</b> Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
 <li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
 </ul></li>
@@ -176,28 +176,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> LinearModels</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>6.1</b> Graphing the Iris data</a></li>
-<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.2</b> Analysing the iris data</a></li>
-<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.3</b> Analysis using t test</a></li>
-<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.4</b> Analysis using ANOVA</a></li>
-<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.5</b> Analysis using Regression</a></li>
-<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.6</b> Points to Note</a></li>
-<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
-<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.8</b> Linear Models</a></li>
-<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.9</b> Matrix Notation for Linear Models</a></li>
-<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.10</b> Matrix Representation</a></li>
-<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.11</b> Distributional Assumptions</a></li>
-<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.12</b> Estimation: Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#good-resources-for-graphing"><i class="fa fa-check"></i><b>6.2</b> Good Resources for Graphing</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.3</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#model-diagnostics"><i class="fa fa-check"></i><b>6.4</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.5</b> Analysis using t test</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.6</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.7</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.8</b> Points to Note</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.9</b> Summary</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.10</b> Linear Models</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.11</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.12</b> Matrix Representation</a></li>
+<li class="chapter" data-level="6.13" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.13</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="6.14" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.14</b> Estimation: Ordinary Least Squares</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Generalised Least Squares</a>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Experimental Design</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#estimation-gls"><i class="fa fa-check"></i><b>7.1</b> Estimation: GLS</a></li>
-<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>7.2</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>7.3</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#gls-example-time-series"><i class="fa fa-check"></i><b>7.4</b> GLS example: Time Series</a></li>
-<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#lynx-data"><i class="fa fa-check"></i><b>7.5</b> Lynx Data</a></li>
-<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#acf-and-pacf"><i class="fa fa-check"></i><b>7.6</b> ACF and PACF</a></li>
-<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>7.7</b> Autoregression of Lynx Data</a></li>
-<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>7.8</b> GLS Autoregression model of Lynx data</a></li>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#some-history"><i class="fa fa-check"></i><b>7.1</b> Some History</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#experiments"><i class="fa fa-check"></i><b>7.2</b> Experiments</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#more-terminology"><i class="fa fa-check"></i><b>7.3</b> More terminology</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#randomness"><i class="fa fa-check"></i><b>7.4</b> Randomness</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#positive-and-negative-controls"><i class="fa fa-check"></i><b>7.5</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#blinding-of-experiments"><i class="fa fa-check"></i><b>7.6</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#covariates"><i class="fa fa-check"></i><b>7.7</b> Covariates</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#natural-experiments-or-natural-experiments"><i class="fa fa-check"></i><b>7.8</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="7.9" data-path="chap7.html"><a href="chap7.html#random-effects-and-blocking"><i class="fa fa-check"></i><b>7.9</b> Random effects and Blocking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap8.html"><a href="chap8.html"><i class="fa fa-check"></i><b>8</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chap8.html"><a href="chap8.html#estimation-gls"><i class="fa fa-check"></i><b>8.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="8.2" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>8.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.3" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>8.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="chap8.html"><a href="chap8.html#gls-example-time-series"><i class="fa fa-check"></i><b>8.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="8.5" data-path="chap8.html"><a href="chap8.html#lynx-data"><i class="fa fa-check"></i><b>8.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="8.6" data-path="chap8.html"><a href="chap8.html#acf-and-pacf"><i class="fa fa-check"></i><b>8.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="8.7" data-path="chap8.html"><a href="chap8.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>8.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="8.8" data-path="chap8.html"><a href="chap8.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>8.8</b> GLS Autoregression model of Lynx data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -223,13 +237,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> Week 1: R Programming I<a href="chap2.html#chap2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="why-programming-why-statistics-why-r" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Why Programming? Why Statistics? Why R?<a href="chap2.html#why-programming-why-statistics-why-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Computer programming has become an increasingly valued skill for biologists. Computer programming allows us to express complicated ideas in a formal way such that they can be analysed and evaluated using a computer. Thus, the computer “keeps us honest” with regard to our ideas. If we can’t explain our scientific problem to a computer, we haven’t thought it through well enough. Indeed, since <a href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> showed that a computer can emulate any process that can be described by an algorithm, we might ask, “What are computers for?” Many of you will be used to thinking that computers are used for word processing, spreadsheets, email, Instagram etc. and that is true. But I think the answer to the question goes much deeper than this. The best answer that I can think of is, “<strong>Computers are machines for thinking with.</strong>” We use computers as an aid to thinking about the world. Computers can take the drudgery out of many scientific processes and leave us with room to think about the “big” questions. Computers are used in many situations in biology. In this course, we will be concerned with using computers to statistically and dynamically <strong>model</strong> aspects of data and biological processes.</p>
+<p>Computer programming has become an increasingly valued skill for biologists. Computer programming allows us to express complicated ideas in a formal way such that they can be analysed and evaluated using a computer. Thus, the computer <strong>keeps us honest</strong> with regard to our ideas. If we can’t explain our scientific problem to a computer, we haven’t thought it through well enough. Indeed, since <a href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> showed that a computer can emulate any process that can be described by an algorithm, we might ask, “What are computers for?” Many of you will be used to thinking that computers are used for word processing, spreadsheets, email, Instagram etc. and that is true. But I think the answer to the question goes much deeper than this. The best answer that I can think of is, “<strong>Computers are machines for thinking with.</strong>” We use computers as an aid to thinking about the world. Computers can take the drudgery out of many scientific processes and leave us with room to think about the “big” questions. Computers are used in many situations in biology. In this course, we will be concerned with using computers to statistically and dynamically <strong>model</strong> aspects of data and biological processes.</p>
 </div>
 <div id="why-statistics" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Why Statistics?<a href="chap2.html#why-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The biological world is messy. There is no way we can treat organisms the way atoms and molecules are treated in physics and chemistry. Even if we knew all the physical and chemical properties of all the molecules in an organism, we still could not predict accurately what that organism looks like or how it will behave so we need to use models that incorporate uncertainty and randomness in a principled way. This is why we do statistics. Statistical models have probability “built in.” Statistical models allow us to draw conclusions from data and form a way of thinking about organisms that takes randomness and uncertainty into account.</p>
 <p>Statistics is at the very heart of biology: the mechanism of natural selection requires that organisms differ, and differences among organisms are ultimately due to the random process of mutation. Mutation is necessary for selection to work. In eukaryotic cells, assortment of chromosomes occur at random, and there can be random “crossing over” events along a chromosome. Thus, statistical models help us to understand how and why organisms have evolved.</p>
-<p>We will be modelling the properties of <strong>data</strong>. Data are crucial to the scientific process and it is important to treat them fairly and gently. We will be using a variety of statistical methods to study data. From previous courses, you may be under the impression that statistics is about performing various tests on your data to draw conclusions. It is true that this is one aspect of statistics. But at a more fundamental level, we seek a good model for our data. After obtaining a good model, we find that the statistical tests are easy. They pretty much look after themselves.</p>
+<p>We will be modelling the properties of <strong>data</strong>. Data are crucial to the scientific process and it is important to treat them fairly and gently. We will be using a variety of statistical methods to study data. From previous courses, you may be under the impression that statistics is about performing various tests on your data to draw conclusions. It is true that this is one aspect of statistics. But at a more fundamental level, we seek a good <strong>model</strong> for our data. After obtaining a good model, we find that the statistical tests are easy. They pretty much look after themselves.</p>
 </div>
 <div id="why-r" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Why R?<a href="chap2.html#why-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>

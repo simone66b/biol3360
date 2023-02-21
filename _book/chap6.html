@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#data-structures"><i class="fa fa-check"></i><b>4.1</b> Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
 <li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
 </ul></li>
@@ -176,28 +176,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> LinearModels</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>6.1</b> Graphing the Iris data</a></li>
-<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.2</b> Analysing the iris data</a></li>
-<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.3</b> Analysis using t test</a></li>
-<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.4</b> Analysis using ANOVA</a></li>
-<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.5</b> Analysis using Regression</a></li>
-<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.6</b> Points to Note</a></li>
-<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
-<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.8</b> Linear Models</a></li>
-<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.9</b> Matrix Notation for Linear Models</a></li>
-<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.10</b> Matrix Representation</a></li>
-<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.11</b> Distributional Assumptions</a></li>
-<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.12</b> Estimation: Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#good-resources-for-graphing"><i class="fa fa-check"></i><b>6.2</b> Good Resources for Graphing</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.3</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#model-diagnostics"><i class="fa fa-check"></i><b>6.4</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.5</b> Analysis using t test</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.6</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.7</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.8</b> Points to Note</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.9</b> Summary</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.10</b> Linear Models</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.11</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.12</b> Matrix Representation</a></li>
+<li class="chapter" data-level="6.13" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.13</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="6.14" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.14</b> Estimation: Ordinary Least Squares</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Generalised Least Squares</a>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Experimental Design</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#estimation-gls"><i class="fa fa-check"></i><b>7.1</b> Estimation: GLS</a></li>
-<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>7.2</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>7.3</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#gls-example-time-series"><i class="fa fa-check"></i><b>7.4</b> GLS example: Time Series</a></li>
-<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#lynx-data"><i class="fa fa-check"></i><b>7.5</b> Lynx Data</a></li>
-<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#acf-and-pacf"><i class="fa fa-check"></i><b>7.6</b> ACF and PACF</a></li>
-<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>7.7</b> Autoregression of Lynx Data</a></li>
-<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>7.8</b> GLS Autoregression model of Lynx data</a></li>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#some-history"><i class="fa fa-check"></i><b>7.1</b> Some History</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#experiments"><i class="fa fa-check"></i><b>7.2</b> Experiments</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#more-terminology"><i class="fa fa-check"></i><b>7.3</b> More terminology</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#randomness"><i class="fa fa-check"></i><b>7.4</b> Randomness</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#positive-and-negative-controls"><i class="fa fa-check"></i><b>7.5</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#blinding-of-experiments"><i class="fa fa-check"></i><b>7.6</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#covariates"><i class="fa fa-check"></i><b>7.7</b> Covariates</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#natural-experiments-or-natural-experiments"><i class="fa fa-check"></i><b>7.8</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="7.9" data-path="chap7.html"><a href="chap7.html#random-effects-and-blocking"><i class="fa fa-check"></i><b>7.9</b> Random effects and Blocking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap8.html"><a href="chap8.html"><i class="fa fa-check"></i><b>8</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chap8.html"><a href="chap8.html#estimation-gls"><i class="fa fa-check"></i><b>8.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="8.2" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>8.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.3" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>8.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="chap8.html"><a href="chap8.html#gls-example-time-series"><i class="fa fa-check"></i><b>8.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="8.5" data-path="chap8.html"><a href="chap8.html#lynx-data"><i class="fa fa-check"></i><b>8.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="8.6" data-path="chap8.html"><a href="chap8.html#acf-and-pacf"><i class="fa fa-check"></i><b>8.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="8.7" data-path="chap8.html"><a href="chap8.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>8.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="8.8" data-path="chap8.html"><a href="chap8.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>8.8</b> GLS Autoregression model of Lynx data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -221,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="chap6" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> LinearModels<a href="chap6.html#chap6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Consider R. A. Fisher’s classic Iris data set:</p>
+<p>Consider R. A. Fisher’s classic Iris data set, consisting of several morphological measurements on the flowers of three species of <em>Iris</em>. This data set is famous in statistics and is often used as test data for a wide variety of statistical methods. Fisher was probably the most important statistician <strong>and</strong> evolutionary biologist of the 20th century. He layed the foundations for our modern practice of statistics and he was a great evolutionary geneticist, partly responsible for inventing population genetics and establishing that natural selection could indeed be a powerful force in evolution. He was also a terrible grump and had lots of fights with other scientists. Although I like to find out about my idols, Fisher is someone that I am glad not to have met! Back to the data:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chap6.html#cb50-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;sepalsPetals.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="sepalsPetals.jpg" alt="An Iris" width="108" />
@@ -253,6 +267,7 @@ Figure 6.2: R. A. Fisher
 ## 148          6.5         3.0          5.2         2.0 virginica
 ## 149          6.2         3.4          5.4         2.3 virginica
 ## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
+<p>Here we have loaded the data frame called <code>iris</code> It is built into R, which is convenient for us. The <code>head()</code> and <code>tail()</code> functions examine the first 6 and the last 6 lines of the data frame, allowing us to see the variable names and check that the data frame is usable. Although</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chap6.html#cb56-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Kosaciec_szczecinkowaty_Iris_setosa.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
 <img src="Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris setosa" width="110" />
@@ -275,35 +290,48 @@ Figure 6.5: Iris versicolor
 </p>
 </div>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="chap6.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code></pre></div>
-<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
-##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
-##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
-##  Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
-##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
-##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
-##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500</code></pre>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        Species  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## </code></pre>
+<p>Here we have a six-figure summary of each of the variables: the mean, minimum and maximum values, plus the median, and first and 3rd quartiles. Together these numbers tell us a little about the distribution of the data (but not much).</p>
 <div id="graphing-the-iris-data" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Graphing the Iris data<a href="chap6.html#graphing-the-iris-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="chap6.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb61-2"><a href="chap6.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
 <span id="cb61-3"><a href="chap6.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-30-1.png" width="360" /></p>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-30-1.png" width="360" />
+Here we have a plot of the Petal Length for each species. The dots overlap a lot and it is hard to see what is going on, although you can see the maxima and minima quite clearly for each species.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chap6.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
 <span id="cb62-2"><a href="chap6.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">height =</span> <span class="dv">0</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-31-1.png" width="360" /></p>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-31-1.png" width="360" />
+Here are the same data but we have “jittered” the data along the x-axis, allowing us to see each data point separately from the others. This is a good way to display small amounts of data. Note that you should only jitter the data in the x direction in this case. Jittering the y data is wrong! (why?)</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="chap6.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Petal.Length), <span class="at">data =</span> iris) <span class="sc">+</span></span>
 <span id="cb63-2"><a href="chap6.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">8</span>)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-32-1.png" width="360" />
-## Good Resources for Graphing
-You can get these books online through the library.</p>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-32-1.png" width="360" /></p>
+<p>If we have a larger amount of data, a box and whisker plot can be useful. It plots the median and interquartile range, and the outer <code>whiskers</code> extend to 1.5 x the size of the interquartile range. Extreme outliers are also indicated.</p>
+</div>
+<div id="good-resources-for-graphing" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Good Resources for Graphing<a href="chap6.html#good-resources-for-graphing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We won’t have much time to go into advanced graphing techniques in this course, although I will try to highlight graphing methods as we go along. Fortunately, there are some good books to consult. They are online through the library:</p>
 <ul>
 <li><em>R Graphics Cookbook</em> by Chang</li>
 <li><em>ggplot2 Elegant Graphics for Data Analysis</em> by Wickham</li>
 </ul>
 </div>
-<div id="analysing-the-iris-data" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Analysing the iris data<a href="chap6.html#analysing-the-iris-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>How would you analyse these data? Analysis of Variance (ANOVA)?</p>
+<div id="analysing-the-iris-data" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Analysing the iris data<a href="chap6.html#analysing-the-iris-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How would you analyse these data? Since we have 3 distinct groups (species) to compare and the data are continuous and (probably) normally-distributed, the Analysis of Variance (ANOVA) might be your first choice. Here is an analysis for petal length in R:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="chap6.html#cb64-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span>
 <span id="cb64-2"><a href="chap6.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
@@ -311,10 +339,21 @@ You can get these books online through the library.</p>
 ## Residuals   147   27.2    0.19                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Model Diagnostics</p>
+<p>We see that there is evidence for significant variation in petal length among species. We reject the null hypothesis that there are no differences in petal length among the three species. Note that this is a very vague conclusion. We don’t know which species differ in their petal length from the others, and we don’t know how big the differences really are. A thorough analysis would establish this information.</p>
+</div>
+<div id="model-diagnostics" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Model Diagnostics<a href="chap6.html#model-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When building a statistical model, checking the model using diagnostic plots is a crucial step. All models have assumptions and if these assumptions are violated then the model will potentially give wrong results. For the ANOVA model, there are several important assumptions:</p>
+<ul>
+<li>The data are independent</li>
+<li>The residuals follow a Normal distribution</li>
+<li>The variance of the residuals is constant over the range of the data (homoscedastic errors).</li>
+</ul>
+<p>While all three assumptions are important, the first and third are crucial. It turns out that the Normality of residuals is not an overly strong assumption for the ANOVA model, but you should still check it, as large departures from Normality can cause problems. I usually rely on graphical approaches to testing assumptions:</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="chap6.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb66-2"><a href="chap6.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="BIOL3360_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
+<p>The first diagnostic plot above, plots the residuals versus their fitted values. If the assumption of homoscedasticity holds (try saying that 5 times fast!), there will be no pattern to the residuals. If you see a curve, either upwards or downwards, that is suggestive of curvature in your data. If there is a “trumpet” like effect either increasing to the right or left, or you have a “bow tie” shape to the residual plot ie narrower in the middle, then the data are not homoscedastic.</p>
 <p>Subset and Recode the Data}</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="chap6.html#cb67-1" aria-hidden="true" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(iris, Species <span class="sc">!=</span> <span class="st">&quot;setosa&quot;</span>)</span></code></pre></div>
 <p>Hypothesis: There exists a difference between the species’ means. How would you analyse these data?
@@ -323,8 +362,8 @@ You can get these books online through the library.</p>
 - Regression?
 - All three!!!</p>
 </div>
-<div id="analysis-using-t-test" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Analysis using t test<a href="chap6.html#analysis-using-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analysis-using-t-test" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Analysis using t test<a href="chap6.html#analysis-using-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chap6.html#cb68-1" aria-hidden="true" tabindex="-1"></a>fit.ttest <span class="ot">&lt;-</span> <span class="fu">t.test</span>(Petal.Length <span class="sc">~</span> Species, </span>
 <span id="cb68-2"><a href="chap6.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> iris2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb68-3"><a href="chap6.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit.ttest)</span></code></pre></div>
@@ -340,8 +379,8 @@ You can get these books online through the library.</p>
 ## mean in group versicolor  mean in group virginica 
 ##                    4.260                    5.552</code></pre>
 </div>
-<div id="analysis-using-anova" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Analysis using ANOVA<a href="chap6.html#analysis-using-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analysis-using-anova" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Analysis using ANOVA<a href="chap6.html#analysis-using-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chap6.html#cb70-1" aria-hidden="true" tabindex="-1"></a>fit.anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris2)</span>
 <span id="cb70-2"><a href="chap6.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.anova)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
@@ -350,8 +389,8 @@ You can get these books online through the library.</p>
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<div id="analysis-using-regression" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Analysis using Regression<a href="chap6.html#analysis-using-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="analysis-using-regression" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Analysis using Regression<a href="chap6.html#analysis-using-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="chap6.html#cb72-1" aria-hidden="true" tabindex="-1"></a>fit.regression <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data=</span>iris2)</span>
 <span id="cb72-2"><a href="chap6.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.regression)</span></code></pre></div>
 <pre><code>## 
@@ -373,8 +412,8 @@ You can get these books online through the library.</p>
 ## Multiple R-squared:  0.6185, Adjusted R-squared:  0.6146 
 ## F-statistic: 158.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div id="points-to-note" class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Points to Note<a href="chap6.html#points-to-note" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="points-to-note" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Points to Note<a href="chap6.html#points-to-note" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>For an F test with <strong>one</strong> degree of freedom in the numerator, <span class="math inline">\(F = t^2\)</span> with the denominator degrees of freedom for the F statistic equal to the degrees of freedom for the t statistic.
 We can get the regression output from the ANOVA fit using <code>summary.lm</code></li>
@@ -415,8 +454,8 @@ We can get the regression output from the ANOVA fit using <code>summary.lm</code
 <span id="cb76-14"><a href="chap6.html#cb76-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="dv">7</span>, <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="BIOL3360_files/figure-html/unnamed-chunk-40-1.png" width="480" /></p>
 </div>
-<div id="summary" class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Summary<a href="chap6.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="summary" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Summary<a href="chap6.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>If we code our categorical variables as 0, 1, then the slope <span class="math inline">\(\beta_1\)</span> is the same as the difference between the means for each category.</li>
 <li>The intercept <span class="math inline">\(\beta_0\)</span> is the value for the baseline category.</li>
@@ -434,8 +473,8 @@ We can get the regression output from the ANOVA fit using <code>summary.lm</code
 ## attr(,&quot;contrasts&quot;)$cat.var
 ## [1] &quot;contr.treatment&quot;</code></pre>
 </div>
-<div id="linear-models" class="section level2 hasAnchor" number="6.8">
-<h2><span class="header-section-number">6.8</span> Linear Models<a href="chap6.html#linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="linear-models" class="section level2 hasAnchor" number="6.10">
+<h2><span class="header-section-number">6.10</span> Linear Models<a href="chap6.html#linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Comparing groups or doing regression are examples of the General Linear Model.</li>
 <li>Regression: <span class="math inline">\(y_i = \beta_0 + \beta_1x_i + \epsilon_i, \epsilon \sim NID(0, \sigma^2)\)</span></li>
@@ -446,8 +485,8 @@ We can get the regression output from the ANOVA fit using <code>summary.lm</code
 – <span class="math inline">\(f(Ax) = Af(x)\)</span> : Homogeneity
 – Idea: The whole is equal to the sum of its parts.</p>
 </div>
-<div id="matrix-notation-for-linear-models" class="section level2 hasAnchor" number="6.9">
-<h2><span class="header-section-number">6.9</span> Matrix Notation for Linear Models<a href="chap6.html#matrix-notation-for-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="matrix-notation-for-linear-models" class="section level2 hasAnchor" number="6.11">
+<h2><span class="header-section-number">6.11</span> Matrix Notation for Linear Models<a href="chap6.html#matrix-notation-for-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)\)</span></li>
 </ul>
@@ -469,8 +508,8 @@ Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
 \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
 \]</span></p>
 </div>
-<div id="matrix-representation" class="section level2 hasAnchor" number="6.10">
-<h2><span class="header-section-number">6.10</span> Matrix Representation<a href="chap6.html#matrix-representation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="matrix-representation" class="section level2 hasAnchor" number="6.12">
+<h2><span class="header-section-number">6.12</span> Matrix Representation<a href="chap6.html#matrix-representation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display">\[
 \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} =
 \begin{bmatrix} 1 &amp; X_1 \\ 1 &amp; X_2 \\ 1 &amp; X_3 \\ \vdots &amp; \vdots \\ 1 &amp; X_n \end{bmatrix} \times
@@ -481,8 +520,8 @@ Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
 \mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
 \]</span>
 </div>
-<div id="distributional-assumptions" class="section level2 hasAnchor" number="6.11">
-<h2><span class="header-section-number">6.11</span> Distributional Assumptions<a href="chap6.html#distributional-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="distributional-assumptions" class="section level2 hasAnchor" number="6.13">
+<h2><span class="header-section-number">6.13</span> Distributional Assumptions<a href="chap6.html#distributional-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display">\[
 \sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
 \sigma^2 &amp; 0 &amp; \cdots &amp; 0 \\
@@ -497,8 +536,8 @@ Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
 Full model:
 <span class="math inline">\(\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})\)</span></p>
 </div>
-<div id="estimation-ordinary-least-squares" class="section level2 hasAnchor" number="6.12">
-<h2><span class="header-section-number">6.12</span> Estimation: Ordinary Least Squares<a href="chap6.html#estimation-ordinary-least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="estimation-ordinary-least-squares" class="section level2 hasAnchor" number="6.14">
+<h2><span class="header-section-number">6.14</span> Estimation: Ordinary Least Squares<a href="chap6.html#estimation-ordinary-least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display">\[
 \hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
 \hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})

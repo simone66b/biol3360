@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#data-structures"><i class="fa fa-check"></i><b>4.1</b> Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
 <li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
 </ul></li>
@@ -176,28 +176,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> LinearModels</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>6.1</b> Graphing the Iris data</a></li>
-<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.2</b> Analysing the iris data</a></li>
-<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.3</b> Analysis using t test</a></li>
-<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.4</b> Analysis using ANOVA</a></li>
-<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.5</b> Analysis using Regression</a></li>
-<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.6</b> Points to Note</a></li>
-<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
-<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.8</b> Linear Models</a></li>
-<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.9</b> Matrix Notation for Linear Models</a></li>
-<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.10</b> Matrix Representation</a></li>
-<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.11</b> Distributional Assumptions</a></li>
-<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.12</b> Estimation: Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#good-resources-for-graphing"><i class="fa fa-check"></i><b>6.2</b> Good Resources for Graphing</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.3</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#model-diagnostics"><i class="fa fa-check"></i><b>6.4</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.5</b> Analysis using t test</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.6</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.7</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.8</b> Points to Note</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.9</b> Summary</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.10</b> Linear Models</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.11</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.12</b> Matrix Representation</a></li>
+<li class="chapter" data-level="6.13" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.13</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="6.14" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.14</b> Estimation: Ordinary Least Squares</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Generalised Least Squares</a>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Experimental Design</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#estimation-gls"><i class="fa fa-check"></i><b>7.1</b> Estimation: GLS</a></li>
-<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>7.2</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>7.3</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#gls-example-time-series"><i class="fa fa-check"></i><b>7.4</b> GLS example: Time Series</a></li>
-<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#lynx-data"><i class="fa fa-check"></i><b>7.5</b> Lynx Data</a></li>
-<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#acf-and-pacf"><i class="fa fa-check"></i><b>7.6</b> ACF and PACF</a></li>
-<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>7.7</b> Autoregression of Lynx Data</a></li>
-<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>7.8</b> GLS Autoregression model of Lynx data</a></li>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#some-history"><i class="fa fa-check"></i><b>7.1</b> Some History</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#experiments"><i class="fa fa-check"></i><b>7.2</b> Experiments</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#more-terminology"><i class="fa fa-check"></i><b>7.3</b> More terminology</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#randomness"><i class="fa fa-check"></i><b>7.4</b> Randomness</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#positive-and-negative-controls"><i class="fa fa-check"></i><b>7.5</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#blinding-of-experiments"><i class="fa fa-check"></i><b>7.6</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#covariates"><i class="fa fa-check"></i><b>7.7</b> Covariates</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#natural-experiments-or-natural-experiments"><i class="fa fa-check"></i><b>7.8</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="7.9" data-path="chap7.html"><a href="chap7.html#random-effects-and-blocking"><i class="fa fa-check"></i><b>7.9</b> Random effects and Blocking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap8.html"><a href="chap8.html"><i class="fa fa-check"></i><b>8</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chap8.html"><a href="chap8.html#estimation-gls"><i class="fa fa-check"></i><b>8.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="8.2" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>8.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.3" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>8.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="chap8.html"><a href="chap8.html#gls-example-time-series"><i class="fa fa-check"></i><b>8.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="8.5" data-path="chap8.html"><a href="chap8.html#lynx-data"><i class="fa fa-check"></i><b>8.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="8.6" data-path="chap8.html"><a href="chap8.html#acf-and-pacf"><i class="fa fa-check"></i><b>8.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="8.7" data-path="chap8.html"><a href="chap8.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>8.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="8.8" data-path="chap8.html"><a href="chap8.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>8.8</b> GLS Autoregression model of Lynx data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -227,8 +241,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="course-delivery" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Course Delivery<a href="chap1.html#course-delivery" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The course is designed with three ``modules:’’ Statistical Modelling, Dynamic Modelling and Communication. Statistical Modelling is taught by Simone Blomberg before the mid-semester break. The first three weeks are devoted to gaining R programming skills (no statistics taught in these weeks). Dynamic Modelling is taught by Jan Engelstaedter after the mid-semester break, and the Communication module is run for the entire semester by Louise Kuchel.</p>
-<p>The course is structured into two ``workshops,’’ one two-hour and one three hour, for a total of 5 contact hours during the week. We expect you to spend another 5 hours on the content outside of contact hours.</p>
+<p>The course is designed with three <code>modules:</code> Statistical Modelling, Dynamic Modelling and Communication. Statistical Modelling is taught by Simone Blomberg before the mid-semester break. The first three weeks are devoted to gaining R programming skills (no statistics taught in these weeks). Dynamic Modelling is taught by Jan Engelstaedter after the mid-semester break, and the Communication module is run for the entire semester by Louise Kuchel.</p>
+<p>The course is structured into two <code>workshops,</code> one two-hour and one three hour, for a total of 5 contact hours during the week. We expect you to spend another 5 hours on the content outside of contact hours.</p>
 </div>
 <div id="textbooks-and-resources" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> Textbooks and Resources<a href="chap1.html#textbooks-and-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -242,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="assessment" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> Assessment<a href="chap1.html#assessment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There will be fortnightly quizzes throughout the course, and one ``practical’’ exam for the communication module. There are no mid-semester or final exams.</p>
+<p>There will be fortnightly quizzes throughout the course, and one <code>practical</code> exam for the communication module. There are no mid-semester or final exams.</p>
 </div>
 <div id="goals-and-expectations" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Goals and expectations<a href="chap1.html#goals-and-expectations" class="anchor-section" aria-label="Anchor link to header"></a></h2>

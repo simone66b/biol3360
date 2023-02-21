@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Generalised Least Squares | BIOL3360</title>
-  <meta name="description" content="7 Generalised Least Squares | BIOL3360" />
+  <title>7 Experimental Design | BIOL3360</title>
+  <meta name="description" content="7 Experimental Design | BIOL3360" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Generalised Least Squares | BIOL3360" />
+  <meta property="og:title" content="7 Experimental Design | BIOL3360" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Generalised Least Squares | BIOL3360" />
+  <meta name="twitter:title" content="7 Experimental Design | BIOL3360" />
   
   
   
@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chap6.html"/>
-
+<link rel="next" href="chap8.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#more-on-data-structures"><i class="fa fa-check"></i><b>4.1</b> More on Data Structures</a></li>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#data-structures"><i class="fa fa-check"></i><b>4.1</b> Data Structures</a></li>
 <li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
 <li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
 </ul></li>
@@ -176,28 +176,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> LinearModels</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>6.1</b> Graphing the Iris data</a></li>
-<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.2</b> Analysing the iris data</a></li>
-<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.3</b> Analysis using t test</a></li>
-<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.4</b> Analysis using ANOVA</a></li>
-<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.5</b> Analysis using Regression</a></li>
-<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.6</b> Points to Note</a></li>
-<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
-<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.8</b> Linear Models</a></li>
-<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.9</b> Matrix Notation for Linear Models</a></li>
-<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.10</b> Matrix Representation</a></li>
-<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.11</b> Distributional Assumptions</a></li>
-<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.12</b> Estimation: Ordinary Least Squares</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#good-resources-for-graphing"><i class="fa fa-check"></i><b>6.2</b> Good Resources for Graphing</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>6.3</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#model-diagnostics"><i class="fa fa-check"></i><b>6.4</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#analysis-using-t-test"><i class="fa fa-check"></i><b>6.5</b> Analysis using t test</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#analysis-using-anova"><i class="fa fa-check"></i><b>6.6</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#analysis-using-regression"><i class="fa fa-check"></i><b>6.7</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#points-to-note"><i class="fa fa-check"></i><b>6.8</b> Points to Note</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#summary"><i class="fa fa-check"></i><b>6.9</b> Summary</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#linear-models"><i class="fa fa-check"></i><b>6.10</b> Linear Models</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>6.11</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#matrix-representation"><i class="fa fa-check"></i><b>6.12</b> Matrix Representation</a></li>
+<li class="chapter" data-level="6.13" data-path="chap6.html"><a href="chap6.html#distributional-assumptions"><i class="fa fa-check"></i><b>6.13</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="6.14" data-path="chap6.html"><a href="chap6.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>6.14</b> Estimation: Ordinary Least Squares</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Generalised Least Squares</a>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> Experimental Design</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#estimation-gls"><i class="fa fa-check"></i><b>7.1</b> Estimation: GLS</a></li>
-<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>7.2</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>7.3</b> GLS example: Phylogenetic autocorrelation</a></li>
-<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#gls-example-time-series"><i class="fa fa-check"></i><b>7.4</b> GLS example: Time Series</a></li>
-<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#lynx-data"><i class="fa fa-check"></i><b>7.5</b> Lynx Data</a></li>
-<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#acf-and-pacf"><i class="fa fa-check"></i><b>7.6</b> ACF and PACF</a></li>
-<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>7.7</b> Autoregression of Lynx Data</a></li>
-<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>7.8</b> GLS Autoregression model of Lynx data</a></li>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#some-history"><i class="fa fa-check"></i><b>7.1</b> Some History</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#experiments"><i class="fa fa-check"></i><b>7.2</b> Experiments</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#more-terminology"><i class="fa fa-check"></i><b>7.3</b> More terminology</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#randomness"><i class="fa fa-check"></i><b>7.4</b> Randomness</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#positive-and-negative-controls"><i class="fa fa-check"></i><b>7.5</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#blinding-of-experiments"><i class="fa fa-check"></i><b>7.6</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#covariates"><i class="fa fa-check"></i><b>7.7</b> Covariates</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#natural-experiments-or-natural-experiments"><i class="fa fa-check"></i><b>7.8</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="7.9" data-path="chap7.html"><a href="chap7.html#random-effects-and-blocking"><i class="fa fa-check"></i><b>7.9</b> Random effects and Blocking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap8.html"><a href="chap8.html"><i class="fa fa-check"></i><b>8</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chap8.html"><a href="chap8.html#estimation-gls"><i class="fa fa-check"></i><b>8.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="8.2" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>8.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.3" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>8.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="chap8.html"><a href="chap8.html#gls-example-time-series"><i class="fa fa-check"></i><b>8.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="8.5" data-path="chap8.html"><a href="chap8.html#lynx-data"><i class="fa fa-check"></i><b>8.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="8.6" data-path="chap8.html"><a href="chap8.html#acf-and-pacf"><i class="fa fa-check"></i><b>8.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="8.7" data-path="chap8.html"><a href="chap8.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>8.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="8.8" data-path="chap8.html"><a href="chap8.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>8.8</b> GLS Autoregression model of Lynx data</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -220,227 +234,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="chap7" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Generalised Least Squares<a href="chap7.html#chap7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In OLS, the assumption about the errors is that they are <strong>independent and identically distributed.</strong> What if they are not independent? One common example is that the errors are correlated with each other. Then we have:
-<span class="math display">\[
-  \epsilon \sim N(0, \sigma^2 \mathbf{\Sigma})
-\]</span>
-where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matrix for the residuals. ie</p>
-<p><span class="math display">\[
-    \mathbf{\Sigma} = \begin{bmatrix}
-      \sigma^2_1 &amp; Cov(\epsilon_1, \epsilon_2) &amp; \cdots &amp; Cov(\epsilon_1, \epsilon_n) \\
-      Cov(\epsilon_2, \epsilon_1) &amp; \sigma^2_2 &amp; \cdots &amp; Cov(\epsilon_2, \epsilon_n) \\
-      \vdots &amp; \vdots &amp;  \ddots  &amp; \vdots \\
-      Cov(\epsilon_n, \epsilon_1) &amp; \cdots &amp; \cdots &amp; \sigma^2_n \end{bmatrix}
-\]</span></p>
-<div id="estimation-gls" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Estimation: GLS<a href="chap7.html#estimation-gls" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Then we have the GLS Estimator:
-<span class="math display">\[
-    \hat{\beta_{GLS}} = (\mathbf{X^T \Sigma^{-1} X})^{-1}\mathbf{X^T\Sigma^{-1}Y}
-\]</span></p>
-<ul>
-<li>If the covariances (off-diagonals) are zero, then we have <em>weighted least squares</em></li>
-<li>We can transform the GLS problem into OLS by multiplying <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> by <span class="math inline">\(\mathbf{\Sigma}^{-1/2}\)</span> Then we can use the OLS equation on these new, transformed data. ie, <span class="math inline">\(\mathbf{X^*} = \mathbf{\Sigma^{-1/2}X}\)</span>, <span class="math inline">\(\mathbf{Y^*} = \mathbf{\Sigma^{-1/2}Y}\)</span>. <span class="math inline">\(\hat{\beta_{GLS}} = \mathbf{(X^{*T}X^*)^{-1}X^*Y^*}\)</span></li>
-</ul>
+<h1><span class="header-section-number">7</span> Experimental Design<a href="chap7.html#chap7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="some-history" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Some History<a href="chap7.html#some-history" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sir Ronald Fisher developed the foundations for the rigourous experimental design when he was a researcher at Rothamsted Experimental Station 1919 -1933. Rothamsted was an agricultural field station and there were a lot of studies conducted there on the effectiveness of different fertiliser treatments, for example. On arriving at Rothamsted, Fisher was struck by how badly the analyses of these field trials were conducted. He set about developing the theory of the Design of Experiments and he also developed statistical methods to correctly analyse the results of experiments. We use the principles laid down by Fisher to this day.</p>
+<p>Although Fisher had some wrong ideas about eugenics, the genetics of intelligence and racial differences, he was remarkable in that he almost single-handedly invented what we now know as <code>classical</code> statistics. and <strong>also</strong> developed the theory of population genetics (along with J. B. S. Haldane and Sewell Wright). He was a giant of 20th century science and an evolutionary biologist at heart. Unfortunately he was rather grumpy and prone to having disagreements and fights with most of his contemporaries. They say you should never meet your heroes and I am glad I never met Fisher. He died in 1962 in Adelaide. His ashes are interred in St. Peters Anglican cathedral in Adelaide. If you go to Adelaide you can visit Fisher’s ashes. Put your hand on the plaque and absorb some of Fisher’s <code>force!</code></p>
 </div>
-<div id="gls-example-phylogenetic-autocorrelation" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> GLS example: Phylogenetic autocorrelation<a href="chap7.html#gls-example-phylogenetic-autocorrelation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="chap7.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb79-2"><a href="chap7.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
-<span id="cb79-3"><a href="chap7.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtree)</span></code></pre></div>
-<pre><code>## ggtree v3.6.2 For help: https://yulab-smu.top/treedata-book/
-## 
-## If you use the ggtree package suite in published research, please cite the appropriate
-## paper(s):
-## 
-## Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package
-## for visualization and annotation of phylogenetic trees with their covariates and other
-## associated data. Methods in Ecology and Evolution. 2017, 8(1):28-36.
-## doi:10.1111/2041-210X.12628
-## 
-## Guangchuang Yu. Using ggtree to visualize data on tree-like structures. Current Protocols in
-## Bioinformatics. 2020, 69:e96. doi:10.1002/cpbi.96
-## 
-## Guangchuang Yu, Tommy Tsan-Yuk Lam, Huachen Zhu, Yi Guan. Two methods for mapping and
-## visualizing associated data on phylogeny using ggtree. Molecular Biology and Evolution.
-## 2018, 35(12):3041-3043. doi:10.1093/molbev/msy194</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggtree&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ape&#39;:
-## 
-##     rotate</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="chap7.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(carni70)</span>
-<span id="cb83-2"><a href="chap7.html#cb83-2" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="at">text=</span>carni70<span class="sc">$</span>tre)</span>
-<span id="cb83-3"><a href="chap7.html#cb83-3" aria-hidden="true" tabindex="-1"></a>LogRange <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>range)</span>
-<span id="cb83-4"><a href="chap7.html#cb83-4" aria-hidden="true" tabindex="-1"></a>LogSize <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>size)</span>
-<span id="cb83-5"><a href="chap7.html#cb83-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange=</span>LogRange, <span class="at">LogSize=</span>LogSize, <span class="at">Species=</span><span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;.&quot;</span>, <span class="fu">rownames</span>(carni70<span class="sc">$</span>tab)))</span>
-<span id="cb83-6"><a href="chap7.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>LogSize, <span class="at">y=</span>LogRange), <span class="at">data=</span>dat)<span class="sc">+</span><span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="chap7.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtree</span>(tr) <span class="sc">+</span> <span class="fu">geom_tiplab</span>()</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
+<div id="experiments" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Experiments<a href="chap7.html#experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We first consider the simplest experiment: the comparison of two experimental <code>treatments.</code> What is a treatment? A treatment is some sort of manipulation carried out by a researcher on a group of experimental units. An example might be if we are trying to find out the effect of a drug, we may give the drug to some subjects. To contrast this treatment, we will give a <code>placebo</code> to another group of people. The delivery of the drug or placebo are both treatments. The experimental units are the subjects in the experiment.</p>
+<p>This simple study has all the properties of an experiment: There is greater than one treatment. (We have 2 treatments, drug and placebo). We are interested in whether the drug works in that the drug treatment is more effective than the placebo, so we can <code>contrast</code> the treatments. We have performed the experiment a number of times, giving either the drug or the placebo to several subjects. Finally, we do this <strong>at random</strong>, that is, each subject has a probability of 0.5 of receiving either the drug or the placebo. More on the subject of randomness below.</p>
+<p>You may have noticed that what we have described is a <strong>randomised, controlled trial</strong> This is the common term for experiments in the medical field and in the media. Calling a study an RCT is much easier to sell to the general public than an <code>experiment</code>. Subjects generally don’t want to be experimented on or treated as guinea pigs so the RCT terminology is used. Statisticians know that we are all talking about ``experiments.’’</p>
 </div>
-<div id="gls-example-phylogenetic-autocorrelation-1" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> GLS example: Phylogenetic autocorrelation<a href="chap7.html#gls-example-phylogenetic-autocorrelation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="chap7.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;nlme&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggtree&#39;:
-## 
-##     collapse</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="chap7.html#cb88-1" aria-hidden="true" tabindex="-1"></a>fit.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">data=</span>dat)</span>
-<span id="cb88-2"><a href="chap7.html#cb88-2" aria-hidden="true" tabindex="-1"></a>fit.gls <span class="ot">&lt;-</span> <span class="fu">gls</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>tr, <span class="at">form=</span><span class="sc">~</span>Species), <span class="at">data=</span>dat)</span>
-<span id="cb88-3"><a href="chap7.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.lm)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = LogRange ~ LogSize, data = dat)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.6043 -0.9277  0.3178  1.0636  2.3245 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1.3562     0.2123   6.389 1.76e-08 ***
-## LogSize       0.2793     0.1070   2.611   0.0111 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.415 on 68 degrees of freedom
-## Multiple R-squared:  0.09112,    Adjusted R-squared:  0.07776 
-## F-statistic: 6.818 on 1 and 68 DF,  p-value: 0.0111</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="chap7.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.gls)</span></code></pre></div>
-<pre><code>## Generalized least squares fit by REML
-##   Model: LogRange ~ LogSize 
-##   Data: dat 
-##        AIC      BIC    logLik
-##   294.6851 301.3436 -144.3425
-## 
-## Correlation Structure: corBrownian
-##  Formula: ~Species 
-##  Parameter estimate(s):
-## numeric(0)
-## 
-## Coefficients:
-##                 Value Std.Error   t-value p-value
-## (Intercept) 1.2515297 2.6279314 0.4762414  0.6354
-## LogSize     0.3710265 0.1950539 1.9021745  0.0614
-## 
-##  Correlation: 
-##         (Intr)
-## LogSize -0.16 
-## 
-## Standardized residuals:
-##        Min         Q1        Med         Q3        Max 
-## -0.7127592 -0.1633996  0.0533231  0.1993733  0.5433174 
-## 
-## Residual standard error: 4.968733 
-## Degrees of freedom: 70 total; 68 residual</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="chap7.html#cb92-1" aria-hidden="true" tabindex="-1"></a>predictvals <span class="ot">&lt;-</span> <span class="cf">function</span>(model, xvar, yvar, <span class="at">xrange=</span><span class="cn">NULL</span>, <span class="at">samples=</span><span class="dv">100</span>,...){</span>
-<span id="cb92-2"><a href="chap7.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(xrange)){</span>
-<span id="cb92-3"><a href="chap7.html#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;lm&#39;</span>,<span class="st">&#39;glm&#39;</span>)){</span>
-<span id="cb92-4"><a href="chap7.html#cb92-4" aria-hidden="true" tabindex="-1"></a>      xrange<span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>model[[xvar]])</span>
-<span id="cb92-5"><a href="chap7.html#cb92-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb92-6"><a href="chap7.html#cb92-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;loess&#39;</span>)){</span>
-<span id="cb92-7"><a href="chap7.html#cb92-7" aria-hidden="true" tabindex="-1"></a>      xrange <span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>x)</span>
-<span id="cb92-8"><a href="chap7.html#cb92-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb92-9"><a href="chap7.html#cb92-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb92-10"><a href="chap7.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  newdata <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(xrange[<span class="dv">1</span>], xrange[<span class="dv">2</span>], <span class="at">length.out =</span> samples))</span>
-<span id="cb92-11"><a href="chap7.html#cb92-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(newdata) <span class="ot">=</span> xvar</span>
-<span id="cb92-12"><a href="chap7.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  newdata[[yvar]] <span class="ot">=</span> <span class="fu">predict</span>(model, <span class="at">newdata=</span>newdata, ...)</span>
-<span id="cb92-13"><a href="chap7.html#cb92-13" aria-hidden="true" tabindex="-1"></a>  newdata</span>
-<span id="cb92-14"><a href="chap7.html#cb92-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb92-15"><a href="chap7.html#cb92-15" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange =</span> LogRange, <span class="at">LogSize =</span> LogSize)</span>
-<span id="cb92-16"><a href="chap7.html#cb92-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Use the predictvals function from &quot;R Graphics Cookbook&quot;</span></span>
-<span id="cb92-17"><a href="chap7.html#cb92-17" aria-hidden="true" tabindex="-1"></a>ols_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.lm, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>)</span>
-<span id="cb92-18"><a href="chap7.html#cb92-18" aria-hidden="true" tabindex="-1"></a>ols_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;OLS&quot;</span></span>
-<span id="cb92-19"><a href="chap7.html#cb92-19" aria-hidden="true" tabindex="-1"></a>gls_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.gls, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>, </span>
-<span id="cb92-20"><a href="chap7.html#cb92-20" aria-hidden="true" tabindex="-1"></a>                             <span class="at">xrange =</span> <span class="fu">range</span>(dat<span class="sc">$</span>LogSize))</span>
-<span id="cb92-21"><a href="chap7.html#cb92-21" aria-hidden="true" tabindex="-1"></a>gls_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;GLS&quot;</span></span>
-<span id="cb92-22"><a href="chap7.html#cb92-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange), <span class="at">data =</span> dat)<span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb92-23"><a href="chap7.html#cb92-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> ols_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb92-24"><a href="chap7.html#cb92-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> gls_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="chap7.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.gls)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-43-2.png" width="672" /></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="chap7.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(fit.gls, <span class="at">form =</span> <span class="sc">~</span><span class="fu">resid</span>(., <span class="at">type =</span> <span class="st">&quot;n&quot;</span>), <span class="at">abline =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-43-3.png" width="672" /></p>
+<div id="more-terminology" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> More terminology<a href="chap7.html#more-terminology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our example, we can consider the two treatments (Drug and Placebo) to be properties of a unified object, the <strong>factor</strong>. We thus have a factor Drug with two <strong>levels</strong>: drug and placebo. In more complicated experiments, there may be more than one factor in an experiment, and the treatments are combinations of the levels of the different factors. Aside: When Fisher defined a factor, he was thinking about genetics, where different alleles were considered to be different genetic factors. We now use the term <code>factor</code> in a more general sense, beyond just allelic differences in phenotypes.</p>
+<p>The data we take from our subjects during the experiment are called the <code>response</code> or <code>outcome</code> variables of the experiment. For our drug example, if we were interested in the effect of the drug on blood pressure, then we would measure the blood pressure of each experimental unit (subject) after applying the drug or placebo. The blood pressure would be the response variable. The factor Drug (with levels drug and placebo) is called the <code>explanatory variable</code> and is defined by our experimental design. The difference between the effect of the drug treatment the placebo is called the <code>effect size.</code></p>
+<p>The placebo treatment is called a <code>control</code> treatment. Controls represent a treatment that contains everything about the drug treatment, except the drug itself. A placebo pill contains no active ingredients but application of a placebo can still affect the results (compared to not taking a pill at all) due to the <code>placebo effect.</code> The effect of taking the drug is thus <strong>isolated</strong> from all the other factors that might influence the results that occur both in the drug treatment and the placebo control. Any <code>effect,</code> the difference between the two treatments, must be due to the application of the drug alone.</p>
 </div>
-<div id="gls-example-time-series" class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> GLS example: Time Series<a href="chap7.html#gls-example-time-series" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>We expect that adjacent values may be more similar than values further away in time. That is, the effect of the <code>disturbance</code> on the time series decays with time.</li>
-<li>In general we do not know the covariances of each value with all other values.</li>
-<li>Instead, we can <code>model</code> the time series effects using a smaller number of parameters.</li>
-<li>A simple example is the <code>autoregression</code> model:</li>
-<li><span class="math inline">\(x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon\)</span></li>
-</ul>
+<div id="randomness" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Randomness<a href="chap7.html#randomness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The role of randomness crops up in two places in experiments. The first is that the experimental units differ in small ways from each other. On one hand we should try to use experimental units (subjects, in our case), that are as uniform as possible to reduce the effects of this randomness. This is the reason for using in-bred lines of rats, mice or rabbits in experiments as they are effectively clones with no genetic differences. They are more uniform, at least in their genetics.</p>
+<p>On the other hand, if our experiment is expected to be more <code>natural</code> we may be interested in running it on a more representative group of experimental units. For example, we may recruit subjects with different backgrounds, body size, gender, age, etc. So that any effects of the drug will be more like the representative effect seen in a clinical setting where lots of different people seek to take the same drug, but respond differently. Such considerations should lead you to think carefully about the hypothesis you are trying to test (more on hypothesis testing below).</p>
+<p>The other source of randomness is that deliberately induced by the experimenter: The treatments are assigned to the subjects at random, using a random number generator. The reasoning here is that such random allocation to treatments serves to break up any systematic differences that could possibly occur among subjects. In contrast, any other mechanism for allocating treatments to experimental units has the potential for systematic bias, which will render the experiment useless. An example might be if we ask subjects to arrive at the clinic at various times during the day, and we gave the drug to all the subjects that arrived early in the morning, and the placebo to the subjects who arrived at the clinic late in the day. If, for example, the effectiveness of the drug depended on the time it was taken (e.g. due to circadian rhythm effects), then our experiment would be destroyed because a systematic bias was introduced during treatment allocation. Only random application of treatments to experimental units can avoid these undesirable effects.</p>
 </div>
-<div id="lynx-data" class="section level2 hasAnchor" number="7.5">
-<h2><span class="header-section-number">7.5</span> Lynx Data<a href="chap7.html#lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="chap7.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
-<span id="cb95-2"><a href="chap7.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lynx)</span></code></pre></div>
-<pre><code>##  Time-Series [1:114] from 1821 to 1934: 269 321 585 871 1475 ...</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="chap7.html#cb97-1" aria-hidden="true" tabindex="-1"></a>lynxdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Year=</span><span class="dv">1821</span><span class="sc">:</span><span class="dv">1934</span>, <span class="at">Lynx=</span>lynx)</span>
-<span id="cb97-2"><a href="chap7.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lynxdat, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Lynx)) <span class="sc">+</span> <span class="fu">geom_line</span>()<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">scale_x_continuous</span>() <span class="sc">+</span> <span class="fu">scale_y_continuous</span>() <span class="sc">+</span> </span>
-<span id="cb97-3"><a href="chap7.html#cb97-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Hudson Bay Lynx Returns&quot;</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div id="positive-and-negative-controls" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Positive and Negative Controls<a href="chap7.html#positive-and-negative-controls" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Most control treatments in experiments are usually <code>negative</code> in the sense that they include all the effects on a treatment, <strong>except</strong> the one of interest to the researcher. However, there are many situations where we need a <code>positive</code> control: A treatment where an effect is guaranteed to be detected. A common example is when biologists are seeking to sequence an unknown gene. In order to make sure the sequencing experiment is working, they include a gene of known sequence. If the experiment can’t get the correct result for the known sequence, then it is clear that there is something wrong with the experimental technique.</p>
 </div>
-<div id="acf-and-pacf" class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">7.6</span> ACF and PACF<a href="chap7.html#acf-and-pacf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="chap7.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
-<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
-##   method            from
-##   as.zoo.data.frame zoo</code></pre>
-<pre><code>## 
-## Attaching package: &#39;forecast&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:nlme&#39;:
-## 
-##     getResponse</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="chap7.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(lynx))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="chap7.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(lynx))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
+<div id="blinding-of-experiments" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Blinding of experiments<a href="chap7.html#blinding-of-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Blinding in experiments is a very useful technique for avoiding all sorts of systematic biases. The method is to apply the experimental treatment <strong>without</strong> the subject knowing what treatment they are being given. So in our example, the researcher gives a pill to the subjects without telling them whether the treatment is the drug or the placebo. Of course, the researcher knows this information so it can be used later in the statistical analysis. An even more sneaky method is the so-called <code>double blind</code> trial. Here, both the researcher and the subject do not know which treatment is being applied. The information is kept by a third party and only revealed to the experimenter at the time of the analysis when collecting of data is over. Doubly-blind trials are a powerful technique for controlling many sorts of systematic bias that may be inadvertently introduced by the experimenter and the subject. Sometimes it is not possible to perform such trials, however.</p>
 </div>
-<div id="autoregression-of-lynx-data" class="section level2 hasAnchor" number="7.7">
-<h2><span class="header-section-number">7.7</span> Autoregression of Lynx Data<a href="chap7.html#autoregression-of-lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="chap7.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find optimal autoregression size</span></span>
-<span id="cb104-2"><a href="chap7.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ar</span>(lynx, <span class="at">method=</span><span class="st">&quot;mle&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## ar(x = lynx, method = &quot;mle&quot;)
-## 
-## Coefficients:
-##       1        2        3        4        5        6        7        8  
-##  1.0555  -0.6298   0.2105  -0.1438  -0.0200   0.0373  -0.2341   0.3322  
-## 
-## Order selected 8  sigma^2 estimated as  616997</code></pre>
+<div id="covariates" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Covariates<a href="chap7.html#covariates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another useful part of an experiment is to collect other data along with the response variable of interest. For example, in our drug experiment, we could collect information on the sex and body size of the subjects, their level of obesity, family history of heart disease etc. These are all of interest and may be important in contributing to the response of the subjects to the drug treatment. Yet, they are not being experimentally manipulated by the researcher. They are simply extra information that can be used in the interpretation of the experiment. They are called <code>covariates.</code></p>
+<p>It is important to remember that perhaps the defining feature of an experiment is to <strong>manipulate</strong> the experimental units in some way. In this way we can distinguish cause and effect. However, it is possible to collect data on a lot of covariates and relate them to some other variable (the presumed <code>outcome</code> or <code>response</code>) without manipulating the study system and then derive conclusions about cause and effect. Such <code>observational</code> studies are fraught because they are heavily dependent on the underlying causal model being correct. However, there could easily be other <strong>unmeasured</strong> variables that are contributing to the outcome, or the measured covariates could be related to each other in complicated ways. Without experimentation, we cannot usually establish cause and effect. (There are some exceptions to this rule but they rely on extra assumptions and are beyond the scope of this course. If you want information about this, ask me in class.)</p>
 </div>
-<div id="gls-autoregression-model-of-lynx-data" class="section level2 hasAnchor" number="7.8">
-<h2><span class="header-section-number">7.8</span> GLS Autoregression model of Lynx data<a href="chap7.html#gls-autoregression-model-of-lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="chap7.html#cb106-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">gls</span>(Lynx<span class="sc">~</span>Year, <span class="at">correlation=</span><span class="fu">corARMA</span>(<span class="at">p=</span><span class="dv">8</span>), <span class="at">data=</span>lynxdat, <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
-<span id="cb106-2"><a href="chap7.html#cb106-2" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
-<pre><code>## Generalized least squares fit by maximum likelihood
-##   Model: Lynx ~ Year 
-##   Data: lynxdat 
-##   Log-likelihood: -923.1686
-## 
-## Coefficients:
-##  (Intercept)         Year 
-## -1535.301943     1.657011 
-## 
-## Correlation Structure: ARMA(8,0)
-##  Formula: ~1 
-##  Parameter estimate(s):
-##        Phi1        Phi2        Phi3        Phi4        Phi5        Phi6        Phi7        Phi8 
-##  1.05436014 -0.62987055  0.20987093 -0.14453853 -0.01997304  0.03578814 -0.23275963  0.32892377 
-## Degrees of freedom: 114 total; 112 residual
-## Residual standard error: 1558.429</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="chap7.html#cb108-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit, <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb108-2"><a href="chap7.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(vals))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="chap7.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(vals))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
+<div id="natural-experiments-or-natural-experiments" class="section level2 hasAnchor" number="7.8">
+<h2><span class="header-section-number">7.8</span> “Natural” Experiments or Natural “Experiments”<a href="chap7.html#natural-experiments-or-natural-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Some people talk about “natural” experiments, such as those provided by natural disasters or weather events, when it is assumed that treatments have been applied to the experimental units at random by the mechanism of the extreme conditions. However, the quotes should be around “experiment” not natural, as nobody doubts the naturalness of the event but it is somewhat dubious to consider it as an experiment akin to researcher manipulated studies where treatments have been allocated to experimental units at random.</p>
+</div>
+<div id="random-effects-and-blocking" class="section level2 hasAnchor" number="7.9">
+<h2><span class="header-section-number">7.9</span> Random effects and Blocking<a href="chap7.html#random-effects-and-blocking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
@@ -449,8 +285,8 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
           </div>
         </div>
       </div>
-<a href="chap6.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chap6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

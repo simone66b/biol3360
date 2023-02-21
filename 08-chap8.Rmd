@@ -1,0 +1,121 @@
+# Generalised Least Squares {#chap8}
+
+In OLS, the assumption about the errors is that they are __independent and identically distributed.__ What if they are not independent? One common example is that the errors are correlated with each other. Then we have:
+$$
+  \epsilon \sim N(0, \sigma^2 \mathbf{\Sigma})
+$$
+  where $\Sigma$ is a variance-covariance matrix for the residuals. ie
+  
+$$
+    \mathbf{\Sigma} = \begin{bmatrix}
+      \sigma^2_1 & Cov(\epsilon_1, \epsilon_2) & \cdots & Cov(\epsilon_1, \epsilon_n) \\
+      Cov(\epsilon_2, \epsilon_1) & \sigma^2_2 & \cdots & Cov(\epsilon_2, \epsilon_n) \\
+      \vdots & \vdots &  \ddots  & \vdots \\
+      Cov(\epsilon_n, \epsilon_1) & \cdots & \cdots & \sigma^2_n \end{bmatrix}
+$$
+
+      
+## Estimation: GLS
+  Then we have the GLS Estimator:
+$$
+    \hat{\beta_{GLS}} = (\mathbf{X^T \Sigma^{-1} X})^{-1}\mathbf{X^T\Sigma^{-1}Y}
+$$
+
+- If the covariances (off-diagonals) are zero, then we have _weighted least squares_
+- We can transform the GLS problem into OLS by multiplying $\mathbf{X}$ and $\mathbf{Y}$ by $\mathbf{\Sigma}^{-1/2}$ Then we can use the OLS equation on these new, transformed data. ie, $\mathbf{X^*} = \mathbf{\Sigma^{-1/2}X}$, $\mathbf{Y^*} = \mathbf{\Sigma^{-1/2}Y}$. $\hat{\beta_{GLS}} = \mathbf{(X^{*T}X^*)^{-1}X^*Y^*}$
+
+## GLS example: Phylogenetic autocorrelation
+```{r}
+library(ape)
+library(ade4)
+library(ggtree)
+data(carni70)
+tr <- read.tree(text=carni70$tre)
+LogRange <- log(carni70$tab$range)
+LogSize <- log(carni70$tab$size)
+dat <- data.frame(LogRange=LogRange, LogSize=LogSize, Species=gsub("_", ".", rownames(carni70$tab)))
+ggplot(aes(x=LogSize, y=LogRange), data=dat)+geom_point()
+ggtree(tr) + geom_tiplab()
+```
+
+## GLS example: Phylogenetic autocorrelation
+```{r}
+library(nlme)
+fit.lm <- lm(LogRange ~ LogSize, data=dat)
+fit.gls <- gls(LogRange ~ LogSize, correlation=corBrownian(phy=tr, form=~Species), data=dat)
+summary(fit.lm)
+summary(fit.gls)
+predictvals <- function(model, xvar, yvar, xrange=NULL, samples=100,...){
+  if(is.null(xrange)){
+    if(class(model) %in% c('lm','glm')){
+      xrange= range(model$model[[xvar]])
+    }
+    else if(class(model) %in% c('loess')){
+      xrange = range(model$x)
+    }
+  }
+  newdata = data.frame(x = seq(xrange[1], xrange[2], length.out = samples))
+  names(newdata) = xvar
+  newdata[[yvar]] = predict(model, newdata=newdata, ...)
+  newdata
+}
+dat <- data.frame(LogRange = LogRange, LogSize = LogSize)
+## Use the predictvals function from "R Graphics Cookbook"
+ols_predicted <- predictvals(fit.lm, "LogSize", "LogRange")
+ols_predicted$fit <- "OLS"
+gls_predicted <- predictvals(fit.gls, "LogSize", "LogRange", 
+                             xrange = range(dat$LogSize))
+gls_predicted$fit <- "GLS"
+ggplot(aes(x = LogSize, y = LogRange), data = dat)+ geom_point() + 
+    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = ols_predicted, linewidth = 2) + 
+    geom_line(aes(x = LogSize, y = LogRange, col = fit), data = gls_predicted, linewidth = 2)
+plot(fit.gls)
+qqnorm(fit.gls, form = ~resid(., type = "n"), abline = c(0, 1))
+``` 
+
+
+## GLS example: Time Series
+
+- We expect that adjacent values may be more similar than values further away in time. That is, the effect of the ``disturbance`` on the time series decays with time. 
+- In general we do not know the covariances of each value with all other values.
+- Instead,  we can ``model`` the time series effects using a smaller number of parameters. 
+- A simple example is the ``autoregression`` model:
+- $x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon$
+
+## Lynx Data
+
+```{r}
+data(lynx)
+str(lynx)
+lynxdat <- data.frame(Year=1821:1934, Lynx=lynx)
+ggplot(lynxdat, aes(x=Year, y=Lynx)) + geom_line()+geom_point() + scale_x_continuous() + scale_y_continuous() + 
+    ggtitle("Hudson Bay Lynx Returns")+theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+## ACF and PACF
+
+```{r}
+library(forecast)
+print(ggAcf(lynx))
+print(ggPacf(lynx))
+```
+
+
+## Autoregression of Lynx Data
+```{r}
+# find optimal autoregression size
+ar(lynx, method="mle")
+```
+
+## GLS Autoregression model of Lynx data
+```{r}
+fit <- gls(Lynx~Year, correlation=corARMA(p=8), data=lynxdat, method="ML")
+fit
+```
+
+```{r}
+vals <- resid(fit, type="n")
+print(ggAcf(vals))
+print(ggPacf(vals))
+```

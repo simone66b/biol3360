@@ -20,7 +20,7 @@ the-workspace-setup
 first-steps
 the-art-of-r-programming
 chap4
-more-on-data-structures
+data-structures
 lists
 data-frames
 chap5
@@ -31,7 +31,9 @@ branching-code-the-if-then-else-construct.
 conclusion
 chap6
 graphing-the-iris-data
+good-resources-for-graphing
 analysing-the-iris-data
+model-diagnostics
 analysis-using-t-test
 analysis-using-anova
 analysis-using-regression
@@ -43,6 +45,16 @@ matrix-representation
 distributional-assumptions
 estimation-ordinary-least-squares
 chap7
+some-history
+experiments
+more-terminology
+randomness
+positive-and-negative-controls
+blinding-of-experiments
+covariates
+natural-experiments-or-natural-experiments
+random-effects-and-blocking
+chap8
 estimation-gls
 gls-example-phylogenetic-autocorrelation
 gls-example-phylogenetic-autocorrelation-1
