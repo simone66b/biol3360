@@ -1,264 +1,59 @@
-# LinearModels {#chap6}
+# Experimental Design {#chap6}
 
-Consider R. A. Fisher's classic Iris data set, consisting of several morphological measurements on the flowers of three species of _Iris_. This data set is famous in statistics and is often used as test data for a wide variety of statistical methods. Fisher was probably the most important statistician __and__ evolutionary biologist of the 20th century. He layed the foundations for our modern practice of statistics and he was a great evolutionary geneticist, partly responsible for inventing population genetics and establishing that natural selection could indeed be a powerful force in evolution. He was also a terrible grump and had lots of fights with other scientists. Although I like to find out about my idols, Fisher is someone that I am glad not to have met! Back to the data:
-```{r, fig.cap="An Iris"}
-knitr::include_graphics("sepalsPetals.jpg")
-```
-```{r, fig.cap="R. A. Fisher"}
-knitr::include_graphics("fisher-smiling-50.jpg")
-```
-```{r}
-data(iris)
-head(iris)
-tail(iris)
-```
-Here we have loaded the data frame called ``iris`` It is built into R, which is convenient for us. The ``head()`` and ``tail()`` functions examine the first 6 and the last 6 lines of the data frame, allowing us to see the variable names and check that the data frame is usable. Although 
-```{r, fig.cap="Iris setosa"}
-knitr::include_graphics("Kosaciec_szczecinkowaty_Iris_setosa.jpg")
-```
+## Some History
+Sir Ronald Fisher developed the foundations for the rigourous experimental design when he was a researcher at Rothamsted Experimental Station 1919 -1933. Rothamsted was an agricultural field station and there were a lot of studies conducted there on the effectiveness of different fertiliser treatments, for example. On arriving at Rothamsted, Fisher was struck by how badly the analyses of these field trials were conducted. He set about developing the theory of the Design of Experiments and he also developed statistical methods to correctly analyse the results of experiments. We use the principles laid down by Fisher to this day.
 
-```{r, fig.cap="Iris virginica"}
-knitr::include_graphics("220px-Iris_virginica.jpg")
-```
+Although Fisher had some wrong ideas about eugenics, the genetics of intelligence and racial differences, he was remarkable in that he almost single-handedly invented what we now know as ``classical`` statistics. and __also__ developed the theory of population genetics (along with J. B. S. Haldane and Sewell Wright). He was a giant of 20th century science and an evolutionary biologist at heart. Unfortunately he was rather grumpy and prone to having disagreements and fights with most of his contemporaries. They say you should never meet your heroes and I am glad I never met Fisher. He died in 1962 in Adelaide. His ashes are interred in St. Peters Anglican cathedral in Adelaide. If you go to Adelaide you can visit Fisher's ashes. Put your hand on the plaque and absorb some of Fisher's ``force!``
 
-```{r, fig.cap="Iris versicolor"}
-knitr::include_graphics("220px-Iris_versicolor_3.jpg")
-```
-```{r}
-summary(iris)
-```
-Here we have a six-figure summary of each of the variables: the mean, minimum and maximum values, plus the median, and first and 3rd quartiles. Together these numbers tell us a little about the distribution of the data (but not much).
+## Experiments
 
-## Graphing the Iris data
+We first consider the simplest experiment: the comparison of two experimental ``treatments.`` What is a treatment? A treatment is some sort of manipulation carried out by a researcher on a group of experimental units. An example might be if we are trying to find out the effect of a drug, we may give the drug to some subjects. To contrast this treatment, we will give a ``placebo`` to another group of people. The delivery of the drug or placebo are both treatments. The experimental units are the subjects in the experiment. 
 
-```{r, fig.height=2.5, fig.width=3.75}
-library(ggplot2)
-ggplot(aes(x = Species, y = Petal.Length), data = iris) +
-geom_point() + ylim(0, 8)
-```
-Here we have a plot of the Petal Length for each species. The dots overlap a lot and it is hard to see what is going on, although you can see the maxima and minima quite clearly for each species.
-```{r, fig.height=2.5, fig.width=3.75}
-ggplot(aes(x = Species, y = Petal.Length), data = iris) +
-geom_jitter(width = 0.4, height = 0) + ylim(0, 8)
-```
-Here are the same data but we have "jittered" the data along the x-axis, allowing us to see each data point separately from the others. This is a good way to display small amounts of data. Note that you should only jitter the data in the x direction in this case. Jittering the y data is wrong! (why?)
-```{r, fig.height=2.5, fig.width=3.75}
-ggplot(aes(x = Species, y = Petal.Length), data = iris) +
-geom_boxplot() + ylim(0, 8)
-```
+This simple study has all the properties of an experiment: There is greater than one treatment. (We have 2 treatments, drug and placebo). We are interested in whether the drug works in that the drug treatment is more effective than the placebo, so we can ``contrast`` the treatments. We have performed the experiment a number of times, giving either the drug or the placebo to several subjects. Finally, we do this __at random__, that is, each subject has a probability of 0.5 of receiving either the drug or the placebo. More on the subject of randomness below.
 
-If we have a larger amount of data, a box and whisker plot can be useful. It plots the median and interquartile range, and the outer ``whiskers`` extend to 1.5 x the size of the interquartile range. Extreme outliers are also indicated.
+You may have noticed that what we have described is a __randomised, controlled trial__ This is the common term for experiments in the medical field and in the media. Calling a study an RCT is much easier to sell to the general public than an ``experiment``. Subjects generally don't want to be experimented on or treated as guinea pigs so the RCT terminology is used. Statisticians know that we are all talking about ``experiments.'' 
 
-## Good Resources for Graphing
+## More terminology
 
-We won't have much time to go into advanced graphing techniques in this course, although I will try to highlight graphing methods as we go along. Fortunately, there are some good books to consult. They are online through the library:
- 
-- _R Graphics Cookbook_ by Chang
-- _ggplot2 Elegant Graphics for Data Analysis_ by Wickham
+In our example, we can consider the two treatments (Drug and Placebo) to be properties of a unified object, the __factor__. We thus have a factor Drug with two __levels__: drug and placebo. In more complicated experiments, there may be more than one factor in an experiment, and the treatments are combinations of the levels of the different factors. Aside: When Fisher defined a factor, he was thinking about genetics, where different alleles were considered to be different genetic factors. We now use the term ``factor`` in a more general sense, beyond just allelic differences in phenotypes.
 
-## Analysing the iris data
+The data we take from our subjects during the experiment are called the ``response`` or ``outcome`` variables of the experiment. For our drug example, if we were interested in the effect of the drug on blood pressure, then we would measure the blood pressure of each experimental unit (subject) after applying the drug or placebo. The blood pressure would be the response variable. The factor Drug (with levels drug and placebo) is called the ``explanatory variable`` and is defined by our experimental design. The difference between the effect of the drug treatment and the placebo is called the ``effect size.`` 
 
-How would you analyse these data? Since we have 3 distinct groups (species) to compare and the data are continuous and (probably) normally-distributed, the Analysis of Variance (ANOVA) might be your first choice. Here is an analysis for petal length in R:
+The placebo treatment is called a ``control`` treatment. Controls represent a treatment that contains everything about the drug treatment, except the drug itself. A placebo pill contains no active ingredients but application of a placebo can still affect the results (compared to not taking a pill at all) due to the ``placebo effect.`` The effect of taking the drug is thus __isolated__ from all the other factors that might influence the results that occur both in the drug treatment and the placebo control. Any ``effect,`` the difference between the two treatments, must be due to the application of the drug alone.
 
-```{r}
-fit <- aov(Petal.Length ~ Species, data = iris)
-summary(fit)
-```
+## Randomness
 
-We see that there is evidence for significant variation in petal length among species. We reject the null hypothesis that there are no differences in petal length among the three species. Note that this is a very vague conclusion. We don't know which species differ in their petal length from the others, and we don't know how big the differences really are. A thorough analysis would establish this information.
+The role of randomness crops up in two places in experiments. The first is that the experimental units differ in small ways from each other. On one hand we should try to use experimental units (subjects, in our case), that are as uniform as possible to reduce the effects of this randomness. This is the reason for using in-bred lines of rats, mice or rabbits in experiments as they are effectively clones with no genetic differences. They are more uniform, at least in their genetics.
 
-## Model Diagnostics
+On the other hand, if our experiment is expected to be more ``natural`` we may be interested in running it on a more representative group of experimental units. For example, we may recruit subjects with different backgrounds, body size, gender, age, etc. So that any effects of the drug will be more like the representative effect seen in a clinical setting where lots of different people seek to take the same drug, but respond differently. Such considerations should lead you to think carefully about the hypothesis you are trying to test (more on hypothesis testing below).
 
-When building a statistical model, checking the model using diagnostic plots is a crucial step. All models have assumptions and if these assumptions are violated then the model will potentially give wrong results. For the ANOVA model, there are several important assumptions:
+The other source of randomness is that deliberately induced by the experimenter: The treatments are assigned to the subjects at random, using a random number generator. The reasoning here is that such random allocation to treatments serves to break up any systematic differences that could possibly occur among subjects. In contrast, any other mechanism for allocating treatments to experimental units has the potential for systematic bias, which will render the experiment useless. An example might be if we ask subjects to arrive at the clinic at various times during the day, and we gave the drug to all the subjects that arrived early in the morning, and the placebo to the subjects who arrived at the clinic late in the day. If, for example, the effectiveness of the drug depended on the time it was taken (e.g. due to circadian rhythm effects), then our experiment would be destroyed because a systematic bias was introduced during treatment allocation. (We say that the drug effect is __confounded__ with the time the drug was taken. Confounding is a big problem and you should really look out for it in the design of any experiment that you do.) Only random application of treatments to experimental units can avoid these systematic biases.
 
-- The data are independent
-- The residuals follow a Normal distribution
-- The variance of the residuals is constant over the range of the data (homoscedastic errors).
+## Positive and Negative Controls
 
-While all three assumptions are important, the first and third are crucial. It turns out that the Normality of residuals is not an overly strong assumption for the ANOVA model, but you should still check it, as large departures from Normality can cause problems. I usually rely on graphical approaches to testing assumptions:
+Most control treatments in experiments are usually ``negative`` in the sense that they include all the effects on a treatment, __except__ the one of interest to the researcher. However, there are many situations where we need a ``positive`` control: A treatment where an effect is guaranteed to be detected. A common example is when biologists are seeking to sequence an unknown gene. In order to make sure the sequencing experiment is working, they include a gene of known sequence. If the experiment can't get the correct result for the known sequence, then it is clear that there is something wrong with the experimental technique.
 
-```{r, fig.height=4, fig.width=8}
-par(mfrow=c(1,2))
-plot(fit, which = 1:2)
-```
+## Blinding of experiments
 
-The first diagnostic plot above, plots the residuals versus their fitted values. If the assumption of homoscedasticity holds (try saying that 5 times fast!), there will be no pattern to the residuals. If you see a curve, either upwards or downwards, that is suggestive of curvature in your data. If there is a "trumpet" like effect either increasing to the right or left, or you have a "bow tie" shape to the residual plot ie narrower in the middle, then the data are not homoscedastic.
+Blinding in experiments is a very useful technique for avoiding all sorts of systematic biases. The method is to apply the experimental treatment __without__ the subject knowing what treatment they are being given. So in our example, the researcher gives a pill to the subjects without telling them whether the treatment is the drug or the placebo. Of course, the researcher knows this information so it can be used later in the statistical analysis. An even more sneaky method is the so-called ``double blind`` trial. Here, both the researcher and the subject do not know which treatment is being applied. The information is kept by a third party and only revealed to the experimenter at the time of the analysis when collecting of data is over. Doubly-blind trials are a powerful technique for controlling many sorts of systematic bias that may be inadvertently introduced by the experimenter and the subject. Sometimes it is not possible to perform such trials, however.
 
+## Covariates
 
-Subset and Recode the Data}
-```{r}
-iris2 <- subset(iris, Species != "setosa")
-```
+Another useful part of an experiment is to collect other data along with the response variable of interest. For example, in our drug experiment, we could collect information on the sex and body size of the subjects, their level of obesity, family history of heart disease etc. These are all of interest and may be important in contributing to the response of the subjects to the drug treatment. Yet, they are not being experimentally manipulated by the researcher. They are simply extra information that can be used in the interpretation of the experiment. They are called ``covariates.`` 
 
-Hypothesis: There exists a difference between the species' means. How would you analyse these data?
-- t-test?
-- ANOVA?
-- Regression?
-- All three!!!
+It is important to remember that perhaps the defining feature of an experiment is to __manipulate__ the experimental units in some way. In this way we can distinguish cause and effect. However, it is possible to collect data on a lot of covariates and relate them to some other variable (the presumed ``outcome`` or ``response``) without manipulating the study system and then derive conclusions about cause and effect. Such ``observational`` studies are fraught because they are heavily dependent on the underlying causal model being correct. However, there could easily be other __unmeasured__ variables that are contributing to the outcome, or the measured covariates could be related to each other in complicated ways. Without experimentation, we cannot usually establish cause and effect. (There are some exceptions to this rule but they rely on extra assumptions and are beyond the scope of this course. If you want information about this, ask me in class.) 
 
-## Analysis using t test 
-```{r}
-fit.ttest <- t.test(Petal.Length ~ Species, 
-  data = iris2, var.equal = TRUE)
-print(fit.ttest)
-```
+## "Natural" Experiments or Natural "Experiments"
 
-## Analysis using ANOVA
-```{r}
-fit.anova <- aov(Petal.Length ~ Species, data = iris2)
-summary(fit.anova)
-```
+Some people talk about "natural" experiments, such as those provided by natural disasters or weather events, when it is assumed that treatments have been applied to the experimental units at random by the mechanism of the extreme conditions. However, the quotes should be around "experiment" not natural, as nobody doubts the naturalness of the event but it is somewhat dubious to consider it as an experiment akin to researcher manipulated studies where treatments have been allocated to experimental units at random. Some systematic bias may have been introduced, of which we are not aware.
 
-## Analysis using Regression
-```{r}
-fit.regression <- lm(Petal.Length ~ Species, data=iris2)
-summary(fit.regression)
-```
+## Random effects and Blocking
 
-## Points to Note
-- For an F test with __one__ degree of freedom in the numerator, $F = t^2$ with the denominator degrees of freedom for the F statistic equal to the degrees of freedom for the t statistic.
-\item We can get the regression output from the ANOVA fit using ``summary.lm``
+One particularly useful technique in the design of experiments is the use of __random effects__, also known as __blocking__. The definition of random effects is slightly complicated so we will leave it to a later chapter. Here we will consider two examples, so you get the idea. Returning to our drug experiment, say we wanted the experiment to be quite large (lots of __replicate__ subjects). So we decide to run the experiment at different clinic locations or hospitals. Now, it is possible that different clinics might produce slightly different results (drug effects). This might be due to the fact that subjects that attend one clinic might receive better treatment, more accurate doses of the drug, may live closer to one clinic rather than another. etc. The upshot is that  some clinics will have, on average, higher or lower effect sizes than others. This variability due to the hospital effect leads to the idea of __blocking__, where we assign patients to blocks (clinics) at random to each of the blocks, The treatments (drug and control) are given to subjects who are a member of a particular clinic, and we use the information of which clinic was attended in the analysis. We then consider the variability in the response to __among__ versus __within__ block effects. So ultimately we are able to __model__ the variation due to blocks and account for it as a component of the variation in the experiment. More on this in the chapter on ``mixed-effects models.`` Aside: The term "block" comes from agricultural trials where fields were divided up into blocks, based on the topography of the field.
 
-```{r}
-summary.lm(fit.anova)
-```
+The second case where random effects and blocking is common is when we take multiple measurements from our subjects. This is called a __repeated measures__ design. In our drug example, we may, in a sense, use each individual as their own control, by first measuring their blood pressure, applying the treatment (drug versus control) and then re-measuring their blood pressure. Here, the "block" is the individual subject. Naturally, some subjects will respond well to the drug, and some not so well. By treating subjects as blocks, we can remove this subject to subject variation and account for it in our analysis. In our simple drug example, we would probably use a __paired t-test__ to test for differences between treatments, within subjects, which is a simple case of a repeated measures analysis.
 
-Regression Plot
+## Power
 
-```{r, fig.height=3.2, fig.width=5}
-iris2$coded <- ifelse(iris2$Species == "versicolor", 0, 1)
-options(warn = -1)
-mns <- tapply(iris2$Petal.Length, iris2$coded, mean)
-df <- data.frame(Petal.Length = mns, coded = 0:1, lower=c(NA, mns[1]), upper = c(NA, mns[2]))
-ggplot(data=iris2, aes(coded, Petal.Length)) + 
-geom_point() + 
-geom_smooth(method = lm , color = "red", se = FALSE, formula=y~x) +
-geom_errorbar(data = df, mapping = aes(x = coded, ymin = lower, 
-  ymax = upper), width = 0.05, col = "blue") + ylim(2.5, 7.5) + xlim(0, 1) +
-geom_text(label = paste(expression(beta[1])), x = 0.5, y = 4.5, parse = TRUE) +
-geom_text(label = paste(expression(beta[1])), x = 0.95, y = 5, parse = TRUE) +
-geom_text(label = paste(expression(beta[0])), x = 0.05, y = 4, parse = TRUE) +
-geom_text(label = paste(expression(height == beta[0] + beta[1] %*% Species)), 
-  x = 0.5, y = 7, parse = TRUE)
-```
-
-## Summary
-- If we code our categorical variables as 0, 1, then the slope $\beta_1$ is the same as the difference between the means for each category.
-- The intercept $\beta_0$ is the value for the baseline category.
-- With 3 or more categories, we construct the 0, 1 ``dummy variables``:
-
-```{r}
-cat.var <- LETTERS[1:3]
-model.matrix(~cat.var)
-```
-
-## Linear Models
-- Comparing groups or doing regression are \textbf{both} examples of the General Linear Model.
-- Regression: $y_i = \beta_0 + \beta_1x_i + \epsilon_i, \epsilon \sim NID(0, \sigma^2)$
-- ANOVA: $y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon \sim NID(0, \sigma^2)$ 
-- Why ``Linear?'' Definition: A linear transformation (equation) is defined by these 2 properties:
-
--- $f(x + y) = f(x) + f(y)$: Additivity
--- $f(Ax) = Af(x)$ : Homogeneity
--- Idea: The whole is equal to the sum of its parts.
-
-## Matrix Notation for Linear Models
-
-- $Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)$
-
-$$
-Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
-Y_2 = \beta_0 + \beta_1 X_2 + \epsilon_2 \\
-Y_3 = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
-\vdots \qquad \vdots \qquad \vdots \\
-Y_n = \beta_0 + \beta_1 X_n + \epsilon_n 
-$$
-
-
-$$
-\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
-\begin{bmatrix} \beta_0 + \beta_1X_1 \\
-                \beta_0 + \beta_1X_2 \\
-               	\beta_0 + \beta_1X_3 \\
-               	\vdots \\
-               	\beta_0 + \beta_1X_n
-\end{bmatrix} +
-\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-$$
-
-## Matrix Representation
-
-$$
-\begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
-\begin{bmatrix} 1 & X_1 \\ 1 & X_2 \\ 1 & X_3 \\ \vdots & \vdots \\ 1 & X_n \end{bmatrix} \times
-\begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
-\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-$$
-
-$$
-\mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
-$$
-\begin{minipage}{.22\linewidth}
-\centering
-$$
-\mathbf{X}= \begin{bmatrix} 
-	1 & X_1 \\
-	1 & X_2 \\
-	1 & X_3 \\
-	\vdots & \vdots \\
-	1 & X_n \end{bmatrix}
-$$
-
-
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
-$$
-\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
-$$
-Vector of Parameters
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
-$$
-\mathbf{\epsilon} = \begin{bmatrix}
-\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-$$
-
-Vector of Error Terms
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
-$$
-\mathbf{Y} = \begin{bmatrix}
-Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
-$$
-Vector of Responses
-\end{minipage}
-
-## Distributional Assumptions
-
-$$
-\sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
-\sigma^2 & 0 & \cdots & 0 \\
-0 & \sigma^2 & \cdots & 0 \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 0 & \cdots & \sigma^2
-\end{bmatrix}
-$$
-$$
-\epsilon \sim N(0, \sigma^2\mathbf{I})
-$$
-\centering
-Full model:
-$\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
-
-
-## Estimation: Ordinary Least Squares
-
-$$
-\hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
-\hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
-$$
-where $\hat{\sigma}^2$ is the unbiased estimator of $\sigma^2$, and $p=2$ since we are estimating the slope and the intercept. $n$ is the sample size.
+I have said previously that we should choose to do our experiment on many experimental units. This is called __replication__. Then each experimental unit is also known as a __replicate__. But how many replicates do we need in each treatment? How big should our __sample size__ be? 
 
