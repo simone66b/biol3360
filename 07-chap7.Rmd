@@ -197,9 +197,7 @@ $$
 
 $$
 \mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
-$$
-\begin{minipage}{.22\linewidth}
-\centering
+$$\\
 $$
 \mathbf{X}= \begin{bmatrix} 
 	1 & X_1 \\
@@ -208,33 +206,18 @@ $$
 	\vdots & \vdots \\
 	1 & X_n \end{bmatrix}
 $$
-
-
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
+Here we have $X$ which is called the ``design matrix``.
 $$
 \mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
 $$
-Vector of Parameters
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
 $$
 \mathbf{\epsilon} = \begin{bmatrix}
 \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
 $$
-
-Vector of Error Terms
-\end{minipage}
-\begin{minipage}{0.22\linewidth}
-\centering
 $$
 \mathbf{Y} = \begin{bmatrix}
 Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
 $$
-Vector of Responses
-\end{minipage}
 
 ## Distributional Assumptions
 
@@ -249,7 +232,6 @@ $$
 $$
 \epsilon \sim N(0, \sigma^2\mathbf{I})
 $$
-\centering
 Full model:
 $\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
 
