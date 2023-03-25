@@ -194,9 +194,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.17" data-path="chap6.html"><a href="chap6.html#effect-sizes"><i class="fa fa-check"></i><b>6.17</b> Effect Sizes</a></li>
 <li class="chapter" data-level="6.18" data-path="chap6.html"><a href="chap6.html#exercises-2"><i class="fa fa-check"></i><b>6.18</b> Exercises</a></li>
 <li class="chapter" data-level="6.19" data-path="chap6.html"><a href="chap6.html#power-curves"><i class="fa fa-check"></i><b>6.19</b> Power Curves</a></li>
-<li class="chapter" data-level="6.20" data-path="chap6.html"><a href="chap6.html#power-analysis-by-simulation"><i class="fa fa-check"></i><b>6.20</b> Power Analysis by Simulation</a></li>
-<li class="chapter" data-level="6.21" data-path="chap6.html"><a href="chap6.html#exercise"><i class="fa fa-check"></i><b>6.21</b> Exercise</a></li>
-<li class="chapter" data-level="6.22" data-path="chap6.html"><a href="chap6.html#references"><i class="fa fa-check"></i><b>6.22</b> References</a></li>
+<li class="chapter" data-level="6.20" data-path="chap6.html"><a href="chap6.html#exercises-3"><i class="fa fa-check"></i><b>6.20</b> Exercises</a></li>
+<li class="chapter" data-level="6.21" data-path="chap6.html"><a href="chap6.html#power-analysis-by-simulation"><i class="fa fa-check"></i><b>6.21</b> Power Analysis by Simulation</a></li>
+<li class="chapter" data-level="6.22" data-path="chap6.html"><a href="chap6.html#exercise"><i class="fa fa-check"></i><b>6.22</b> Exercise</a></li>
+<li class="chapter" data-level="6.23" data-path="chap6.html"><a href="chap6.html#references"><i class="fa fa-check"></i><b>6.23</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> LinearModels</a>
 <ul>
@@ -273,25 +274,54 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 </div>
 <div id="gls-example-phylogenetic-autocorrelation" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> GLS example: Phylogenetic autocorrelation<a href="chap8.html#gls-example-phylogenetic-autocorrelation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="chap8.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb91-2"><a href="chap8.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
-<span id="cb91-3"><a href="chap8.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtree)</span>
-<span id="cb91-4"><a href="chap8.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(carni70)</span>
-<span id="cb91-5"><a href="chap8.html#cb91-5" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="at">text=</span>carni70<span class="sc">$</span>tre)</span>
-<span id="cb91-6"><a href="chap8.html#cb91-6" aria-hidden="true" tabindex="-1"></a>LogRange <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>range)</span>
-<span id="cb91-7"><a href="chap8.html#cb91-7" aria-hidden="true" tabindex="-1"></a>LogSize <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>size)</span>
-<span id="cb91-8"><a href="chap8.html#cb91-8" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange=</span>LogRange, <span class="at">LogSize=</span>LogSize, <span class="at">Species=</span><span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;.&quot;</span>, <span class="fu">rownames</span>(carni70<span class="sc">$</span>tab)))</span>
-<span id="cb91-9"><a href="chap8.html#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>LogSize, <span class="at">y=</span>LogRange), <span class="at">data=</span>dat)<span class="sc">+</span><span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="chap8.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtree</span>(tr) <span class="sc">+</span> <span class="fu">geom_tiplab</span>()</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-51-2.png" width="672" /></p>
+<p>One problem that we have is that the covariances are unknown. Adding more data (the favorite method for statisticians!) does not help, as it just adds more covariances to the problem. We have 2 possible solutions. One, model the covariances using a reduced number of parameters (see the Lynx example below). The other solution is to use <strong>additional information</strong> from outside of the problem. An example is regression accounting for correlated data due to <strong>phylogenetic</strong> effects.</p>
+<p>We will use data from the <code>ade4</code> package on the body size and home range size of different species of carnivores. The data set also includes a phylogeny for the carnivores.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chap8.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape) <span class="do">## phylogenetic analyses</span></span>
+<span id="cb1-2"><a href="chap8.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4) <span class="do">## source of data</span></span>
+<span id="cb1-3"><a href="chap8.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtree) <span class="do">## tree ploting functions</span></span></code></pre></div>
+<pre><code>## ggtree v3.6.2 For help: https://yulab-smu.top/treedata-book/
+## 
+## If you use the ggtree package suite in published research, please cite
+## the appropriate paper(s):
+## 
+## Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam.
+## ggtree: an R package for visualization and annotation of phylogenetic
+## trees with their covariates and other associated data. Methods in
+## Ecology and Evolution. 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
+## 
+## Guangchuang Yu. Using ggtree to visualize data on tree-like structures.
+## Current Protocols in Bioinformatics. 2020, 69:e96. doi:10.1002/cpbi.96
+## 
+## G Yu. Data Integration, Manipulation and Visualization of Phylogenetic
+## Trees (1st ed.). Chapman and Hall/CRC. 2022. ISBN: 9781032233574</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggtree&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ape&#39;:
+## 
+##     rotate</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chap8.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(carni70) <span class="do">## the data and tree</span></span>
+<span id="cb5-2"><a href="chap8.html#cb5-2" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">read.tree</span>(<span class="at">text=</span>carni70<span class="sc">$</span>tre) <span class="do">## extract the tree</span></span>
+<span id="cb5-3"><a href="chap8.html#cb5-3" aria-hidden="true" tabindex="-1"></a>LogRange <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>range) <span class="do">## log transform</span></span>
+<span id="cb5-4"><a href="chap8.html#cb5-4" aria-hidden="true" tabindex="-1"></a>LogSize <span class="ot">&lt;-</span> <span class="fu">log</span>(carni70<span class="sc">$</span>tab<span class="sc">$</span>size)</span>
+<span id="cb5-5"><a href="chap8.html#cb5-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange=</span>LogRange, <span class="at">LogSize=</span>LogSize, <span class="at">Species=</span><span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;.&quot;</span>, <span class="fu">rownames</span>(carni70<span class="sc">$</span>tab))) <span class="do">## set up the data frame</span></span>
+<span id="cb5-6"><a href="chap8.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>LogSize, <span class="at">y=</span>LogRange), <span class="at">data=</span>dat)<span class="sc">+</span><span class="fu">geom_point</span>() <span class="do">## plot the data</span></span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chap8.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtree</span>(tr) <span class="sc">+</span> <span class="fu">geom_tiplab</span>() <span class="do">## plot the tree</span></span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 </div>
 <div id="gls-example-phylogenetic-autocorrelation-1" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> GLS example: Phylogenetic autocorrelation<a href="chap8.html#gls-example-phylogenetic-autocorrelation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="chap8.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
-<span id="cb93-2"><a href="chap8.html#cb93-2" aria-hidden="true" tabindex="-1"></a>fit.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">data=</span>dat)</span>
-<span id="cb93-3"><a href="chap8.html#cb93-3" aria-hidden="true" tabindex="-1"></a>fit.gls <span class="ot">&lt;-</span> <span class="fu">gls</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>tr, <span class="at">form=</span><span class="sc">~</span>Species), <span class="at">data=</span>dat)</span>
-<span id="cb93-4"><a href="chap8.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.lm)</span></code></pre></div>
+<p>Here we fit the OLS model and also the GLS model, to compare the results. Note that <strong>both</strong> models fit a line of best fit, but with different assumptions. We plot the data and the lines on the same graph:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chap8.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;nlme&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggtree&#39;:
+## 
+##     collapse</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chap8.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="chap8.html#cb10-2" aria-hidden="true" tabindex="-1"></a>fit.lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">data=</span>dat) <span class="do">## fit the model using OLS</span></span>
+<span id="cb10-3"><a href="chap8.html#cb10-3" aria-hidden="true" tabindex="-1"></a>fit.gls <span class="ot">&lt;-</span> <span class="fu">gls</span>(LogRange <span class="sc">~</span> LogSize, <span class="at">correlation=</span><span class="fu">corBrownian</span>(<span class="at">phy=</span>tr, <span class="at">form=</span><span class="sc">~</span>Species), <span class="at">data=</span>dat) <span class="do">## fit the model using GLS</span></span>
+<span id="cb10-4"><a href="chap8.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.lm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = LogRange ~ LogSize, data = dat)
@@ -310,7 +340,7 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## Residual standard error: 1.415 on 68 degrees of freedom
 ## Multiple R-squared:  0.09112,    Adjusted R-squared:  0.07776 
 ## F-statistic: 6.818 on 1 and 68 DF,  p-value: 0.0111</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="chap8.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.gls)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chap8.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit.gls)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: LogRange ~ LogSize 
 ##   Data: dat 
@@ -337,59 +367,62 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## 
 ## Residual standard error: 4.968733 
 ## Degrees of freedom: 70 total; 68 residual</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="chap8.html#cb97-1" aria-hidden="true" tabindex="-1"></a>predictvals <span class="ot">&lt;-</span> <span class="cf">function</span>(model, xvar, yvar, <span class="at">xrange=</span><span class="cn">NULL</span>, <span class="at">samples=</span><span class="dv">100</span>,...){</span>
-<span id="cb97-2"><a href="chap8.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(xrange)){</span>
-<span id="cb97-3"><a href="chap8.html#cb97-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;lm&#39;</span>,<span class="st">&#39;glm&#39;</span>)){</span>
-<span id="cb97-4"><a href="chap8.html#cb97-4" aria-hidden="true" tabindex="-1"></a>      xrange<span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>model[[xvar]])</span>
-<span id="cb97-5"><a href="chap8.html#cb97-5" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb97-6"><a href="chap8.html#cb97-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;loess&#39;</span>)){</span>
-<span id="cb97-7"><a href="chap8.html#cb97-7" aria-hidden="true" tabindex="-1"></a>      xrange <span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>x)</span>
-<span id="cb97-8"><a href="chap8.html#cb97-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb97-9"><a href="chap8.html#cb97-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb97-10"><a href="chap8.html#cb97-10" aria-hidden="true" tabindex="-1"></a>  newdata <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(xrange[<span class="dv">1</span>], xrange[<span class="dv">2</span>], <span class="at">length.out =</span> samples))</span>
-<span id="cb97-11"><a href="chap8.html#cb97-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(newdata) <span class="ot">=</span> xvar</span>
-<span id="cb97-12"><a href="chap8.html#cb97-12" aria-hidden="true" tabindex="-1"></a>  newdata[[yvar]] <span class="ot">=</span> <span class="fu">predict</span>(model, <span class="at">newdata=</span>newdata, ...)</span>
-<span id="cb97-13"><a href="chap8.html#cb97-13" aria-hidden="true" tabindex="-1"></a>  newdata</span>
-<span id="cb97-14"><a href="chap8.html#cb97-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb97-15"><a href="chap8.html#cb97-15" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange =</span> LogRange, <span class="at">LogSize =</span> LogSize)</span>
-<span id="cb97-16"><a href="chap8.html#cb97-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Use the predictvals function from &quot;R Graphics Cookbook&quot;</span></span>
-<span id="cb97-17"><a href="chap8.html#cb97-17" aria-hidden="true" tabindex="-1"></a>ols_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.lm, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>)</span>
-<span id="cb97-18"><a href="chap8.html#cb97-18" aria-hidden="true" tabindex="-1"></a>ols_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;OLS&quot;</span></span>
-<span id="cb97-19"><a href="chap8.html#cb97-19" aria-hidden="true" tabindex="-1"></a>gls_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.gls, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>, </span>
-<span id="cb97-20"><a href="chap8.html#cb97-20" aria-hidden="true" tabindex="-1"></a>                             <span class="at">xrange =</span> <span class="fu">range</span>(dat<span class="sc">$</span>LogSize))</span>
-<span id="cb97-21"><a href="chap8.html#cb97-21" aria-hidden="true" tabindex="-1"></a>gls_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;GLS&quot;</span></span>
-<span id="cb97-22"><a href="chap8.html#cb97-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange), <span class="at">data =</span> dat)<span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb97-23"><a href="chap8.html#cb97-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> ols_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb97-24"><a href="chap8.html#cb97-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> gls_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="chap8.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.gls)</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-52-2.png" width="672" /></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="chap8.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(fit.gls, <span class="at">form =</span> <span class="sc">~</span><span class="fu">resid</span>(., <span class="at">type =</span> <span class="st">&quot;n&quot;</span>), <span class="at">abline =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-52-3.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chap8.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## construct a function to calculate predicted values for various models</span></span>
+<span id="cb14-2"><a href="chap8.html#cb14-2" aria-hidden="true" tabindex="-1"></a>predictvals <span class="ot">&lt;-</span> <span class="cf">function</span>(model, xvar, yvar, <span class="at">xrange=</span><span class="cn">NULL</span>, <span class="at">samples=</span><span class="dv">100</span>,...){</span>
+<span id="cb14-3"><a href="chap8.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(xrange)){</span>
+<span id="cb14-4"><a href="chap8.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;lm&#39;</span>,<span class="st">&#39;glm&#39;</span>)){</span>
+<span id="cb14-5"><a href="chap8.html#cb14-5" aria-hidden="true" tabindex="-1"></a>      xrange<span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>model[[xvar]])</span>
+<span id="cb14-6"><a href="chap8.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-7"><a href="chap8.html#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">class</span>(model) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;loess&#39;</span>)){</span>
+<span id="cb14-8"><a href="chap8.html#cb14-8" aria-hidden="true" tabindex="-1"></a>      xrange <span class="ot">=</span> <span class="fu">range</span>(model<span class="sc">$</span>x)</span>
+<span id="cb14-9"><a href="chap8.html#cb14-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-10"><a href="chap8.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-11"><a href="chap8.html#cb14-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-12"><a href="chap8.html#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## construct a new data frame for predictions</span></span>
+<span id="cb14-13"><a href="chap8.html#cb14-13" aria-hidden="true" tabindex="-1"></a>  newdata <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(xrange[<span class="dv">1</span>], xrange[<span class="dv">2</span>], <span class="at">length.out =</span> samples))</span>
+<span id="cb14-14"><a href="chap8.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(newdata) <span class="ot">=</span> xvar</span>
+<span id="cb14-15"><a href="chap8.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  newdata[[yvar]] <span class="ot">=</span> <span class="fu">predict</span>(model, <span class="at">newdata=</span>newdata, ...)</span>
+<span id="cb14-16"><a href="chap8.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  newdata</span>
+<span id="cb14-17"><a href="chap8.html#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-18"><a href="chap8.html#cb14-18" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LogRange =</span> LogRange, <span class="at">LogSize =</span> LogSize)</span>
+<span id="cb14-19"><a href="chap8.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Use the predictvals function from &quot;R Graphics Cookbook&quot;</span></span>
+<span id="cb14-20"><a href="chap8.html#cb14-20" aria-hidden="true" tabindex="-1"></a>ols_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.lm, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>)</span>
+<span id="cb14-21"><a href="chap8.html#cb14-21" aria-hidden="true" tabindex="-1"></a>ols_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;OLS&quot;</span></span>
+<span id="cb14-22"><a href="chap8.html#cb14-22" aria-hidden="true" tabindex="-1"></a>gls_predicted <span class="ot">&lt;-</span> <span class="fu">predictvals</span>(fit.gls, <span class="st">&quot;LogSize&quot;</span>, <span class="st">&quot;LogRange&quot;</span>, </span>
+<span id="cb14-23"><a href="chap8.html#cb14-23" aria-hidden="true" tabindex="-1"></a>                             <span class="at">xrange =</span> <span class="fu">range</span>(dat<span class="sc">$</span>LogSize))</span>
+<span id="cb14-24"><a href="chap8.html#cb14-24" aria-hidden="true" tabindex="-1"></a>gls_predicted<span class="sc">$</span>fit <span class="ot">&lt;-</span> <span class="st">&quot;GLS&quot;</span></span>
+<span id="cb14-25"><a href="chap8.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange), <span class="at">data =</span> dat)<span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb14-26"><a href="chap8.html#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> ols_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb14-27"><a href="chap8.html#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> LogSize, <span class="at">y =</span> LogRange, <span class="at">col =</span> fit), <span class="at">data =</span> gls_predicted, <span class="at">linewidth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chap8.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit.gls)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chap8.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(fit.gls, <span class="at">form =</span> <span class="sc">~</span><span class="fu">resid</span>(., <span class="at">type =</span> <span class="st">&quot;n&quot;</span>), <span class="at">abline =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
 </div>
 <div id="gls-example-time-series" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> GLS example: Time Series<a href="chap8.html#gls-example-time-series" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>We expect that adjacent values may be more similar than values further away in time. That is, the effect of the <code>disturbance</code> on the time series decays with time.</li>
-<li>In general we do not know the covariances of each value with all other values.</li>
-<li>Instead, we can <code>model</code> the time series effects using a smaller number of parameters.</li>
-<li>A simple example is the <code>autoregression</code> model:</li>
-<li><span class="math inline">\(x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon\)</span></li>
-</ul>
+<p>Frequently we do not have extra information to specify the covariances among the data points. In that case, an alternative is to model the covariances using a reduced model with fewer parameters. This is what is done using time-series analysis. Time-series analysis is useful when data does not come in all at once, but comes in at a regular rate over time. We expect data that are close by (in time) to be likely to be correlated, and data that are more distant (in time) to be less correlated, or even negatively correlated. There may also be strong positive correlations among data that are distant if there are seasonal effects, for example.</p>
+<p>A simple example of time-series analysis is the <code>autoregression</code> model:
+- <span class="math inline">\(x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon\)</span></p>
+<p>Here, we model the <span class="math inline">\(x_t\)</span> data at time <span class="math inline">\(t\)</span> by <code>regressing</code> the data on itself at different time lags. The <span class="math inline">\(\phi\)</span>s represent the strength of the regression relationships and the data at different time lags. The challenge is to estimate the <span class="math inline">\(\phi\)</span>s and determine how many terms we need to successfully model the data.</p>
 </div>
 <div id="lynx-data" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Lynx Data<a href="chap8.html#lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="chap8.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
-<span id="cb100-2"><a href="chap8.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lynx)</span></code></pre></div>
+<p>The Lynx data are some of the most famous in ecology. They are the number of lynx (<em>Lynx pardinus</em>: Felidae) pelts collected by Canadian hunters and sold to the Hudson Bay Trading Company over more than 100 years. The data describe cycles of small and large populations of lynx over time. The cause of these cycles has been a popular research topic for many years.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chap8.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lynx)</span>
+<span id="cb17-2"><a href="chap8.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lynx)</span></code></pre></div>
 <pre><code>##  Time-Series [1:114] from 1821 to 1934: 269 321 585 871 1475 ...</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="chap8.html#cb102-1" aria-hidden="true" tabindex="-1"></a>lynxdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Year=</span><span class="dv">1821</span><span class="sc">:</span><span class="dv">1934</span>, <span class="at">Lynx=</span>lynx)</span>
-<span id="cb102-2"><a href="chap8.html#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lynxdat, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Lynx)) <span class="sc">+</span> <span class="fu">geom_line</span>()<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">scale_x_continuous</span>() <span class="sc">+</span> <span class="fu">scale_y_continuous</span>() <span class="sc">+</span> </span>
-<span id="cb102-3"><a href="chap8.html#cb102-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Hudson Bay Lynx Returns&quot;</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chap8.html#cb19-1" aria-hidden="true" tabindex="-1"></a>lynxdat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Year=</span><span class="dv">1821</span><span class="sc">:</span><span class="dv">1934</span>, <span class="at">Lynx=</span>lynx)</span>
+<span id="cb19-2"><a href="chap8.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lynxdat, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Lynx)) <span class="sc">+</span> <span class="fu">geom_line</span>()<span class="sc">+</span><span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">scale_x_continuous</span>() <span class="sc">+</span> <span class="fu">scale_y_continuous</span>() <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="chap8.html#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">&quot;Hudson Bay Lynx Returns&quot;</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="acf-and-pacf" class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> ACF and PACF<a href="chap8.html#acf-and-pacf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="chap8.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
+<p>The Autocorrelation Function and the Partial Autocorrelation Function (ACF and PCF) describe the pattern of correlatedness of the data at different time lags. In general significant correlations in the ACF (values that fall above or below the horizontal lines) determines whether you have a problem with temporal autocorrelation. The PACF plot tells you how many <span class="math inline">\(\phi\)</span> parameters you should use in the analysis. It should be noted that the statistical study of time series is a very large topic and mostly beyond the scope of this course. Nevertheless, GLS is a popular method for simple time series.</p>
+<p>We see in the following plots that there is indeed a problem with temporal autocorrelation. The ACF shows alternating groups of positive and negative correlations. The PACF suggests that 8 <span class="math inline">\(\phi\)</span> parameters are needed to model the data, because the largest significant lag is lag number 8.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chap8.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div>
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
 ##   as.zoo.data.frame zoo</code></pre>
@@ -398,15 +431,16 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 <pre><code>## The following object is masked from &#39;package:nlme&#39;:
 ## 
 ##     getResponse</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="chap8.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(lynx))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="chap8.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(lynx))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-54-2.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chap8.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(lynx))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chap8.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(lynx))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 <div id="autoregression-of-lynx-data" class="section level2 hasAnchor" number="8.7">
 <h2><span class="header-section-number">8.7</span> Autoregression of Lynx Data<a href="chap8.html#autoregression-of-lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="chap8.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find optimal autoregression size</span></span>
-<span id="cb109-2"><a href="chap8.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ar</span>(lynx, <span class="at">method=</span><span class="st">&quot;mle&quot;</span>)</span></code></pre></div>
+<p>We can use the method of Maximum Likelihood Estimation to estimate the <span class="math inline">\(\phi\)</span> parameters. The <code>ar</code> function estimates that 8 parameters are necessary, and gives the values of the <span class="math inline">\(\phi\)</span> coefficients.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chap8.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find optimal autoregression size</span></span>
+<span id="cb26-2"><a href="chap8.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ar</span>(lynx, <span class="at">method=</span><span class="st">&quot;mle&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ar(x = lynx, method = &quot;mle&quot;)
@@ -419,8 +453,9 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 </div>
 <div id="gls-autoregression-model-of-lynx-data" class="section level2 hasAnchor" number="8.8">
 <h2><span class="header-section-number">8.8</span> GLS Autoregression model of Lynx data<a href="chap8.html#gls-autoregression-model-of-lynx-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="chap8.html#cb111-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">gls</span>(Lynx<span class="sc">~</span>Year, <span class="at">correlation=</span><span class="fu">corARMA</span>(<span class="at">p=</span><span class="dv">8</span>), <span class="at">data=</span>lynxdat, <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
-<span id="cb111-2"><a href="chap8.html#cb111-2" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
+<p>Next, we can use GLS to fit the time-series model, specifying the number of <span class="math inline">\(\phi\)</span> parameters as <code>p = 8</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chap8.html#cb28-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">gls</span>(Lynx<span class="sc">~</span>Year, <span class="at">correlation=</span><span class="fu">corARMA</span>(<span class="at">p=</span><span class="dv">8</span>), <span class="at">data=</span>lynxdat, <span class="at">method=</span><span class="st">&quot;ML&quot;</span>)</span>
+<span id="cb28-2"><a href="chap8.html#cb28-2" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
 <pre><code>## Generalized least squares fit by maximum likelihood
 ##   Model: Lynx ~ Year 
 ##   Data: lynxdat 
@@ -433,15 +468,18 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## Correlation Structure: ARMA(8,0)
 ##  Formula: ~1 
 ##  Parameter estimate(s):
-##        Phi1        Phi2        Phi3        Phi4        Phi5        Phi6        Phi7        Phi8 
-##  1.05436014 -0.62987055  0.20987093 -0.14453853 -0.01997304  0.03578814 -0.23275963  0.32892377 
+##        Phi1        Phi2        Phi3        Phi4        Phi5        Phi6 
+##  1.05436014 -0.62987055  0.20987093 -0.14453853 -0.01997304  0.03578814 
+##        Phi7        Phi8 
+## -0.23275963  0.32892377 
 ## Degrees of freedom: 114 total; 112 residual
 ## Residual standard error: 1558.429</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="chap8.html#cb113-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit, <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb113-2"><a href="chap8.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(vals))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="chap8.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(vals))</span></code></pre></div>
-<p><img src="BIOL3360_files/figure-html/unnamed-chunk-57-2.png" width="672" /></p>
+<p>Finally, we can re-check the autocorrelation plots of the residuals and verify that there are no further problems with autocorrelation.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="chap8.html#cb30-1" aria-hidden="true" tabindex="-1"></a>vals <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit, <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb30-2"><a href="chap8.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggAcf</span>(vals))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="chap8.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ggPacf</span>(vals))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 
 </div>
 </div>

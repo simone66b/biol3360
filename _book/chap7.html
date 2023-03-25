@@ -252,14 +252,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Consider R. A. Fisher’s classic Iris data set, consisting of several morphological measurements on the flowers of three species of <em>Iris</em>. This data set is famous in statistics and is often used as test data for a wide variety of statistical methods. Fisher was probably the most important statistician <strong>and</strong> evolutionary biologist of the 20th century. He layed the foundations for our modern practice of statistics and he was a great evolutionary geneticist, partly responsible for inventing population genetics and establishing that natural selection could indeed be a powerful force in evolution. He was also a terrible grump and had lots of fights with other scientists. Although I like to find out about my idols, Fisher is someone that I am glad not to have met! Back to the data:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chap7.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;sepalsPetals.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
-<img src="sepalsPetals.jpg" alt="An Iris"  />
+<img src="sepalsPetals.jpg" alt="An Iris" width="108" />
 <p class="caption">
 Figure 7.1: An Iris
 </p>
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chap7.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fisher-smiling-50.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
-<img src="fisher-smiling-50.jpg" alt="R. A. Fisher"  />
+<img src="fisher-smiling-50.jpg" alt="R. A. Fisher" width="100" />
 <p class="caption">
 Figure 7.2: R. A. Fisher
 </p>
@@ -284,21 +284,21 @@ Figure 7.2: R. A. Fisher
 <p>Here we have loaded the data frame called <code>iris</code> It is built into R, which is convenient for us. The <code>head()</code> and <code>tail()</code> functions examine the first 6 and the last 6 lines of the data frame, allowing us to see the variable names and check that the data frame is usable. Although</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chap7.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;Kosaciec_szczecinkowaty_Iris_setosa.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
-<img src="Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris setosa"  />
+<img src="Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris setosa" width="110" />
 <p class="caption">
 Figure 7.3: Iris setosa
 </p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chap7.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;220px-Iris_virginica.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
-<img src="220px-Iris_virginica.jpg" alt="Iris virginica"  />
+<img src="220px-Iris_virginica.jpg" alt="Iris virginica" width="110" />
 <p class="caption">
 Figure 7.4: Iris virginica
 </p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chap7.html#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;220px-Iris_versicolor_3.jpg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
-<img src="220px-Iris_versicolor_3.jpg" alt="Iris versicolor"  />
+<img src="220px-Iris_versicolor_3.jpg" alt="Iris versicolor" width="110" />
 <p class="caption">
 Figure 7.5: Iris versicolor
 </p>
@@ -497,13 +497,14 @@ We can get the regression output from the ANOVA fit using <code>summary.lm</code
 </ul>
 <p>– <span class="math inline">\(f(x + y) = f(x) + f(y)\)</span>: Additivity
 – <span class="math inline">\(f(Ax) = Af(x)\)</span> : Homogeneity
-– Idea: The whole is equal to the sum of its parts.</p>
+– Idea: The whole is equal to the sum of its parts</p>
+<p>Linear models are the workhorse of all statistical modelling. They crop up everywhere. Especially, the computational ease with which we can analyse linear models governs the procedures for the design of experiments. The reason for the use of the guidelines for the design of experiments in Chapter 6 is precisely so that we can apply a linear modelling framework to the experimental system. This is why we need to spend so much time on them. An appreciation of the mathematics is very useful for understanding their uses, similarities and differences from each other.</p>
 </div>
 <div id="matrix-notation-for-linear-models" class="section level2 hasAnchor" number="7.11">
 <h2><span class="header-section-number">7.11</span> Matrix Notation for Linear Models<a href="chap7.html#matrix-notation-for-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)\)</span></li>
-</ul>
+<p>The mathematical formulation of a linear regression model (perhaps the simplest linear model) is below:</p>
+<p><span class="math inline">\(Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)\)</span></p>
+<p>The <span class="math inline">\(Y_i\)</span>’s are the values of the response variable. The <span class="math inline">\(\beta\)</span>’s are the intercept and slope parameters. It is these that we would like to estimate.. <span class="math inline">\(X_i\)</span> are the data for the explanatory variable. <span class="math inline">\(\sigma^2\)</span> is the error variance: the variance of the residuals around the line. The residual is simply the distance between the data point and the fitted line, on the y axis. We can write down an equation for each data point:</p>
 <p><span class="math display">\[
 Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
 Y_2 = \beta_0 + \beta_1 X_2 + \epsilon_2 \\
@@ -511,6 +512,7 @@ Y_3 = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
 \vdots \qquad \vdots \qquad \vdots \\
 Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
 \]</span></p>
+<p>We can form column vectors for the elements of each equation:</p>
 <p><span class="math display">\[
 \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} =
 \begin{bmatrix} \beta_0 + \beta_1X_1 \\
@@ -524,38 +526,32 @@ Y_n = \beta_0 + \beta_1 X_n + \epsilon_n
 </div>
 <div id="matrix-representation" class="section level2 hasAnchor" number="7.12">
 <h2><span class="header-section-number">7.12</span> Matrix Representation<a href="chap7.html#matrix-representation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can then factor out the <span class="math inline">\(\beta\)</span> terms from the middle vector.</p>
 <p><span class="math display">\[
 \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} =
 \begin{bmatrix} 1 &amp; X_1 \\ 1 &amp; X_2 \\ 1 &amp; X_3 \\ \vdots &amp; \vdots \\ 1 &amp; X_n \end{bmatrix} \times
 \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
 \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-\]</span></p>
+\]</span>
+We can then write down the matrix equation for the linear model:</p>
 <p><span class="math display">\[
 \mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
-\]</span>\
+\]</span>
 <span class="math display">\[
 \mathbf{X}= \begin{bmatrix}
     1 &amp; X_1 \\
     1 &amp; X_2 \\
     1 &amp; X_3 \\
     \vdots &amp; \vdots \\
-    1 &amp; X_n \end{bmatrix}
-\]</span>
-Here we have <span class="math inline">\(X\)</span> which is called the <code>design matrix</code>.
-<span class="math display">\[
-\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
-\]</span>
-<span class="math display">\[
-\mathbf{\epsilon} = \begin{bmatrix}
-\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-\]</span>
-<span class="math display">\[
-\mathbf{Y} = \begin{bmatrix}
+    1 &amp; X_n \end{bmatrix} \mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} \mathbf{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix} \mathbf{Y} = \begin{bmatrix}
 Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
-\]</span></p>
+\]</span>
+Here we have <span class="math inline">\(\mathbf{X}\)</span> which is called the <strong>design matrix</strong>. <span class="math inline">\(\beta\)</span> is the <strong>vector of parameters</strong> (to be estimated). <span class="math inline">\(\mathbf{\epsilon}\)</span> is the <strong>vector of errors</strong>. <span class="math inline">\(\mathbf{Y}\)</span> is the <strong>vector of responses</strong>. In this, the General Linear Model, <span class="math inline">\(\mathbf{X}\)</span> can have more than 2 columns. The first column is usually a vector of 1’s (corresponding to the intercept). The other columns contain the explanatory variables, which may be continuous (leading to <strong>multiple regression</strong>) or discrete (usually 0, 1), leading to the <strong>Analysis of Variance</strong> (ANOVA). Mixtures of continuous and discrete explanatory variables lead to the <strong>Analysis of Covariance</strong> (ANCOVA) and other more complicated models.</p>
 </div>
 <div id="distributional-assumptions" class="section level2 hasAnchor" number="7.13">
 <h2><span class="header-section-number">7.13</span> Distributional Assumptions<a href="chap7.html#distributional-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Finally, we have to specify the assumptions regarding the statistical distribution of the residuals. This will usually be one number, specifying that the variance of residuals, given the symbol <span class="math inline">\(\sigma^2\)</span>. If we want to specify the variance for each data value, we can write:</p>
 <p><span class="math display">\[
 \sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
 \sigma^2 &amp; 0 &amp; \cdots &amp; 0 \\
@@ -564,19 +560,23 @@ Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
 0 &amp; 0 &amp; \cdots &amp; \sigma^2
 \end{bmatrix}
 \]</span>
+where <span class="math inline">\(\mathbf{I}\)</span> is the identity matrix. Thus, each data point has a variance of <span class="math inline">\(\sigma^2\)</span> and the off-diagonals are all zero, signifying that there is <strong>no correlation</strong> between the data points. We can write this as:
 <span class="math display">\[
 \epsilon \sim N(0, \sigma^2\mathbf{I})
 \]</span>
-Full model:
-<span class="math inline">\(\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})\)</span></p>
+We say that the epsilons (<span class="math inline">\(\mathbf{\epsilon}\)</span>) are <strong>distributed as</strong> following a Normal distribution, with zero mean and variance <span class="math inline">\(\sigma^2\mathbf{I}\)</span>. <strong>N</strong> is the usual symbol for the Normal distribution and the “~” means “is distributed as.”</p>
+<p>This leads to the Full model:</p>
+<p><span class="math inline">\(\Huge\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})\)</span></p>
+<p><strong>This equation is worth remembering.</strong></p>
 </div>
 <div id="estimation-ordinary-least-squares" class="section level2 hasAnchor" number="7.14">
 <h2><span class="header-section-number">7.14</span> Estimation: Ordinary Least Squares<a href="chap7.html#estimation-ordinary-least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[
+<p>We wish to estimate <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma^2\)</span>. This is usually done by the method of Ordinary Least Squares (OLS). The derivation of these estimators is beyond the scope of the course. You may have seen the formula for <span class="math inline">\(\hat{\beta}\)</span> before: it was the last exercise in the matrix problem sheet.
+<span class="math display">\[
 \hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
 \hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
 \]</span>
-where <span class="math inline">\(\hat{\sigma}^2\)</span> is the unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(p=2\)</span> since we are estimating the slope and the intercept. <span class="math inline">\(n\)</span> is the sample size.</p>
+where <span class="math inline">\(\hat{\sigma}^2\)</span> is the unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(p=2\)</span> in the situation where we are estimating the slope and the intercept. <span class="math inline">\(n\)</span> is the sample size.</p>
 
 </div>
 </div>

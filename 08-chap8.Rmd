@@ -25,26 +25,37 @@ $$
 - We can transform the GLS problem into OLS by multiplying $\mathbf{X}$ and $\mathbf{Y}$ by $\mathbf{\Sigma}^{-1/2}$ Then we can use the OLS equation on these new, transformed data. ie, $\mathbf{X^*} = \mathbf{\Sigma^{-1/2}X}$, $\mathbf{Y^*} = \mathbf{\Sigma^{-1/2}Y}$. $\hat{\beta_{GLS}} = \mathbf{(X^{*T}X^*)^{-1}X^*Y^*}$
 
 ## GLS example: Phylogenetic autocorrelation
+
+One problem that we have is that the covariances are unknown. Adding more data (the favorite method for statisticians!) does not help, as it just adds more covariances to the problem. We have 2 possible solutions. One, model the covariances using a reduced number of parameters (see the Lynx example below). The other solution is to use __additional information__ from outside of the problem. An example is regression accounting for correlated data due to __phylogenetic__ effects.
+
+We will use data from the ``ade4`` package on the body size and home range size of different species of carnivores. The data set also includes a phylogeny for the carnivores.
+
 ```{r}
-library(ape)
-library(ade4)
-library(ggtree)
-data(carni70)
-tr <- read.tree(text=carni70$tre)
-LogRange <- log(carni70$tab$range)
+library(ape) ## phylogenetic analyses
+library(ade4) ## source of data
+library(ggtree) ## tree ploting functions
+data(carni70) ## the data and tree
+tr <- read.tree(text=carni70$tre) ## extract the tree
+LogRange <- log(carni70$tab$range) ## log transform
 LogSize <- log(carni70$tab$size)
-dat <- data.frame(LogRange=LogRange, LogSize=LogSize, Species=gsub("_", ".", rownames(carni70$tab)))
-ggplot(aes(x=LogSize, y=LogRange), data=dat)+geom_point()
-ggtree(tr) + geom_tiplab()
+dat <- data.frame(LogRange=LogRange, LogSize=LogSize, Species=gsub("_", ".", rownames(carni70$tab))) ## set up the data frame
+ggplot(aes(x=LogSize, y=LogRange), data=dat)+geom_point() ## plot the data
+ggtree(tr) + geom_tiplab() ## plot the tree
 ```
 
 ## GLS example: Phylogenetic autocorrelation
+
+Here we fit the OLS model and also the GLS model, to compare the results. Note that __both__ models fit a line of best fit, but with different assumptions. We plot the data and the lines on the same graph:
+
 ```{r}
 library(nlme)
-fit.lm <- lm(LogRange ~ LogSize, data=dat)
-fit.gls <- gls(LogRange ~ LogSize, correlation=corBrownian(phy=tr, form=~Species), data=dat)
+library(ggplot2)
+fit.lm <- lm(LogRange ~ LogSize, data=dat) ## fit the model using OLS
+fit.gls <- gls(LogRange ~ LogSize, correlation=corBrownian(phy=tr, form=~Species), data=dat) ## fit the model using GLS
 summary(fit.lm)
 summary(fit.gls)
+
+## construct a function to calculate predicted values for various models
 predictvals <- function(model, xvar, yvar, xrange=NULL, samples=100,...){
   if(is.null(xrange)){
     if(class(model) %in% c('lm','glm')){
@@ -54,6 +65,8 @@ predictvals <- function(model, xvar, yvar, xrange=NULL, samples=100,...){
       xrange = range(model$x)
     }
   }
+  
+  ## construct a new data frame for predictions
   newdata = data.frame(x = seq(xrange[1], xrange[2], length.out = samples))
   names(newdata) = xvar
   newdata[[yvar]] = predict(model, newdata=newdata, ...)
@@ -76,13 +89,16 @@ qqnorm(fit.gls, form = ~resid(., type = "n"), abline = c(0, 1))
 
 ## GLS example: Time Series
 
-- We expect that adjacent values may be more similar than values further away in time. That is, the effect of the ``disturbance`` on the time series decays with time. 
-- In general we do not know the covariances of each value with all other values.
-- Instead,  we can ``model`` the time series effects using a smaller number of parameters. 
-- A simple example is the ``autoregression`` model:
+Frequently we do not have extra information to specify the covariances among the data points. In that case, an alternative is to model the covariances using a reduced model with fewer parameters. This is what is done using time-series analysis. Time-series analysis is useful when data does not come in all at once, but comes in at a regular rate over time. We expect data that are close by (in time) to be likely to be correlated, and data that are more distant (in time) to be less correlated, or even negatively correlated. There may also be strong positive correlations among data that are distant if there are seasonal effects, for example.
+
+A simple example of time-series analysis is the ``autoregression`` model:
 - $x_t=\phi_1x_{t-1}+ \phi_2x_{t-2} + \dots + \phi_px_{t-p}+\epsilon$
 
+Here, we model the $x_t$ data at time $t$ by ``regressing`` the data on itself at different time lags. The $\phi$s represent the strength of the regression relationships and the data at different time lags. The challenge is to estimate the $\phi$s and determine how many terms we need to successfully model the data.
+
 ## Lynx Data
+
+The Lynx data are some of the most famous in ecology. They are the number of lynx (_Lynx pardinus_: Felidae) pelts collected by Canadian hunters and sold to the Hudson Bay Trading Company over more than 100 years. The data describe cycles of small and large populations of lynx over time. The cause of these cycles has been a popular research topic for many years.
 
 ```{r}
 data(lynx)
@@ -94,6 +110,9 @@ ggplot(lynxdat, aes(x=Year, y=Lynx)) + geom_line()+geom_point() + scale_x_contin
 
 
 ## ACF and PACF
+The Autocorrelation Function and the Partial Autocorrelation Function (ACF and PCF) describe the pattern of correlatedness of the data at different time lags. In general significant correlations in the ACF (values that fall above or below the horizontal lines) determines whether you have a problem with temporal autocorrelation. The PACF plot tells you how many $\phi$ parameters you should use in the analysis. It should be noted that the statistical study of time series is a very large topic and mostly beyond the scope of this course. Nevertheless, GLS is a popular method for simple time series.
+
+We see in the following plots that there is indeed a problem with temporal autocorrelation. The ACF shows alternating groups of positive and negative correlations. The PACF suggests that 8 $\phi$ parameters are needed to model the data, because the largest significant lag is lag number 8.
 
 ```{r}
 library(forecast)
@@ -103,16 +122,22 @@ print(ggPacf(lynx))
 
 
 ## Autoregression of Lynx Data
+
+We can use the method of Maximum Likelihood Estimation to estimate the $\phi$ parameters. The ``ar`` function estimates that 8 parameters are necessary, and gives the values of the $\phi$ coefficients.
 ```{r}
 # find optimal autoregression size
 ar(lynx, method="mle")
 ```
 
 ## GLS Autoregression model of Lynx data
+
+Next, we can use GLS to fit the time-series model, specifying the number of $\phi$ parameters as ``p = 8``.
 ```{r}
 fit <- gls(Lynx~Year, correlation=corARMA(p=8), data=lynxdat, method="ML")
 fit
 ```
+
+Finally, we can re-check the autocorrelation plots of the residuals and verify that there are no further problems with autocorrelation.
 
 ```{r}
 vals <- resid(fit, type="n")

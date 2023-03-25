@@ -160,11 +160,17 @@ model.matrix(~cat.var)
 
 -- $f(x + y) = f(x) + f(y)$: Additivity
 -- $f(Ax) = Af(x)$ : Homogeneity
--- Idea: The whole is equal to the sum of its parts.
+-- Idea: The whole is equal to the sum of its parts
+
+Linear models are the workhorse of all statistical modelling. They crop up everywhere. Especially, the computational ease with which we can analyse linear models governs the procedures for the design of experiments. The reason for the use of the guidelines for the design of experiments in Chapter 6 is precisely so that we can apply a linear modelling framework to the experimental system. This is why we need to spend so much time on them. An appreciation of the mathematics is very useful for understanding their uses, similarities and differences from each other.
 
 ## Matrix Notation for Linear Models
 
-- $Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)$
+The mathematical formulation of a linear regression model (perhaps the simplest linear model) is below:
+
+$Y_i= \beta_0 + \beta_1 X_i + \epsilon_i, \epsilon_i \sim NID(0, \sigma^2)$
+
+The $Y_i$'s are the values of the response variable. The $\beta$'s are the intercept and slope parameters. It is these that we would like to estimate.. $X_i$ are the data for the explanatory variable.  $\sigma^2$ is the error variance: the variance of the residuals around the line. The residual is simply the distance between the data point and the fitted line, on the y axis. We can write down an equation for each data point:
 
 $$
 Y_1 = \beta_0 + \beta_1 X_1 + \epsilon_1 \\
@@ -174,6 +180,7 @@ Y_3 = \beta_0 + \beta_1 X_3 + \epsilon_3 \\
 Y_n = \beta_0 + \beta_1 X_n + \epsilon_n 
 $$
 
+We can form column vectors for the elements of each equation:
 
 $$
 \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
@@ -188,38 +195,34 @@ $$
 
 ## Matrix Representation
 
+We can then factor out the $\beta$ terms from the middle vector.
+
 $$
 \begin{bmatrix} Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix} = 
 \begin{bmatrix} 1 & X_1 \\ 1 & X_2 \\ 1 & X_3 \\ \vdots & \vdots \\ 1 & X_n \end{bmatrix} \times
 \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} +
 \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
 $$
+We can then write down the matrix equation for the linear model:
 
 $$
 \mathbf{Y}= \mathbf{X}\mathbf{\beta}+\mathbf{\epsilon}
-$$\\
+$$
 $$
 \mathbf{X}= \begin{bmatrix} 
 	1 & X_1 \\
 	1 & X_2 \\
 	1 & X_3 \\
 	\vdots & \vdots \\
-	1 & X_n \end{bmatrix}
-$$
-Here we have $X$ which is called the ``design matrix``.
-$$
-\mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix}
-$$
-$$
-\mathbf{\epsilon} = \begin{bmatrix}
-\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix}
-$$
-$$
-\mathbf{Y} = \begin{bmatrix}
+	1 & X_n \end{bmatrix} \mathbf{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1 \end{bmatrix} \mathbf{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \vdots \\ \epsilon_n \end{bmatrix} \mathbf{Y} = \begin{bmatrix}
 Y_1 \\ Y_2 \\ Y_3 \\ \vdots \\ Y_n \end{bmatrix}
 $$
+Here we have $\mathbf{X}$ which is called the __design matrix__. $\beta$ is the __vector of parameters__ (to be estimated). $\mathbf{\epsilon}$ is the __vector of errors__. $\mathbf{Y}$ is the __vector of responses__. In this, the General Linear Model, $\mathbf{X}$ can have more than 2 columns. The first column is usually a vector of 1's (corresponding to the intercept). The other columns contain the explanatory variables, which may be continuous (leading to __multiple regression__) or discrete (usually 0, 1), leading to the __Analysis of Variance__ (ANOVA). Mixtures of continuous and discrete explanatory variables lead to the __Analysis of Covariance__ (ANCOVA) and other more complicated models. 
 
 ## Distributional Assumptions
+
+Finally, we have to specify the assumptions regarding the statistical distribution of the residuals. This will usually be one number, specifying that the variance of residuals, given the symbol $\sigma^2$. If we want to specify the variance for each data value, we can write:
 
 $$
 \sigma^2_\epsilon = \sigma^2\mathbf{I} = \begin{bmatrix}
@@ -229,18 +232,23 @@ $$
 0 & 0 & \cdots & \sigma^2
 \end{bmatrix}
 $$
+where $\mathbf{I}$ is the identity matrix. Thus, each data point has a variance of $\sigma^2$ and the off-diagonals are all zero, signifying that there is __no correlation__ between the data points. We can write this as:
 $$
 \epsilon \sim N(0, \sigma^2\mathbf{I})
 $$
-Full model:
-$\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
+We say that the epsilons ($\mathbf{\epsilon}$) are __distributed as__ following a Normal distribution, with zero mean and variance $\sigma^2\mathbf{I}$. __N__ is the usual symbol for the Normal distribution and the "~" means "is distributed as."
 
+This leads to the Full model:
+
+$\Huge\textbf{Y} = \mathbf{X\beta} + \mathbf{\epsilon}, \quad \mathbf{\epsilon} \sim N(0, \sigma^2\mathbf{I})$
+
+__This equation is worth remembering.__
 
 ## Estimation: Ordinary Least Squares
 
+We wish to estimate $\beta$ and $\sigma^2$. This is usually done by the method of Ordinary Least Squares (OLS). The derivation of these estimators is beyond the scope of the course. You may have seen the formula for $\hat{\beta}$ before: it was the last exercise in the matrix problem sheet.
 $$
 \hat{\beta} = (\mathbf{X^TX})^{-1}\mathbf{X^T} \mathbf{Y} \\
 \hat{\sigma^2} = \frac{1}{n - p}(\mathbf{Y} - \mathbf{X\hat{\beta}})^T (\mathbf{Y} - \mathbf{X\hat{\beta}})
 $$
-where $\hat{\sigma}^2$ is the unbiased estimator of $\sigma^2$, and $p=2$ since we are estimating the slope and the intercept. $n$ is the sample size.
-
+where $\hat{\sigma}^2$ is the unbiased estimator of $\sigma^2$, and $p=2$ in the situation where we are estimating the slope and the intercept. $n$ is the sample size.
