@@ -79,6 +79,7 @@ gls-autoregression-model-of-lynx-data
 chap9
 types-of-data
 multinomial-experiments
+pearsons-x2-test
 example-1.-specified-cell-probabilities
 example-2-goodness-of-fit
 example-3-contingency-tables
@@ -95,4 +96,5 @@ diagnostics
 another-approach-to-diagnostics
 some-theory
 simple-example-the-poisson-distribution
+the-binomial-distribution-in-exponential-form
 issues-when-fitting-with-glms

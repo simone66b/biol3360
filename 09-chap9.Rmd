@@ -17,10 +17,14 @@ In a multinomial experiment, the trials are independent. We are interested in th
 
 $$p(n_1, n_2, \dots, n_k)=\frac{n!}{n_1!n_2 \dots n_k!}p_1^{n_1}p_2^{n_2} \dots p_k^{n_k}
 $$
- ## Pearson's $X^2$ test
- 
- ![Karl Pearson (1857-1936)]{Karl_Pearson.jpg}
-  
+
+
+## Pearson's $X^2$ test
+
+```{r, echo=FALSE}
+knitr::include_graphics("Karl_Pearson.jpg")
+cat("Karl Pearson")
+```
 The $X^2$ test was proposed in 1900, and can be used for testing hypotheses about $p_1, p_2, p_3, \dots, p_k$ Suppose that $n=100$ balls were thrown into $k$ boxes. Further suppose that $p_1=0.1$. What would the expected number of balls in box 1 be? This would just be $E(n_1)=np_1=(100)(0.1)=10$ Similarly for the other boxes, we have: $E(n_i)=np_i, i= 1, 2, \dots, k$ 
 
 Suppose we postulate values for the $p_i$s. If our hypothesis is correct, the $n_i$s should not depart much from the expected values (remember residuals in regression? This is the same principle.) Hence it seems reasonable to use the deviations from the expected values in a test statistic: $n_i-np_i, i=1 ,2, \dots, k$
@@ -51,12 +55,6 @@ Frequently we know what the cell probabilities (the $p_i$'s) should be, based on
 counts <- c(56, 19, 17, 8)
 names(counts) <- c("RY", "WY", "RG", "WG")
 counts
-```    
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-```{r}
 ratio <- c(9, 3, 3, 1)
 p <- ratio / sum(ratio)
 expected <- sum(counts) * p
@@ -299,7 +297,7 @@ It can be written in exponential form as:
 $$f(y \mid \lambda) = \exp(y \log \lambda - \lambda - \log y!)$$
 Note that $a(y) = y$ so the distribution is in canonical form. Also, the natural parameter $b(\lambda) = \log \lambda$ so $\log()$ is the canonical link function.
  
-##The Binomial distribution in exponential form
+## The Binomial distribution in exponential form
   The Binomial distribution has probability mass function:
 
   $$f(y \mid p) = \binom{n}{y} p^y(1-p)^{n-y}$$
