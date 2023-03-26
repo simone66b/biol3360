@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 More R Programming | BIOL3360</title>
-  <meta name="description" content="4 More R Programming | BIOL3360" />
+  <title>9 Categorical Data Analysis | BIOL3360</title>
+  <meta name="description" content="9 Categorical Data Analysis | BIOL3360" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 More R Programming | BIOL3360" />
+  <meta property="og:title" content="9 Categorical Data Analysis | BIOL3360" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 More R Programming | BIOL3360" />
+  <meta name="twitter:title" content="9 Categorical Data Analysis | BIOL3360" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chap3.html"/>
-<link rel="next" href="chap5.html"/>
+<link rel="prev" href="chap8.html"/>
+<link rel="next" href="multinomial-experiments.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -270,126 +270,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chap4" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> More R Programming<a href="chap4.html#chap4" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="data-structures" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Data Structures<a href="chap4.html#data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Data structures are fundamental to any computer language. You have already seen some: vectors, matrices, and arrays. In fact, matrices and arrays are really special types of vectors. Matrices and arrays have a special property: they possess dimensions. Try this:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chap4.html#cb8-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span></span>
-<span id="cb8-2"><a href="chap4.html#cb8-2" aria-hidden="true" tabindex="-1"></a>v</span>
-<span id="cb8-3"><a href="chap4.html#cb8-3" aria-hidden="true" tabindex="-1"></a>vmat <span class="ot">&lt;-</span> v; <span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb8-4"><a href="chap4.html#cb8-4" aria-hidden="true" tabindex="-1"></a>vmat</span>
-<span id="cb8-5"><a href="chap4.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vmat) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb8-6"><a href="chap4.html#cb8-6" aria-hidden="true" tabindex="-1"></a>vmat</span></code></pre></div>
-<p>See that you can turn a vector into a matrix, and you can turn a matrix into a vector. The key is the <code>dim()</code> function which allows you to set and get the dimensions of a matrix or vector. The same applies to higher dimensional objects (arrays):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chap4.html#cb9-1" aria-hidden="true" tabindex="-1"></a>avec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span></span>
-<span id="cb9-2"><a href="chap4.html#cb9-2" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(avec, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb9-3"><a href="chap4.html#cb9-3" aria-hidden="true" tabindex="-1"></a>arr</span>
-<span id="cb9-4"><a href="chap4.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(arr)</span></code></pre></div>
-</div>
-<div id="lists" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Lists<a href="chap4.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Vectors, matrices and arrays are of limited usefulness: they only allow the elements of these data structures to be of the same <strong>type</strong>. That is, vectors (and matrices and arrays) can only have one type of data in them. For example, you can have a vector of numbers:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chap4.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
-<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<p>or a vector of characters:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chap4.html#cb12-1" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
-<p>but you can’t have a vector that mixes characters and numbers:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chap4.html#cb14-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
-<span id="cb14-2"><a href="chap4.html#cb14-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>## [1] &quot;1&quot; &quot;A&quot;</code></pre>
-<p>See that R turns the number (1) into a character (“1”). These are not the same thing! This behaviour may or may not be important to your program but it is crucial that you know about it. So how do you combine, say, characters and numbers? You use another data structure: the list.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chap4.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)</span>
-<span id="cb16-2"><a href="chap4.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
-<pre><code>## [[1]]
-## [1] 1
-## 
-## [[2]]
-## [1] &quot;A&quot;</code></pre>
-<p>Here we have a list with two <strong>elements</strong>. The first element is a numeric vector of length 1. It’s just the number 1. The second element is a character vector of length 1. It is just the character “A.” The way R prints out lists gives us a way to access elements, using the square bracket notation (<code>[[</code>, <code>[</code>, etc). So say we want the first element of <code>mylist</code>. We can do:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chap4.html#cb18-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<p>Similarly for the second element. (Try it!) Another useful aspect of lists is that the elements can have names:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chap4.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Number&quot;</span>, <span class="st">&quot;Letter&quot;</span>)</span>
-<span id="cb20-2"><a href="chap4.html#cb20-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
-<pre><code>## $Number
-## [1] 1
-## 
-## $Letter
-## [1] &quot;A&quot;</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chap4.html#cb22-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Letter</span></code></pre></div>
-<pre><code>## [1] &quot;A&quot;</code></pre>
-<p>See that if the list has named elements, we can use the <code>$</code> notation. This notation is less general: lists will always have an ordered set of elements but lists don’t always have names attached to the elements. The <code>$</code> notation is more readable, however.</p>
-<p>Note also that unlike vectors and matrices, you can have “nested” lists: lists within lists. This is a very useful property in many circumstances:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chap4.html#cb24-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span>), <span class="fu">list</span>(<span class="st">&quot;B&quot;</span>, <span class="dv">2</span>))</span>
-<span id="cb24-2"><a href="chap4.html#cb24-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
-<pre><code>## [[1]]
-## [[1]][[1]]
-## [1] &quot;A&quot;
-## 
-## [[1]][[2]]
-## [1] 1
-## 
-## 
-## [[2]]
-## [[2]][[1]]
-## [1] &quot;B&quot;
-## 
-## [[2]][[2]]
-## [1] 2</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chap4.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mylist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Element1&quot;</span>, <span class="st">&quot;Element2&quot;</span>)</span>
-<span id="cb26-2"><a href="chap4.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mylist</span></code></pre></div>
-<pre><code>## $Element1
-## $Element1[[1]]
-## [1] &quot;A&quot;
-## 
-## $Element1[[2]]
-## [1] 1
-## 
-## 
-## $Element2
-## $Element2[[1]]
-## [1] &quot;B&quot;
-## 
-## $Element2[[2]]
-## [1] 2</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="chap4.html#cb28-1" aria-hidden="true" tabindex="-1"></a>mylist[[<span class="dv">1</span>]][[<span class="dv">2</span>]] <span class="do">## accesses the second element of Element1.</span></span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="chap4.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="sc">$</span>Element1[[<span class="dv">1</span>]] <span class="do">## mix and match!</span></span></code></pre></div>
-<pre><code>## [1] &quot;A&quot;</code></pre>
-</div>
-<div id="data-frames" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Data Frames<a href="chap4.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A data frame is a special type of list. Its main difference is that a data frame is a list with all its elements having the same length. This is the way that statistical data are usually represented: The columns of the data frame represent variables. The rows of the data frame represent observations. Thus, a data frame is “rectangular.” Here’s a simple example:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="chap4.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ade4)</span>
-<span id="cb32-2"><a href="chap4.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lizards)</span>
-<span id="cb32-3"><a href="chap4.html#cb32-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> lizards<span class="sc">$</span>traits</span>
-<span id="cb32-4"><a href="chap4.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
-<pre><code>##    mean.L matur.L max.L hatch.L hatch.m clutch.S age.mat clutch.F
-## Sa   69.2      58    82    27.8   0.572      6.0      13      1.5
-## Sh   48.4      42    56    22.9   0.310      3.2       5      2.0
-## Tl  168.4     132   190    42.8   2.235     16.9      19      1.0
-## Mc   66.1      56    72    25.0   0.441      7.2      11      1.5
-## My   70.1      60    81    26.6   0.550      5.4      10      1.0
-## Pb   55.2      44    64    24.0   0.304      4.2       8      2.0</code></pre>
-<p>Here we have used the <code>lizards</code> data set from the <code>ade4</code> package. This data set is actually a list: It has elements <code>traits</code> and two phylogenies: <code>hprA</code> and <code>hprB</code> I extracted the data frame from this list and looked at the first 6 lines. It is a <code>data.frame</code> with 8 variables (columns) and 18 observations, one for each species of lizard in the data set. Since <code>dat</code> is also a list, we can refer to the columns using the square-bracket notation or the <code>$</code> notation. Also, data frames have another property: they have dimensions:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chap4.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dat)</span></code></pre></div>
-<pre><code>## [1] 18  8</code></pre>
-<p>And you can refer to the elements of the data frame as if they were a matrix:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="chap4.html#cb36-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">3</span>, <span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] 42.8</code></pre>
-<p>This gives the value at the 3rd row and 4th column.</p>
-<p>Although each column (variable) has to be of the same length, if you have missing data, you can just put <code>NA</code> which is the missing data character in R:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="chap4.html#cb38-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">3</span>, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb38-2"><a href="chap4.html#cb38-2" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
-<pre><code>##    mean.L matur.L max.L hatch.L hatch.m
-## Sa   69.2      58    82    27.8   0.572
-## Sh   48.4      42    56    22.9   0.310
-## Tl  168.4     132   190      NA   2.235
-## Mc   66.1      56    72    25.0   0.441</code></pre>
-<p>Usually you will import data from a file into a data.frame. You can have your NA values in the data file and R will understand them and import them with the rest of the data.</p>
-
+<div id="chap9" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Categorical Data Analysis<a href="chap9.html#chap9" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="types-of-data" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Types of Data<a href="chap9.html#types-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are two basic types of data, <strong>continuous</strong> and <strong>discrete</strong>. Continuous measurements are on some kind of scale, for example an <em>interval</em> scale, where distances between values on the scale but ratios are not, for example temperature in degrees Celsius. It makes sense to say that two temperatures are different, but it makes no sense to calculate the ratio of temperatures on the Celsius scale. Another possibility is the <em>ratio</em> scale, where there is a meaningful zero point. Examples include body mass and temperature in degrees Kelvin. Other types of continuous data include circular data, such as angles or compass bearings.</p>
+<p>In this chapter we will discuss the analysis of <em>discrete</em> data. Discrete data can be <em>ordinal</em> or ranked, such as League tables in sporting contests. Or they may be <em>nominal</em> or categorical, falling into separate, unordered, categories.</p>
 </div>
 </div>
             </section>
@@ -397,8 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="chap3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chap5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chap8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multinomial-experiments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
