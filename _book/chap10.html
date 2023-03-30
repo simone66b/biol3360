@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | BIOL3360</title>
-  <meta name="description" content="Page not found | BIOL3360" />
+  <title>10 Mixed Effects Models | BIOL3360</title>
+  <meta name="description" content="10 Mixed Effects Models | BIOL3360" />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | BIOL3360" />
+  <meta property="og:title" content="10 Mixed Effects Models | BIOL3360" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | BIOL3360" />
+  <meta name="twitter:title" content="10 Mixed Effects Models | BIOL3360" />
   
   
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="chap9.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -277,18 +277,168 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="chap10" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Mixed Effects Models<a href="chap10.html#chap10" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="model-formulae" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Model Formulae<a href="chap10.html#model-formulae" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall that the general linear model (LM) can be written as:
+<span class="math display">\[
+\mathbf{Y}=\mathbf{X}\beta + \epsilon, \epsilon \sim N(0, \sigma^2\mathbf{I})
+\]</span>
+This can also be written as:
+<span class="math display">\[
+E(\mathbf{Y}) = \mathbf{\mu} = \mathbf{X}\beta, \mathbf{Y} \sim N(\mathbf{\mu}, \sigma^2\mathbf{I})
+\]</span>
+leading to the Generalised Linear Model (GLM):
+<span class="math display">\[
+g(\mathbf{\mu}) = \mathbf{X\beta},\; \mathbf{\mu} \sim f(\mathbf{\mu, \theta})
+\]</span>
+The main innovations of the Generalised Linear Model are that firstly, it can handle different distributions for the response variable other than the Normal distribution. Secondly, it has the concept of a <strong>link</strong> function that allows the modelling of the linear effects of <span class="math inline">\(X\beta\)</span> (the <strong>linear predictor</strong>) onto a transformed scale, hence allowing for some nonlinear properties of the data. For example, the <span class="math inline">\(logit()\)</span> link function for the Binomial distribution, which we have seen previously.</p>
+<p>In this chapter, we extend the general linear model in another direction, with the incorporation of <strong>random effects</strong>. Our new model will be:</p>
+<p><span class="math display">\[\mathbf{Y} = \mathbf{X\beta} + \mathbf{Zb} + \mathbf{\epsilon}, \epsilon \sim N(0, \sigma^2\mathbf{\Sigma}), \mathbf{b} \sim N(0, \delta^2\mathbf{G})\]</span>
+We can see that this new model is very similar to the general linear model, but with a couple of additions. There is still a response variable (<span class="math inline">\(\mathbf{Y}\)</span>), a linear predictor (<span class="math inline">\(\mathbf{X\beta}\)</span>), and a distributional assumption about <span class="math inline">\(\epsilon\)</span>. However we have a new thing that looks like a linear predictor, <span class="math inline">\(\mathbf{Zb}\)</span>. We also have a distributional assumption for <span class="math inline">\(\mathbf{b}\)</span>. We call <span class="math inline">\(\mathbf{b}\)</span> the <strong>random effects</strong> and <span class="math inline">\(\mathbf{Z}\)</span> is the <strong>design matrix</strong> for the random effects. Like the <span class="math inline">\(\epsilon\)</span> terms, the random effects are assumed to be Normal, with zero mean and some variance <span class="math inline">\(\delta^2\)</span> and covariance matrix <span class="math inline">\(\mathbf{G}\)</span>. <span class="math inline">\(\mathbf{G}\)</span> will often be the identity matrix (<span class="math inline">\(\mathbf{I}\)</span>), but not necessarily so, similar to what we saw when we briefly looked at models for correlated data (in Chapter 8). The so-called <strong>fixed effects</strong> are modelled using the fixed effects design matrix (<span class="math inline">\(\mathbf{X}\)</span>), as previously in the general linear model. We are interested in estimating the Greek letters again: the fixed effects (<span class="math inline">\(\mathbf{\beta}\)</span>), the residual variance (<span class="math inline">\(\sigma^2\)</span>) and the variance of the random effects <span class="math inline">\(\mathbf{\delta^2}\)</span>. In fact, there may be many extra variances to estimate from the random effects, depending on the complexity of <span class="math inline">\(\mathbf{Z}\)</span>.</p>
+</div>
+<div id="definition-of-random-effects" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Definition of Random Effects<a href="chap10.html#definition-of-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Random effects are very slippery beasts. They can be difficult to understand and define. Here are some definitions, (from Gelman, A. Analysis of variance - Why it is more important than ever. Annals of Statistics 33(1):1-31):</p>
+<ol style="list-style-type: decimal">
+<li><p>Fixed effects are constant across individuals, and random effects vary. For example, in a growth study, a model with random intercepts <span class="math inline">\(\alpha_i\)</span> and fixed slope <span class="math inline">\(\beta\)</span> corresponds to parallel lines for different individuals <span class="math inline">\(i\)</span>, or the model <span class="math inline">\(y_{it}=\alpha_i+\beta_t\)</span>. (Kreft and de Leeuw 1998)</p></li>
+<li><p>Effects are fixed if they are interesting in themselves or random if there is interest in the underlying population. (Searle et al. 1992)</p></li>
+<li><p>When a sample exhausts the population, the corresponding variable is ; when the sample is a small (i.e., negligible) part of the population the corresponding variable is . (Green and Tukey 1960)</p></li>
+<li><p>If an effect is assumed to be a realized value of a random variable, it is called a random effect’’ (LaMotte 1983)</p></li>
+<li><p>Fixed effects are estimated using least squares (or, more generally, maximum likelihood) and random effects are estimated with shrinkage [<em>linear unbiased prediction</em>]. (Robinson 1991)</p></li>
+</ol>
+<p>You can see that these definitions are not very exact, and they differ in the emphasis they place on various properties of random effects and their estimation. If you have trouble understanding what random effects are, you are in good company!</p>
+</div>
+<div id="example-1-repeated-measures" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Example 1: Repeated Measures<a href="chap10.html#example-1-repeated-measures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A researcher wishes to study the factors affecting the population density of black rock skinks (<em>Egernia saxatilis</em>) in ten different
+sites. At each site, she records the population density of skinks at twenty rock outcrops (in lizards <span class="math inline">\(m^{-2}\)</span> ). In addition, she records the area of the outcrop, the diameter of the largest rock in the outcrop and the aspect (in degrees from North).</p>
+<p><img src="brs.jpeg" alt="Rockin’ Black Rock Skink" />
+Here, the response variable is the density of skinks. The explanatory variables are site, area, diameter and aspect. Of these, site is a random effect (ie part of <span class="math inline">\(\mathbf{Z}\)</span>). The others are (fixed) covariates (ie. part of <span class="math inline">\(\mathbf{X}\)</span>). Site can be considered random as it is a sample of sites the researcher <em>could</em> have sampled. Definitions 2 and 3 above seem to apply. Each site is measured several times (several outcrops), so this sampling scheme can be considered a <strong>repeated measures</strong> design, another name for mixed-effects models. (You may have noticed that the researcher counted skinks, so technically the response is a <em>count</em> variable, and a Generalised Linear Model might be more appropriate. In fact, this leads to the technique of Generalised Linear Mixed-Effects Models (GLMM), which is beyond the scope of this course. You should research GLMMs yourself!)</p>
+</div>
+<div id="example-2-the-split-plot-design." class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Example 2: The Split-Plot Design.<a href="chap10.html#example-2-the-split-plot-design." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A researcher sows a crop of three cereal grains, each in 6 separate blocks. Within each plot, subplots are created and each subplot is fertilised with one of four different fertiliser concentrations. The crop yield is measured on each subplot.</p>
+<p><img src="splitplot.png" alt="Split Plot Design" />
+Here we see that there are 6 blocks, with 3 plots each. Each plot is a different colour, within a block, representing the variety of oats that have been sown. The plots are further divided into 4 subplots. Four different fertilizer treatments were applied to each of the four subplots in each plot, represented by the numbers. We can see that both the blocks and the plots are measured more than once (that’s repeated measures, again.). There are really two experiments going on here: One to look at which variety produces the most yield (at the plot level) and one which determines the effect of each fertilizer on yield (at the subplot level). This <strong>nested</strong> structure for the experiment is a classic case of random effects. We have plots nested within blocks and subplots nested within plots. As a rule, nested effects are always random. We can analyse this data in R as it is part of the <code>nlme</code> package, which contains functions for mixed-effects models.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chap10.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb1-2"><a href="chap10.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Oats)</span>
+<span id="cb1-3"><a href="chap10.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Oats)</span></code></pre></div>
+<pre><code>##  Block           Variety       nitro          yield      
+##  VI :12   Golden Rain:24   Min.   :0.00   Min.   : 53.0  
+##  V  :12   Marvellous :24   1st Qu.:0.15   1st Qu.: 86.0  
+##  III:12   Victory    :24   Median :0.30   Median :102.5  
+##  IV :12                    Mean   :0.30   Mean   :104.0  
+##  II :12                    3rd Qu.:0.45   3rd Qu.:121.2  
+##  I  :12                    Max.   :0.60   Max.   :174.0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chap10.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Oats)</span></code></pre></div>
+<pre><code>## Grouped Data: yield ~ nitro | Block
+##   Block     Variety nitro yield
+## 1     I     Victory   0.0   111
+## 2     I     Victory   0.2   130
+## 3     I     Victory   0.4   157
+## 4     I     Victory   0.6   174
+## 5     I Golden Rain   0.0   117
+## 6     I Golden Rain   0.2   114</code></pre>
+<p>We can now fit the mixed-effects model:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chap10.html#cb5-1" aria-hidden="true" tabindex="-1"></a>Oats<span class="sc">$</span>nitro <span class="ot">&lt;-</span> <span class="fu">factor</span>(Oats<span class="sc">$</span>nitro)</span>
+<span id="cb5-2"><a href="chap10.html#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lme</span>(yield <span class="sc">~</span> Variety <span class="sc">*</span> nitro, <span class="at">random=</span><span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>Block<span class="sc">/</span>Variety, <span class="at">data =</span> Oats)</span>
+<span id="cb5-3"><a href="chap10.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit)</span></code></pre></div>
+<pre><code>##               numDF denDF   F-value p-value
+## (Intercept)       1    45 245.14299  &lt;.0001
+## Variety           2    10   1.48534  0.2724
+## nitro             3    45  37.68562  &lt;.0001
+## Variety:nitro     6    45   0.30282  0.9322</code></pre>
+<p>What’s going on here? Well, we use the <code>lme</code> function to fit the model. “lme” for linear mixed-effects, similar to <code>lm</code> and <code>glm</code>. It has a familiar syntax. The first argument is a formula. Here, we model yield as a function of Variety (of oats) and nitro (fertilizer treatment). The <code>*</code> signifies that we also want to look at the <strong>interaction</strong> of Variety with nitro. This is because there may be <strong>non additive</strong> effects, for example a particular Oat variety may perform far better (or far worse!) on one particular fertilizer concentration compared to another. Interaction effects are common in biology so it is usual for us to at least allow the possibility that they occur in this case. The next argument is the keyword <code>random</code> and it is a one-sided formula (see the <code>~</code> sign), followed by a 1, and a vertical bar (|) and then Block/Variety. In the lme function, this is the way nested random effects are specified. We say that Variety is nested with Block. The <code>1</code> specifies that the random effect is on the <strong>intercept</strong>. In effect, if this were a regression problem, this would amount to allowing a different intercept for every Variety within every Block.</p>
+<p>Next we simply produce the fixed-effects ANOVA table and we can see that ther is no significant interaction term (Variety and nitro show no significant non-additive effects), and no effect of Variety, but there is a significant effect of fertilizer concentration on yield. Notice that Variety appears in the fixed effects formula <em>and</em> the random effects formula. This is unusual. Mostly the fixed and random effects should be separate (see the equation above, which puts them in different design matrices). However in the case of the split-plot design, the variable Variety is really just a place holder for the number of the plot within each Block, so we can use the Block variable in two places in the call to <code>lme</code>.</p>
+<p>Finally, we can look at the summary output of the model to examine the estimated effect sizes for each <span class="math inline">\(\beta\)</span> parameter in the model, and each variance parameter. (There will be 3 variance parameters: one for the among-Block variance, one for the among-Plot variance, and one for the error variance (<span class="math inline">\(\sigma^2\)</span>).)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chap10.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: Oats 
+##        AIC      BIC    logLik
+##   559.0285 590.4437 -264.5143
+## 
+## Random effects:
+##  Formula: ~1 | Block
+##         (Intercept)
+## StdDev:    14.64496
+## 
+##  Formula: ~1 | Variety %in% Block
+##         (Intercept) Residual
+## StdDev:    10.29863 13.30727
+## 
+## Fixed effects:  yield ~ Variety * nitro 
+##                               Value Std.Error DF   t-value p-value
+## (Intercept)                80.00000  9.106958 45  8.784492  0.0000
+## VarietyMarvellous           6.66667  9.715028 10  0.686222  0.5082
+## VarietyVictory             -8.50000  9.715028 10 -0.874933  0.4021
+## nitro0.2                   18.50000  7.682957 45  2.407927  0.0202
+## nitro0.4                   34.66667  7.682957 45  4.512152  0.0000
+## nitro0.6                   44.83333  7.682957 45  5.835427  0.0000
+## VarietyMarvellous:nitro0.2  3.33333 10.865342 45  0.306786  0.7604
+## VarietyVictory:nitro0.2    -0.33333 10.865342 45 -0.030679  0.9757
+## VarietyMarvellous:nitro0.4 -4.16667 10.865342 45 -0.383482  0.7032
+## VarietyVictory:nitro0.4     4.66667 10.865342 45  0.429500  0.6696
+## VarietyMarvellous:nitro0.6 -4.66667 10.865342 45 -0.429500  0.6696
+## VarietyVictory:nitro0.6     2.16667 10.865342 45  0.199411  0.8428
+##  Correlation: 
+##                            (Intr) VrtyMr VrtyVc ntr0.2 ntr0.4 ntr0.6 VM:0.2
+## VarietyMarvellous          -0.533                                          
+## VarietyVictory             -0.533  0.500                                   
+## nitro0.2                   -0.422  0.395  0.395                            
+## nitro0.4                   -0.422  0.395  0.395  0.500                     
+## nitro0.6                   -0.422  0.395  0.395  0.500  0.500              
+## VarietyMarvellous:nitro0.2  0.298 -0.559 -0.280 -0.707 -0.354 -0.354       
+## VarietyVictory:nitro0.2     0.298 -0.280 -0.559 -0.707 -0.354 -0.354  0.500
+## VarietyMarvellous:nitro0.4  0.298 -0.559 -0.280 -0.354 -0.707 -0.354  0.500
+## VarietyVictory:nitro0.4     0.298 -0.280 -0.559 -0.354 -0.707 -0.354  0.250
+## VarietyMarvellous:nitro0.6  0.298 -0.559 -0.280 -0.354 -0.354 -0.707  0.500
+## VarietyVictory:nitro0.6     0.298 -0.280 -0.559 -0.354 -0.354 -0.707  0.250
+##                            VV:0.2 VM:0.4 VV:0.4 VM:0.6
+## VarietyMarvellous                                     
+## VarietyVictory                                        
+## nitro0.2                                              
+## nitro0.4                                              
+## nitro0.6                                              
+## VarietyMarvellous:nitro0.2                            
+## VarietyVictory:nitro0.2                               
+## VarietyMarvellous:nitro0.4  0.250                     
+## VarietyVictory:nitro0.4     0.500  0.500              
+## VarietyMarvellous:nitro0.6  0.250  0.500  0.250       
+## VarietyVictory:nitro0.6     0.500  0.250  0.500  0.500
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.81300898 -0.56144838  0.01758044  0.63864476  1.57034166 
+## 
+## Number of Observations: 72
+## Number of Groups: 
+##              Block Variety %in% Block 
+##                  6                 18</code></pre>
+<p>First we see some basic details about the model fit, such as the Akaike Information Criterion (AIC), the Bayesian Information Criterion (BIC) and the value of the loglikelihood at its maximum. These values can be used to compare different models. The next section in the summary output shows the random effects. They are presented as Standard Deviations (which are just square-roots of the variances). As predicted, there are 3 values. The first is for the Block effect (which we label as <span class="math inline">\(\delta_1\)</span>), the second for the Variety within Block effect (<span class="math inline">\(\delta_2\)</span>) and the Residual error standard deviation (<span class="math inline">\(\sigma\)</span>). We can see that both the Block and Variety standard deviations are quite high and comparable to the error standard deviation, suggesting that these effects are important in our model. The next part of the output is the fixed effects. Here we get the <span class="math inline">\(\beta\)</span> terms for our fixed effects model. There are a lot of them. The (Intercept) value is the estimated yield when the Variety is at its baseline category (Golden Rain variety in this case) and at zero nitrogen treatment. The other <span class="math inline">\(\beta\)</span> parameters are the <em>differences</em> between the stated effects and the Intercept value. It’s hard to interpret this output because of the interaction terms, but note that they all have p &gt; 0.05, which agrees with the ANOVA table output. Also, we can see that the effect of nitro fertilizer concentration is different from zero for all 3 fertilizer treatments (remember, the 4th is the control and is part of the intercept in this analysis). The effects of Variety Marvellous and Victory are not significantly different from the Intercept, which refers to Golden Rain.</p>
+<p>The next part of the output is the correlations among the fixed effects. This part of the output is not usually of much interest, except when the matrix (in the form of a covariance matrix) is used, for example, in the Delta method such as we used in the GLM practical class. The next part of the output is just a 5 number summary of the residuals. From this, we can get an idea of the skewness of the residuals. Ideally we want the quartiles roughly centered around the median. Finally, there is information on the sample size for the experiment: 72 observations in 6 blocks, with 18 replicates of Variety nested within Block.</p>
+<p>Finally, we should look at some diagnostic plots to determine the appropriateness of our model:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chap10.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit); <span class="fu">qqnorm</span>(fit, <span class="at">abline=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-5-1.png" width="672" /><img src="BIOL3360_files/figure-html/unnamed-chunk-5-2.png" width="672" />
+We can see that there is good scatter along the fitted values, with no obvious trend or change in variance (trumpet or bow-tie effects). The Normal QQ plot is also quite good. The <span class="math inline">\(\epsilon\)</span>’s are mainly on the line, with some slight evidence of right-skew. We can see this because the dots on the left-hand side of the plot fall below the line, showing that the tail is “thinner” than for a Normal distribution, and the dots on the right-hand side of the plot fall above the line, showing that the upper tail is “fatter” than for a Normal distribution. Some skew is very common in these sorts of statistical models, mostly because (by definition) the tails of the distribution are hard to sample.</p>
+<p>We can get some idea about what is going on by looking at a histogram of the residuals:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chap10.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="chap10.html#cb10-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">residuals =</span> <span class="fu">resid</span>(fit))</span>
+<span id="cb10-3"><a href="chap10.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>residuals, <span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">data=</span>dat) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="chap10.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">15</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="chap10.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+We can see that there is a slight hint of bimodality, but this is not worth worrying about and didn’t really jump out at us from the QQ plot. We can see that there are more data on the far right-hand side than on the far left, showing the skew to the right.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="chap9.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
