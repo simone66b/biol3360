@@ -98,11 +98,8 @@ some-theory
 simple-example-the-poisson-distribution
 the-binomial-distribution-in-exponential-form
 issues-when-fitting-with-glms
-exercises-3
 chap10
 model-formulae
 definition-of-random-effects
-a-worked-example
-an-example
-example-2-the-split-plot-design.
 example-1-repeated-measures
+example-2-the-split-plot-design.

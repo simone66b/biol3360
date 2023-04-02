@@ -252,6 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.18" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#the-binomial-distribution-in-exponential-form"><i class="fa fa-check"></i><b>10.18</b> The Binomial distribution in exponential form</a></li>
 <li class="chapter" data-level="10.19" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#issues-when-fitting-with-glms"><i class="fa fa-check"></i><b>10.19</b> Issues when fitting with GLMs</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>11</b> Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chap10.html"><a href="chap10.html#model-formulae"><i class="fa fa-check"></i><b>11.1</b> Model Formulae</a></li>
+<li class="chapter" data-level="11.2" data-path="chap10.html"><a href="chap10.html#definition-of-random-effects"><i class="fa fa-check"></i><b>11.2</b> Definition of Random Effects</a></li>
+<li class="chapter" data-level="11.3" data-path="chap10.html"><a href="chap10.html#example-1-repeated-measures"><i class="fa fa-check"></i><b>11.3</b> Example 1: Repeated Measures</a></li>
+<li class="chapter" data-level="11.4" data-path="chap10.html"><a href="chap10.html#example-2-the-split-plot-design."><i class="fa fa-check"></i><b>11.4</b> Example 2: The Split-Plot Design.</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -331,11 +338,16 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## -3.6043 -0.9277  0.3178  1.0636  2.3245 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   1.3562     0.2123   6.389 1.76e-08 ***
-## LogSize       0.2793     0.1070   2.611   0.0111 *  
+##             Estimate Std. Error t value
+## (Intercept)   1.3562     0.2123   6.389
+## LogSize       0.2793     0.1070   2.611
+##             Pr(&gt;|t|)    
+## (Intercept) 1.76e-08 ***
+## LogSize       0.0111 *  
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+##   0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39;
+##   0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.415 on 68 degrees of freedom
 ## Multiple R-squared:  0.09112,    Adjusted R-squared:  0.07776 
@@ -353,17 +365,22 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## numeric(0)
 ## 
 ## Coefficients:
-##                 Value Std.Error   t-value p-value
-## (Intercept) 1.2515297 2.6279314 0.4762414  0.6354
-## LogSize     0.3710265 0.1950539 1.9021745  0.0614
+##                 Value Std.Error   t-value
+## (Intercept) 1.2515297 2.6279314 0.4762414
+## LogSize     0.3710265 0.1950539 1.9021745
+##             p-value
+## (Intercept)  0.6354
+## LogSize      0.0614
 ## 
 ##  Correlation: 
 ##         (Intr)
 ## LogSize -0.16 
 ## 
 ## Standardized residuals:
-##        Min         Q1        Med         Q3        Max 
-## -0.7127592 -0.1633996  0.0533231  0.1993733  0.5433174 
+##        Min         Q1        Med         Q3 
+## -0.7127592 -0.1633996  0.0533231  0.1993733 
+##        Max 
+##  0.5433174 
 ## 
 ## Residual standard error: 4.968733 
 ## Degrees of freedom: 70 total; 68 residual</code></pre>
@@ -438,10 +455,10 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## ar(x = lynx, method = &quot;mle&quot;)
 ## 
 ## Coefficients:
-##       1        2        3        4        5        6        7  
-##  1.0555  -0.6298   0.2105  -0.1438  -0.0200   0.0373  -0.2341  
-##       8  
-##  0.3322  
+##       1        2        3        4  
+##  1.0555  -0.6298   0.2105  -0.1438  
+##       5        6        7        8  
+## -0.0200   0.0373  -0.2341   0.3322  
 ## 
 ## Order selected 8  sigma^2 estimated as  616997</code></pre>
 </div>
@@ -462,10 +479,12 @@ where <span class="math inline">\(\Sigma\)</span> is a variance-covariance matri
 ## Correlation Structure: ARMA(8,0)
 ##  Formula: ~1 
 ##  Parameter estimate(s):
-##        Phi1        Phi2        Phi3        Phi4        Phi5 
-##  1.05436014 -0.62987055  0.20987093 -0.14453853 -0.01997304 
-##        Phi6        Phi7        Phi8 
-##  0.03578814 -0.23275963  0.32892377 
+##        Phi1        Phi2        Phi3 
+##  1.05436014 -0.62987055  0.20987093 
+##        Phi4        Phi5        Phi6 
+## -0.14453853 -0.01997304  0.03578814 
+##        Phi7        Phi8 
+## -0.23275963  0.32892377 
 ## Degrees of freedom: 114 total; 112 residual
 ## Residual standard error: 1558.429</code></pre>
 <p>Finally, we can re-check the autocorrelation plots of the residuals and verify that there are no further problems with autocorrelation.</p>

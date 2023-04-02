@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chap9.html"/>
-
+<link rel="next" href="chap10.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,6 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.18" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#the-binomial-distribution-in-exponential-form"><i class="fa fa-check"></i><b>10.18</b> The Binomial distribution in exponential form</a></li>
 <li class="chapter" data-level="10.19" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#issues-when-fitting-with-glms"><i class="fa fa-check"></i><b>10.19</b> Issues when fitting with GLMs</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>11</b> Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chap10.html"><a href="chap10.html#model-formulae"><i class="fa fa-check"></i><b>11.1</b> Model Formulae</a></li>
+<li class="chapter" data-level="11.2" data-path="chap10.html"><a href="chap10.html#definition-of-random-effects"><i class="fa fa-check"></i><b>11.2</b> Definition of Random Effects</a></li>
+<li class="chapter" data-level="11.3" data-path="chap10.html"><a href="chap10.html#example-1-repeated-measures"><i class="fa fa-check"></i><b>11.3</b> Example 1: Repeated Measures</a></li>
+<li class="chapter" data-level="11.4" data-path="chap10.html"><a href="chap10.html#example-2-the-split-plot-design."><i class="fa fa-check"></i><b>11.4</b> Example 2: The Split-Plot Design.</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -320,10 +327,12 @@ It’s easier to visualise the <span class="math inline">\(\chi^2\)</span> distr
 <p>Because the expected proportions come from theory, and not the data themselves, we do not lose any degrees of freedom apart from the restriction that <span class="math inline">\(n_1+n_2+n_3+n_4=100\)</span>. Therefore there are <span class="math inline">\(k-1=4-1=3\)</span> degrees of freedom. Hence, because the p-value is &gt;&gt; 0.05, we do not reject the null hypothesis that the peas follow the Mendelian model. Of course, we can easily do this using the built-in <code>chisq.test()</code> function in R:</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="multinomial-experiments.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(counts, <span class="at">p =</span> ratio, <span class="at">rescale.p =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
-##  Chi-squared test for given probabilities
+##  Chi-squared test for given
+##  probabilities
 ## 
 ## data:  counts
-## X-squared = 0.65778, df = 3, p-value = 0.8831</code></pre>
+## X-squared = 0.65778, df = 3, p-value =
+## 0.8831</code></pre>
 </div>
 <div id="example-2-goodness-of-fit" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">10.3</span> Example 2: Goodness-of-fit<a href="multinomial-experiments.html#example-2-goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -462,7 +471,8 @@ Therefore we do <strong>not</strong> reject the null hypothesis that the data co
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  mat
-## X-squared = 57.362, df = 4, p-value = 1.039e-11</code></pre>
+## X-squared = 57.362, df = 4, p-value =
+## 1.039e-11</code></pre>
 </div>
 <div id="assumptions-of-the-x2-test" class="section level2 hasAnchor" number="10.5">
 <h2><span class="header-section-number">10.5</span> Assumptions of the <span class="math inline">\(X^2\)</span> Test<a href="multinomial-experiments.html#assumptions-of-the-x2-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -540,11 +550,16 @@ Note that the loglinear model is a special case of the Poisson GLM. The advantag
 ## 
 ## Model 1: Frequency ~ Authorship + Input
 ## Model 2: Frequency ~ Authorship * Input
-##   Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
-## 1         4     54.542                          
-## 2         0      0.000  4   54.542 4.052e-11 ***
+##   Resid. Df Resid. Dev Df Deviance
+## 1         4     54.542            
+## 2         0      0.000  4   54.542
+##    Pr(&gt;Chi)    
+## 1              
+## 2 4.052e-11 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+## Signif. codes:  
+##   0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39;
+##   0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="multinomial-experiments.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with the loglinear model output:</span></span>
 <span id="cb145-2"><a href="multinomial-experiments.html#cb145-2" aria-hidden="true" tabindex="-1"></a>fit</span></code></pre></div>
 <pre><code>## Call:
@@ -586,15 +601,22 @@ Note that the loglinear model is a special case of the Poisson GLM. The advantag
 ##     Dose, family = binomial(link = logit), data = Experiment)
 ## 
 ## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.6622  -1.0517  -0.6809   0.3001   1.5211  
+##     Min       1Q   Median       3Q  
+## -1.6622  -1.0517  -0.6809   0.3001  
+##     Max  
+##  1.5211  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)   59.574      5.078   11.73   &lt;2e-16 ***
-## Dose         -33.618      2.853  -11.78   &lt;2e-16 ***
+##             Estimate Std. Error z value
+## (Intercept)   59.574      5.078   11.73
+## Dose         -33.618      2.853  -11.78
+##             Pr(&gt;|z|)    
+## (Intercept)   &lt;2e-16 ***
+## Dose          &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+##   0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39;
+##   0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -627,18 +649,24 @@ Notice that the left-hand plot looks like the usual quantile-quantile plot, but 
 ##     poly(Dose, 2), family = binomial(link = logit), data = Experiment)
 ## 
 ## Deviance Residuals: 
-##       1        2        3        4        5        6        7  
-##  0.3262  -0.7598   0.3934   0.5521  -1.0252   0.5541   0.3984  
-##       8  
-## -0.8577  
+##       1        2        3        4  
+##  0.3262  -0.7598   0.3934   0.5521  
+##       5        6        7        8  
+## -1.0252   0.5541   0.3984  -0.8577  
 ## 
 ## Coefficients:
-##                Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)     -1.0315     0.2044  -5.047 4.48e-07 ***
-## poly(Dose, 2)1  -6.6299     0.6423 -10.323  &lt; 2e-16 ***
-## poly(Dose, 2)2  -1.3391     0.5465  -2.450   0.0143 *  
+##                Estimate Std. Error z value
+## (Intercept)     -1.0315     0.2044  -5.047
+## poly(Dose, 2)1  -6.6299     0.6423 -10.323
+## poly(Dose, 2)2  -1.3391     0.5465  -2.450
+##                Pr(&gt;|z|)    
+## (Intercept)    4.48e-07 ***
+## poly(Dose, 2)1  &lt; 2e-16 ***
+## poly(Dose, 2)2   0.0143 *  
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+##   0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39;
+##   0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
@@ -695,8 +723,8 @@ which is in canonical form and the natural parameter is <span class="math inline
           </div>
         </div>
       </div>
-<a href="chap9.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="chap9.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -252,6 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.18" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#the-binomial-distribution-in-exponential-form"><i class="fa fa-check"></i><b>10.18</b> The Binomial distribution in exponential form</a></li>
 <li class="chapter" data-level="10.19" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#issues-when-fitting-with-glms"><i class="fa fa-check"></i><b>10.19</b> Issues when fitting with GLMs</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>11</b> Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chap10.html"><a href="chap10.html#model-formulae"><i class="fa fa-check"></i><b>11.1</b> Model Formulae</a></li>
+<li class="chapter" data-level="11.2" data-path="chap10.html"><a href="chap10.html#definition-of-random-effects"><i class="fa fa-check"></i><b>11.2</b> Definition of Random Effects</a></li>
+<li class="chapter" data-level="11.3" data-path="chap10.html"><a href="chap10.html#example-1-repeated-measures"><i class="fa fa-check"></i><b>11.3</b> Example 1: Repeated Measures</a></li>
+<li class="chapter" data-level="11.4" data-path="chap10.html"><a href="chap10.html#example-2-the-split-plot-design."><i class="fa fa-check"></i><b>11.4</b> Example 2: The Split-Plot Design.</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -368,20 +375,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-2"><a href="chap4.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lizards)</span>
 <span id="cb32-3"><a href="chap4.html#cb32-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> lizards<span class="sc">$</span>traits</span>
 <span id="cb32-4"><a href="chap4.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div>
-<pre><code>##    mean.L matur.L max.L hatch.L hatch.m clutch.S age.mat
-## Sa   69.2      58    82    27.8   0.572      6.0      13
-## Sh   48.4      42    56    22.9   0.310      3.2       5
-## Tl  168.4     132   190    42.8   2.235     16.9      19
-## Mc   66.1      56    72    25.0   0.441      7.2      11
-## My   70.1      60    81    26.6   0.550      5.4      10
-## Pb   55.2      44    64    24.0   0.304      4.2       8
-##    clutch.F
-## Sa      1.5
-## Sh      2.0
-## Tl      1.0
-## Mc      1.5
-## My      1.0
-## Pb      2.0</code></pre>
+<pre><code>##    mean.L matur.L max.L hatch.L hatch.m
+## Sa   69.2      58    82    27.8   0.572
+## Sh   48.4      42    56    22.9   0.310
+## Tl  168.4     132   190    42.8   2.235
+## Mc   66.1      56    72    25.0   0.441
+## My   70.1      60    81    26.6   0.550
+## Pb   55.2      44    64    24.0   0.304
+##    clutch.S age.mat clutch.F
+## Sa      6.0      13      1.5
+## Sh      3.2       5      2.0
+## Tl     16.9      19      1.0
+## Mc      7.2      11      1.5
+## My      5.4      10      1.0
+## Pb      4.2       8      2.0</code></pre>
 <p>Here we have used the <code>lizards</code> data set from the <code>ade4</code> package. This data set is actually a list: It has elements <code>traits</code> and two phylogenies: <code>hprA</code> and <code>hprB</code> I extracted the data frame from this list and looked at the first 6 lines. It is a <code>data.frame</code> with 8 variables (columns) and 18 observations, one for each species of lizard in the data set. Since <code>dat</code> is also a list, we can refer to the columns using the square-bracket notation or the <code>$</code> notation. Also, data frames have another property: they have dimensions:</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="chap4.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dat)</span></code></pre></div>
 <pre><code>## [1] 18  8</code></pre>

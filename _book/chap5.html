@@ -252,6 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.18" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#the-binomial-distribution-in-exponential-form"><i class="fa fa-check"></i><b>10.18</b> The Binomial distribution in exponential form</a></li>
 <li class="chapter" data-level="10.19" data-path="multinomial-experiments.html"><a href="multinomial-experiments.html#issues-when-fitting-with-glms"><i class="fa fa-check"></i><b>10.19</b> Issues when fitting with GLMs</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>11</b> Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="chap10.html"><a href="chap10.html#model-formulae"><i class="fa fa-check"></i><b>11.1</b> Model Formulae</a></li>
+<li class="chapter" data-level="11.2" data-path="chap10.html"><a href="chap10.html#definition-of-random-effects"><i class="fa fa-check"></i><b>11.2</b> Definition of Random Effects</a></li>
+<li class="chapter" data-level="11.3" data-path="chap10.html"><a href="chap10.html#example-1-repeated-measures"><i class="fa fa-check"></i><b>11.3</b> Example 1: Repeated Measures</a></li>
+<li class="chapter" data-level="11.4" data-path="chap10.html"><a href="chap10.html#example-2-the-split-plot-design."><i class="fa fa-check"></i><b>11.4</b> Example 2: The Split-Plot Design.</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -319,13 +326,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-10"><a href="chap5.html#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-11"><a href="chap5.html#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>() <span class="do">## call the function.</span></span></code></pre></div>
 <pre><code>## Values from a Normal distribution
-## -1.041544 
-## 0.584233 
-## 0.7866792 
-## 1.002791 
-## 1.79045 
-## -0.6874724 
-## Outlier detected: 1.969898</code></pre>
+## -1.578838 
+## -0.3700755 
+## 1.468436 
+## -0.9038172 
+## -1.68179 
+## 0.4753817 
+## 0.9984249 
+## -0.5338553 
+## -1.179791 
+## 1.188979 
+## 0.987033 
+## 0.8492657 
+## -0.6937916 
+## -0.7415797 
+## -0.2396876 
+## -0.2054859 
+## 1.417971 
+## 0.2862391 
+## -0.4236882 
+## -0.3242979 
+## 0.6669687 
+## 0.5471811 
+## 0.7099803 
+## -1.309301 
+## 1.719572 
+## -0.3027559 
+## 0.3979195 
+## -0.4557022 
+## -0.6792077 
+## 0.1373215 
+## 0.8996313 
+## -0.6195593 
+## -0.3470022 
+## -0.6509271 
+## -0.7944333 
+## 1.422673 
+## 0.6671759 
+## 0.9962597 
+## -0.3819069 
+## -0.03775848 
+## -1.132686 
+## -0.4792064 
+## -0.2163299 
+## 0.1270386 
+## -0.6418964 
+## -1.036951 
+## -0.1246365 
+## -0.3532984 
+## Outlier detected: 2.84966</code></pre>
 <p>Note that the loop occurs while the test condition is TRUE. The flow of control breaks out of the while loop as soon as the test condition is FALSE. You can also break out of loops using the <code>break</code> command. You can also skip an iteration of the loop (usually a for loop) using the <code>next</code> command.</p>
 <p>The <code>repeat</code> loop is not often used. It simply iterates over a block of code, without the possibility of the loop ending. You can escape from a <code>repeat</code> loop using the <code>break</code> or <code>next</code> commands.</p>
 </div>
