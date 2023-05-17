@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 Experimental Design | Design of Experiments</title>
+  <meta name="description" content="11 Experimental Design | Design of Experiments" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 Experimental Design | Design of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 Experimental Design | Design of Experiments" />
+  
+  
+  
+
+<meta name="author" content="Assoc. Prof. Simone Blomberg" />
+
+
+<meta name="date" content="2023-04-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chap10.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="shortcut icon" href="pics/favicon.ico">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://shire.science.uq.edu.au/QBIOL/">QBIO Home</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to BIOL3360!</a></li>
+<li class="chapter" data-level="1" data-path="chap1.html"><a href="chap1.html"><i class="fa fa-check"></i><b>1</b> BIOL3360: Analysis and Communication of Biological Data</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chap1.html"><a href="chap1.html#course-description"><i class="fa fa-check"></i><b>1.1</b> Course description</a></li>
+<li class="chapter" data-level="1.2" data-path="chap1.html"><a href="chap1.html#course-delivery"><i class="fa fa-check"></i><b>1.2</b> Course Delivery</a></li>
+<li class="chapter" data-level="1.3" data-path="chap1.html"><a href="chap1.html#textbooks-and-resources"><i class="fa fa-check"></i><b>1.3</b> Textbooks and Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="chap1.html"><a href="chap1.html#assessment"><i class="fa fa-check"></i><b>1.4</b> Assessment</a></li>
+<li class="chapter" data-level="1.5" data-path="chap1.html"><a href="chap1.html#goals-and-expectations"><i class="fa fa-check"></i><b>1.5</b> Goals and expectations</a></li>
+<li class="chapter" data-level="1.6" data-path="chap1.html"><a href="chap1.html#course-communication"><i class="fa fa-check"></i><b>1.6</b> Course communication</a></li>
+<li class="chapter" data-level="1.7" data-path="chap1.html"><a href="chap1.html#and-finally"><i class="fa fa-check"></i><b>1.7</b> And finally…</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap2.html"><a href="chap2.html"><i class="fa fa-check"></i><b>2</b> Week 1: R Programming I</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chap2.html"><a href="chap2.html#why-programming-why-statistics-why-r"><i class="fa fa-check"></i><b>2.1</b> Why Programming? Why Statistics? Why R?</a></li>
+<li class="chapter" data-level="2.2" data-path="chap2.html"><a href="chap2.html#why-statistics"><i class="fa fa-check"></i><b>2.2</b> Why Statistics?</a></li>
+<li class="chapter" data-level="2.3" data-path="chap2.html"><a href="chap2.html#why-r"><i class="fa fa-check"></i><b>2.3</b> Why R?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap3.html"><a href="chap3.html"><i class="fa fa-check"></i><b>3</b> Beginning R Programming</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chap3.html"><a href="chap3.html#the-workspace-setup"><i class="fa fa-check"></i><b>3.1</b> The Workspace Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="chap3.html"><a href="chap3.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a></li>
+<li class="chapter" data-level="3.3" data-path="chap3.html"><a href="chap3.html#the-art-of-r-programming"><i class="fa fa-check"></i><b>3.3</b> The Art of R Programming</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap4.html"><a href="chap4.html"><i class="fa fa-check"></i><b>4</b> More R Programming</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chap4.html"><a href="chap4.html#data-structures"><i class="fa fa-check"></i><b>4.1</b> Data Structures</a></li>
+<li class="chapter" data-level="4.2" data-path="chap4.html"><a href="chap4.html#lists"><i class="fa fa-check"></i><b>4.2</b> Lists</a></li>
+<li class="chapter" data-level="4.3" data-path="chap4.html"><a href="chap4.html#data-frames"><i class="fa fa-check"></i><b>4.3</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap5.html"><a href="chap5.html"><i class="fa fa-check"></i><b>5</b> Flow of Control</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap5.html"><a href="chap5.html#loops"><i class="fa fa-check"></i><b>5.1</b> Loops</a></li>
+<li class="chapter" data-level="5.2" data-path="chap5.html"><a href="chap5.html#for-loops"><i class="fa fa-check"></i><b>5.2</b> For loops</a></li>
+<li class="chapter" data-level="5.3" data-path="chap5.html"><a href="chap5.html#while-and-repeat"><i class="fa fa-check"></i><b>5.3</b> while and repeat</a></li>
+<li class="chapter" data-level="5.4" data-path="chap5.html"><a href="chap5.html#branching-code-the-if-then-else-construct."><i class="fa fa-check"></i><b>5.4</b> Branching code: The if-then-else construct.</a></li>
+<li class="chapter" data-level="5.5" data-path="chap5.html"><a href="chap5.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap6.html"><a href="chap6.html"><i class="fa fa-check"></i><b>6</b> Experimental Design</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap6.html"><a href="chap6.html#some-history"><i class="fa fa-check"></i><b>6.1</b> Some History</a></li>
+<li class="chapter" data-level="6.2" data-path="chap6.html"><a href="chap6.html#experiments"><i class="fa fa-check"></i><b>6.2</b> Experiments</a></li>
+<li class="chapter" data-level="6.3" data-path="chap6.html"><a href="chap6.html#more-terminology"><i class="fa fa-check"></i><b>6.3</b> More terminology</a></li>
+<li class="chapter" data-level="6.4" data-path="chap6.html"><a href="chap6.html#randomness"><i class="fa fa-check"></i><b>6.4</b> Randomness</a></li>
+<li class="chapter" data-level="6.5" data-path="chap6.html"><a href="chap6.html#positive-and-negative-controls"><i class="fa fa-check"></i><b>6.5</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="6.6" data-path="chap6.html"><a href="chap6.html#blinding-of-experiments"><i class="fa fa-check"></i><b>6.6</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="6.7" data-path="chap6.html"><a href="chap6.html#covariates"><i class="fa fa-check"></i><b>6.7</b> Covariates</a></li>
+<li class="chapter" data-level="6.8" data-path="chap6.html"><a href="chap6.html#natural-experiments-or-natural-experiments"><i class="fa fa-check"></i><b>6.8</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="6.9" data-path="chap6.html"><a href="chap6.html#random-effects-and-blocking"><i class="fa fa-check"></i><b>6.9</b> Random effects and Blocking</a></li>
+<li class="chapter" data-level="6.10" data-path="chap6.html"><a href="chap6.html#power"><i class="fa fa-check"></i><b>6.10</b> Power</a></li>
+<li class="chapter" data-level="6.11" data-path="chap6.html"><a href="chap6.html#factors-affecting-the-power-of-a-test"><i class="fa fa-check"></i><b>6.11</b> Factors affecting the Power of a Test</a></li>
+<li class="chapter" data-level="6.12" data-path="chap6.html"><a href="chap6.html#built-in-r-functions-for-power-analysis"><i class="fa fa-check"></i><b>6.12</b> Built-in R Functions for Power Analysis</a></li>
+<li class="chapter" data-level="6.13" data-path="chap6.html"><a href="chap6.html#power-of-the-t-test"><i class="fa fa-check"></i><b>6.13</b> Power of the t-test</a></li>
+<li class="chapter" data-level="6.14" data-path="chap6.html"><a href="chap6.html#exercises"><i class="fa fa-check"></i><b>6.14</b> Exercises</a></li>
+<li class="chapter" data-level="6.15" data-path="chap6.html"><a href="chap6.html#package-pwr"><i class="fa fa-check"></i><b>6.15</b> Package <tt>pwr</tt></a></li>
+<li class="chapter" data-level="6.16" data-path="chap6.html"><a href="chap6.html#exercises-1"><i class="fa fa-check"></i><b>6.16</b> Exercises</a></li>
+<li class="chapter" data-level="6.17" data-path="chap6.html"><a href="chap6.html#effect-sizes"><i class="fa fa-check"></i><b>6.17</b> Effect Sizes</a></li>
+<li class="chapter" data-level="6.18" data-path="chap6.html"><a href="chap6.html#exercises-2"><i class="fa fa-check"></i><b>6.18</b> Exercises</a></li>
+<li class="chapter" data-level="6.19" data-path="chap6.html"><a href="chap6.html#power-curves"><i class="fa fa-check"></i><b>6.19</b> Power Curves</a></li>
+<li class="chapter" data-level="6.20" data-path="chap6.html"><a href="chap6.html#exercises-3"><i class="fa fa-check"></i><b>6.20</b> Exercises</a></li>
+<li class="chapter" data-level="6.21" data-path="chap6.html"><a href="chap6.html#power-analysis-by-simulation"><i class="fa fa-check"></i><b>6.21</b> Power Analysis by Simulation</a></li>
+<li class="chapter" data-level="6.22" data-path="chap6.html"><a href="chap6.html#exercise"><i class="fa fa-check"></i><b>6.22</b> Exercise</a></li>
+<li class="chapter" data-level="6.23" data-path="chap6.html"><a href="chap6.html#references"><i class="fa fa-check"></i><b>6.23</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap7.html"><a href="chap7.html"><i class="fa fa-check"></i><b>7</b> LinearModels</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chap7.html"><a href="chap7.html#graphing-the-iris-data"><i class="fa fa-check"></i><b>7.1</b> Graphing the Iris data</a></li>
+<li class="chapter" data-level="7.2" data-path="chap7.html"><a href="chap7.html#good-resources-for-graphing"><i class="fa fa-check"></i><b>7.2</b> Good Resources for Graphing</a></li>
+<li class="chapter" data-level="7.3" data-path="chap7.html"><a href="chap7.html#analysing-the-iris-data"><i class="fa fa-check"></i><b>7.3</b> Analysing the iris data</a></li>
+<li class="chapter" data-level="7.4" data-path="chap7.html"><a href="chap7.html#model-diagnostics"><i class="fa fa-check"></i><b>7.4</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="7.5" data-path="chap7.html"><a href="chap7.html#analysis-using-t-test"><i class="fa fa-check"></i><b>7.5</b> Analysis using t test</a></li>
+<li class="chapter" data-level="7.6" data-path="chap7.html"><a href="chap7.html#analysis-using-anova"><i class="fa fa-check"></i><b>7.6</b> Analysis using ANOVA</a></li>
+<li class="chapter" data-level="7.7" data-path="chap7.html"><a href="chap7.html#analysis-using-regression"><i class="fa fa-check"></i><b>7.7</b> Analysis using Regression</a></li>
+<li class="chapter" data-level="7.8" data-path="chap7.html"><a href="chap7.html#points-to-note"><i class="fa fa-check"></i><b>7.8</b> Points to Note</a></li>
+<li class="chapter" data-level="7.9" data-path="chap7.html"><a href="chap7.html#summary"><i class="fa fa-check"></i><b>7.9</b> Summary</a></li>
+<li class="chapter" data-level="7.10" data-path="chap7.html"><a href="chap7.html#linear-models"><i class="fa fa-check"></i><b>7.10</b> Linear Models</a></li>
+<li class="chapter" data-level="7.11" data-path="chap7.html"><a href="chap7.html#matrix-notation-for-linear-models"><i class="fa fa-check"></i><b>7.11</b> Matrix Notation for Linear Models</a></li>
+<li class="chapter" data-level="7.12" data-path="chap7.html"><a href="chap7.html#matrix-representation"><i class="fa fa-check"></i><b>7.12</b> Matrix Representation</a></li>
+<li class="chapter" data-level="7.13" data-path="chap7.html"><a href="chap7.html#distributional-assumptions"><i class="fa fa-check"></i><b>7.13</b> Distributional Assumptions</a></li>
+<li class="chapter" data-level="7.14" data-path="chap7.html"><a href="chap7.html#estimation-ordinary-least-squares"><i class="fa fa-check"></i><b>7.14</b> Estimation: Ordinary Least Squares</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap8.html"><a href="chap8.html"><i class="fa fa-check"></i><b>8</b> Generalised Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chap8.html"><a href="chap8.html#estimation-gls"><i class="fa fa-check"></i><b>8.1</b> Estimation: GLS</a></li>
+<li class="chapter" data-level="8.2" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation"><i class="fa fa-check"></i><b>8.2</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.3" data-path="chap8.html"><a href="chap8.html#gls-example-phylogenetic-autocorrelation-1"><i class="fa fa-check"></i><b>8.3</b> GLS example: Phylogenetic autocorrelation</a></li>
+<li class="chapter" data-level="8.4" data-path="chap8.html"><a href="chap8.html#gls-example-time-series"><i class="fa fa-check"></i><b>8.4</b> GLS example: Time Series</a></li>
+<li class="chapter" data-level="8.5" data-path="chap8.html"><a href="chap8.html#lynx-data"><i class="fa fa-check"></i><b>8.5</b> Lynx Data</a></li>
+<li class="chapter" data-level="8.6" data-path="chap8.html"><a href="chap8.html#acf-and-pacf"><i class="fa fa-check"></i><b>8.6</b> ACF and PACF</a></li>
+<li class="chapter" data-level="8.7" data-path="chap8.html"><a href="chap8.html#autoregression-of-lynx-data"><i class="fa fa-check"></i><b>8.7</b> Autoregression of Lynx Data</a></li>
+<li class="chapter" data-level="8.8" data-path="chap8.html"><a href="chap8.html#gls-autoregression-model-of-lynx-data"><i class="fa fa-check"></i><b>8.8</b> GLS Autoregression model of Lynx data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap9.html"><a href="chap9.html"><i class="fa fa-check"></i><b>9</b> Categorical Data Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chap9.html"><a href="chap9.html#types-of-data"><i class="fa fa-check"></i><b>9.1</b> Types of Data</a></li>
+<li class="chapter" data-level="9.2" data-path="chap9.html"><a href="chap9.html#pearsons-x2-test"><i class="fa fa-check"></i><b>9.2</b> Pearson’s <span class="math inline">\(X^2\)</span> test</a></li>
+<li class="chapter" data-level="9.3" data-path="chap9.html"><a href="chap9.html#example-1.-specified-cell-probabilities"><i class="fa fa-check"></i><b>9.3</b> Example 1. Specified Cell Probabilities</a></li>
+<li class="chapter" data-level="9.4" data-path="chap9.html"><a href="chap9.html#example-2-goodness-of-fit"><i class="fa fa-check"></i><b>9.4</b> Example 2: Goodness-of-fit</a></li>
+<li class="chapter" data-level="9.5" data-path="chap9.html"><a href="chap9.html#example-3-contingency-tables"><i class="fa fa-check"></i><b>9.5</b> Example 3: Contingency Tables</a></li>
+<li class="chapter" data-level="9.6" data-path="chap9.html"><a href="chap9.html#assumptions-of-the-x2-test"><i class="fa fa-check"></i><b>9.6</b> Assumptions of the <span class="math inline">\(X^2\)</span> Test</a></li>
+<li class="chapter" data-level="9.7" data-path="chap9.html"><a href="chap9.html#loglinear-models"><i class="fa fa-check"></i><b>9.7</b> Loglinear Models</a></li>
+<li class="chapter" data-level="9.8" data-path="chap9.html"><a href="chap9.html#generalised-linear-models"><i class="fa fa-check"></i><b>9.8</b> Generalised Linear Models</a></li>
+<li class="chapter" data-level="9.9" data-path="chap9.html"><a href="chap9.html#the-general-linear-model-for-normal-responses"><i class="fa fa-check"></i><b>9.9</b> The General Linear Model for Normal Responses</a></li>
+<li class="chapter" data-level="9.10" data-path="chap9.html"><a href="chap9.html#the-poisson-glm"><i class="fa fa-check"></i><b>9.10</b> The Poisson GLM</a></li>
+<li class="chapter" data-level="9.11" data-path="chap9.html"><a href="chap9.html#fitting-the-poisson-glm"><i class="fa fa-check"></i><b>9.11</b> Fitting the Poisson GLM</a></li>
+<li class="chapter" data-level="9.12" data-path="chap9.html"><a href="chap9.html#mode-diagnostics"><i class="fa fa-check"></i><b>9.12</b> Mode Diagnostics</a></li>
+<li class="chapter" data-level="9.13" data-path="chap9.html"><a href="chap9.html#the-binomial-glm"><i class="fa fa-check"></i><b>9.13</b> The Binomial GLM</a></li>
+<li class="chapter" data-level="9.14" data-path="chap9.html"><a href="chap9.html#example-beetle-mortality-to-insecticide"><i class="fa fa-check"></i><b>9.14</b> Example: Beetle mortality to insecticide</a></li>
+<li class="chapter" data-level="9.15" data-path="chap9.html"><a href="chap9.html#diagnostics"><i class="fa fa-check"></i><b>9.15</b> Diagnostics</a></li>
+<li class="chapter" data-level="9.16" data-path="chap9.html"><a href="chap9.html#another-approach-to-diagnostics"><i class="fa fa-check"></i><b>9.16</b> Another approach to Diagnostics</a></li>
+<li class="chapter" data-level="9.17" data-path="chap9.html"><a href="chap9.html#some-theory"><i class="fa fa-check"></i><b>9.17</b> Some theory</a></li>
+<li class="chapter" data-level="9.18" data-path="chap9.html"><a href="chap9.html#simple-example-the-poisson-distribution"><i class="fa fa-check"></i><b>9.18</b> Simple example: The Poisson distribution</a></li>
+<li class="chapter" data-level="9.19" data-path="chap9.html"><a href="chap9.html#the-binomial-distribution-in-exponential-form"><i class="fa fa-check"></i><b>9.19</b> The Binomial distribution in exponential form</a></li>
+<li class="chapter" data-level="9.20" data-path="chap9.html"><a href="chap9.html#issues-when-fitting-with-glms"><i class="fa fa-check"></i><b>9.20</b> Issues when fitting with GLMs</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap10.html"><a href="chap10.html"><i class="fa fa-check"></i><b>10</b> Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chap10.html"><a href="chap10.html#model-formulae"><i class="fa fa-check"></i><b>10.1</b> Model Formulae</a></li>
+<li class="chapter" data-level="10.2" data-path="chap10.html"><a href="chap10.html#definition-of-random-effects"><i class="fa fa-check"></i><b>10.2</b> Definition of Random Effects</a></li>
+<li class="chapter" data-level="10.3" data-path="chap10.html"><a href="chap10.html#example-1-repeated-measures"><i class="fa fa-check"></i><b>10.3</b> Example 1: Repeated Measures</a></li>
+<li class="chapter" data-level="10.4" data-path="chap10.html"><a href="chap10.html#example-2-the-split-plot-design."><i class="fa fa-check"></i><b>10.4</b> Example 2: The Split-Plot Design.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="experimental-design.html"><a href="experimental-design.html"><i class="fa fa-check"></i><b>11</b> Experimental Design</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="experimental-design.html"><a href="experimental-design.html#some-history-1"><i class="fa fa-check"></i><b>11.1</b> Some History</a></li>
+<li class="chapter" data-level="11.2" data-path="experimental-design.html"><a href="experimental-design.html#although-fisher-had-some-wrong-ideas-about-eugenics-the-genetics-of-intelligence-and-racial-differences-he-was-remarkable-in-that-he-almost-single-handedly-invented-what-we-now-know-as-classical-statistics.-and-also-developed-the-theory-of-population-genetics-along-with-j.-b.-s.-haldane-and-sewell-wright.-he-was-a-giant-of-20th-century-science-and-an-evolutionary-biologist-at-heart.-unfortunately-he-was-rather-grumpy-and-prone-to-having-disagreements-and-fights-with-most-of-his-contemporaries.-they-say-you-should-never-meet-your-heroes-and-i-am-glad-i-never-met-fisher.-he-died-in-1962-in-adelaide.-his-ashes-are-interred-in-st.-peters-anglican-cathedral-in-adelaide.-if-you-go-to-adelaide-you-can-visit-fishers-ashes.-put-your-hand-on-the-plaque-and-absorb-some-of-fishers-force"><i class="fa fa-check"></i><b>11.2</b> Although Fisher had some wrong ideas about eugenics, the genetics of intelligence and racial differences, he was remarkable in that he almost single-handedly invented what we now know as <code>classical</code> statistics. and <strong>also</strong> developed the theory of population genetics (along with J. B. S. Haldane and Sewell Wright). He was a giant of 20th century science and an evolutionary biologist at heart. Unfortunately he was rather grumpy and prone to having disagreements and fights with most of his contemporaries. They say you should never meet your heroes and I am glad I never met Fisher. He died in 1962 in Adelaide. His ashes are interred in St. Peters Anglican cathedral in Adelaide. If you go to Adelaide you can visit Fisher’s ashes. Put your hand on the plaque and absorb some of Fisher’s <code>force!</code></a></li>
+<li class="chapter" data-level="11.3" data-path="experimental-design.html"><a href="experimental-design.html#experiments-1"><i class="fa fa-check"></i><b>11.3</b> Experiments</a></li>
+<li class="chapter" data-level="11.4" data-path="experimental-design.html"><a href="experimental-design.html#more-terminology-1"><i class="fa fa-check"></i><b>11.4</b> More terminology</a></li>
+<li class="chapter" data-level="11.5" data-path="experimental-design.html"><a href="experimental-design.html#randomness-1"><i class="fa fa-check"></i><b>11.5</b> Randomness</a></li>
+<li class="chapter" data-level="11.6" data-path="experimental-design.html"><a href="experimental-design.html#positive-and-negative-controls-1"><i class="fa fa-check"></i><b>11.6</b> Positive and Negative Controls</a></li>
+<li class="chapter" data-level="11.7" data-path="experimental-design.html"><a href="experimental-design.html#blinding-of-experiments-1"><i class="fa fa-check"></i><b>11.7</b> Blinding of experiments</a></li>
+<li class="chapter" data-level="11.8" data-path="experimental-design.html"><a href="experimental-design.html#covariates-1"><i class="fa fa-check"></i><b>11.8</b> Covariates</a></li>
+<li class="chapter" data-level="11.9" data-path="experimental-design.html"><a href="experimental-design.html#natural-experiments-or-natural-experiments-1"><i class="fa fa-check"></i><b>11.9</b> “Natural” Experiments or Natural “Experiments”</a></li>
+<li class="chapter" data-level="11.10" data-path="experimental-design.html"><a href="experimental-design.html#random-effects-and-blocking-1"><i class="fa fa-check"></i><b>11.10</b> Random effects and Blocking</a></li>
+<li class="chapter" data-level="11.11" data-path="experimental-design.html"><a href="experimental-design.html#power-1"><i class="fa fa-check"></i><b>11.11</b> Power</a></li>
+<li class="chapter" data-level="11.12" data-path="experimental-design.html"><a href="experimental-design.html#factors-affecting-the-power-of-a-test-1"><i class="fa fa-check"></i><b>11.12</b> Factors affecting the Power of a Test</a></li>
+<li class="chapter" data-level="11.13" data-path="experimental-design.html"><a href="experimental-design.html#built-in-r-functions-for-power-analysis-1"><i class="fa fa-check"></i><b>11.13</b> Built-in R Functions for Power Analysis</a></li>
+<li class="chapter" data-level="11.14" data-path="experimental-design.html"><a href="experimental-design.html#power-of-the-t-test-1"><i class="fa fa-check"></i><b>11.14</b> Power of the t-test</a></li>
+<li class="chapter" data-level="11.15" data-path="experimental-design.html"><a href="experimental-design.html#effect-sizes-1"><i class="fa fa-check"></i><b>11.15</b> Effect Sizes</a></li>
+<li class="chapter" data-level="11.16" data-path="experimental-design.html"><a href="experimental-design.html#power-curves-1"><i class="fa fa-check"></i><b>11.16</b> Power Curves</a></li>
+<li class="chapter" data-level="11.17" data-path="experimental-design.html"><a href="experimental-design.html#references-1"><i class="fa fa-check"></i><b>11.17</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="experimental-design" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Experimental Design<a href="experimental-design.html#experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="some-history-1" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Some History<a href="experimental-design.html#some-history-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sir Ronald Fisher developed the foundations for the rigourous experimental design when he was a researcher at Rothamsted Experimental Station 1919 -1933. Rothamsted was an agricultural field station and there were a lot of studies conducted there on the effectiveness of different fertiliser treatments, for example. On arriving at Rothamsted, Fisher was struck by how badly the analyses of these field trials were conducted. He set about developing the theory of the Design of Experiments and he also developed statistical methods to correctly analyse the results of experiments. We use the principles laid down by Fisher to this day.</p>
+</div>
+<div id="although-fisher-had-some-wrong-ideas-about-eugenics-the-genetics-of-intelligence-and-racial-differences-he-was-remarkable-in-that-he-almost-single-handedly-invented-what-we-now-know-as-classical-statistics.-and-also-developed-the-theory-of-population-genetics-along-with-j.-b.-s.-haldane-and-sewell-wright.-he-was-a-giant-of-20th-century-science-and-an-evolutionary-biologist-at-heart.-unfortunately-he-was-rather-grumpy-and-prone-to-having-disagreements-and-fights-with-most-of-his-contemporaries.-they-say-you-should-never-meet-your-heroes-and-i-am-glad-i-never-met-fisher.-he-died-in-1962-in-adelaide.-his-ashes-are-interred-in-st.-peters-anglican-cathedral-in-adelaide.-if-you-go-to-adelaide-you-can-visit-fishers-ashes.-put-your-hand-on-the-plaque-and-absorb-some-of-fishers-force" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Although Fisher had some wrong ideas about eugenics, the genetics of intelligence and racial differences, he was remarkable in that he almost single-handedly invented what we now know as <code>classical</code> statistics. and <strong>also</strong> developed the theory of population genetics (along with J. B. S. Haldane and Sewell Wright). He was a giant of 20th century science and an evolutionary biologist at heart. Unfortunately he was rather grumpy and prone to having disagreements and fights with most of his contemporaries. They say you should never meet your heroes and I am glad I never met Fisher. He died in 1962 in Adelaide. His ashes are interred in St. Peters Anglican cathedral in Adelaide. If you go to Adelaide you can visit Fisher’s ashes. Put your hand on the plaque and absorb some of Fisher’s <code>force!</code><a href="experimental-design.html#although-fisher-had-some-wrong-ideas-about-eugenics-the-genetics-of-intelligence-and-racial-differences-he-was-remarkable-in-that-he-almost-single-handedly-invented-what-we-now-know-as-classical-statistics.-and-also-developed-the-theory-of-population-genetics-along-with-j.-b.-s.-haldane-and-sewell-wright.-he-was-a-giant-of-20th-century-science-and-an-evolutionary-biologist-at-heart.-unfortunately-he-was-rather-grumpy-and-prone-to-having-disagreements-and-fights-with-most-of-his-contemporaries.-they-say-you-should-never-meet-your-heroes-and-i-am-glad-i-never-met-fisher.-he-died-in-1962-in-adelaide.-his-ashes-are-interred-in-st.-peters-anglican-cathedral-in-adelaide.-if-you-go-to-adelaide-you-can-visit-fishers-ashes.-put-your-hand-on-the-plaque-and-absorb-some-of-fishers-force" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="experiments-1" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Experiments<a href="experimental-design.html#experiments-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We first consider the simplest experiment: the comparison of two experimental <code>treatments.</code> What is a treatment? A treatment is some sort of manipulation carried out by a researcher on a group of experimental units. An example might be if we are trying to find out the effect of a drug, we may give the drug to some subjects. To contrast this treatment, we will give a <code>placebo</code> to another group of people. The delivery of the drug or placebo are both treatments. The experimental units are the subjects in the experiment.</p>
+<p>This simple study has all the properties of an experiment: There is greater than one treatment. (We have 2 treatments, drug and placebo). We are interested in whether the drug works in that the drug treatment is more effective than the placebo, so we can <code>contrast</code> the treatments. We have performed the experiment a number of times, giving either the drug or the placebo to several subjects. Finally, we do this <strong>at random</strong>, that is, each subject has a probability of 0.5 of receiving either the drug or the placebo. More on the subject of randomness below.</p>
+<p>You may have noticed that what we have described is a <strong>randomised, controlled trial</strong> This is the common term for experiments in the medical field and in the media. Calling a study an RCT is much easier to sell to the general public than an <code>experiment</code>. Subjects generally don’t want to be experimented on or treated as guinea pigs so the RCT terminology is used. Statisticians know that we are all talking about ``experiments.’’</p>
+</div>
+<div id="more-terminology-1" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> More terminology<a href="experimental-design.html#more-terminology-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our example, we can consider the two treatments (Drug and Placebo) to be properties of a unified object, the <strong>factor</strong>. We thus have a factor Drug with two <strong>levels</strong>: drug and placebo. In more complicated experiments, there may be more than one factor in an experiment, and the treatments are combinations of the levels of the different factors. Aside: When Fisher defined a factor, he was thinking about genetics, where different alleles were considered to be different genetic factors. We now use the term <code>factor</code> in a more general sense, beyond just allelic differences in phenotypes.</p>
+<p>The data we take from our subjects during the experiment are called the <code>response</code> or <code>outcome</code> variables of the experiment. For our drug example, if we were interested in the effect of the drug on blood pressure, then we would measure the blood pressure of each experimental unit (subject) after applying the drug or placebo. The blood pressure would be the response variable. The factor Drug (with levels drug and placebo) is called the <code>explanatory variable</code> and is defined by our experimental design. The difference between the effect of the drug treatment and the placebo is called the <code>effect size.</code></p>
+<p>The placebo treatment is called a <code>control</code> treatment. Controls represent a treatment that contains everything about the drug treatment, except the drug itself. A placebo pill contains no active ingredients but application of a placebo can still affect the results (compared to not taking a pill at all) due to the <code>placebo effect.</code> The effect of taking the drug is thus <strong>isolated</strong> from all the other factors that might influence the results that occur both in the drug treatment and the placebo control. Any <code>effect,</code> the difference between the two treatments, must be due to the application of the drug alone.</p>
+</div>
+<div id="randomness-1" class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> Randomness<a href="experimental-design.html#randomness-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The role of randomness crops up in two places in experiments. The first is that the experimental units differ in small ways from each other. On one hand we should try to use experimental units (subjects, in our case), that are as uniform as possible to reduce the effects of this randomness. This is the reason for using in-bred lines of rats, mice or rabbits in experiments as they are effectively clones with no genetic differences. They are more uniform, at least in their genetics.</p>
+<p>On the other hand, if our experiment is expected to be more <code>natural</code> we may be interested in running it on a more representative group of experimental units. For example, we may recruit subjects with different backgrounds, body size, gender, age, etc. So that any effects of the drug will be more like the representative effect seen in a clinical setting where lots of different people seek to take the same drug, but respond differently. Such considerations should lead you to think carefully about the hypothesis you are trying to test (more on hypothesis testing below).</p>
+<p>The other source of randomness is that deliberately induced by the experimenter: The treatments are assigned to the subjects at random, using a random number generator. The reasoning here is that such random allocation to treatments serves to break up any systematic differences that could possibly occur among subjects. In contrast, any other mechanism for allocating treatments to experimental units has the potential for systematic bias, which will render the experiment useless. An example might be if we ask subjects to arrive at the clinic at various times during the day, and we gave the drug to all the subjects that arrived early in the morning, and the placebo to the subjects who arrived at the clinic late in the day. If, for example, the effectiveness of the drug depended on the time it was taken (e.g. due to circadian rhythm effects), then our experiment would be destroyed because a systematic bias was introduced during treatment allocation. (We say that the drug effect is <strong>confounded</strong> with the time the drug was taken. Confounding is a big problem and you should really look out for it in the design of any experiment that you do.) Only random application of treatments to experimental units can avoid these systematic biases.</p>
+</div>
+<div id="positive-and-negative-controls-1" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Positive and Negative Controls<a href="experimental-design.html#positive-and-negative-controls-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Most control treatments in experiments are usually <code>negative</code> in the sense that they include all the effects on a treatment, <strong>except</strong> the one of interest to the researcher. However, there are many situations where we need a <code>positive</code> control: A treatment where an effect is guaranteed to be detected. A common example is when biologists are seeking to sequence an unknown gene. In order to make sure the sequencing experiment is working, they include a gene of known sequence. If the experiment can’t get the correct result for the known sequence, then it is clear that there is something wrong with the experimental technique.</p>
+</div>
+<div id="blinding-of-experiments-1" class="section level2 hasAnchor" number="11.7">
+<h2><span class="header-section-number">11.7</span> Blinding of experiments<a href="experimental-design.html#blinding-of-experiments-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Blinding in experiments is a very useful technique for avoiding all sorts of systematic biases. The method is to apply the experimental treatment <strong>without</strong> the subject knowing what treatment they are being given. So in our example, the researcher gives a pill to the subjects without telling them whether the treatment is the drug or the placebo. Of course, the researcher knows this information so it can be used later in the statistical analysis. An even more sneaky method is the so-called <code>double blind</code> trial. Here, both the researcher and the subject do not know which treatment is being applied. The information is kept by a third party and only revealed to the experimenter at the time of the analysis when collecting of data is over. Doubly-blind trials are a powerful technique for controlling many sorts of systematic bias that may be inadvertently introduced by the experimenter and the subject. Sometimes it is not possible to perform such trials, however.</p>
+</div>
+<div id="covariates-1" class="section level2 hasAnchor" number="11.8">
+<h2><span class="header-section-number">11.8</span> Covariates<a href="experimental-design.html#covariates-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another useful part of an experiment is to collect other data along with the response variable of interest. For example, in our drug experiment, we could collect information on the sex and body size of the subjects, their level of obesity, family history of heart disease etc. These are all of interest and may be important in contributing to the response of the subjects to the drug treatment. Yet, they are not being experimentally manipulated by the researcher. They are simply extra information that can be used in the interpretation of the experiment. They are called <code>covariates.</code></p>
+<p>It is important to remember that perhaps the defining feature of an experiment is to <strong>manipulate</strong> the experimental units in some way. In this way we can distinguish cause and effect. However, it is possible to collect data on a lot of covariates and relate them to some other variable (the presumed <code>outcome</code> or <code>response</code>) without manipulating the study system and then derive conclusions about cause and effect. Such <code>observational</code> studies are fraught because they are heavily dependent on the underlying causal model being correct. However, there could easily be other <strong>unmeasured</strong> variables that are contributing to the outcome, or the measured covariates could be related to each other in complicated ways. Without experimentation, we cannot usually establish cause and effect. (There are some exceptions to this rule but they rely on extra assumptions and are beyond the scope of this course. If you want information about this, ask me in class.)</p>
+</div>
+<div id="natural-experiments-or-natural-experiments-1" class="section level2 hasAnchor" number="11.9">
+<h2><span class="header-section-number">11.9</span> “Natural” Experiments or Natural “Experiments”<a href="experimental-design.html#natural-experiments-or-natural-experiments-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Some people talk about “natural” experiments, such as those provided by natural disasters or weather events, when it is assumed that treatments have been applied to the experimental units at random by the mechanism of the extreme conditions. However, the quotes should be around “experiment” not natural, as nobody doubts the naturalness of the event but it is somewhat dubious to consider it as an experiment akin to researcher manipulated studies where treatments have been allocated to experimental units at random. Some systematic bias may have been introduced, of which we are not aware.</p>
+</div>
+<div id="random-effects-and-blocking-1" class="section level2 hasAnchor" number="11.10">
+<h2><span class="header-section-number">11.10</span> Random effects and Blocking<a href="experimental-design.html#random-effects-and-blocking-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One particularly useful technique in the design of experiments is the use of <strong>random effects</strong>, also known as <strong>blocking</strong>. The definition of random effects is slightly complicated so we will leave it to a later chapter. Here we will consider two examples, so you get the idea. Returning to our drug experiment, say we wanted the experiment to be quite large (lots of <strong>replicate</strong> subjects). So we decide to run the experiment at different clinic locations or hospitals. Now, it is possible that different clinics might produce slightly different results (drug effects). This might be due to the fact that subjects that attend one clinic might receive better treatment, more accurate doses of the drug, may live closer to one clinic rather than another. etc. The upshot is that some clinics will have, on average, higher or lower effect sizes than others. This variability due to the hospital effect leads to the idea of <strong>blocking</strong>, where we assign patients to blocks (clinics) at random to each of the blocks, The treatments (drug and control) are given to subjects who are a member of a particular clinic, and we use the information of which clinic was attended in the analysis. We then consider the variability in the response to <strong>among</strong> versus <strong>within</strong> block effects. So ultimately we are able to <strong>model</strong> the variation due to blocks and account for it as a component of the variation in the experiment. More on this in the chapter on <code>mixed-effects models.</code> Aside: The term “block” comes from agricultural trials where fields were divided up into blocks, based on the topography of the field.</p>
+<p>The second case where random effects and blocking is common is when we take multiple measurements from our subjects. This is called a <strong>repeated measures</strong> design. In our drug example, we may, in a sense, use each individual as their own control, by first measuring their blood pressure, applying the treatment (drug versus control) and then re-measuring their blood pressure. Here, the “block” is the individual subject. Naturally, some subjects will respond well to the drug, and some not so well. By treating subjects as blocks, we can remove this subject to subject variation and account for it in our analysis. In our simple drug example, we would probably use a <strong>paired t-test</strong> to test for differences between treatments, within subjects, which is a simple case of a repeated measures analysis.</p>
+</div>
+<div id="power-1" class="section level2 hasAnchor" number="11.11">
+<h2><span class="header-section-number">11.11</span> Power<a href="experimental-design.html#power-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I have said previously that we should choose to do our experiment on many experimental units. This is called <strong>replication</strong>. Then each experimental unit is also known as a <strong>replicate</strong>. But how many replicates do we need in each treatment? How big should our <strong>sample size</strong> be?</p>
+<p>In a series of papers in the early 20th century, Jerzey Neyman and Egon S. Pearson developed a decision-theoretic approach to hypothesis-testing. The theory was later extended and generalised by Abraham Wald.</p>
+<p><img src="neymanpearson.jpg" alt="Jerzey Neyman (1894 - 1981) and Egon Pearson (1895 - 1980)" />
+<img src="wald.jpg" alt="Abraham Wald" />
+Neyman, Pearson and Wald.</p>
+<p>Wald was one of the first to notice the phenomenon of <code>survival bias</code> during World War II.
+<img src="survbias.png" alt="Survivor Bias" /></p>
+<p>A centrepiece of the Neyman-Pearson approach is the idea of there being two possible types of error when considering rejecting a hypothesis based on data:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right"></th>
+<th align="right"><span class="math inline">\(H_0\)</span> False</th>
+<th align="right"><span class="math inline">\(H_0\)</span> True</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Reject <span class="math inline">\(H_0\)</span></td>
+<td align="right">Correct</td>
+<td align="right">Type I error</td>
+</tr>
+<tr class="even">
+<td align="right">Accept <span class="math inline">\(H_0\)</span></td>
+<td align="right">Type II error</td>
+<td align="right">Correct</td>
+</tr>
+</tbody>
+</table>
+<p>Thus, a rational approach to hypothesis testing will seek to reject a hypothesis if it is false and accept a hypothesis when it is true. The two types of error are rejecting the null hypothesis when it is true (Type I) and accepting the null hypothesis when it is false (Type II). In the Neyman-Pearson theory, it is usual to fix the Type I error probability (<span class="math inline">\(\alpha\)</span>) at some constant (often at 0.05, but not necessarily), and then choose a test which minimises the Type II error probability (<span class="math inline">\(\beta\)</span>), conditional on <span class="math inline">\(\alpha\)</span>. The (null) hypothesis is then either rejected when the associated p-value for the test is less than <span class="math inline">\(\alpha\)</span>, or otherwise accepted.</p>
+<p>The Neyman-Pearson theory has come under a lot of criticism since its formulation. Although much maligned, it is still used to justify and compare statistical testing procedures, whether or not scientists accept the paradigm for their everyday data analyses. For our purposes, the theory introduces the concept of “power” of a test, where power is defined as P(Reject <span class="math inline">\(H_0 | H_0\)</span> is false). That is, 1 minus the Type II error probability, or <span class="math inline">\(1 − \beta\)</span>. (The first person to promote power as a concept was “Student” a.k.a W. S. Gosset, head brewer for the Guinness brewery. (Interestingly, R. A. Fisher (the other main architect of classical statistics) was against the whole idea of power.)</p>
+</div>
+<div id="factors-affecting-the-power-of-a-test-1" class="section level2 hasAnchor" number="11.12">
+<h2><span class="header-section-number">11.12</span> Factors affecting the Power of a Test<a href="experimental-design.html#factors-affecting-the-power-of-a-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are several factors affecting the power of a test:</p>
+<ul>
+<li><p>There is a trade-off between α and β such that greater power can be gained by accepting a less stringent condition for the Type I error. In other words, power is increased when α is increased. The shortcoming of setting a higher α is that Type I errors will be more likely. This may not be desirable.</p></li>
+<li><p>Power can be increased by increasing the effect size. The reasoning is that any test will have trouble rejecting the null hypothesis if the null hypothesis is only <code>slightly</code> wrong. If the effect size of an experiment (such as the difference between a treatment and a control) is large, then it is easier to detect, and the null hypothesis will be soundly rejected.</p></li>
+<li><p>The use of covariates or blocking variables can also increase the power of a
+test, as <code>controlling</code> for other, nuisance, variables can make the test more precise.</p></li>
+<li><p>Increasing the sample size in an experiment or observational study also increases the power to detect a response.</p></li>
+</ul>
+<p>It is important to carefully consider sample sizes before doing any experimental work. This is because data are expensive to collect, and may involve an appreciable amount of time and money expended by the researcher. Also, especially in medical research, there are ethical issues to consider. Experiments should be designed so that the minimum number of subjects (e.g. rats, dogs, or monkeys) are used in order to arrive at valid scientific conclusions. For these reasons, it is important to take a quantitative approach to maximising power in an experiment and to design experimental protocols that are efficient in their use of resources (subjects).</p>
+</div>
+<div id="built-in-r-functions-for-power-analysis-1" class="section level2 hasAnchor" number="11.13">
+<h2><span class="header-section-number">11.13</span> Built-in R Functions for Power Analysis<a href="experimental-design.html#built-in-r-functions-for-power-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R comes with a wide variety of built-in functions for power analyses.</p>
+</div>
+<div id="power-of-the-t-test-1" class="section level2 hasAnchor" number="11.14">
+<h2><span class="header-section-number">11.14</span> Power of the t-test<a href="experimental-design.html#power-of-the-t-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall that one use of the t-test is used to test for differences between two sample means, drawn from two Normal populations with unknown variance. The null hypothesis is that the samples were drawn from a single population. i.e. H0 : the sample means are not different. Examine the help page for power.t.test, part of which is presented below:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="experimental-design.html#cb1-1" aria-hidden="true" tabindex="-1"></a>?power.t.test</span>
+<span id="cb1-2"><a href="experimental-design.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="experimental-design.html#cb1-3" aria-hidden="true" tabindex="-1"></a>power.t.test</span>
+<span id="cb1-4"><a href="experimental-design.html#cb1-4" aria-hidden="true" tabindex="-1"></a>package<span class="sc">:</span>stats</span>
+<span id="cb1-5"><a href="experimental-design.html#cb1-5" aria-hidden="true" tabindex="-1"></a>R Documentation</span>
+<span id="cb1-6"><a href="experimental-design.html#cb1-6" aria-hidden="true" tabindex="-1"></a>Power calculations <span class="cf">for</span> one and two sample t tests</span>
+<span id="cb1-7"><a href="experimental-design.html#cb1-7" aria-hidden="true" tabindex="-1"></a>Description<span class="sc">:</span></span>
+<span id="cb1-8"><a href="experimental-design.html#cb1-8" aria-hidden="true" tabindex="-1"></a>Compute power of test, or determine parameters to obtain target power.</span>
+<span id="cb1-9"><a href="experimental-design.html#cb1-9" aria-hidden="true" tabindex="-1"></a>Usage<span class="sc">:</span></span>
+<span id="cb1-10"><a href="experimental-design.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">delta =</span> <span class="cn">NULL</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb1-11"><a href="experimental-design.html#cb1-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">power =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;two.sample&quot;</span>, <span class="st">&quot;one.sample&quot;</span>, <span class="st">&quot;paired&quot;</span>), </span>
+<span id="cb1-12"><a href="experimental-design.html#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">&quot;two.sided&quot;</span>, <span class="st">&quot;one.sided&quot;</span>), <span class="at">strict =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Notice that <tt>power.t.test</tt> accepts 8 <code>arguments</code>. Arguments <tt>type, alternative</tt> and <tt>strict</tt> describe the behaviour of the t-test. That is, whether the test is a two-sample, one-sample, or paired t-test, and whether it is a two-sided or one-sided test. Further, we are given the option of including both tails in the power calculation for the two-sided test, by setting <tt>strict=TRUE</tt>. Note that the default is <tt>strict=FALSE</tt>. The first 5 arguments determine the type of analysis. To use the function, you specify 4 of the first 5 arguments, and the unspecified argument is the one that is output from the computation. Here’s an example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="experimental-design.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.t.test</span>(<span class="at">n=</span><span class="dv">6</span>, .<span class="dv">2</span>, <span class="at">sd=</span>.<span class="dv">1</span>, <span class="at">power=</span><span class="cn">NULL</span>)</span></code></pre></div>
+<pre><code>## 
+##      Two-sample t test power calculation 
+## 
+##               n = 6
+##           delta = 0.2
+##              sd = 0.1
+##       sig.level = 0.05
+##           power = 0.8764176
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group</code></pre>
+<p>Note that we have left the sig.level argument at its default (0.05). We have specified the sample size, and the two arguments that contribute to the effect size (delta, the difference between the means and sd, the common standard deviation. More on effect sizes below). <tt>power</tt> was set to NULL, as this is the value we are trying to compute. The output is printed, including the estimated
+power (0.88 in this case).</p>
+</div>
+<div id="effect-sizes-1" class="section level2 hasAnchor" number="11.15">
+<h2><span class="header-section-number">11.15</span> Effect Sizes<a href="experimental-design.html#effect-sizes-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It was mentioned previously that increasing the effect size (the standardised “difference” between treatment groups) results in an increased power. However, calculation of effect sizes varies from test to test, depending on the underlying distribution of the test statistic. Frequently, we do not know the likely effect size that may occur in an experiment. The best approach is then to do a pilot experiment on a small scale to estimate the likely effect size. In the absence of pilot data, Cohen (1988) provides standard measures of effect size, classified as “small”, “medium”, and “large” for a variety of tests. These effect sizes are built into the <code>pwr</code> package, using the function <code>cohen.ES</code>. Although these “standard” effect sizes are somewhat arbitrary, they can provide a first guide for sample size estimation. Note, however, that a pilot experiment is the recommended way to estimate effect sizes for an experimental study.</p>
+</div>
+<div id="power-curves-1" class="section level2 hasAnchor" number="11.16">
+<h2><span class="header-section-number">11.16</span> Power Curves<a href="experimental-design.html#power-curves-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Calculating specific values of power, sample size or effect size can be illuminating with regard to the statistical restrictions on experimental design and analysis. But frequently a graph tells the story more completely and succinctly. Here we show how to draw power, sample size, and effect size curves using the above functions in R:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="experimental-design.html#cb4-1" aria-hidden="true" tabindex="-1"></a>nvals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">100</span>, <span class="at">length.out=</span><span class="dv">200</span>)</span>
+<span id="cb4-2"><a href="experimental-design.html#cb4-2" aria-hidden="true" tabindex="-1"></a>powvals <span class="ot">&lt;-</span> <span class="fu">sapply</span>(nvals, <span class="cf">function</span> (x) <span class="fu">power.t.test</span>(<span class="at">n=</span>x, <span class="at">delta=</span><span class="dv">1</span>)<span class="sc">$</span>power)</span>
+<span id="cb4-3"><a href="experimental-design.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nvals, powvals, <span class="at">xlab=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;power&quot;</span>,</span>
+<span id="cb4-4"><a href="experimental-design.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">main=</span><span class="st">&quot;Power curve for</span><span class="sc">\n</span><span class="st"> t-test with delta = 1&quot;</span>,</span>
+<span id="cb4-5"><a href="experimental-design.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">type=</span><span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>If we are unsure of our effect size, we can also alter delta to see the effect of both effect size and sample size on power:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="experimental-design.html#cb5-1" aria-hidden="true" tabindex="-1"></a>deltas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.8</span>)</span>
+<span id="cb5-2"><a href="experimental-design.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nvals, <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">length.out=</span><span class="fu">length</span>(nvals)), <span class="at">xlab=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;power&quot;</span>,</span>
+<span id="cb5-3"><a href="experimental-design.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">main=</span><span class="st">&quot;Power Curve for</span><span class="sc">\n</span><span class="st">t-test with varying delta&quot;</span>, <span class="at">type=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb5-4"><a href="experimental-design.html#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="experimental-design.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb5-6"><a href="experimental-design.html#cb5-6" aria-hidden="true" tabindex="-1"></a>powvals <span class="ot">&lt;-</span> <span class="fu">sapply</span>(nvals, <span class="cf">function</span> (x) <span class="fu">power.t.test</span>(<span class="at">n=</span>x, <span class="at">delta=</span>deltas[i])<span class="sc">$</span>power)</span>
+<span id="cb5-7"><a href="experimental-design.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(nvals, powvals, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span>i)</span>
+<span id="cb5-8"><a href="experimental-design.html#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-9"><a href="experimental-design.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;0.2&quot;</span>, <span class="st">&quot;0.4&quot;</span>, <span class="st">&quot;0.8&quot;</span>))</span></code></pre></div>
+<p><img src="BIOL3360_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="references-1" class="section level2 hasAnchor" number="11.17">
+<h2><span class="header-section-number">11.17</span> References<a href="experimental-design.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cohen (1988) is the classic text for non-statisticians.</p>
+<p>Cohen J., 1988. Statistical Power Analysis for the Behavioural Sciences. Routledge, 2nd ed. <a href="https://search.library.uq.edu.au/permalink/f/12kerkf/61UQ_ALMA2182073200003131">Here in the library</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chap10.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": {},
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
